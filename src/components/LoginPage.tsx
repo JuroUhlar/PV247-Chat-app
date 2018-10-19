@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 export class LoginPage extends React.PureComponent {
-
   render(): JSX.Element {
     return (
       <div className="login-form">

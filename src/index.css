@@ -1,3 +1,5 @@
+/* Login page */
+
 .login-form {
   width: 340px;
     margin: 50px auto;
@@ -21,3 +23,31 @@
       font-weight: bold;
       margin-bottom: 10px; 
   }
+
+/* Channel bar item */
+
+  .channel-bar-item {
+    
+    border-radius: 4px; 
+    padding: 10px;
+  }
+
+  .channel-bar-item:hover {
+    background-color: lightblue; 
+    cursor: pointer;
+  }
+
+  .channel-bar-item_drag-icon, .channel-bar-item_options-icon {
+    visibility: hidden;
+  }
+
+  .channel-bar-item_drag-icon {
+    cursor: grab;
+  }
+
+  .channel-bar-item:hover .channel-bar-item_options-icon, .channel-bar-item:hover .channel-bar-item_drag-icon  {
+    visibility: visible;
+  }
+
+
+  
