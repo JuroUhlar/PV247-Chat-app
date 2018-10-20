@@ -50,4 +50,28 @@
   }
 
 
+  /* Layout  */
+
+
+body, html, .full-height {
+    height: 100%;
+  }  
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+}
+
+.sidebar-container, .content-container {
+  border: 1px solid black;
+}
+
+.sidebar-container {
+  width: 250px;
+}
+
+.content-container {
+  flex: 1;
+}
   

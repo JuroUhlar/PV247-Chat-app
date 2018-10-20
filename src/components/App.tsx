@@ -6,7 +6,7 @@ export class App extends React.PureComponent {
 
   render(): JSX.Element {
     return (
-      <div>
+      <div className="full-height">
         {/* <LoginPage /> */}
         <ContentWrapper />
       </div>
