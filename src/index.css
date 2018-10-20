@@ -2,60 +2,77 @@
 
 .login-form {
   width: 340px;
-    margin: 50px auto;
+  margin: 50px auto;
 }
 
-  .login-form form {
-    margin-bottom: 15px;
-      background: #f7f7f7;
-      box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
-      padding: 30px 30px 10px 30px ;
-  }
-  .login-form h2 {
-      margin: 0 0 15px;
-  }
-  .login-form .form-control, .btn {
-      min-height: 38px;
-      border-radius: 2px;
-  }
-  .login-form .btn {        
-      font-size: 15px;
-      font-weight: bold;
-      margin-bottom: 10px; 
-  }
+.login-form form {
+  margin-bottom: 15px;
+  background: #f7f7f7;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+  padding: 30px 30px 10px 30px;
+}
+
+.login-form h2 {
+  margin: 0 0 15px;
+}
+
+.login-form .form-control, .btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+
+.login-form .btn {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
 /* Channel bar item */
 
-  .channel-bar-item {
-    
-    border-radius: 4px; 
-    padding: 10px;
-  }
+.channel-bar-item {
+  border-radius: 4px;
+  display: flex;
+}
 
-  .channel-bar-item:hover {
-    background-color: lightblue; 
-    cursor: pointer;
-  }
+.channel-bar-item:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
 
-  .channel-bar-item_drag-icon, .channel-bar-item_options-icon {
-    visibility: hidden;
-  }
+.channel-bar-item_drag-icon, .channel-bar-item_options-icon {
+  visibility: hidden;
+  padding: 0px 5px;
+  line-height: 35px;
+}
 
-  .channel-bar-item_drag-icon {
-    cursor: grab;
-  }
+.channel-bar-item_channel-label {
+  flex: 1;
+  vertical-align: middle;
+  line-height: 35px;
+}
 
-  .channel-bar-item:hover .channel-bar-item_options-icon, .channel-bar-item:hover .channel-bar-item_drag-icon  {
-    visibility: visible;
-  }
+.channel-bar-item:hover .channel-bar-item_options-icon, .channel-bar-item:hover .channel-bar-item_drag-icon {
+  visibility: visible;
+}
 
+.channel-bar-item_drag-icon {
+  cursor: grab;
+}
 
-  /* Layout  */
+.channel-bar-item_drag-icon:hover {
+  font-weight: bold;
+}
 
+.channel-bar-item_options-icon:hover {
+  font-weight: bold;
+  background-color: aquamarine;
+}
+
+/* Layout  */
 
 body, html, .full-height {
-    height: 100%;
-  }  
+  height: 100%;
+}
 
 .content-wrapper {
   display: flex;
@@ -76,7 +93,6 @@ body, html, .full-height {
 .content-container {
   flex: 1;
 }
-
 
 .user-card, .channel-listing {
   border: 1px solid blue;
