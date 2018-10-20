@@ -24,12 +24,11 @@ export class ChannelListing extends React.PureComponent<any, IChannelListingStat
 
   render(): JSX.Element {
     return (
-      <div>
+      <div className="channel-listing">
         <h2>Channels</h2>
         {this.state.channels.map(channel => (
           <BarItem label={channel.label} />
         ))}
-
       </div>
     );
   }

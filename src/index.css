@@ -69,9 +69,24 @@ body, html, .full-height {
 
 .sidebar-container {
   width: 250px;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-container {
   flex: 1;
 }
-  
+
+
+.user-card, .channel-listing {
+  border: 1px solid blue;
+}
+
+.channel-listing {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.user-card {
+  height: 100px;
+}
