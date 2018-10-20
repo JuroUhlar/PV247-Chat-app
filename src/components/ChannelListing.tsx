@@ -27,9 +27,9 @@ export class ChannelListing extends React.PureComponent<any, IChannelListingStat
       <div className="channel-listing">
         <div className="channel-taskbar">
           <span className="channel-taskbar_title">Channels</span>
-          <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel" aria-hidden="true"/>
+          <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel" aria-hidden="true" />
         </div>
-        
+
         {this.state.channels.map(channel => (
           <BarItem label={channel.label} />
         ))}

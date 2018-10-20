@@ -136,6 +136,45 @@ body, html, .full-height {
   overflow-y: auto;
 }
 
+/* User card */
+
 .user-card {
-  height: 100px;
+  height: 80px;
+  display: flex;
+  align-content: space-around;
+  align-items: center;
+}
+
+.user-card .avatar-container {
+  flex: 1;
+  padding: 15px;
+}
+
+.user-card .user-card_username {
+  flex: 3;
+}
+
+.user-card .user-card_icon-container {
+  flex: 1;
+}
+
+.user-card_user-menu-icon {
+  padding: 10px;
+  margin: 15px;
+  border-radius: 4px;
+}
+
+.user-card_user-menu-icon:hover {
+  font-weight: bold;
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+.user-card img.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid black;
+  cursor: pointer;
 }
