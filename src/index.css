@@ -136,6 +136,11 @@ body, html, .full-height {
   overflow-y: auto;
 }
 
+.channel-listing .channels-ordered-list {
+  list-style-type: none;
+  padding: 0px;
+}
+
 /* User card */
 
 .user-card {
