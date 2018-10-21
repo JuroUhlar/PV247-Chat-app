@@ -26,6 +26,10 @@ export const ChannelView: React.StatelessComponent<IChannelViewProps> = ({ chann
                 wrapperClassName="wrapperClassName"
                 editorClassName="editorClassName"
             />
+            <div className="send-btn-holder">
+                <div className="inside glyphicon glyphicon-send">
+                </div>
+            </div>
         </div>
     </span>
 );
