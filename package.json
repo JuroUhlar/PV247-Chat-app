@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "immutable": "^3.8.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
   "devDependencies": {
+    "@types/draft-js": "^0.10.25",
     "@types/jest": "^23.1.5",
     "@types/prop-types": "^15.5.6",
     "@types/react": "^16.4.6",
+    "@types/react-draft-wysiwyg": "^1.12.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
@@ -28,6 +31,7 @@
     "babel-preset-stage-0": "^6.0.15",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
+    "draft-js": "^0.10.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^2.0.0",
@@ -40,6 +44,7 @@
     "jest": "^23.4.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "react-draft-wysiwyg": "^1.12.13",
     "react-set-state-usage": "^2.0.1",
     "style-loader": "^0.22.1",
     "ts-jest": "^23.0.0",

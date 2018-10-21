@@ -170,7 +170,7 @@ body, html, .full-height {
   cursor: pointer;
 }
 
-.user-card img.avatar {
+.mini-avatar {
   vertical-align: middle;
   width: 50px;
   height: 50px;
@@ -222,4 +222,85 @@ body, html, .full-height {
 
 .user-profile-header {
   flex-grow: 1;
+}
+
+.message-list {
+  list-style-type:none;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.message-pane {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 10px;
+  width: 300px;
+
+}
+.message-pane .avatar-side{
+  float: left;
+  width: 50px;
+}
+
+.message-pane .message-side{
+  float: right;
+  width: 240px;
+  border: none;
+  border-radius: 10px;
+  background-color: khaki;
+  padding: 0 6px 8px 6px;
+}
+
+.message-pane-pos-right .message-side {
+  background-color: lightsteelblue;
+}
+
+.message-pane .top-message-bar-cont {
+  position: relative;
+  width: 100%;
+}
+
+.message-pane .top-message-bar{
+  float: right;
+  padding-right: 1px;
+  padding-top: 5px;
+}
+
+.message-pane .small-icon {
+  float: left;
+  height: 10px;
+  margin-right: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.message-pane .small-icon:hover{
+  color: aquamarine;
+}
+.message-pane .text-container{
+  clear: both;
+}
+
+.message-pane-pos-right .message-pane {
+  margin-left: 40%;
+}
+
+.message-pane-pos-left .message-pane {
+  margin-right: 40%;
+}
+
+.message-pane-block {
+  flex-grow: 1;
+}
+
+.top-bar-cont{
+  height: 7%;
+}
+
+.channel-view-cont {
+  height: 65%;
+  overflow-y: scroll;
+}
+.writing-view-cont {
+  height: 25%;
 }

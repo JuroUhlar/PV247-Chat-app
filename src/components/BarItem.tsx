@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 
 interface IBarItemProps {
   label: string;
+  onClick: (name: string) => void;
 }
 
 export class BarItem extends React.PureComponent<IBarItemProps> {
@@ -13,7 +14,10 @@ export class BarItem extends React.PureComponent<IBarItemProps> {
 
   render(): JSX.Element {
     return (
-      <div className="channel-bar-item">
+      <div
+          className="channel-bar-item"
+          onClick={() => { this.props.onClick(this.props.label); }}
+      >
         <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true" />
         <span className="channel-bar-item_channel-label">
           {this.props.label}

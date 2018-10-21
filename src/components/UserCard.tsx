@@ -1,12 +1,19 @@
 import * as React from 'react';
 
-export class UserCard extends React.PureComponent {
+interface IUserCardProps {
+    onClick: (name: string) => void;
+}
+
+export class UserCard extends React.PureComponent<IUserCardProps> {
   render(): JSX.Element {
     return (
-      <div className="user-card">
+      <div
+          className="user-card"
+          onClick={() => { this.props.onClick('ProfilePage'); }}
+      >
         <div className="avatar-container">
           <img
-            className="avatar"
+            className="mini-avatar"
             src="http://modernurbandesigners.com/Lists/Staff/Attachments/9/female-avatar-square.jpg" />
         </div>
         <div className="user-card_username">

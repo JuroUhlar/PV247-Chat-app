@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { BarItem } from './BarItem';
 
+interface IChanelListingProps {
+  onClick: (name: string) => void;
+}
+
 interface IChannelListingState {
   channels: any[];
 }
 
-export class ChannelListing extends React.PureComponent<any, IChannelListingState> {
-  constructor(props: any) {
+export class ChannelListing extends React.PureComponent<IChanelListingProps, IChannelListingState> {
+  constructor(props: IChanelListingProps) {
     super(props);
 
     this.state = {
@@ -31,7 +35,11 @@ export class ChannelListing extends React.PureComponent<any, IChannelListingStat
         </div>
 
         {this.state.channels.map(channel => (
-          <BarItem label={channel.label} />
+          <BarItem
+              key={channel.id}
+              label={channel.label}
+              onClick={this.props.onClick}
+          />
         ))}
       </div>
     );
