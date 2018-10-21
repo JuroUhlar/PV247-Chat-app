@@ -282,6 +282,9 @@ body, html, .full-height {
 .message-pane .small-icon:hover{
   color: aquamarine;
 }
+.message-pane-pos-left .small-icon:hover{
+  color: orangered;
+}
 .message-pane .text-container{
   clear: both;
 }

@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-export class LoginPage extends React.PureComponent {
+interface ILoginPageProps {
+  onLogInClick: () => void;
+}
+
+export class LoginPage extends React.PureComponent<ILoginPageProps> {
   render(): JSX.Element {
     return (
       <div className="login-form">
@@ -15,10 +19,16 @@ export class LoginPage extends React.PureComponent {
           <div className="form-group">
             <div className="row">
               <div className="col-sm-6">
-                <button className="btn btn-primary btn-block">Log in</button>
+                <button
+                    className="btn btn-primary btn-block"
+                    onClick={this.props.onLogInClick}
+                >Log in</button>
               </div>
               <div className="col-sm-6">
-                <button className="btn btn-secondary btn-block">Sign Up</button>
+                <button
+                    className="btn btn-secondary btn-block"
+                    onClick={this.props.onLogInClick}
+                >Sign Up</button>
               </div>
             </div>
           </div>

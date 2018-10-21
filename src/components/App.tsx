@@ -1,14 +1,43 @@
 import * as React from 'react';
-// import { LoginPage } from './LoginPage';
+import * as PropTypes from 'prop-types';
+import { LoginPage } from './LoginPage';
 import { ContentWrapper } from './ContentWrapper';
 
-export class App extends React.PureComponent {
+interface IAppState {
+  isLogged: boolean;
+}
+
+export class App extends React.PureComponent<any, IAppState> {
+    static displayName = 'App';
+
+    static propTypes = {
+      isLogged: PropTypes.bool.isRequired,
+    };
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            isLogged: false,
+        };
+    }
+
+    _onLoginClick = () => {
+      this.setState(() => ({
+        isLogged: true,
+      }));
+    };
 
   render(): JSX.Element {
     return (
       <div className="full-height">
-        {/* <LoginPage /> */}
-        <ContentWrapper />
+          {!this.state.isLogged &&
+          <LoginPage
+              onLogInClick={this._onLoginClick}
+          />
+          }
+          {this.state.isLogged &&
+          <ContentWrapper />
+          }
       </div>
     );
   }
