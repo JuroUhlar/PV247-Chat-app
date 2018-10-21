@@ -4,7 +4,19 @@ interface IUserCardProps {
     onClick: (name: string) => void;
 }
 
-export class UserCard extends React.PureComponent<IUserCardProps> {
+interface IUserCardState {
+  username: string;
+}
+
+export class UserCard extends React.PureComponent<IUserCardProps, IUserCardState> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      username: 'Jane Doe',
+    };
+  }
+
   render(): JSX.Element {
     return (
       <div
@@ -16,11 +28,11 @@ export class UserCard extends React.PureComponent<IUserCardProps> {
             className="mini-avatar"
             src="http://modernurbandesigners.com/Lists/Staff/Attachments/9/female-avatar-square.jpg" />
         </div>
-        <div className="user-card_username">
-          <span>User name</span>
+        <div className="user-card_username-container">
+          <span>{this.state.username}</span>
         </div>
         <div className="user-card_icon-container">
-          <span className="glyphicon glyphicon-chevron-up user-card_user-menu-icon" title="User settings" aria-hidden="true" />
+          <span className="glyphicon glyphicon-chevron-up user-card_open-user-menu-icon" title="User settings" aria-hidden="true" />
         </div>
       </div>
     );
