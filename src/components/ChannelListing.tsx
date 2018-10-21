@@ -31,8 +31,8 @@ export class ChannelListing extends React.PureComponent<any, IChannelListingStat
         </div>
         <ol className="channels-ordered-list">
           {this.state.channels.map(channel => (
-            <li>
-              <BarItem label={channel.label} />
+            <li key={channel.id}>
+              <BarItem label={channel.label} key={channel.id} />
             </li>
           ))}
         </ol>
