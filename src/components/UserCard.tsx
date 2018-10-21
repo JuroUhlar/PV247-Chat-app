@@ -21,11 +21,11 @@ export class UserCard extends React.PureComponent<any, IUserCardState> {
             className="avatar"
             src="http://modernurbandesigners.com/Lists/Staff/Attachments/9/female-avatar-square.jpg" />
         </div>
-        <div className="user-card_username">
+        <div className="user-card_username-container">
           <span>{this.state.username}</span>
         </div>
         <div className="user-card_icon-container">
-          <span className="glyphicon glyphicon-chevron-up user-card_user-menu-icon" title="User settings" aria-hidden="true" />
+          <span className="glyphicon glyphicon-chevron-up user-card_open-user-menu-icon" title="User settings" aria-hidden="true" />
         </div>
       </div>
     );

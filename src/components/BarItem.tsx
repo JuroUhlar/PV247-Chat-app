@@ -18,7 +18,7 @@ export class BarItem extends React.PureComponent<IBarItemProps> {
         <span className="channel-bar-item_channel-label">
           {this.props.label}
         </span>
-        <span className="glyphicon glyphicon-option-vertical channel-bar-item_options-icon visible-on-hover" title="Options" aria-hidden="true" />
+        <span className="glyphicon glyphicon-option-vertical channel-bar-item_open-options-icon visible-on-hover" title="Options" aria-hidden="true" />
       </div>
     );
   }

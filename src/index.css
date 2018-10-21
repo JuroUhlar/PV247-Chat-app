@@ -39,7 +39,7 @@
   cursor: pointer;
 }
 
-.channel-bar-item_drag-icon, .channel-bar-item_options-icon {
+.channel-bar-item_drag-icon, .channel-bar-item_open-options-icon {
   visibility: hidden;
   padding: 0px 5px;
   line-height: 35px;
@@ -52,7 +52,7 @@
   line-height: 35px;
 }
 
-.channel-bar-item:hover .channel-bar-item_options-icon, .channel-bar-item:hover .channel-bar-item_drag-icon {
+.channel-bar-item:hover .channel-bar-item_open-options-icon, .channel-bar-item:hover .channel-bar-item_drag-icon {
   visibility: visible;
 }
 
@@ -64,7 +64,7 @@
   font-weight: bold;
 }
 
-.channel-bar-item_options-icon:hover {
+.channel-bar-item_open-options-icon:hover {
   font-weight: bold;
   background-color: aquamarine;
 }
@@ -150,7 +150,7 @@ body, html, .full-height {
   padding: 15px;
 }
 
-.user-card .user-card_username {
+.user-card .user-card_username-container {
   flex: 3;
 }
 
@@ -158,13 +158,13 @@ body, html, .full-height {
   flex: 1;
 }
 
-.user-card_user-menu-icon {
+.user-card_open-user-menu-icon {
   padding: 10px;
   margin: 15px;
   border-radius: 4px;
 }
 
-.user-card_user-menu-icon:hover {
+.user-card_open-user-menu-icon:hover {
   font-weight: bold;
   background-color: aquamarine;
   cursor: pointer;
