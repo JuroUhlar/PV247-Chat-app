@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ChannelListing } from './ChannelListing';
 import { UserCard } from './UserCard';
+import { ProfileView } from './ProfileView';
 
 export class ContentWrapper extends React.PureComponent {
   render(): JSX.Element {
@@ -11,7 +12,7 @@ export class ContentWrapper extends React.PureComponent {
             <UserCard />
         </div>
         <div className="content-container">
-            <h2>Channel content</h2>
+            <ProfileView/>
         </div>
       </div>
     );

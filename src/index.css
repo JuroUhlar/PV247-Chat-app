@@ -178,3 +178,48 @@ body, html, .full-height {
   border: 1px solid black;
   cursor: pointer;
 }
+
+.user-profile {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.user-profile-block {
+  margin: auto;
+  flex-grow: 1;
+}
+
+.user-profile img.avatar {
+  vertical-align: middle;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid black;
+  cursor: pointer;
+  align-items: center;
+}
+
+.avatar-container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  align-items: center;
+}
+
+.avatar-container .btn-default {
+  flex-grow: 1;
+}
+
+.avatar-container img {
+  flex-grow: 1;
+}
+
+.user-profile form {
+  margin-right: 50px;
+}
+
+.user-profile-header {
+  flex-grow: 1;
+}
