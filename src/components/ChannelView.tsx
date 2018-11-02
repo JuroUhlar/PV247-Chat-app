@@ -5,7 +5,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 interface IChannelViewProps {
-    channelName: string;
+    readonly channelName: string;
 }
 
 export const ChannelView: React.StatelessComponent<IChannelViewProps> = ({ channelName }) => (
@@ -27,8 +27,7 @@ export const ChannelView: React.StatelessComponent<IChannelViewProps> = ({ chann
                 editorClassName="editorClassName"
             />
             <div className="send-btn-holder">
-                <div className="inside glyphicon glyphicon-send">
-                </div>
+                <div className="inside glyphicon glyphicon-send" />
             </div>
         </div>
     </span>

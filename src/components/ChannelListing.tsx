@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {BarItem} from './BarItem';
+import { ChannelBarItem } from './ChannelBarItem';
 
 interface IChanelListingProps {
-    onClick: (name: string) => void;
+    readonly onClick: (name: string) => void;
 }
 
 interface IChannelListingState {
-    channels: any[];
+    readonly channels: any[];
 }
 
 export class ChannelListing extends React.PureComponent<IChanelListingProps, IChannelListingState> {
@@ -37,7 +37,7 @@ export class ChannelListing extends React.PureComponent<IChanelListingProps, ICh
                 <ol className="channels-ordered-list">
                     {this.state.channels.map(channel => (
                         <li key={channel.id}>
-                            <BarItem
+                            <ChannelBarItem
                                 label={channel.label}
                                 key={channel.id}
                                 onClick={this.props.onClick}

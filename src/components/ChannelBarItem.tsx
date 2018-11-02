@@ -4,17 +4,20 @@ import * as PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
-interface IBarItemProps {
-  label: string;
-  onClick: (name: string) => void;
+interface IChannelBarItemProps {
+  readonly label: string;
+  readonly onClick: (name: string) => void;
 }
 
-export class BarItem extends React.PureComponent<IBarItemProps, any> {
+export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, any> {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
   };
+
+
 
   constructor(props: any) {
     super(props);
@@ -37,12 +40,22 @@ export class BarItem extends React.PureComponent<IBarItemProps, any> {
   };
 
 
+
+
   render(): JSX.Element {
+
+    const theme = createMuiTheme({
+      typography: {
+        // Tell Material-UI what the font-size on the html element is.
+        htmlFontSize: 12,
+        useNextVariants: true,
+      },
+    });
 
     return (
       <div
-          className="channel-bar-item"
-          onClick={() => { this.props.onClick(this.props.label); }}
+        className="channel-bar-item"
+        onClick={() => { this.props.onClick(this.props.label); }}
       >
         <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true" />
         <span className="channel-bar-item_channel-label">
@@ -68,33 +81,36 @@ export class BarItem extends React.PureComponent<IBarItemProps, any> {
         </DropdownButton> */}
 
         {/* <div className="channel-bar-item_open-options-icon-container"> */}
-        <Button
-          aria-owns={'simple-menu'}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          <span className="glyphicon glyphicon-option-vertical" title="Options" aria-hidden="true" />
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={this.state.anchorEl}
-          anchorReference="anchorEl"
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          getContentAnchorEl={null}
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={this.handleClose}>Rename</MenuItem>
-          <MenuItem onClick={this.handleClose}>Invite users</MenuItem>
-          <MenuItem onClick={this.handleClose}>Delete</MenuItem>
-        </Menu>
+        <MuiThemeProvider theme={theme}>
+          <Button
+            aria-owns={'simple-menu'}
+            aria-haspopup="true"
+            onClick={this.handleClick}
+          >
+            <span className="glyphicon glyphicon-option-vertical" title="Options" aria-hidden="true" />
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={this.state.anchorEl}
+            anchorReference="anchorEl"
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            getContentAnchorEl={null}
+            open={Boolean(this.state.anchorEl)}
+            onClose={this.handleClose}
+          >
+            <MenuItem onClick={this.handleClose}>Rename</MenuItem>
+            <MenuItem onClick={this.handleClose}>Invite users</MenuItem>
+            <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+          </Menu>
+        </MuiThemeProvider>
+
         {/* </div> */}
       </div>
     );

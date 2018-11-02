@@ -1,18 +1,13 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import { LoginPage } from './LoginPage';
 import { ContentWrapper } from './ContentWrapper';
 
 interface IAppState {
-  isLogged: boolean;
+  readonly isLogged: boolean;
 }
 
 export class App extends React.PureComponent<any, IAppState> {
     static displayName = 'App';
-
-    static propTypes = {
-      isLogged: PropTypes.bool.isRequired,
-    };
 
     constructor(props: any) {
         super(props);

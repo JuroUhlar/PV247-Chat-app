@@ -2,10 +2,10 @@ import * as React from 'react';
 import { ChannelListing } from './ChannelListing';
 import { UserCard } from './UserCard';
 import { ProfileView } from './ProfileView';
-import {ChannelView} from './ChannelView';
+import { ChannelView } from './ChannelView';
 
 interface IContentWrapperState {
-  currentPage: string;
+  readonly currentPage: string;
 }
 
 export class ContentWrapper extends React.PureComponent<any, IContentWrapperState>  {
@@ -13,12 +13,11 @@ export class ContentWrapper extends React.PureComponent<any, IContentWrapperStat
     super(props);
 
     this.state = {
-        currentPage: 'Profile',
+      currentPage: 'Profile',
     };
   }
 
   _onPageClick = (name: string) => {
-    console.log('clicked', name);
     this.setState(() => ({
       currentPage: name,
     }));
@@ -28,24 +27,24 @@ export class ContentWrapper extends React.PureComponent<any, IContentWrapperStat
     return (
       <div className="content-wrapper full-height">
         <div className="sidebar-container">
-            <ChannelListing
-                onClick={this._onPageClick}
-            />
-            <UserCard
-                onClick={this._onPageClick}
-            />
+          <ChannelListing
+            onClick={this._onPageClick}
+          />
+          <UserCard
+            onClick={this._onPageClick}
+          />
         </div>
         <div className="content-container">
-            {this.state.currentPage === 'ProfilePage' &&
+          {this.state.currentPage === 'ProfilePage' &&
             <ProfileView />
-            }
-            {this.state.currentPage !== 'ProfilePage' &&
+          }
+          {this.state.currentPage !== 'ProfilePage' &&
             <span>
-                <ChannelView
-                    channelName={this.state.currentPage}
-                />
+              <ChannelView
+                channelName={this.state.currentPage}
+              />
             </span>
-            }
+          }
         </div>
       </div>
     );

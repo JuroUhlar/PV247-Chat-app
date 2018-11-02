@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
 interface MessageProps {
-    text: string;
-    messagePos: string;
-    avatarUrl?: string;
+    readonly text: string;
+    readonly messagePos: string;
+    readonly avatarUrl?: string;
 }
 
 export const Message: React.StatelessComponent<MessageProps> = (props) => {
@@ -26,9 +26,9 @@ export const Message: React.StatelessComponent<MessageProps> = (props) => {
                 <div className="message-side">
                     <div className="top-message-bar-cont">
                         <div className="top-message-bar">
-                            <div className="small-icon glyphicon glyphicon-trash"></div>
-                            <div className="small-icon glyphicon glyphicon-heart"></div>
-                            <div className="small-icon glyphicon glyphicon-thumbs-down"></div>
+                            <div className="small-icon glyphicon glyphicon-trash" />
+                            <div className="small-icon glyphicon glyphicon-heart" />
+                            <div className="small-icon glyphicon glyphicon-thumbs-down" />
                             <div className="small-icon" style={{fontWeight: 'bold'}}>2</div>
                         </div>
                     </div>

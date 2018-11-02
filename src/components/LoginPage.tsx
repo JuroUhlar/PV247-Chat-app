@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface ILoginPageProps {
-  onLogInClick: () => void;
+  readonly onLogInClick: () => void;
 }
 
 export class LoginPage extends React.PureComponent<ILoginPageProps> {
@@ -20,14 +20,14 @@ export class LoginPage extends React.PureComponent<ILoginPageProps> {
             <div className="row">
               <div className="col-sm-6">
                 <button
-                    className="btn btn-primary btn-block"
-                    onClick={this.props.onLogInClick}
+                  className="btn btn-primary btn-block"
+                  onClick={this.props.onLogInClick}
                 >Log in</button>
               </div>
               <div className="col-sm-6">
                 <button
-                    className="btn btn-secondary btn-block"
-                    onClick={this.props.onLogInClick}
+                  className="btn btn-secondary btn-block"
+                  onClick={this.props.onLogInClick}
                 >Sign Up</button>
               </div>
             </div>

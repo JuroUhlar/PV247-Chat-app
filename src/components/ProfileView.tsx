@@ -24,7 +24,7 @@ export const ProfileView: React.StatelessComponent = () => (
                             id="profileView-inputEmail"
                             name="profileView-inputEmail"
                             type="text"
-                            value="Jane@Doe.com"
+                            defaultValue="Jane@Doe.com"
                             disabled
                             className="form-control"
                         />
@@ -38,7 +38,7 @@ export const ProfileView: React.StatelessComponent = () => (
                             name="profileView-nickname"
                             id="profileView-nickname"
                             type="text"
-                            value="JaneD"
+                            defaultValue="JaneD"
                             className="form-control"
                         />
                     </div>

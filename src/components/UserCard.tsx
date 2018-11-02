@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 interface IUserCardProps {
-    onClick: (name: string) => void;
+  readonly onClick: (name: string) => void;
 }
 
 interface IUserCardState {
-  username: string;
+  readonly username: string;
 }
 
 export class UserCard extends React.PureComponent<IUserCardProps, IUserCardState> {
