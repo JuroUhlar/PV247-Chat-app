@@ -2,38 +2,53 @@ import * as React from 'react';
 import { LoginPage } from './LoginPage';
 import { ContentWrapper } from './ContentWrapper';
 
+// Redux stuff
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { rootReducer } from '../reducers/rootReducer';
+import { getInitialChannels } from '../utils/getInitialChannels';
+
+
+const initialState = {
+  channels: getInitialChannels(),
+};
+
 interface IAppState {
   readonly isLogged: boolean;
 }
 
+const store = createStore(rootReducer, initialState);
+
 export class App extends React.PureComponent<any, IAppState> {
-    static displayName = 'App';
+  static displayName = 'App';
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            isLogged: false,
-        };
-    }
-
-    _onLoginClick = () => {
-      this.setState(() => ({
-        isLogged: true,
-      }));
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      isLogged: false,
     };
+  }
+
+  _onLoginClick = () => {
+    this.setState(() => ({
+      isLogged: true,
+    }));
+  };
 
   render(): JSX.Element {
     return (
-      <div className="full-height">
+      <Provider store={store}>
+        <div className="full-height">
           {!this.state.isLogged &&
-          <LoginPage
+            <LoginPage
               onLogInClick={this._onLoginClick}
-          />
+            />
           }
           {this.state.isLogged &&
-          <ContentWrapper />
+            <ContentWrapper />
           }
-      </div>
+        </div>
+      </Provider>
     );
   }
 }
