@@ -10,6 +10,7 @@ export interface IChannelListingStateProps {
 
 export interface IChannelListingDispatchProps {
     readonly onAddChannel: (name: string) => void;
+    readonly onDeleteChannel: (id: Uuid) => void;
 }
 
 export interface IChannelListingOwnProps {
@@ -33,9 +34,11 @@ export class ChannelListing extends React.PureComponent<
                     {this.props.channels.map((channel: IChannel) => (
                         <li key={channel.id}>
                             <ChannelBarItem
-                                label={channel.name}
+                                channelName={channel.name}
+                                channelId={channel.id}
                                 key={channel.id}
                                 onClick={this.props.onClick}
+                                onDeleteChannel={this.props.onDeleteChannel}
                             />
                         </li>
                     ))}

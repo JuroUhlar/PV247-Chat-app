@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from '../reducers/rootReducer';
 import { getInitialChannels } from '../utils/getInitialChannels';
-import { devToolsEnhancer, composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const initialState = {

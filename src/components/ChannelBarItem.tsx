@@ -7,8 +7,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 
 interface IChannelBarItemProps {
-  readonly label: string;
+  readonly channelName: string;
+  readonly channelId: Uuid;
   readonly onClick: (name: string) => void;
+  readonly onDeleteChannel: (id: Uuid) => void;
 }
 
 export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, any> {
@@ -37,6 +39,11 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     });
   };
 
+  deleteChannel = () => {
+    this.handleClose();
+    this.props.onDeleteChannel(this.props.channelId);
+  }
+
 
 
 
@@ -53,11 +60,11 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     return (
       <div
         className="channel-bar-item"
-        onClick={() => { this.props.onClick(this.props.label); }}
+        onClick={() => { this.props.onClick(this.props.channelName); }}
       >
         <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true" />
         <span className="channel-bar-item_channel-label">
-          {this.props.label}
+          {this.props.channelName}
         </span>
         {/* Original icon */}
         {/* <span className="glyphicon glyphicon-option-vertical channel-bar-item_open-options-icon visible-on-hover" title="Options" aria-hidden="true" /> */}
@@ -105,7 +112,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
           >
             <MenuItem onClick={this.handleClose}>Rename</MenuItem>
             <MenuItem onClick={this.handleClose}>Invite users</MenuItem>
-            <MenuItem onClick={this.handleClose}>Delete</MenuItem>
+            <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
           </Menu>
         </MuiThemeProvider>
 

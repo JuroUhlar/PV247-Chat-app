@@ -1,6 +1,6 @@
 import { IState } from '../models/IState';
 import { Dispatch } from 'redux';
-import { createChannel } from '../actions/channelActionCreators';
+import { createChannel, deleteChannel } from '../actions/channelActionCreators';
 import { IChannel } from '../models/IChannel';
 import { connect } from 'react-redux';
 import {
@@ -18,6 +18,7 @@ const mapStateToProps = (state: IState): IChannelListingStateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IChannelListingDispatchProps => {
   return {
     onAddChannel: (name: string) => dispatch(createChannel(name)),
+    onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id))
   };
 };
 

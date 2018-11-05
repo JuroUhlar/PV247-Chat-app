@@ -9,7 +9,7 @@ export const createChannel = (name: string): Action => ({
   }
 });
 
-export const updateItem = (id: Uuid, name: string): Action => ({
+export const updateChannel = (id: Uuid, name: string): Action => ({
   type: CHANNEL_RENAME,
   payload: {
     id,
@@ -17,7 +17,7 @@ export const updateItem = (id: Uuid, name: string): Action => ({
   }
 });
 
-export const deleteItem = (id: Uuid): Action => ({
+export const deleteChannel = (id: Uuid): Action => ({
   type: CHANNEL_DELETE,
   payload: {
     id
