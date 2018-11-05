@@ -53,6 +53,7 @@
     "less-loader": "^4.1.0",
     "react-draft-wysiwyg": "^1.12.13",
     "react-set-state-usage": "^2.0.1",
+    "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.22.1",
     "ts-jest": "^23.0.0",
     "ts-loader": "^4.4.2",

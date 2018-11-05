@@ -17,8 +17,6 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     label: PropTypes.string.isRequired,
   };
 
-
-
   constructor(props: any) {
     super(props);
     this.state = {

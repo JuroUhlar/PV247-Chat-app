@@ -16,12 +16,10 @@ export interface IChannelListingOwnProps {
     readonly onClick: (name: string) => void;
 }
 
-
-
 export class ChannelListing extends React.PureComponent<
     IChannelListingOwnProps &
     IChannelListingStateProps &
-    IChannelListingDispatchProps > {
+    IChannelListingDispatchProps> {
 
     render(): JSX.Element {
         return (

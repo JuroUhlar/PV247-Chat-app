@@ -4,9 +4,10 @@ import { ContentWrapper } from './ContentWrapper';
 
 // Redux stuff
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from '../reducers/rootReducer';
 import { getInitialChannels } from '../utils/getInitialChannels';
+import { devToolsEnhancer, composeWithDevTools } from 'redux-devtools-extension';
 
 
 const initialState = {
@@ -17,7 +18,13 @@ interface IAppState {
   readonly isLogged: boolean;
 }
 
-const store = createStore(rootReducer, initialState);
+const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(
+    applyMiddleware()
+  ),
+);
 
 export class App extends React.PureComponent<any, IAppState> {
   static displayName = 'App';
