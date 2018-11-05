@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChannelListing } from './ChannelListing';
+import { ChannelListingContainer } from '../containers/ChannelListingContainer';
 import { UserCard } from './UserCard';
 import { ProfileView } from './ProfileView';
 import { ChannelView } from './ChannelView';
@@ -27,7 +27,7 @@ export class ContentWrapper extends React.PureComponent<any, IContentWrapperStat
     return (
       <div className="content-wrapper full-height">
         <div className="sidebar-container">
-          <ChannelListing
+          <ChannelListingContainer
             onClick={this._onPageClick}
           />
           <UserCard

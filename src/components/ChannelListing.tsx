@@ -1,30 +1,27 @@
 import * as React from 'react';
 import { ChannelBarItem } from './ChannelBarItem';
+import { IChannel } from '../models/IChannel';
+import * as Immutable from 'immutable';
 
-interface IChanelListingProps {
+
+export interface IChannelListingStateProps {
+    readonly channels: Immutable.List<IChannel>;
+}
+
+export interface IChannelListingDispatchProps {
+    readonly onAddChannel: (name: string) => void;
+}
+
+export interface IChannelListingOwnProps {
     readonly onClick: (name: string) => void;
 }
 
-interface IChannelListingState {
-    readonly channels: any[];
-}
 
-export class ChannelListing extends React.PureComponent<IChanelListingProps, IChannelListingState> {
-    constructor(props: IChanelListingProps) {
-        super(props);
 
-        this.state = {
-            channels: [
-                {label: 'General', id: 0},
-                {label: 'Random', id: 1},
-                {label: 'Off-topic', id: 2},
-                {label: 'Not work related', id: 3},
-                {label: 'Memes', id: 4},
-                {label: 'Gossip', id: 5},
-                {label: 'Cat videos', id: 6},
-            ],
-        };
-    }
+export class ChannelListing extends React.PureComponent<
+    IChannelListingOwnProps &
+    IChannelListingStateProps &
+    IChannelListingDispatchProps > {
 
     render(): JSX.Element {
         return (
@@ -32,13 +29,13 @@ export class ChannelListing extends React.PureComponent<IChanelListingProps, ICh
                 <div className="channel-taskbar">
                     <span className="channel-taskbar_title">Channels</span>
                     <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel"
-                          aria-hidden="true"/>
+                        aria-hidden="true" />
                 </div>
                 <ol className="channels-ordered-list">
-                    {this.state.channels.map(channel => (
+                    {this.props.channels.map((channel: IChannel) => (
                         <li key={channel.id}>
                             <ChannelBarItem
-                                label={channel.label}
+                                label={channel.name}
                                 key={channel.id}
                                 onClick={this.props.onClick}
                             />
