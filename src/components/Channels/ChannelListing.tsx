@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ChannelBarItem } from './ChannelBarItem';
-import { IChannel } from '../models/IChannel';
+import { IChannel } from '../../models/IChannel';
 import * as Immutable from 'immutable';
 
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Proptypes from 'prop-types';
-import { MessageList } from './MessageList';
+import { MessageList } from '../Messages/MessageList';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
