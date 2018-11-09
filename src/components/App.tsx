@@ -4,7 +4,7 @@ import {LoginPage} from './LoginPage';
 import {ContentWrapper} from './ContentWrapper';
 
 export interface IAppCallbackProps {
-  readonly onLogin: () => void;
+  readonly onLogin: (name: string) => void;
 }
 
 export interface IAppDataProps {
@@ -25,7 +25,7 @@ export class App extends React.PureComponent<AppProps> {
   }
 
   _onLoginClick = () => {
-    this.props.onLogin();
+    this.props.onLogin('');
   };
 
   render(): JSX.Element {

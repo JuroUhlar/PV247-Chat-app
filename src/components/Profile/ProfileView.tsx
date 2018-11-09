@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Avatar} from './Avatar';
 
 export const ProfileView: React.StatelessComponent = () => (
     <div>
@@ -6,9 +7,9 @@ export const ProfileView: React.StatelessComponent = () => (
             <section className="user-profile">
                 <div className="avatar-container user-profile-block">
                     <h1 className="user-profile-header">Your Profile</h1>
-                    <img
-                        className="avatar "
-                        src="http://modernurbandesigners.com/Lists/Staff/Attachments/9/female-avatar-square.jpg"
+                    <Avatar
+                        avatarSize="avatar "
+                        avatarPath="http://modernurbandesigners.com/Lists/Staff/Attachments/9/female-avatar-square.jpg"
                     />
                     <button className="btn btn-default">
                         Change Avatar

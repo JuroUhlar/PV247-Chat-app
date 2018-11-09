@@ -5,11 +5,11 @@ import {IState} from '../models/IState';
 import {logIn} from '../actions/statusActionCreators';
 
 const mapStateToProps = (state: IState): IAppDataProps => ({
-  isLogged: state.loginStatus,
+  isLogged: !!state.users.currentUserId,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IAppCallbackProps => ({
-  onLogin: () => dispatch(logIn()),
+  onLogin: (name: string) => dispatch(logIn(name)),
 });
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

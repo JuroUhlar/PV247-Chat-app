@@ -8,5 +8,5 @@ export const MESSAGE_DELETE = 'MESSAGE_DELETE';
 export const MESSAGE_LIKE = 'MESSAGE_LIKE';
 export const MESSAGE_DISLIKE = 'MESSAGE_DISLIKE';
 
-export const STATUS_LOG_IN = 'STATUS_LOG_IN';
-export const STATUS_LOG_OUT = 'STATUS_LOG_OUT';
+export const USER_LOG_IN = 'USER_LOG_IN';
+export const USER_LOG_OUT = 'USER_LOG_OUT';
