@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {IAppCallbackProps, IAppDataProps, App} from '../components/App';
 import {IState} from '../models/IState';
-import {logIn} from '../actions/statusActionCreators';
+import {logIn} from '../actions/usersActionCreators';
 
 const mapStateToProps = (state: IState): IAppDataProps => ({
   isLogged: !!state.users.currentUserId,

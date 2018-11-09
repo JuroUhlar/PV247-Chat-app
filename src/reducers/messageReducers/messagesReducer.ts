@@ -9,7 +9,8 @@ const initialState = getInitialMessages();
 export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initialState, action: Action):
   Immutable.Map<Uuid, IMessage> => {
   switch (action.type) {
-    case MESSAGE_CREATE: {return prevState}
+    case MESSAGE_CREATE:
+      return prevState;
 
     case MESSAGE_DISLIKE:
     case MESSAGE_LIKE: {
