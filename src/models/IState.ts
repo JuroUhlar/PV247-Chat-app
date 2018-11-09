@@ -1,12 +1,12 @@
 import * as Immutable from 'immutable';
 import { IChannel } from './IChannel';
-import {IMessage} from './Message';
+import {IMessageListing} from './IMessageListing';
 // import { IUser } from './IUser';
 
 export interface IState {
   channels: Immutable.List<IChannel>;
   // users: Immutable.List<IUser>;
-  messages: Immutable.Map<Uuid, IMessage>;
+  messageListing: IMessageListing;
   loginStatus: boolean;
 }
 

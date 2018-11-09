@@ -3,7 +3,7 @@ import {IState} from '../../models/IState';
 import {IMessageListingDataProps, MessageList} from '../../components/Messages/MessageList';
 
 const mapStateToProps = (state: IState): IMessageListingDataProps => ({
-  messages: state.messages,
+  messageIds: state.messageListing.messageIds,
 });
 
 export const MessageListingContainer = connect(mapStateToProps)(MessageList);
