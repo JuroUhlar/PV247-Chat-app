@@ -8,7 +8,7 @@ export interface IMessageCallbackProps {
 export interface IMessageDataProps {
   readonly text: string;
   readonly messagePos: string;
-  readonly messageLikes: number;
+  readonly messageLikesCount: number;
   readonly avatarUrl?: string;
 }
 
@@ -20,7 +20,7 @@ export class Message extends React.PureComponent<MessageProps> {
     text: PropTypes.string.isRequired,
     messagePos: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string,
-    messageLikes: PropTypes.number.isRequired,
+    messageLikesCount: PropTypes.number.isRequired,
     onLikeMessage: PropTypes.func.isRequired,
   };
 
@@ -32,7 +32,7 @@ export class Message extends React.PureComponent<MessageProps> {
       text,
       messagePos,
       avatarUrl,
-      messageLikes,
+      messageLikesCount,
     } = this.props;
 
 
@@ -55,7 +55,7 @@ export class Message extends React.PureComponent<MessageProps> {
                   onClick={this._onClick}
                 />
                 <div className="small-icon" style={{fontWeight: 'bold'}}>
-                  {messageLikes}
+                  {messageLikesCount}
                 </div>
               </div>
             </div>

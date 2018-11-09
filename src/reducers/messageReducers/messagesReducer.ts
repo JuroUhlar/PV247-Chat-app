@@ -2,8 +2,11 @@ import * as Immutable from 'immutable';
 import {IMessage} from '../../models/Message';
 import {MESSAGE_CREATE, MESSAGE_DISLIKE, MESSAGE_LIKE} from '../../constants/actionTypes';
 import {messageReducer} from './messageReducer';
+import {getInitialMessages} from '../../utils/getInitialMessages';
 
-export const messagesReducer = (prevState = Immutable.Map<Uuid, IMessage>(), action: Action):
+const initialState = getInitialMessages();
+
+export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initialState, action: Action):
   Immutable.Map<Uuid, IMessage> => {
   switch (action.type) {
     case MESSAGE_CREATE: {return prevState}

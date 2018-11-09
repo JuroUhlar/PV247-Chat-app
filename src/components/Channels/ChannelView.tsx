@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as Proptypes from 'prop-types';
-import { MessageList } from '../Messages/MessageList';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {MessageListingContainer} from '../../containers/Messages/MessageListingContainer';
 
 interface IChannelViewProps {
     readonly channelName: string;
@@ -16,7 +16,7 @@ export const ChannelView: React.StatelessComponent<IChannelViewProps> = ({ chann
         <div className="channel-view-cont">
             <div>
                 <div>
-                    <MessageList />
+                    <MessageListingContainer />
                 </div>
             </div>
         </div>
