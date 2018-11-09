@@ -7,7 +7,7 @@ export interface IMessageListingDataProps {
   readonly messageIds: Immutable.Set<Uuid>;
 }
 
-export const MessageList: React.SFC<IMessageListingDataProps> = ({messageIds}) => {
+export const MessageListing: React.SFC<IMessageListingDataProps> = ({messageIds}) => {
   this._prepareMessages = () => {
     return (messageIds && messageIds.map((id: Uuid) => {
         return (
@@ -27,7 +27,7 @@ export const MessageList: React.SFC<IMessageListingDataProps> = ({messageIds}) =
 };
 
 
-MessageList.displayName = 'MessageList';
-MessageList.propTypes = {
+MessageListing.displayName = 'MessageList';
+MessageListing.propTypes = {
   messageIds: PropTypes.object,
 };

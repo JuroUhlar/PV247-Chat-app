@@ -14,9 +14,13 @@ interface IChannelBarItemProps {
 }
 
 export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, any> {
+  static displayName = 'ChannelBarItem';
 
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    channelName: PropTypes.string.isRequired,
+    channelId: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onDeleteChannel: PropTypes.func.isRequired,
   };
 
   constructor(props: any) {
