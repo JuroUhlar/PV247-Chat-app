@@ -1,6 +1,8 @@
-import { IState } from '../models/IState';
 import { channelsReducer } from './channelsReducer';
+import {combineReducers} from 'redux';
+import {messagesReducer} from './messageReducers/messagesReducer';
 
-export const rootReducer = (prevState = {} as IState, action: Action): IState => ({
-  channels: channelsReducer(prevState.channels, action),
+export const rootReducer = combineReducers({
+  channels: channelsReducer,
+  messages: messagesReducer,
 });

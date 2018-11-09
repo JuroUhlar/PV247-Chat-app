@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Message} from './Message';
+import {MessageContainer as Message} from '../containers/MessageContainer';
 
 
 export const MessageList: React.StatelessComponent = () => (

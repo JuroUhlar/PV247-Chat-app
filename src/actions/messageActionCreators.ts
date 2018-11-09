@@ -7,10 +7,10 @@ import {
   MESSAGE_LIKE,
 } from '../constants/actionTypes';
 
-export const createMessage = (text: string, ownerId: Uuid): Action => ({
+export const createMessage = (text: string, authorId: Uuid): Action => ({
   type: MESSAGE_CREATE,
   payload: {
-    ownerId,
+    authorId,
     messageId: uuid(),
     text,
   }
@@ -31,16 +31,18 @@ export const deleteMessage = (messageId: Uuid): Action => ({
   }
 });
 
-export const likeMessage = (messageId: Uuid): Action => ({
+export const likeMessage = (messageId: Uuid, userId: Uuid): Action => ({
   type: MESSAGE_LIKE,
   payload: {
     messageId,
+    userId,
   }
 });
 
-export const dislikeMessage = (messageId: Uuid): Action => ({
+export const dislikeMessage = (messageId: Uuid, userId: Uuid): Action => ({
   type: MESSAGE_DISLIKE,
   payload: {
     messageId,
+    userId,
   }
 });
