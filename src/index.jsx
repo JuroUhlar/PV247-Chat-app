@@ -8,6 +8,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import { App } from './components/App.tsx';
+import { AppWrapper } from './components/AppWrapper.tsx';
 
-ReactDOM.render(<App />, document.getElementById('app-root'));
+ReactDOM.render(<AppWrapper/>, document.getElementById('app-root'));

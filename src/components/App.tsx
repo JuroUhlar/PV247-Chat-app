@@ -1,61 +1,45 @@
 import * as React from 'react';
-import { LoginPage } from './LoginPage';
-import { ContentWrapper } from './ContentWrapper';
+import * as PropTypes from 'prop-types';
+import {LoginPage} from './LoginPage';
+import {ContentWrapper} from './ContentWrapper';
 
-// Redux stuff
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from '../reducers/rootReducer';
-import { getInitialChannels } from '../utils/getInitialChannels';
-import { composeWithDevTools } from 'redux-devtools-extension';
+export interface IAppCallbackProps {
+  readonly onLogin: () => void;
+}
 
-
-const initialState = {
-  channels: getInitialChannels(),
-};
-
-interface IAppState {
+export interface IAppDataProps {
   readonly isLogged: boolean;
 }
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(
-    applyMiddleware()
-  ),
-);
+export type AppProps = IAppCallbackProps & IAppDataProps;
 
-export class App extends React.PureComponent<any, IAppState> {
+export class App extends React.PureComponent<AppProps> {
   static displayName = 'App';
+
+  static propTypes = {
+    onLogin: PropTypes.func.isRequired,
+  };
 
   constructor(props: any) {
     super(props);
-    this.state = {
-      isLogged: false,
-    };
   }
 
   _onLoginClick = () => {
-    this.setState(() => ({
-      isLogged: true,
-    }));
+    this.props.onLogin();
   };
 
   render(): JSX.Element {
+    const {isLogged} = this.props;
     return (
-      <Provider store={store}>
-        <div className="full-height">
-          {!this.state.isLogged &&
-            <LoginPage
-              onLogInClick={this._onLoginClick}
-            />
-          }
-          {this.state.isLogged &&
-            <ContentWrapper />
-          }
-        </div>
-      </Provider>
+      <div className="full-height">
+        {isLogged ?
+          <ContentWrapper/>
+          :
+          <LoginPage
+            onLogInClick={this._onLoginClick}
+          />
+        }
+      </div>
     );
   }
 }

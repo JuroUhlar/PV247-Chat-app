@@ -1,8 +1,11 @@
 import * as Immutable from 'immutable';
 import { IChannel } from '../models/IChannel';
 import { CHANNEL_CREATE, CHANNEL_RENAME, CHANNEL_DELETE } from '../constants/actionTypes';
+import {getInitialChannels} from '../utils/getInitialChannels';
 
-export const channelsReducer = (prevState = Immutable.List<IChannel>(), action: Action): Immutable.List<IChannel> => {
+const initialState = getInitialChannels();
+
+export const channelsReducer = (prevState: Immutable.List<IChannel> = initialState, action: Action): Immutable.List<IChannel> => {
   switch (action.type) {
     case CHANNEL_CREATE: {
       const { id, name } = action.payload;

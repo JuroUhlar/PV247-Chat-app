@@ -7,5 +7,6 @@ export interface IState {
   channels: Immutable.List<IChannel>;
   // users: Immutable.List<IUser>;
   messages: Immutable.Map<Uuid, IMessage>;
+  loginStatus: boolean;
 }
 
