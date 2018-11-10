@@ -35,7 +35,7 @@
 }
 
 .channel-bar-item:hover {
-  background-color: lightblue;
+  background-color: #b7cbe3;
   cursor: pointer;
 }
 
@@ -92,7 +92,7 @@
 
 .channel-taskbar .add-channel-icon:hover {
   font-weight: bold;
-  background-color: aquamarine;
+  background-color: #a8dab5;
 }
 
 .channel-taskbar .channel-taskbar_title {
@@ -173,7 +173,7 @@ body, html, .full-height {
 
 .user-card_open-user-menu-icon:hover {
   font-weight: bold;
-  background-color: aquamarine;
+  background-color: #a8dab5;
   cursor: pointer;
 }
 
@@ -254,13 +254,13 @@ body, html, .full-height {
   float: right;
   width: 240px;
   border: none;
-  border-radius: 10px;
-  background-color: khaki;
+  border-radius: 3px;
+  background-color: #a8dab5;
   padding: 0 6px 8px 6px;
 }
 
 .message-pane-pos-right .message-side {
-  background-color: lightsteelblue;
+  background-color: #b7cbe3;
 }
 
 .message-pane .top-message-bar-cont {
@@ -276,17 +276,15 @@ body, html, .full-height {
 
 .message-pane .small-icon {
   float: left;
-  height: 10px;
+  height: 13px;
   margin-right: 4px;
   font-size: 11px;
   cursor: pointer;
 }
 .message-pane .small-icon:hover{
-  color: aquamarine;
+  color: gray;
 }
-.message-pane-pos-left .small-icon:hover{
-  color: orangered;
-}
+
 .message-pane .text-container{
   clear: both;
 }
@@ -311,10 +309,11 @@ body, html, .full-height {
 .channel-view-cont {
   height: 65%;
   overflow-y: scroll;
-  background-color: #ebebebed;
+  background-color: white;
 }
 .writing-view-cont {
   height: 25%;
+  background-color: white;
 }
 
 .send-btn-holder {
@@ -324,18 +323,22 @@ body, html, .full-height {
   position: absolute;
   bottom: 40px;
   right: 40px;
-  color: white;
-  background-color: blue;
+  color: darkblue;
+  background-color: #b7cbe3;
   border-radius: 15px;
   cursor: pointer;
 }
 
 .send-btn-holder:hover{
-  background-color: aquamarine;
-  color: gray;
+  background-color: darkblue;
+  color: #b7cbe3;
 }
 
 .send-btn-holder .inside {
   top: -3px;
   left: -3px;
+}
+
+.rdw-editor-toolbar {
+  background-color: #b7cbe3;
 }
