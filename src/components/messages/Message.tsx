@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {Avatar} from '../Profile/Avatar';
+import {Avatar} from '../profile/Avatar';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: () => void;

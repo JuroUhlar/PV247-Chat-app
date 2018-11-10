@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {ChannelListingContainer} from '../containers/ChannelListingContainer';
-import {ChannelView} from './Channels/ChannelView';
-import {ProfileViewContainer} from '../containers/Profile/ProfileViewContainer';
-import {UserCardContainer} from '../containers/Profile/UserCardContainer';
+import {ChannelView} from './channels/ChannelView';
+import {ProfileViewContainer} from '../containers/profile/ProfileViewContainer';
+import {UserCardContainer} from '../containers/profile/UserCardContainer';
 
 interface IContentWrapperState {
   readonly currentPage: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as Immutable from 'immutable';
-import {MessageContainer} from '../../containers/Messages/MessageContainer';
+import {MessageContainer} from '../../containers/messages/MessageContainer';
 
 export interface IMessageListingDataProps {
   readonly messageIds: Immutable.Set<Uuid>;

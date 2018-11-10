@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Proptypes from 'prop-types';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import {MessageListingContainer} from '../../containers/Messages/MessageListingContainer';
+import {MessageListingContainer} from '../../containers/messages/MessageListingContainer';
 
 interface IChannelViewProps {
     readonly channelName: string;

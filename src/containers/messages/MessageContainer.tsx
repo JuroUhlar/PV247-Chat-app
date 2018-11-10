@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {IMessageCallbackProps, IMessageDataProps, Message} from '../../components/Messages/Message';
+import {IMessageCallbackProps, IMessageDataProps, Message} from '../../components/messages/Message';
 import {likeMessage} from '../../actions/messageActionCreators';
 import {IState} from '../../models/IState';
 import {janeId} from '../../utils/getInitialUsers';

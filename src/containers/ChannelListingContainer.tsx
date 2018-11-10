@@ -7,7 +7,7 @@ import {
   IChannelListingDispatchProps,
   IChannelListingStateProps,
   ChannelListing
-} from '../components/Channels/ChannelListing';
+} from '../components/channels/ChannelListing';
 
 const mapStateToProps = (state: IState): IChannelListingStateProps => {
   return {

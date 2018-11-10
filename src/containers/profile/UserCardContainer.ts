@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {IState} from '../../models/IState';
-import {IUserCardCallbackProps, IUserCardDataProps, UserCard} from '../../components/Profile/UserCard';
+import {IUserCardCallbackProps, IUserCardDataProps, UserCard} from '../../components/profile/UserCard';
 
 const mapStateToProps = (state: IState): IUserCardDataProps => {
   const currentUserId = state.usersInfo.currentUserId;
