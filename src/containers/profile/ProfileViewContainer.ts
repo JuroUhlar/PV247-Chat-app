@@ -5,12 +5,10 @@ import {getCurrentUser} from '../../utils/usersUtils';
 
 const mapStateToProps = (state: IState): IProfileViewDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);
-  const {avatarPath, email, name} = currentUser;
+  const {avatarPath} = currentUser;
 
   return {
     avatarPath,
-    email,
-    username: name,
   };
 };
 

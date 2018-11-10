@@ -1,12 +1,10 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import {Avatar} from './Avatar';
-import {ProfileFields} from './ProfileFields';
+import {ProfileFieldsContainer} from '../../containers/profile/ProfileFieldsContainer';
 
 export interface IProfileViewDataProps {
   readonly avatarPath?: string;
-  readonly email: string;
-  readonly username: string;
 }
 
 export interface IProfileViewCallbackProps {
@@ -16,8 +14,6 @@ type ProfileViewProps = IProfileViewCallbackProps & IProfileViewDataProps;
 
 export const ProfileView: React.SFC<ProfileViewProps> = ({
  avatarPath,
- email,
- username,
 }) => (
   <div>
     <div>
@@ -32,10 +28,7 @@ export const ProfileView: React.SFC<ProfileViewProps> = ({
             Change Avatar
           </button>
         </div>
-        <ProfileFields
-          email={email}
-          username={username}
-        />
+        <ProfileFieldsContainer/>
       </section>
     </div>
   </div>
@@ -44,6 +37,4 @@ export const ProfileView: React.SFC<ProfileViewProps> = ({
 ProfileView.displayName = 'ProfileView';
 ProfileView.propTypes = {
   avatarPath: PropTypes.string,
-  email: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
 };

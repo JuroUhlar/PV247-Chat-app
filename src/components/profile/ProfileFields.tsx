@@ -5,15 +5,17 @@ import {isInsertEmpty} from '../../utils/isInsertEmpty';
 export interface IProfileFieldsDataProps {
   readonly email: string;
   readonly username: string;
+  readonly userId: string;
 }
 
 export interface IProfileFieldsCallbackProps {
+  onSave: (id: Uuid, name: string) => void;
 }
 
 type ProfileFieldsProps = IProfileFieldsDataProps & IProfileFieldsCallbackProps;
 
 interface IProfileFieldsState {
-  text: string;
+  username: string;
 }
 
 export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProfileFieldsState> {
@@ -22,19 +24,33 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
   static propTypes = {
     email: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+
+    onSave: PropTypes.func.isRequired,
   };
 
   constructor(props: ProfileFieldsProps) {
     super(props);
-    this.state = {text: props.username};
+    this.state = {username: props.username};
   }
 
   _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const text = event.currentTarget.value;
-    this.setState(() => ({text}));
+    const username = event.currentTarget.value;
+    this.setState(() => ({username}));
+  };
+
+  _handleSave = () => {
+    this.props.onSave(this.props.userId, this.state.username);
+  };
+
+  _handleCancel = () => {
+    const username = this.props.username;
+    this.setState(() => ({username}));
   };
 
   render() {
+    const {username} = this.state;
+
     return (
       <form className="account-details user-profile-block">
         <div className="form-group">
@@ -58,7 +74,7 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
           </label>
           <input
             onChange={this._handleChange}
-            value={this.state.text}
+            value={username}
             name="profileView-nickname"
             id="profileView-nickname"
             type="text"
@@ -69,9 +85,10 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
           <div className="row">
             <div className="col-sm-6">
               <button
-                disabled={isInsertEmpty(this.state.text)}
+                disabled={isInsertEmpty(username)}
                 className="btn btn-primary btn-block"
                 type="button"
+                onClick={this._handleSave}
               > Submit
               </button>
             </div>
@@ -80,6 +97,7 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
                 className="btn btn-default btn-block"
                 type="button"
                 disabled={false}
+                onClick={this._handleCancel}
               > Cancel
               </button>
             </div>

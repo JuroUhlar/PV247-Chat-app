@@ -10,3 +10,5 @@ export const MESSAGE_DISLIKE = 'MESSAGE_DISLIKE';
 
 export const USER_LOG_IN = 'USER_LOG_IN';
 export const USER_LOG_OUT = 'USER_LOG_OUT';
+
+export const USERNAME_CHANGES_SAVE = 'USERNAME_CHANGES_SAVE';
