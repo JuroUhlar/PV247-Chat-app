@@ -3,7 +3,6 @@ import {
   MESSAGE_CREATE,
   MESSAGE_DELETE,
   MESSAGE_DISLIKE,
-  MESSAGE_EDIT,
   MESSAGE_LIKE,
 } from '../constants/actionTypes';
 
@@ -12,14 +11,6 @@ export const createMessage = (text: string, authorId: Uuid): Action => ({
   payload: {
     authorId,
     messageId: uuid(),
-    text,
-  }
-});
-
-export const updateMessage = (messageId: Uuid, text: string): Action => ({
-  type: MESSAGE_EDIT,
-  payload: {
-    messageId,
     text,
   }
 });

@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import {IMessage} from '../../models/Message';
-import {MESSAGE_CREATE, MESSAGE_DISLIKE, MESSAGE_LIKE} from '../../constants/actionTypes';
+import {MESSAGE_CREATE, MESSAGE_DELETE, MESSAGE_DISLIKE, MESSAGE_LIKE} from '../../constants/actionTypes';
 import {messageReducer} from './messageReducer';
 import {getInitialMessages} from '../../utils/getInitialMessages';
 
@@ -12,11 +12,16 @@ export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initi
     case MESSAGE_CREATE:
       return prevState;
 
+    case MESSAGE_DELETE: {
+      return prevState.delete(action.payload.messageId);
+    }
+
     case MESSAGE_DISLIKE:
     case MESSAGE_LIKE: {
-      const {messaeId} = action.payload;
-      const currentMessage = prevState.get(messaeId);
-      const newState = prevState.set(messaeId, messageReducer(currentMessage, action));
+      const {messageId} = action.payload;
+      const currentMessage = prevState.get(messageId);
+      const newMessage = messageReducer(currentMessage, action);
+      const newState = prevState.set(messageId, newMessage);
 
       return newState;
     }

@@ -3,7 +3,9 @@ import * as PropTypes from 'prop-types';
 import {Avatar} from '../profile/Avatar';
 
 export interface IMessageCallbackProps {
-  readonly onLikeMessage: () => void;
+  readonly onLikeMessage: (messageId: Uuid, userId: Uuid) => void;
+  readonly onDislikeMessage: (messageId: Uuid, userId: Uuid) => void;
+  readonly onDeleteMessage: (messageId: Uuid) => void;
 }
 
 export interface IMessageDataProps {
@@ -11,6 +13,9 @@ export interface IMessageDataProps {
   readonly messagePos: string;
   readonly messageLikesCount: number;
   readonly avatarUrl?: string;
+  readonly messageId: Uuid;
+  readonly authorId: Uuid;
+  readonly currentUserId: Uuid;
 }
 
 type MessageProps = IMessageCallbackProps & IMessageDataProps;
@@ -22,10 +27,29 @@ export class Message extends React.PureComponent<MessageProps> {
     messagePos: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string,
     messageLikesCount: PropTypes.number.isRequired,
+    messageId: PropTypes.string.isRequired,
+    currentUserId: PropTypes.string.isRequired,
+
     onLikeMessage: PropTypes.func.isRequired,
+    onDislikeMessage: PropTypes.func.isRequired,
   };
 
-  _onClick = () => this.props.onLikeMessage();
+  _onLike = () => {
+    const {currentUserId, messageId} = this.props;
+    this.props.onLikeMessage(messageId, currentUserId);
+  };
+
+  _onDislike = () => {
+    const {currentUserId, messageId, onDislikeMessage} = this.props;
+    onDislikeMessage(messageId, currentUserId);
+  };
+
+  _onDelete = () => {
+    const {messageId, authorId, currentUserId, onDeleteMessage} = this.props;
+    if (authorId === currentUserId) {
+      onDeleteMessage(messageId);
+    }
+  };
 
   render(): JSX.Element {
     const {
@@ -47,11 +71,17 @@ export class Message extends React.PureComponent<MessageProps> {
           <div className="message-side">
             <div className="top-message-bar-cont">
               <div className="top-message-bar">
-                <div className="small-icon glyphicon glyphicon-trash"/>
-                <div className="small-icon glyphicon glyphicon-heart"/>
+                <div
+                  className="small-icon glyphicon glyphicon-trash"
+                  onClick={this._onDelete}
+                />
+                <div
+                  className="small-icon glyphicon glyphicon-heart"
+                  onClick={this._onLike}
+                />
                 <div
                   className="small-icon glyphicon glyphicon-thumbs-down"
-                  onClick={this._onClick}
+                  onClick={this._onDislike}
                 />
                 <div className="small-icon" style={{fontWeight: 'bold'}}>
                   {messageLikesCount}
