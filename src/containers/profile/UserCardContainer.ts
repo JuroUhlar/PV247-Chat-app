@@ -2,10 +2,10 @@ import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {IState} from '../../models/IState';
 import {IUserCardCallbackProps, IUserCardDataProps, UserCard} from '../../components/profile/UserCard';
+import {getCurrentUser} from '../../utils/usersUtils';
 
 const mapStateToProps = (state: IState): IUserCardDataProps => {
-  const currentUserId = state.usersInfo.currentUserId;
-  const currentUser = state.usersInfo.users.get(currentUserId);
+  const currentUser = getCurrentUser(state.usersInfo);
   return {
     username: currentUser.name,
     avatarPath: currentUser.avatarPath,

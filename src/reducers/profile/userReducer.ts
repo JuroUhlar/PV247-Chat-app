@@ -1,5 +1,5 @@
 import {IUser} from '../../models/User';
-import {getJane} from '../../utils/getInitialUsers';
+import {getJane} from '../../utils/usersUtils';
 
 const initialState = getJane();
 

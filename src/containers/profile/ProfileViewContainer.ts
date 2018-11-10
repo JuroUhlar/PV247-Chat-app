@@ -1,13 +1,16 @@
 import {connect} from 'react-redux';
 import {IState} from '../../models/IState';
 import {IProfileViewDataProps, ProfileView} from '../../components/profile/ProfileView';
+import {getCurrentUser} from '../../utils/usersUtils';
 
 const mapStateToProps = (state: IState): IProfileViewDataProps => {
-  const currentUserId = state.usersInfo.currentUserId;
-  const currentUser = state.usersInfo.users.get(currentUserId);
+  const currentUser = getCurrentUser(state.usersInfo);
+  const {avatarPath, email, name} = currentUser;
 
   return {
-    avatarPath: currentUser.avatarPath,
+    avatarPath,
+    email,
+    username: name,
   };
 };
 

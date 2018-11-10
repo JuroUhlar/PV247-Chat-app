@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import {IUser} from '../../models/User';
-import {getInitialUsers} from '../../utils/getInitialUsers';
+import {getInitialUsers} from '../../utils/usersUtils';
 
 const initialState = getInitialUsers();
 

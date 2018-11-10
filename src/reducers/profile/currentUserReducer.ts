@@ -1,5 +1,5 @@
 import {USER_LOG_IN, USER_LOG_OUT} from '../../constants/actionTypes';
-import {janeId} from '../../utils/getInitialUsers';
+import {janeId} from '../../utils/usersUtils';
 
 const initialState = janeId;
 

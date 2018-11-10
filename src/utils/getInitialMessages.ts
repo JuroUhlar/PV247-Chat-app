@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import {IMessage, Message} from '../models/Message';
-import {janeId} from './getInitialUsers';
+import {janeId} from './usersUtils';
 
 
 const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
