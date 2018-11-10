@@ -1,34 +1,22 @@
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {IMessageCallbackProps, IMessageDataProps, Message} from '../../components/Messages/Message';
-import {likeMessage} from '../../actions/messageActionCreators';
 import {IState} from '../../models/IState';
-import {janeId} from '../../utils/getInitialUsers';
+import {IUserCardCallbackProps, IUserCardDataProps, UserCard} from '../../components/Profile/UserCard';
 
-interface IMessageContainerDataProps {
-  readonly messageId: Uuid;
-}
-
-const mapStateToProps = (state: IState, {messageId}: IMessageContainerDataProps): IMessageDataProps => {
-  const message = state.messageListing.messages.get(messageId);
-  const messagePos = message && message.authorId === janeId
-    ? 'message-pane-pos-right'
-    : 'message-pane-pos-left';
-  const likesCount = message && message.likes.count() - message.dislikes.count();
-  const text = message && message.text;
+const mapStateToProps = (state: IState): IUserCardDataProps => {
+  const currentUserId = state.usersInfo.currentUserId;
+  const currentUser = state.usersInfo.users.get(currentUserId);
   return {
-    text,
-    messagePos,
-    messageLikesCount: likesCount,
+    username: currentUser.name,
+    avatarPath: currentUser.avatarPath,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IMessageCallbackProps => {
-  const messageId = 'messageId';
-  const userId = 'userId';
+const mapDispatchToProps = (dispatch: Dispatch, props: IUserCardCallbackProps): IUserCardCallbackProps => {
+  console.log(typeof dispatch);
   return {
-    onLikeMessage: () => dispatch(likeMessage(messageId, userId)),
+    onClick: (name: string) => props.onClick(name),
   };
 };
 
-export const MessageContainer = connect(mapStateToProps, mapDispatchToProps)(Message);
+export const UserCardContainer = connect(mapStateToProps, mapDispatchToProps)(UserCard);

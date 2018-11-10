@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {Avatar} from '../Profile/Avatar';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: () => void;
@@ -27,7 +28,6 @@ export class Message extends React.PureComponent<MessageProps> {
   _onClick = () => this.props.onLikeMessage();
 
   render(): JSX.Element {
-    const spareAvatarUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGR7Mo4SPawVcs97YO3W2TiWl3bjGiEU3_whXMGAcNOMJygVGB';
     const {
       text,
       messagePos,
@@ -39,12 +39,11 @@ export class Message extends React.PureComponent<MessageProps> {
     return (
       <div className={messagePos}>
         <div className="message-pane">
-          <div className="avatar-side">
-            <img
-              className="mini-avatar"
-              src={avatarUrl || spareAvatarUrl}
-            />
-          </div>
+          <Avatar
+            avatarPath={avatarUrl}
+            avatarPos="avatar-side"
+            avatarSize="mini-avatar"
+          />
           <div className="message-side">
             <div className="top-message-bar-cont">
               <div className="top-message-bar">

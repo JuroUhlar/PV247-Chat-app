@@ -16,10 +16,15 @@ const mapStateToProps = (state: IState, {messageId}: IMessageContainerDataProps)
     : 'message-pane-pos-left';
   const likesCount = message && message.likes.count() - message.dislikes.count();
   const text = message && message.text;
+
+  const messageAuthorId = message.authorId;
+  const messageAuthor = state.usersInfo.users.get(messageAuthorId);
+
   return {
     text,
     messagePos,
     messageLikesCount: likesCount,
+    avatarUrl: messageAuthor.avatarPath,
   };
 };
 

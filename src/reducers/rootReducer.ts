@@ -6,5 +6,5 @@ import {usersInfoReducer} from './Profile/usersInfoReducer';
 export const rootReducer = combineReducers({
   channels: channelsReducer,
   messageListing: messageListingReducers,
-  users: usersInfoReducer,
+  usersInfo: usersInfoReducer,
 });

@@ -10,7 +10,7 @@ export const getJane = (): IUser => (
     id: janeId,
     email: 'jane@doe.com',
     name: 'JaneD',
-    avatarPath: '../../assets/Jane.jpg',
+    avatarPath: 'https://i.imgur.com/SElyTHD.jpg',
   })
 );
 
@@ -19,13 +19,13 @@ export const getInitialUsers = (): Immutable.Map<Uuid, IUser> => Immutable.Map({
     id: harryId,
     email: 'harry@gmail.com',
     name: 'HarryTheHamster',
-    avatarPath: '../../assets/Harry.jpg',
+    avatarPath: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Harry_Treadaway_SDCC_2014_%28cropped%29.jpg/1200px-Harry_Treadaway_SDCC_2014_%28cropped%29.jpg',
   }),
   [sallyId]: new User({
     id: sallyId,
     email: 'sally@gmail.com',
     name: 'Sallyorg',
-    avatarPath: '../../assets/Sally.jpg',
+    avatarPath: 'https://vignette.wikia.nocookie.net/kpop/images/2/2e/Gugudan_Sally_Act_1_The_Little_Mermaid_photo_2.png/revision/latest?cb=20161025230221.jpg',
   }),
   [janeId]: getJane(),
 });

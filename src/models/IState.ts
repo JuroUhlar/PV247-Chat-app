@@ -5,7 +5,7 @@ import {IUsersInfo} from './IUsersInfo';
 
 export interface IState {
   channels: Immutable.List<IChannel>;
-  users: IUsersInfo;
+  usersInfo: IUsersInfo;
   messageListing: IMessageListing;
 }
 

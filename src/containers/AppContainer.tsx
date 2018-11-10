@@ -5,7 +5,7 @@ import {IState} from '../models/IState';
 import {logIn} from '../actions/usersActionCreators';
 
 const mapStateToProps = (state: IState): IAppDataProps => ({
-  isLogged: !!state.users.currentUserId,
+  isLogged: !!state.usersInfo.currentUserId,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IAppCallbackProps => ({
