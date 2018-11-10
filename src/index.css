@@ -125,6 +125,7 @@ body, html, .full-height {
 
 .content-container {
   flex: 1;
+  background-color: #e6f3ed;
 }
 
 .user-card, .channel-listing {
@@ -147,6 +148,7 @@ body, html, .full-height {
   height: 80px;
   display: flex;
   align-content: space-around;
+  background-color: #e6f3ed;
   align-items: center;
 }
 
