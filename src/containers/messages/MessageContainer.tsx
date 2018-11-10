@@ -21,16 +21,7 @@ const mapStateToProps = (state: IState, {messageId}: IMessageContainerDataProps)
   const messageAuthor = state.usersInfo.users.get(messageAuthorId);
 
   const {likes, dislikes} = message.popularity;
-
-  let likesCount = 50;
-  try {
-    likesCount = likes.size - dislikes.size;
-  } catch (e) {
-    console.log(JSON.stringify(message.popularity), likes, dislikes);
-  }
-
-  console.log(JSON.stringify(message.popularity), likesCount, text);
-
+  const likesCount = likes.size - dislikes.size;
 
   return {
     text,
