@@ -1,1 +1,1 @@
-export const isInsertEmpty = (text: string) => (text.trim() === '');
+export const isInsertEmpty = (text?: string) => (!!text && text.trim() === '');

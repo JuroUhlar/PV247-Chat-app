@@ -1,4 +1,4 @@
-import {USER_LOG_IN, USER_LOG_OUT, USERNAME_CHANGES_SAVE} from '../constants/actionTypes';
+import {USER_LOG_IN, USER_LOG_OUT, USER_CHANGE_USERNAME, USER_CHANGE_AVATAR} from '../constants/actionTypes';
 
 export const logIn = (userId: Uuid): Action => ({
   type: USER_LOG_IN,
@@ -11,6 +11,11 @@ export const logOut = (userId: Uuid): Action => ({
 });
 
 export const saveChangesToUsername = (id: string, name: string): Action => ({
-  type: USERNAME_CHANGES_SAVE,
+  type: USER_CHANGE_USERNAME,
   payload: { id, name },
+});
+
+export const changeAvatar = (id: string, avatarPath: string): Action => ({
+  type: USER_CHANGE_AVATAR,
+  payload: { id, avatarPath },
 });

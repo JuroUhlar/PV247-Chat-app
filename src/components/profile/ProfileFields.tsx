@@ -9,13 +9,13 @@ export interface IProfileFieldsDataProps {
 }
 
 export interface IProfileFieldsCallbackProps {
-  onSave: (id: Uuid, name: string) => void;
+  readonly onSave: (id: Uuid, name: string) => void;
 }
 
 type ProfileFieldsProps = IProfileFieldsDataProps & IProfileFieldsCallbackProps;
 
 interface IProfileFieldsState {
-  username: string;
+  readonly username: string;
 }
 
 export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProfileFieldsState> {

@@ -1,13 +1,19 @@
 import {IUser} from '../../models/User';
 import {getJane} from '../../utils/usersUtils';
-import {USERNAME_CHANGES_SAVE} from '../../constants/actionTypes';
+import {USER_CHANGE_AVATAR, USER_CHANGE_USERNAME} from '../../constants/actionTypes';
 
 const initialState = getJane();
 
 export const userReducer = (prevState: IUser = initialState, action: Action) => {
   switch (action.type) {
-    case USERNAME_CHANGES_SAVE: {
+    case USER_CHANGE_USERNAME: {
       const newState = prevState.with({name: action.payload.name});
+
+      return newState;
+    }
+
+    case USER_CHANGE_AVATAR: {
+      const newState = prevState.with({avatarPath: action.payload.avatarPath});
 
       return newState;
     }

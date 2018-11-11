@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ChannelListingContainer} from '../containers/ChannelListingContainer';
 import {ChannelView} from './channels/ChannelView';
-import {ProfileViewContainer} from '../containers/profile/ProfileViewContainer';
+import {ProfileView} from '../components/profile/ProfileView';
 import {UserCardContainer} from '../containers/profile/UserCardContainer';
 
 interface IContentWrapperState {
@@ -36,7 +36,7 @@ export class ContentWrapper extends React.PureComponent<any, IContentWrapperStat
         </div>
         <div className="content-container">
           {this.state.currentPage === 'ProfilePage' ?
-            <ProfileViewContainer/>
+            <ProfileView/>
             :
             <span>
               <ChannelView

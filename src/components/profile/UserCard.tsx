@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {Avatar} from './Avatar';
 
 export interface IUserCardCallbackProps {
   readonly onClick: (name: string) => void;
@@ -32,9 +33,10 @@ export class UserCard extends React.PureComponent<UserCardProps> {
           onClick={() => { this.props.onClick('ProfilePage'); }}
       >
         <div className="avatar-container">
-          <img
-            className="mini-avatar"
-            src={this.props.avatarPath} />
+          <Avatar
+            avatarSize="mini-avatar"
+            avatarPath={this.props.avatarPath}
+          />
         </div>
         <div className="user-card_username-container">
           <span>{this.props.username}</span>

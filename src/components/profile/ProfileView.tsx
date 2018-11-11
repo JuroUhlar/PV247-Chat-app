@@ -1,33 +1,13 @@
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import {Avatar} from './Avatar';
 import {ProfileFieldsContainer} from '../../containers/profile/ProfileFieldsContainer';
+import {ProfileAvatarSettingsContainer} from '../../containers/profile/ProfileAvatarSettingsContainer';
 
-export interface IProfileViewDataProps {
-  readonly avatarPath?: string;
-}
-
-export interface IProfileViewCallbackProps {
-}
-
-type ProfileViewProps = IProfileViewCallbackProps & IProfileViewDataProps;
-
-export const ProfileView: React.SFC<ProfileViewProps> = ({
- avatarPath,
-}) => (
+export const ProfileView: React.SFC = () => (
   <div>
     <div>
       <section className="user-profile">
-        <div className="avatar-container user-profile-block">
-          <h1 className="user-profile-header">Your Profile</h1>
-          <Avatar
-            avatarSize="avatar"
-            avatarPath={avatarPath}
-          />
-          <button className="btn btn-default">
-            Change Avatar
-          </button>
-        </div>
+        <ProfileAvatarSettingsContainer/>
         <ProfileFieldsContainer/>
       </section>
     </div>
