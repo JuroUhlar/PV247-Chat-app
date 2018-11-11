@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IChannel } from '../../models/IChannel';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
+
 export interface IChannelEditModalStateProps {
   readonly channel: IChannel;
 }
@@ -51,7 +52,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
     this.props.onClose();
   }
 
-  save = () => {
+  createChannel = () => {
     this.props.onAddChannel(this.state.nameValue);
     this.resetForm();
     this.props.onClose();
@@ -78,6 +79,18 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
                 value={this.state.nameValue}
                 placeholder="Enter channel name"
                 onChange={this.handleNameChange}
+                autoFocus
+                onKeyPress={event => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                    if (this.props.channel) {
+                      this.updateChannel();
+                    } else {
+                      this.createChannel();
+                    }
+                  }
+                }
+                }
               />
               <FormControl.Feedback />
             </FormGroup>
@@ -86,7 +99,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
         <Modal.Footer>
           {this.props.channel ?
             <Button onClick={this.updateChannel}>Update channel</Button> :
-            <Button onClick={this.save}>Create channel</Button>}
+            <Button onClick={this.createChannel}>Create channel</Button>}
         </Modal.Footer>
       </Modal>
     );

@@ -86,7 +86,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
         className="channel-bar-item"
         onClick={() => { this.props.onClick(this.props.channelName); }}
       >
-        <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true" />
+        <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true"/>
         <span className="channel-bar-item_channel-label">
           {this.props.channelName}
         </span>
