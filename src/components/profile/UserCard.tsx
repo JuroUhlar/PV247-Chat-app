@@ -1,6 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Avatar} from './Avatar';
+import * as ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
+import {DropdownButton} from 'react-bootstrap';
+import MenuItem from '@material-ui/core/es/MenuItem/MenuItem';
+import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 export interface IUserCardCallbackProps {
   readonly onClick: (name: string) => void;
@@ -29,8 +33,10 @@ export class UserCard extends React.PureComponent<UserCardProps> {
   render(): JSX.Element {
     return (
       <div
-          className="user-card"
-          onClick={() => { this.props.onClick('ProfilePage'); }}
+        className="user-card"
+        onClick={() => {
+          this.props.onClick('ProfilePage');
+        }}
       >
         <div className="avatar-container">
           <Avatar
@@ -42,7 +48,26 @@ export class UserCard extends React.PureComponent<UserCardProps> {
           <span>{this.props.username}</span>
         </div>
         <div className="user-card_icon-container">
-          <span className="glyphicon glyphicon-chevron-up user-card_open-user-menu-icon" title="User settings" aria-hidden="true" />
+          <ButtonToolbar
+            className="user-card_open-user-menu-icon">
+            <DropdownButton
+              dropup
+              bsStyle="link"
+              title={
+                <div style={{display: 'inline-block'}}>
+                  <Glyphicon glyph="chevron-up"/>
+                </div>}
+              noCaret
+              id="dropdown-no-caret"
+            >
+              <MenuItem
+                key="viewUserProfile"
+                divider> View Profile
+              </MenuItem>
+              <MenuItem>Another option</MenuItem>
+              <MenuItem key="userLogout">Log Out</MenuItem>
+            </DropdownButton>
+          </ButtonToolbar>
         </div>
       </div>
     );
