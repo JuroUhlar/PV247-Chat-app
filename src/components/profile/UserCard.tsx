@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Avatar} from './Avatar';
 import * as ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import {DropdownButton} from 'react-bootstrap';
-import MenuItem from '@material-ui/core/es/MenuItem/MenuItem';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 export interface IUserCardCallbackProps {
@@ -70,8 +69,9 @@ export class UserCard extends React.PureComponent<UserCardProps> {
               <MenuItem
                 onClick={this._handleViewProfile}
                 key="viewUserProfile"
-                divider> View Profile
+                > View Profile
               </MenuItem>
+              <MenuItem divider />
               <MenuItem>Another option</MenuItem>
               <MenuItem
                 key="userLogout"

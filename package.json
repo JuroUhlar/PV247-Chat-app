@@ -9,7 +9,6 @@
     "test": "jest --config=jest.config.js --no-cache"
   },
   "dependencies": {
-    "@material-ui/core": "^3.2.2",
     "bootstrap": "^3.3.7",
     "immutable": "^3.8.2",
     "memoizee": "^0.4.14",

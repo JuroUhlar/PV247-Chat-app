@@ -1,11 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-// import { DropdownButton, MenuItem } from 'react-bootstrap';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { ChannelEditModalContainer } from '../../containers/channels/ChannelEditModalContainer';
+import { DropdownButton, Glyphicon, MenuItem } from 'react-bootstrap';
 
 interface IChannelBarItemProps {
   readonly channelName: string;
@@ -69,57 +65,31 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     this.props.onDeleteChannel(this.props.channelId);
   }
 
-
-
   render(): JSX.Element {
-
-    const theme = createMuiTheme({
-      typography: {
-        // Tell Material-UI what the font-size on the html element is.
-        htmlFontSize: 12,
-        useNextVariants: true,
-      },
-    });
-
     return (
       <div
         className="channel-bar-item"
         onClick={() => { this.props.onClick(this.props.channelName); }}
       >
-        <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true"/>
+        <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reorded channels" aria-hidden="true" />
         <span className="channel-bar-item_channel-label">
           {this.props.channelName}
         </span>
 
-        <MuiThemeProvider theme={theme}>
-          <Button
-            aria-owns={'simple-menu'}
-            aria-haspopup="true"
-            onClick={this.openDropdown}
-          >
-            <span className="glyphicon glyphicon-option-vertical" title="Options" aria-hidden="true" />
-          </Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={this.state.anchorEl}
-            anchorReference="anchorEl"
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            getContentAnchorEl={null}
-            open={Boolean(this.state.anchorEl)}
-            onClose={this.closeDropdown}
-          >
-            <MenuItem onClick={this.handleRename}>Rename</MenuItem>
-            <MenuItem onClick={this.closeDropdown}>Invite users</MenuItem>
-            <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
-          </Menu>
-        </MuiThemeProvider>
+        <DropdownButton
+          bsStyle="link"
+          title={
+            <div style={{ display: 'inline-block' }}>
+              <Glyphicon glyph="option-vertical" />
+            </div>}
+          noCaret
+          pullRight
+          id="dropdown-no-caret"
+        >
+          <MenuItem onClick={this.handleRename}>Rename</MenuItem>
+          <MenuItem onClick={this.closeDropdown}>Invite users</MenuItem>
+          <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
+        </DropdownButton>
         <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} channelId={this.props.channelId} />
       </div>
     );
