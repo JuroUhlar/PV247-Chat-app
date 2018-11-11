@@ -1,13 +1,13 @@
-import { IState } from '../models/IState';
+import { IState } from '../../models/IState';
 import { Dispatch } from 'redux';
-import { createChannel, deleteChannel } from '../actions/channelActionCreators';
-import { IChannel } from '../models/IChannel';
+import { createChannel, deleteChannel, renameChannel } from '../../actions/channelActionCreators';
+import { IChannel } from '../../models/IChannel';
 import { connect } from 'react-redux';
 import {
   IChannelListingDispatchProps,
   IChannelListingStateProps,
   ChannelListing
-} from '../components/channels/ChannelListing';
+} from '../../components/channels/ChannelListing';
 
 const mapStateToProps = (state: IState): IChannelListingStateProps => {
   return {
@@ -18,7 +18,8 @@ const mapStateToProps = (state: IState): IChannelListingStateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IChannelListingDispatchProps => {
   return {
     onAddChannel: (name: string) => dispatch(createChannel(name)),
-    onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id))
+    onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id)),
+    onRenameChannel: (id: Uuid, newName: string) => dispatch(renameChannel(id, newName))
   };
 };
 

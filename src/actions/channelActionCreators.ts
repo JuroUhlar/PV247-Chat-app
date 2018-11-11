@@ -9,7 +9,7 @@ export const createChannel = (name: string): Action => ({
   }
 });
 
-export const updateChannel = (id: Uuid, name: string): Action => ({
+export const renameChannel = (id: Uuid, name: string): Action => ({
   type: CHANNEL_RENAME,
   payload: {
     id,

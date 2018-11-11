@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { ChannelEditModalContainer } from '../../containers/channels/ChannelEditModalContainer';
 
 interface IChannelBarItemProps {
   readonly channelName: string;
@@ -21,33 +22,52 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     channelId: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     onDeleteChannel: PropTypes.func.isRequired,
+
   };
 
   constructor(props: any) {
     super(props);
     this.state = {
       anchorEl: null,
+      showChannelModal: false,
     };
   }
 
-  handleClick = (event: any) => {
+  openDropdown = (event: any) => {
     const anchorElement: HTMLElement = event.currentTarget;
     this.setState(() => {
       return { anchorEl: anchorElement };
     });
   };
 
-  handleClose = () => {
+  closeDropdown = () => {
     this.setState(() => {
       return { anchorEl: null };
     });
   };
 
-  deleteChannel = () => {
-    this.handleClose();
-    this.props.onDeleteChannel(this.props.channelId);
+  closeModal = () => {
+    this.setState(() => ({
+      showChannelModal: false,
+    }));
+  };
+
+  openModal = () => {
+    this.setState(() => ({
+      showChannelModal: true,
+    }));
   }
 
+  handleRename = () => {
+    this.openModal();
+    this.closeDropdown();
+  }
+
+
+  deleteChannel = () => {
+    this.closeDropdown();
+    this.props.onDeleteChannel(this.props.channelId);
+  }
 
 
 
@@ -70,31 +90,12 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
         <span className="channel-bar-item_channel-label">
           {this.props.channelName}
         </span>
-        {/* Original icon */}
-        {/* <span className="glyphicon glyphicon-option-vertical channel-bar-item_open-options-icon visible-on-hover" title="Options" aria-hidden="true" /> */}
 
-        {/* React-bootstrap solution */}
-        {/* <DropdownButton
-          title="Options"
-          key="1"
-          id="2"
-          noCaret
-        >
-          <MenuItem eventKey="1">Action</MenuItem>
-          <MenuItem eventKey="2">Another action</MenuItem>
-          <MenuItem eventKey="3" active>
-            Active Item
-      </MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey="4">Separated link</MenuItem>
-        </DropdownButton> */}
-
-        {/* <div className="channel-bar-item_open-options-icon-container"> */}
         <MuiThemeProvider theme={theme}>
           <Button
             aria-owns={'simple-menu'}
             aria-haspopup="true"
-            onClick={this.handleClick}
+            onClick={this.openDropdown}
           >
             <span className="glyphicon glyphicon-option-vertical" title="Options" aria-hidden="true" />
           </Button>
@@ -112,15 +113,14 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
             }}
             getContentAnchorEl={null}
             open={Boolean(this.state.anchorEl)}
-            onClose={this.handleClose}
+            onClose={this.closeDropdown}
           >
-            <MenuItem onClick={this.handleClose}>Rename</MenuItem>
-            <MenuItem onClick={this.handleClose}>Invite users</MenuItem>
+            <MenuItem onClick={this.handleRename}>Rename</MenuItem>
+            <MenuItem onClick={this.closeDropdown}>Invite users</MenuItem>
             <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
           </Menu>
         </MuiThemeProvider>
-
-        {/* </div> */}
+        <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} channelId={this.props.channelId} />
       </div>
     );
   }

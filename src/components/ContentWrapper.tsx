@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ChannelListingContainer} from '../containers/ChannelListingContainer';
+import {ChannelListingContainer} from '../containers/channels/ChannelListingContainer';
 import {ChannelView} from './channels/ChannelView';
 import {ProfileView} from '../components/profile/ProfileView';
 import {UserCardContainer} from '../containers/profile/UserCardContainer';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ChannelBarItem } from './ChannelBarItem';
-import { ChannelManagementModal } from './ChannelManagementModal';
+import { ChannelEditModalContainer } from '../../containers/channels/ChannelEditModalContainer';
 import { IChannel } from '../../models/IChannel';
 import * as Immutable from 'immutable';
 
@@ -12,6 +12,7 @@ export interface IChannelListingStateProps {
 export interface IChannelListingDispatchProps {
     readonly onAddChannel: (name: string) => void;
     readonly onDeleteChannel: (id: Uuid) => void;
+    readonly onRenameChannel: (id: Uuid, newName: string) => void;
 }
 
 export interface IChannelListingOwnProps {
@@ -47,6 +48,13 @@ export class ChannelListing extends React.PureComponent<
         }));
     }
 
+    handleRename(id: Uuid) {
+        this.setState(() => ({
+            showChannelModal: true,
+        }));
+        console.log(id);
+    }
+
 
 
     render(): JSX.Element {
@@ -66,11 +74,13 @@ export class ChannelListing extends React.PureComponent<
                                 key={channel.id}
                                 onClick={this.props.onClick}
                                 onDeleteChannel={this.props.onDeleteChannel}
+
                             />
                         </li>
                     ))}
                 </ol>
-                <ChannelManagementModal show={this.state.showChannelModal} onClose={this.closeModal} onSave={this.props.onAddChannel} />
+                {/* <ChannelEditModal show={this.state.showChannelModal} onClose={this.closeModal} onSave={this.props.onAddChannel} /> */}
+                <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal}/>
             </div>
         );
     }
