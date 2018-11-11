@@ -6,12 +6,13 @@ import {
   MESSAGE_LIKE,
 } from '../constants/actionTypes';
 
-export const createMessage = (text: string, authorId: Uuid): Action => ({
+export const createMessage = (text: string, authorId: Uuid, channelId: Uuid): Action => ({
   type: MESSAGE_CREATE,
   payload: {
     authorId,
     messageId: uuid(),
     text,
+    channelId,
   }
 });
 

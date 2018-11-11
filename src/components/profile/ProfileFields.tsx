@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {isInsertEmpty} from '../../utils/isInsertEmpty';
+import {isInsertEmpty} from '../../utils/textUtils';
 
 export interface IProfileFieldsDataProps {
   readonly email: string;

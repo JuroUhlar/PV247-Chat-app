@@ -9,8 +9,10 @@ const initialState = getInitialMessages();
 export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initialState, action: Action):
   Immutable.Map<Uuid, IMessage> => {
   switch (action.type) {
-    case MESSAGE_CREATE:
-      return prevState;
+    case MESSAGE_CREATE: {
+      const newMessage = messageReducer(undefined, action);
+      return prevState.set(action.payload.messageId, newMessage);
+    }
 
     case MESSAGE_DELETE: {
       return prevState.delete(action.payload.messageId);

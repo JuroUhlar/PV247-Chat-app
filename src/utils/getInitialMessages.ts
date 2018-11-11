@@ -7,7 +7,7 @@ const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
 const sallyId = '4a681417-dcfc-4951-b6b8-cb1db613f975';
 
 const gossipChannelId = '788467fa-10b2-43bc-81dd-fc9f53dcd5a5';
-const randomChannelId = '82457399-8a2d-4a59-b391-eba1b905a2f3';
+export const randomChannelId = '82457399-8a2d-4a59-b391-eba1b905a2f3';
 const offTopicChannelId = '09a04ac0-daa2-4ddd-ae6c-2972c68ccc29';
 
 const messageId1 = '2339d21f-d7fd-4838-aaa7-e009b5cc4ed6';

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Avatar} from '../profile/Avatar';
+import {addLineBreaks} from '../../utils/textUtils';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: (messageId: Uuid, userId: Uuid) => void;
@@ -51,6 +52,8 @@ export class Message extends React.PureComponent<MessageProps> {
     }
   };
 
+  _createMarkup = (text: string) => ({__html: addLineBreaks(text)});
+
   render(): JSX.Element {
     const {
       text,
@@ -88,9 +91,9 @@ export class Message extends React.PureComponent<MessageProps> {
                 </div>
               </div>
             </div>
-            <div className="text-container message-pane-block">
-              {text}
-            </div>
+            <div
+              className="text-container message-pane-block"
+              dangerouslySetInnerHTML={this._createMarkup(text)}/>
           </div>
         </div>
       </div>
