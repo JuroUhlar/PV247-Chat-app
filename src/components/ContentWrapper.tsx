@@ -31,7 +31,7 @@ export class ContentWrapper extends React.PureComponent<any, IContentWrapperStat
             onClick={this._onPageClick}
           />
           <UserCardContainer
-            onClick={this._onPageClick}
+            onClickViewProfile={this._onPageClick}
           />
         </div>
         <div className="content-container">

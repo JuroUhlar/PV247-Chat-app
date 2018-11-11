@@ -7,11 +7,13 @@ import MenuItem from '@material-ui/core/es/MenuItem/MenuItem';
 import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 export interface IUserCardCallbackProps {
-  readonly onClick: (name: string) => void;
+  readonly onClickViewProfile: (name: string) => void;
+  readonly onLogout: (userId: Uuid) => void;
 }
 
 export interface IUserCardDataProps {
   readonly username: string;
+  readonly userId: string;
   readonly avatarPath?: string;
 }
 
@@ -21,24 +23,29 @@ export class UserCard extends React.PureComponent<UserCardProps> {
   static displayName = 'UserCard';
   static propTypes = {
     username: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
     avatarPath: PropTypes.string,
 
-    onClick: PropTypes.func.isRequired,
+    onClickViewProfile: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired,
   };
 
   constructor(props: any) {
     super(props);
   }
 
+  _handleLogout = () => this.props.onLogout(this.props.userId);
+
+  _handleViewProfile = () => this.props.onClickViewProfile('ProfilePage');
+
   render(): JSX.Element {
     return (
       <div
         className="user-card"
-        onClick={() => {
-          this.props.onClick('ProfilePage');
-        }}
       >
-        <div className="avatar-container">
+        <div
+          className="avatar-container"
+          onClick={this._handleViewProfile}>
           <Avatar
             avatarSize="mini-avatar"
             avatarPath={this.props.avatarPath}
@@ -61,11 +68,16 @@ export class UserCard extends React.PureComponent<UserCardProps> {
               id="dropdown-no-caret"
             >
               <MenuItem
+                onClick={this._handleViewProfile}
                 key="viewUserProfile"
                 divider> View Profile
               </MenuItem>
               <MenuItem>Another option</MenuItem>
-              <MenuItem key="userLogout">Log Out</MenuItem>
+              <MenuItem
+                key="userLogout"
+                onClick={this._handleLogout}
+              >Log Out
+              </MenuItem>
             </DropdownButton>
           </ButtonToolbar>
         </div>
