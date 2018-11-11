@@ -1,5 +1,5 @@
-import {MESSAGE_DELETE, MESSAGE_DISLIKE, MESSAGE_LIKE} from '../../constants/actionTypes';
-import {IMessage, Message} from '../../models/Message';
+import {MESSAGE_CREATE, MESSAGE_DISLIKE, MESSAGE_LIKE} from '../../constants/actionTypes';
+import {IMessage, Message, MessagePopularity} from '../../models/Message';
 import {messagePopularityReducer} from './messagePopularityReducer';
 
 export const messageReducer = (prevState: IMessage = new Message(), action: Action): IMessage => {
@@ -13,7 +13,20 @@ export const messageReducer = (prevState: IMessage = new Message(), action: Acti
       return newState;
     }
 
-    case MESSAGE_DELETE:
+    case MESSAGE_CREATE: {
+      const {messageId, authorId, text, channelId} = action.payload;
+      const newMessage = new Message({
+        messageId,
+        text,
+        timeStamp: Date.now(),
+        authorId,
+        channelId,
+        popularity: new MessagePopularity(),
+      });
+
+      return newMessage;
+    }
+
     default:
       return prevState;
   }

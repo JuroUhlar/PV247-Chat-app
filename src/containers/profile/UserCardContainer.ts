@@ -15,7 +15,6 @@ const mapStateToProps = (state: IState): IUserCardDataProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, props: IUserCardCallbackProps): IUserCardCallbackProps => {
-  console.log(typeof dispatch);
   return {
     onClickViewProfile: (name: string) => props.onClickViewProfile(name),
     onLogout: (userId: Uuid) => dispatch(logOut(userId)),
