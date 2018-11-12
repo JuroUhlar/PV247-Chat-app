@@ -1,10 +1,9 @@
-import * as Immutable from 'immutable';
-import { IChannel } from './IChannel';
-import {IMessageListing} from './IMessageListing';
-import {IUsersInfo} from './IUsersInfo';
+import { IMessageListing } from './IMessageListing';
+import { IUsersInfo } from './IUsersInfo';
+import { IChannelsInfo } from './IChannelListing';
 
 export interface IState {
-  channels: Immutable.List<IChannel>;
+  channelsInfo: IChannelsInfo;
   usersInfo: IUsersInfo;
   messageListing: IMessageListing;
 }

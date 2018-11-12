@@ -1,25 +1,24 @@
 import { IState } from '../../models/IState';
 import { Dispatch } from 'redux';
-import { createChannel, deleteChannel, renameChannel } from '../../actions/channelActionCreators';
+import { createChannel, renameChannel } from '../../actions/channelActionCreators';
 import { IChannel } from '../../models/IChannel';
 import { connect } from 'react-redux';
 import {
-  IChannelListingDispatchProps,
-  IChannelListingStateProps,
+  IChannelListingCallbackProps,
+  IChannelListingDataProps,
   ChannelListing
 } from '../../components/channels/ChannelListing';
 
-const mapStateToProps = (state: IState): IChannelListingStateProps => {
+const mapStateToProps = (state: IState): IChannelListingDataProps => {
   return {
-    channels: state.channels.map((i: IChannel) => i).toList(),
+    channels: state.channelsInfo.channels.map((i: IChannel) => i).toList(),
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): IChannelListingDispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch): IChannelListingCallbackProps => {
   return {
     onAddChannel: (name: string) => dispatch(createChannel(name)),
-    onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id)),
-    onRenameChannel: (id: Uuid, newName: string) => dispatch(renameChannel(id, newName))
+    onRenameChannel: (id: Uuid, newName: string) => dispatch(renameChannel(id, newName)),
   };
 };
 

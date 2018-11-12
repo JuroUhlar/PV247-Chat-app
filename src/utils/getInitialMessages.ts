@@ -1,14 +1,11 @@
 import * as Immutable from 'immutable';
-import {IMessage, Message, MessagePopularity} from '../models/Message';
-import {janeId} from './usersUtils';
+import { IMessage, Message, MessagePopularity } from '../models/Message';
+import { janeId } from './usersUtils';
+import { generalChannelId, offTopicChannelId, randomChannelId } from './getInitialChannels';
 
 
 const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
 const sallyId = '4a681417-dcfc-4951-b6b8-cb1db613f975';
-
-const gossipChannelId = '788467fa-10b2-43bc-81dd-fc9f53dcd5a5';
-export const randomChannelId = '82457399-8a2d-4a59-b391-eba1b905a2f3';
-const offTopicChannelId = '09a04ac0-daa2-4ddd-ae6c-2972c68ccc29';
 
 const messageId1 = '2339d21f-d7fd-4838-aaa7-e009b5cc4ed6';
 const messageId2 = '0e5a5341-27f2-488f-8973-8e94dbf743de';
@@ -25,7 +22,7 @@ export const getInitialMessages = (): Immutable.Map<Uuid, IMessage> => Immutable
     text: 'Harry dates Sally.',
     timestamp: new Date('2018-11-02T03:24:05'),
     authorId: harryId,
-    channelId: gossipChannelId,
+    channelId: randomChannelId,
     popularity: new MessagePopularity({
       likes: Immutable.Set<Uuid>([harryId]),
       dislikes: Immutable.Set<Uuid>([sallyId]),
@@ -47,7 +44,7 @@ export const getInitialMessages = (): Immutable.Map<Uuid, IMessage> => Immutable
     text: 'Fred eats ginger bread.',
     timestamp: new Date('2018-11-04T11:20:34'),
     authorId: sallyId,
-    channelId: gossipChannelId,
+    channelId: generalChannelId,
     popularity: new MessagePopularity({
       likes: Immutable.Set<Uuid>([janeId]),
       dislikes: Immutable.Set<Uuid>([harryId]),
