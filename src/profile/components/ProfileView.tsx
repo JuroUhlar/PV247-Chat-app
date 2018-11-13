@@ -1,7 +1,6 @@
-import * as PropTypes from 'prop-types';
 import * as React from 'react';
-import {ProfileFieldsContainer} from '../containers/ProfileFieldsContainer';
-import {ProfileAvatarSettingsContainer} from '../containers/ProfileAvatarSettingsContainer';
+import { ProfileFieldsContainer } from '../containers/ProfileFieldsContainer';
+import { ProfileAvatarSettingsContainer } from '../containers/ProfileAvatarSettingsContainer';
 
 export const ProfileView: React.SFC = () => (
   <div>
@@ -15,6 +14,3 @@ export const ProfileView: React.SFC = () => (
 );
 
 ProfileView.displayName = 'ProfileView';
-ProfileView.propTypes = {
-  avatarPath: PropTypes.string,
-};

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {Avatar} from './Avatar';
+import { Avatar } from './Avatar';
 import * as ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
-import {DropdownButton, MenuItem} from 'react-bootstrap';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import { Link } from 'react-router-dom';
 
 export interface IUserCardCallbackProps {
   readonly onClickViewProfile: (name: string) => void;
@@ -42,14 +43,14 @@ export class UserCard extends React.PureComponent<UserCardProps> {
       <div
         className="user-card"
       >
-        <div
-          className="avatar-container"
-          onClick={this._handleViewProfile}>
-          <Avatar
-            avatarSize="mini-avatar"
-            avatarPath={this.props.avatarPath}
-          />
-        </div>
+        <Link to="/ProfileView">
+          <div className="avatar-container">
+            <Avatar
+              avatarSize="mini-avatar"
+              avatarPath={this.props.avatarPath}
+            />
+          </div>
+        </Link>
         <div className="user-card_username-container">
           <span>{this.props.username}</span>
         </div>
@@ -60,7 +61,7 @@ export class UserCard extends React.PureComponent<UserCardProps> {
               pullRight
               bsStyle="link"
               title={
-                <div style={{display: 'inline-block'}}>
+                <div style={{ display: 'inline-block' }}>
                   <Glyphicon glyph="chevron-down"/>
                 </div>}
               noCaret
@@ -69,9 +70,9 @@ export class UserCard extends React.PureComponent<UserCardProps> {
               <MenuItem
                 onClick={this._handleViewProfile}
                 key="viewUserProfile"
-                > View Profile
+              > View Profile
               </MenuItem>
-              <MenuItem divider />
+              <MenuItem divider/>
               <MenuItem>Another option</MenuItem>
               <MenuItem
                 key="userLogout"

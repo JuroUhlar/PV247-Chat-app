@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {LoginPage} from './LoginPage';
-import {ContentWrapper} from './ContentWrapper';
+import { LoginPage } from './LoginPage';
+import { ContentWrapperContainer } from '../../channels/containers/ContentWrapperContainer';
 
 export interface IAppCallbackProps {
   readonly onLogin: (name: string) => void;
@@ -29,11 +29,11 @@ export class App extends React.PureComponent<AppProps> {
   };
 
   render(): JSX.Element {
-    const {isLogged} = this.props;
+    const { isLogged } = this.props;
     return (
       <div className="full-height">
         {isLogged ?
-          <ContentWrapper/>
+          <ContentWrapperContainer/>
           :
           <LoginPage
             onLogInClick={this._onLoginClick}
