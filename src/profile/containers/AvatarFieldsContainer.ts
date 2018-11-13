@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {IState} from '../../models/IState';
+import {IState} from '../../shared/models/IState';
 import {AvatarFields, IAvatarFieldsCallbackProps, IAvatarFieldsDataProps} from '../components/AvatarFields';
 import {getCurrentUser} from '../utils/usersUtils';
 import {Dispatch} from 'redux';

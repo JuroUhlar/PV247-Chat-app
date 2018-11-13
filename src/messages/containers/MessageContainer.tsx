@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {IMessageCallbackProps, IMessageDataProps, Message} from '../components/Message';
 import {deleteMessage, dislikeMessage, likeMessage} from '../messageActionCreators';
-import {IState} from '../../models/IState';
+import {IState} from '../../shared/models/IState';
 
 interface IMessageContainerDataProps {
   readonly messageId: Uuid;

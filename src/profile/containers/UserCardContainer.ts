@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {IState} from '../../models/IState';
+import {IState} from '../../shared/models/IState';
 import {IUserCardCallbackProps, IUserCardDataProps, UserCard} from '../components/UserCard';
 import {getCurrentUser} from '../utils/usersUtils';
 import {logOut} from '../usersActionCreators';

@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {IRichTextEditorCallbackProps, IRichTextEditorDataProps, RichTextEditor} from '../components/RichTextEditor';
 import {Dispatch} from 'redux';
 import {createMessage} from '../messageActionCreators';
-import {IState} from '../../models/IState';
+import {IState} from '../../shared/models/IState';
 
 const mapStateToProps = (state: IState): IRichTextEditorDataProps => {
   const {currentUserId} = state.usersInfo;

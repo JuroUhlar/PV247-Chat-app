@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {IAppCallbackProps, IAppDataProps, App} from '../components/App';
-import {IState} from '../../models/IState';
+import {IState} from '../models/IState';
 import {logIn} from '../../profile/usersActionCreators';
 
 const mapStateToProps = (state: IState): IAppDataProps => ({

@@ -2,7 +2,7 @@ import * as React from 'react';
 // Redux stuff
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
-import {rootReducer} from '../../reducers/rootReducer';
+import {rootReducer} from '../reducers/rootReducer';
 import {getInitialChannels} from '../../channels/utils/getInitialChannels';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {AppContainer} from '../containers/AppContainer';
