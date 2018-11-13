@@ -128,10 +128,6 @@ body, html, .full-height {
   background-color: #e6f3ed;
 }
 
-.user-card, .channel-listing {
-  border: 1px solid lightsteelblue;
-}
-
 .channel-listing {
   flex: 1;
   overflow-y: auto;
@@ -145,11 +141,15 @@ body, html, .full-height {
 /* User card */
 
 .user-card {
-  height: 80px;
+  height: 11%;
   display: flex;
   align-content: space-around;
   background-color: #e6f3ed;
   align-items: center;
+}
+
+.user-card, .channel-listing {
+  border: 1px solid lightsteelblue;
 }
 
 .user-card .avatar-container {
@@ -302,8 +302,12 @@ body, html, .full-height {
 }
 
 .top-bar-cont {
-  height: 7%;
+  height: 8%;
   border-bottom: 1px solid lightsteelblue;
+}
+
+.top-bar-cont h1 {
+  margin: 20px 20px;
 }
 
 .channel-view-cont {

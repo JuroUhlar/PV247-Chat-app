@@ -57,11 +57,11 @@ export class UserCard extends React.PureComponent<UserCardProps> {
           <ButtonToolbar
             className="user-card_open-user-menu-icon">
             <DropdownButton
-              dropup
+              pullRight
               bsStyle="link"
               title={
                 <div style={{display: 'inline-block'}}>
-                  <Glyphicon glyph="chevron-up"/>
+                  <Glyphicon glyph="chevron-down"/>
                 </div>}
               noCaret
               id="dropdown-no-caret"

@@ -27,11 +27,11 @@ export class ContentWrapper extends React.PureComponent<any, IContentWrapperStat
     return (
       <div className="content-wrapper full-height">
         <div className="sidebar-container">
-          <ChannelListingContainer
-            onClick={this._onPageClick}
-          />
           <UserCardContainer
             onClickViewProfile={this._onPageClick}
+          />
+          <ChannelListingContainer
+            onClick={this._onPageClick}
           />
         </div>
         <div className="content-container">
