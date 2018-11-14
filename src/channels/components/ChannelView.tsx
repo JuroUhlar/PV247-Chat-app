@@ -3,19 +3,25 @@ import * as PropTypes from 'prop-types';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { MessageListingContainer } from '../../messages/containers/MessageListingContainer';
 import { RichTextEditorContainer } from '../../messages/containers/RichTextEditorContainer';
+import { Route, RouteComponentProps } from 'react-router';
+import { withRouterPropTypes } from '../../shared/utils/routerProps';
+import { CHANNEL_VIEW_ROUTE } from '../../shared/constants/routes';
 
-export interface IChannelViewDataProps {
+export interface IChannelViewDataProps extends RouteComponentProps {
   readonly channelName: string;
 }
 
-export const ChannelView: React.SFC<IChannelViewDataProps> = ({ channelName }) => (
+export const ChannelView: React.SFC<IChannelViewDataProps> = (props: IChannelViewDataProps) => (
   <span>
     <div className="top-bar-cont">
-      <h1>{channelName}</h1>
-      <h1>{history}</h1>
+      <h1>{props.channelName}</h1>
     </div>
     <div className="channel-view-cont">
-      <MessageListingContainer/>
+      <Route
+        path={CHANNEL_VIEW_ROUTE}
+        location={props.history.location}
+        component={MessageListingContainer}
+      />
       <RichTextEditorContainer/>
     </div>
   </span>
@@ -25,4 +31,5 @@ ChannelView.displayName = 'ChannelView';
 
 ChannelView.propTypes = {
   channelName: PropTypes.string.isRequired,
+  ...withRouterPropTypes,
 };

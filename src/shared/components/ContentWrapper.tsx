@@ -2,18 +2,15 @@ import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { ChannelListingContainer } from '../../channels/containers/ChannelListingContainer';
 import { UserCardContainer } from '../../profile/containers/UserCardContainer';
-import { ChannelView } from '../../channels/components/ChannelView';
 import { withRouterPropTypes } from '../utils/routerProps';
 import { ProfileView } from '../../profile/components/ProfileView';
-
-interface IContentWrapperState {
-  readonly currentPage: string;
-}
+import { CHANNEL_VIEW_ROUTE, PROFILE_VIEW_ROUTE } from '../constants/routes';
+import { ChannelViewContainer } from '../../channels/containers/ChannelViewContainer';
 
 export interface IContentWrapperDataProps extends RouteComponentProps<any> {
 }
 
-export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps, IContentWrapperState> {
+export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps> {
   static displayName = 'ContentWrapper';
   static propTypes = {
     ...withRouterPropTypes,
@@ -23,17 +20,7 @@ export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps
 
   constructor(props: any) {
     super(props);
-
-    this.state = {
-      currentPage: 'General Channel',
-    };
   }
-
-  _onPageClick = (name: string) => {
-    this.setState(() => ({
-      currentPage: name,
-    }));
-  };
 
   componentDidMount() {
     this.stopListening = this.props.history.listen(() => {
@@ -51,20 +38,20 @@ export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps
     return (
       <div className="content-wrapper full-height">
         <div className="sidebar-container">
-          <UserCardContainer
-            onClickViewProfile={this._onPageClick}
-          />
-          <ChannelListingContainer
-            onClick={this._onPageClick}
-          />
+          <UserCardContainer/>
+          <ChannelListingContainer/>
         </div>
         <div className="content-container">
-          <Route location={this.props.history.location} path="/ProfileView" component={ProfileView}/>
+          <Route
+            exact
+            location={this.props.history.location}
+            path={PROFILE_VIEW_ROUTE}
+            component={ProfileView}
+          />
           <Route
             location={this.props.history.location}
-            path="/ChannelView"
-            component={ChannelView}
-            channelName={this.state.currentPage}
+            path={CHANNEL_VIEW_ROUTE}
+            component={ChannelViewContainer}
           />
         </div>
       </div>

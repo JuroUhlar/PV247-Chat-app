@@ -5,9 +5,10 @@ import * as ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { LOGIN_ROUTE, PROFILE_VIEW_ROUTE } from '../../shared/constants/routes';
 
 export interface IUserCardCallbackProps {
-  readonly onClickViewProfile: (name: string) => void;
   readonly onLogout: (userId: Uuid) => void;
 }
 
@@ -26,7 +27,6 @@ export class UserCard extends React.PureComponent<UserCardProps> {
     userId: PropTypes.string.isRequired,
     avatarPath: PropTypes.string,
 
-    onClickViewProfile: PropTypes.func.isRequired,
     onLogout: PropTypes.func.isRequired,
   };
 
@@ -36,14 +36,12 @@ export class UserCard extends React.PureComponent<UserCardProps> {
 
   _handleLogout = () => this.props.onLogout(this.props.userId);
 
-  _handleViewProfile = () => this.props.onClickViewProfile('ProfilePage');
-
   render(): JSX.Element {
     return (
       <div
         className="user-card"
       >
-        <Link to="/ProfileView">
+        <Link to={PROFILE_VIEW_ROUTE}>
           <div className="avatar-container">
             <Avatar
               avatarSize="mini-avatar"
@@ -67,18 +65,23 @@ export class UserCard extends React.PureComponent<UserCardProps> {
               noCaret
               id="dropdown-no-caret"
             >
-              <MenuItem
-                onClick={this._handleViewProfile}
-                key="viewUserProfile"
-              > View Profile
-              </MenuItem>
+              <LinkContainer to={PROFILE_VIEW_ROUTE}>
+                <MenuItem
+                  key="viewUserProfile"
+                >
+                  <div>
+                    View Profile
+                  </div>
+                </MenuItem>
+              </LinkContainer>
               <MenuItem divider/>
-              <MenuItem>Another option</MenuItem>
-              <MenuItem
-                key="userLogout"
-                onClick={this._handleLogout}
-              >Log Out
-              </MenuItem>
+              <LinkContainer to={LOGIN_ROUTE}>
+                <MenuItem
+                  key="userLogout"
+                  // onClick={this._handleLogout}
+                >Log Out
+                </MenuItem>
+              </LinkContainer>
             </DropdownButton>
           </ButtonToolbar>
         </div>
