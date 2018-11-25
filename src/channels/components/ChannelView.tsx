@@ -22,8 +22,8 @@ export const ChannelView: React.SFC<IChannelViewDataProps> = (props: IChannelVie
         location={props.history.location}
         component={MessageListingContainer}
       />
-      <RichTextEditorContainer/>
     </div>
+    <RichTextEditorContainer/>
   </span>
 );
 
