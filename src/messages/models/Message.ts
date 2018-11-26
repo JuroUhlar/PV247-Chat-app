@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable';
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 
 interface IMessagePopularityData {
   readonly likes: Immutable.Set<Uuid>;
@@ -56,7 +56,6 @@ export class Message extends Record(messageRecordData) implements IMessage {
   readonly text: string;
   readonly popularity: IMessagePopularity;
 
-
   toObject(): IMessageData {
     return super.toObject() as IMessageData;
   }
@@ -64,4 +63,49 @@ export class Message extends Record(messageRecordData) implements IMessage {
   with(data: Partial<IMessageData>): IMessage {
     return super.merge(data) as Message;
   }
+}
+
+export interface IMessageServerModel {
+  readonly id: Uuid;
+  readonly value: string;
+  readonly createdAt: string;
+  readonly createdBy: Uuid;
+  readonly updatedAt: string;
+  readonly updatedBy: Uuid;
+  readonly customData: {
+    popularity: {
+      likes: [];
+      dislikes: [];
+    }
+  };
+}
+
+const messageServerModelRecordData = {
+  id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  value: '',
+  createdAt: '',
+  createdBy: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  updatedAt: null,
+  updatedBy: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+  customData: {
+    popularity: {
+      likes: [],
+      dislikes: [],
+    }
+  },
+};
+
+export class MessageServerModel extends Record(messageServerModelRecordData) implements IMessageServerModel {
+  readonly id: Uuid;
+  readonly value: string;
+  readonly createdAt: string;
+  readonly createdBy: Uuid;
+  readonly updatedAt: string;
+  readonly updatedBy: Uuid;
+  readonly customData: {
+    popularity: {
+      likes: [];
+      dislikes: [];
+    }
+  };
 }
