@@ -1,10 +1,10 @@
 import * as Immutable from 'immutable';
 import { IChannel } from '../models/IChannel';
 
-export const generalChannelId = '788467fa-10b2-43bc-81dd-fc9f53dcd5a5';
-export const randomChannelId = '82457399-8a2d-4a59-b391-eba1b905a2f3';
-export const offTopicChannelId = '09a04ac0-daa2-4ddd-ae6c-2972c68ccc29';
-const dogVidChannelId = 'b5512f68-a529-4417-aac1-be09608588d0';
+export const generalChannelId = '2be69b8a-1c3c-4f69-8a7c-f9445d13acb6';
+export const randomChannelId = 'c5d2e3fd-4914-4e43-8533-367f120d8b12';
+export const offTopicChannelId = 'caf29328-5325-45fd-be08-84bd47c53338';
+const dogVidChannelId = '69eba76b-0197-4bf4-b3f0-95a7b14356f7';
 
 export const getInitialChannels = (): Immutable.List<IChannel> => Immutable.List([
   { id: generalChannelId, name: 'General', users: Immutable.List([]) },
