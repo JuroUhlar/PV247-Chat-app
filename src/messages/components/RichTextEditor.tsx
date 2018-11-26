@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import {EditorState} from 'draft-js';
 import {ContentBlock, Editor} from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import {randomChannelId} from '../utils/getInitialMessages';
+import { randomChannelId } from '../../channels/utils/getInitialChannels';
 
 export interface IRichTextEditorCallbackProps {
   readonly onSendText: (text: string, authorId: Uuid, channelId: Uuid) => void;
