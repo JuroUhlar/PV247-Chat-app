@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChannelBarItem } from './ChannelBarItem';
 import { ChannelEditModalContainer } from '../containers/ChannelEditModalContainer';
-import { IChannel } from '../models/IChannel';
+import { IChannel } from '../models/Channel';
 import * as Immutable from 'immutable';
 
 

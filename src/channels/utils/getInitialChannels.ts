@@ -1,6 +1,5 @@
 import * as Immutable from 'immutable';
-import { IChannel, Channel } from '../models/IChannel';
-// import { IChannelListing } from '../models/IChannelListing';
+import { IChannel, Channel } from '../models/Channel';
 
 export const generalChannelId = '2be69b8a-1c3c-4f69-8a7c-f9445d13acb6';
 export const randomChannelId = 'c5d2e3fd-4914-4e43-8533-367f120d8b12';

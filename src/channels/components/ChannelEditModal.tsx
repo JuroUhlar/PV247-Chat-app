@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IChannel } from '../models/IChannel';
+import { IChannel } from '../models/Channel';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 

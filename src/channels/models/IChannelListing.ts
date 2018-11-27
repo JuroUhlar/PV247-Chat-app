@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable';
-import { IChannel } from './IChannel';
+import { IChannel } from './Channel';
 
 export interface IChannelListing {
   readonly channels: Immutable.Map<Uuid, IChannel>;

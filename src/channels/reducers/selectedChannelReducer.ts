@@ -1,5 +1,5 @@
 import { CHANNEL_SELECT } from '../../shared/constants/actionTypes';
-import {getInitialChannels} from '../utils/getInitialChannels';
+import { getInitialChannels } from '../utils/getInitialChannels';
 
 const initialState = getInitialChannels().first().id;
 
