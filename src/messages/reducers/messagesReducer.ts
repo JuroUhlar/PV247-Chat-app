@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import { IMessage, IMessageServerModel } from '../models/Message';
-import { MESSAGE_CREATE, MESSAGE_DELETE, MESSAGE_DISLIKE, MESSAGE_LIKE, MESSAGES_FETCH__SUCCESS } from '../../shared/constants/actionTypes';
+import { MESSAGE_CREATE, MESSAGE_DELETE, MESSAGE_DISLIKE, MESSAGE_LIKE, MESSAGES_FETCH__SUCCESS, MESSAGES_POST__SUCCESS } from '../../shared/constants/actionTypes';
 import { messageReducer } from './messageReducer';
 import { convertServerToViewMessageModel } from '../utils/convertMessageModels';
 
@@ -17,7 +17,21 @@ export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initi
 
     case MESSAGE_CREATE: {
       const newMessage = messageReducer(undefined, action);
-      return prevState.set(action.payload.messageId, newMessage);
+      return prevState.set(action.payload.id , newMessage);
+    }
+
+    case MESSAGES_POST__SUCCESS: {
+      const oldId = action.payload.message.customData.clientId;
+
+      const oldMessage = prevState.get(oldId);
+      const updatedMessage = messageReducer(oldMessage, action);
+
+      return prevState
+        .mapEntries<string, IMessage>((entry: [string, IMessage]) =>
+          (entry[0] === oldId)
+            ? [ updatedMessage.id, updatedMessage ]
+            : entry)
+        .toMap();
     }
 
     case MESSAGE_DELETE: {

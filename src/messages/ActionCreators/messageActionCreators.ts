@@ -1,6 +1,5 @@
 import * as uuid from 'uuid';
 import {
-  MESSAGE_CREATE,
   MESSAGE_DELETE,
   MESSAGE_DISLIKE,
   MESSAGE_LIKE,
@@ -9,17 +8,12 @@ import {
   MESSAGES_FETCH__FAILURE,
   MESSAGES_FETCH__REQUEST,
   MESSAGES_FETCH__SUCCESS,
+  MESSAGES_POST__FAILURE,
+  MESSAGES_POST__SUCCESS,
 } from '../../shared/constants/actionTypes';
+import { createMessageFactory } from './createMessageFactory';
 
-export const createMessage = (text: string, authorId: Uuid, channelId: Uuid): Action => ({
-  type: MESSAGE_CREATE,
-  payload: {
-    authorId,
-    messageId: uuid(),
-    text,
-    channelId,
-  }
-});
+export const createMessage = createMessageFactory(uuid);
 
 export const deleteMessage = (messageId: Uuid): Action => ({
   type: MESSAGE_DELETE,
@@ -67,4 +61,14 @@ export const succeedToDeleteMessage = (json: object): Action => ({
 export const failToDeleteMessage = (id: string, error: Error): Action => ({
   type: MESSAGES_DELETE__FAILURE,
   payload: { id, errorMessage: error.message || 'Message was not deleted' },
+});
+
+export const succeedToPostMessage = (json: object): Action => ({
+  type: MESSAGES_POST__SUCCESS,
+  payload: { message: json },
+});
+
+export const failToPostMessage = (id: string, error: Error): Action => ({
+  type: MESSAGES_POST__FAILURE,
+  payload: { id, errorMessage: error.message || 'Message was not created' },
 });

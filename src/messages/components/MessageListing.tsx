@@ -27,7 +27,7 @@ export const MessageListing: React.SFC<IMessageListingDataProps> = ({messageIds}
 };
 
 
-MessageListing.displayName = 'MessageList';
+MessageListing.displayName = 'MessageListing';
 MessageListing.propTypes = {
   messageIds: PropTypes.object,
 };

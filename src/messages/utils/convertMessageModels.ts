@@ -4,7 +4,7 @@ import { IMessage, IMessageServerModel, Message, MessagePopularity, MessageServe
 export const convertServerToViewMessageModel = (serverModel: IMessageServerModel): IMessage => {
   const { value, createdAt, id, customData: { authorId, popularity: { likes, dislikes } } } = serverModel;
   const timestamp = Date.parse(createdAt);
-  const popullll = new MessagePopularity({
+  const messagePopularity = new MessagePopularity({
     likes: Immutable.Set(likes),
     dislikes: Immutable.Set(dislikes)
   });
@@ -14,20 +14,18 @@ export const convertServerToViewMessageModel = (serverModel: IMessageServerModel
     timestamp,
     authorId,
     channelId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-    popularity: popullll,
+    popularity: messagePopularity,
   }));
 };
 
-export const convertViewToServerMessageModel = (clientModel: IMessage, authorEmail: string): IMessageServerModel => {
-  const { text, timestamp, popularity, id } = clientModel;
-  const createdAtDate = timestamp && timestamp.toString();
+export const convertViewToServerMessageModel = (clientModel: Partial<IMessage>): IMessageServerModel => {
+  const { text, popularity, id, authorId } = clientModel;
   return (new MessageServerModel({
-    id,
     value: text,
-    createdAtDate,
-    updatedAtDate: createdAtDate,
-    createdBy: authorEmail,
-    updatedBy: authorEmail,
-    customData: { popularity }
+    customData: {
+      popularity,
+      authorId,
+      clientId: id,
+    }
   }));
 };

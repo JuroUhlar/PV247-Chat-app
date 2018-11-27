@@ -39,7 +39,7 @@ export interface IMessageData {
 export interface IMessage extends IMessageData, IRecordFunctions<IMessageData, IMessage> {
 }
 
-const messageRecordData: IMessageData = {
+export const messageRecordData: IMessageData = {
   id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   text: '',
   timestamp: null,
@@ -65,20 +65,24 @@ export class Message extends Record(messageRecordData) implements IMessage {
   }
 }
 
-export interface IMessageServerModel {
-  readonly id: Uuid;
+export interface IMessagePostServerModelData {
   readonly value: string;
-  readonly createdAt: string;
-  readonly createdBy: Uuid;
-  readonly updatedAt: string;
-  readonly updatedBy: Uuid;
   readonly customData: {
     popularity: {
       likes: [];
       dislikes: [];
     },
     authorId: Uuid;
+    clientId: Uuid;
   };
+}
+
+export interface IMessageServerModel extends IMessagePostServerModelData {
+  readonly id: Uuid;
+  readonly createdAt: string;
+  readonly createdBy: Uuid;
+  readonly updatedAt: string;
+  readonly updatedBy: Uuid;
 }
 
 const messageServerModelRecordData = {
@@ -94,6 +98,7 @@ const messageServerModelRecordData = {
       dislikes: [],
     },
     authorId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+    clientId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   },
 };
 
@@ -110,5 +115,6 @@ export class MessageServerModel extends Record(messageServerModelRecordData) imp
       dislikes: [];
     },
     authorId: Uuid;
+    clientId: Uuid;
   };
 }
