@@ -9,7 +9,9 @@ export const messageIdsReducer = (prevState: Immutable.OrderedSet<Uuid> = initia
   switch (action.type) {
     case MESSAGES_FETCH__SUCCESS: {
       const receivedObjects = action.payload.messages;
-      const messageIds = receivedObjects.map((value: IMessageServerModel) => value.id);
+      const messageIds = receivedObjects
+        .map((value: IMessageServerModel) => value.id)
+        .reverse();
 
       return prevState.merge(messageIds);
     }

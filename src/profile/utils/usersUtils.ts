@@ -1,21 +1,26 @@
 import * as Immutable from 'immutable';
 import * as memoizee from 'memoizee';
-import {IUser, User} from '../models/User';
-import {IUsersInfo} from '../models/IUsersInfo';
+import { IUser, User } from '../models/User';
+import { IUsersInfo } from '../models/IUsersInfo';
 
 const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
 const sallyId = '4a681417-dcfc-4951-b6b8-cb1db613f975';
 export const janeId = 'd6378ee0-df4b-4c28-b57e-2c19b360261f';
 
+export const bearer1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYW5lQGdtYWlsLmNvbSIsImp0aSI6IjUyODgxOWI0LTM1ZDAtNDEyNS1hNWY3LTMxMWQ4NWNkZWVkZiIsImlhdCI6MTU0MzI3NTY3M';
+export const bearer2 = 'iwibmJmIjoxNTQzMjc1NjcyLCJleHAiOjE1NDMzNjIwNzIsImlzcyI6IlBWMjQ3IEFQSSIsImF1ZCI6IlBWMjQ3IFN0dWRlbnRzIn0.XxBcY_kz6VuagtLSrf54dHqKT2UXdGCgr6rTeFMe_Is';
+export const janeBearer = bearer1 + bearer2;
+
+
 const getCurrentUser = (state: IUsersInfo) => {
-  const {currentUserId} = state;
+  const { currentUserId } = state;
   const currentUser = state.users.get(currentUserId);
 
   return currentUser;
 };
 
 const memoizedGetCurrentUser = memoizee(getCurrentUser);
-export {memoizedGetCurrentUser as getCurrentUser};
+export { memoizedGetCurrentUser as getCurrentUser };
 
 export const getJane = (): IUser => (
   new User({

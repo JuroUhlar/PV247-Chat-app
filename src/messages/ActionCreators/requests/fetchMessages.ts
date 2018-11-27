@@ -4,9 +4,7 @@ import * as uuid from 'uuid';
 import { failToFetchMessages, requestMessages, succeedToFetchMessages } from '../messageActionCreators';
 import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-
-const janeBearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYW5lQGdtYWlsLmNvbSIsImp0aSI6IjUyODgxOWI0LTM1ZDAtNDEyNS1hNWY3LTMxMWQ4NWNkZWVkZiIsImlhdCI6MTU0MzI3NTY3M';
-const janeBearerPart2 = 'iwibmJmIjoxNTQzMjc1NjcyLCJleHAiOjE1NDMzNjIwNzIsImlzcyI6IlBWMjQ3IEFQSSIsImF1ZCI6IlBWMjQ3IFN0dWRlbnRzIn0.XxBcY_kz6VuagtLSrf54dHqKT2UXdGCgr6rTeFMe_Is';
+import { janeBearer } from '../../../profile/utils/usersUtils';
 
 const fetchMessagesFactoryDependencies = {
   fetchBegin: requestMessages,
@@ -16,7 +14,7 @@ const fetchMessagesFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer + janeBearerPart2,
+      authorization: 'Bearer ' + janeBearer,
     },
   })
     .then(response => checkStatus(response)),

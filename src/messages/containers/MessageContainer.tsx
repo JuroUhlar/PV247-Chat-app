@@ -1,14 +1,16 @@
-import {Dispatch} from 'redux';
-import {connect} from 'react-redux';
-import {IMessageCallbackProps, IMessageDataProps, Message} from '../components/Message';
-import {deleteMessage, dislikeMessage, likeMessage} from '../ActionCreators/messageActionCreators';
-import {IState} from '../../shared/models/IState';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { IMessageCallbackProps, IMessageDataProps, Message } from '../components/Message';
+import { dislikeMessage, likeMessage } from '../ActionCreators/messageActionCreators';
+import { IState } from '../../shared/models/IState';
+import { offTopicChannelId } from '../../channels/utils/getInitialChannels';
+import { deleteMessageRequest } from '../ActionCreators/requests/deleteMessage';
 
 interface IMessageContainerDataProps {
   readonly messageId: Uuid;
 }
 
-const mapStateToProps = (state: IState, {messageId}: IMessageContainerDataProps): IMessageDataProps => {
+const mapStateToProps = (state: IState, { messageId }: IMessageContainerDataProps): IMessageDataProps => {
   const currentUserId = state.usersInfo.currentUserId;
   const message = state.messageListing.messages.get(messageId);
   const messagePos = message.authorId === currentUserId
@@ -20,7 +22,7 @@ const mapStateToProps = (state: IState, {messageId}: IMessageContainerDataProps)
   const messageAuthorId = message.authorId;
   const messageAuthor = state.usersInfo.users.get(messageAuthorId);
 
-  const {likes, dislikes} = message.popularity;
+  const { likes, dislikes } = message.popularity;
   const likesCount = likes.size - dislikes.size;
 
   return {
@@ -35,10 +37,11 @@ const mapStateToProps = (state: IState, {messageId}: IMessageContainerDataProps)
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMessageCallbackProps => {
+  const currentChannelId = offTopicChannelId;
   return {
     onLikeMessage: (messageId: Uuid, userId: Uuid) => dispatch(likeMessage(messageId, userId)),
     onDislikeMessage: (messageId: Uuid, userId: Uuid) => dispatch(dislikeMessage(messageId, userId)),
-    onDeleteMessage: (messageId: Uuid) => dispatch(deleteMessage(messageId)),
+    onDeleteMessage: (messageId: Uuid) => deleteMessageRequest(dispatch, currentChannelId, messageId),
   };
 };
 

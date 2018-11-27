@@ -1,5 +1,15 @@
 import * as uuid from 'uuid';
-import { MESSAGE_CREATE, MESSAGE_DELETE, MESSAGE_DISLIKE, MESSAGE_LIKE, MESSAGES_FETCH__FAILURE, MESSAGES_FETCH__REQUEST, MESSAGES_FETCH__SUCCESS, } from '../../shared/constants/actionTypes';
+import {
+  MESSAGE_CREATE,
+  MESSAGE_DELETE,
+  MESSAGE_DISLIKE,
+  MESSAGE_LIKE,
+  MESSAGES_DELETE__FAILURE,
+  MESSAGES_DELETE__SUCCESS,
+  MESSAGES_FETCH__FAILURE,
+  MESSAGES_FETCH__REQUEST,
+  MESSAGES_FETCH__SUCCESS,
+} from '../../shared/constants/actionTypes';
 
 export const createMessage = (text: string, authorId: Uuid, channelId: Uuid): Action => ({
   type: MESSAGE_CREATE,
@@ -47,4 +57,14 @@ export const succeedToFetchMessages = (json: object): Action => ({
 export const failToFetchMessages = (id: string, error: Error): Action => ({
   type: MESSAGES_FETCH__FAILURE,
   payload: { id, errorMessage: error.message || 'Messages were not fetched' },
+});
+
+export const succeedToDeleteMessage = (json: object): Action => ({
+  type: MESSAGES_DELETE__SUCCESS,
+  payload: { messages: json },
+});
+
+export const failToDeleteMessage = (id: string, error: Error): Action => ({
+  type: MESSAGES_DELETE__FAILURE,
+  payload: { id, errorMessage: error.message || 'Message was not deleted' },
 });
