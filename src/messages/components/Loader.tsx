@@ -4,10 +4,11 @@ import { ChannelViewContainer } from '../../channels/containers/ChannelViewConta
 
 export interface ILoaderDataProps {
   isFetching: boolean;
+  currentChannelId: Uuid;
 }
 
 export interface  ILoaderCallbackProps {
-  fetchMessages: () => Promise<Action>;
+  fetchMessages: (currentChannelId: Uuid) => Promise<Action>;
 }
 
 type LoaderProps = ILoaderDataProps & ILoaderCallbackProps;
@@ -16,6 +17,7 @@ export class Loader extends React.PureComponent<LoaderProps> {
   static displayName = 'Loader';
   static propTypes = {
     isFetching: PropTypes.bool.isRequired,
+    currentChannelId: PropTypes.string.isRequired,
 
     fetchMessages: PropTypes.func.isRequired,
   };
@@ -25,8 +27,7 @@ export class Loader extends React.PureComponent<LoaderProps> {
   }
 
   componentDidMount() {
-    console.log('I think I fetched.');
-    this.props.fetchMessages();
+    this.props.fetchMessages(this.props.currentChannelId);
   }
 
   render() {

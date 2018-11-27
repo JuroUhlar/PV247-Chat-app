@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { channelsReducer } from './channelsReducer';
-import { channelIdsReducer } from './ChannelIdsReducer';
+import { channelIdsReducer } from './channelIdsReducer';
 import { selectedChannelReducer } from './selectedChannelReducer';
 
 export const channelListingReducers = combineReducers({
