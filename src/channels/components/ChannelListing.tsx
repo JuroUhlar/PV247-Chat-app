@@ -13,7 +13,7 @@ export interface IChannelListingCallbackProps {
   readonly onAddChannel: (name: string) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
   readonly onRenameChannel: (id: Uuid, newName: string) => void;
-  readonly onClick: (name: string) => void;
+  readonly onSelectChannel: (id: Uuid) => void;
 }
 
 type ChannelListingProps = IChannelListingDataProps & IChannelListingCallbackProps;
@@ -67,6 +67,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
                 channelName={channel.name}
                 channelId={channel.id}
                 key={channel.id}
+                onSelectChannel={this.props.onSelectChannel}
                 onDeleteChannel={this.props.onDeleteChannel}
               />
             </li>

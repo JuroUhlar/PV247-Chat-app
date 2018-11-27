@@ -9,6 +9,7 @@ interface IChannelBarItemProps {
   readonly channelName: string;
   readonly channelId: Uuid;
   readonly onDeleteChannel: (id: Uuid) => void;
+  readonly onSelectChannel: (id: Uuid) => void;
 }
 
 export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, any> {
@@ -18,7 +19,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     channelName: PropTypes.string.isRequired,
     channelId: PropTypes.string.isRequired,
     onDeleteChannel: PropTypes.func.isRequired,
-
+    onSelectChannel: PropTypes.func.isRequired,
   };
 
   constructor(props: any) {
@@ -59,6 +60,10 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     this.closeDropdown();
   };
 
+  selectChannel = () => {
+    this.props.onSelectChannel(this.props.channelId);
+  }
+
 
   deleteChannel = () => {
     this.closeDropdown();
@@ -69,7 +74,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     return (
       <div className="channel-bar-item" >
         <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reordered channels" aria-hidden="true"/>
-        <Link to={CHANNEL_VIEW_ROUTE} className="channel-bar-item_channel-label">
+        <Link to={CHANNEL_VIEW_ROUTE} className="channel-bar-item_channel-label" onClick={this.selectChannel}>
           <span>
             {this.props.channelName}
           </span>
