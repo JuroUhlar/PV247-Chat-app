@@ -5,7 +5,7 @@ import {usersInfoReducers} from '../../profile/reducers/usersInfoReducers';
 import { appInfoReducers } from './appInfoReducers';
 
 export const rootReducer = combineReducers({
-  channels: channelListingReducers,
+  channelListing: channelListingReducers,
   messageListing: messageListingReducers,
   usersInfo: usersInfoReducers,
   appInfo: appInfoReducers,
