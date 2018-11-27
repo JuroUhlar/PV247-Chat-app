@@ -5,10 +5,11 @@ import { MessageListingContainer } from '../../messages/containers/MessageListin
 import { RichTextEditorContainer } from '../../messages/containers/RichTextEditorContainer';
 import { Route, RouteComponentProps } from 'react-router';
 import { withRouterPropTypes } from '../../shared/utils/routerProps';
-import { CHANNEL_VIEW_ROUTE } from '../../shared/constants/routes';
+import { SPECIFIC_CHANNEL_VIEW_ROUTE } from '../../shared/constants/routes';
 
 export interface IChannelViewDataProps extends RouteComponentProps {
   readonly channelName: string;
+  readonly currentChannelId: Uuid;
 }
 
 export const ChannelView: React.SFC<IChannelViewDataProps> = (props: IChannelViewDataProps) => (
@@ -18,7 +19,7 @@ export const ChannelView: React.SFC<IChannelViewDataProps> = (props: IChannelVie
     </div>
     <div className="channel-view-cont">
       <Route
-        path={CHANNEL_VIEW_ROUTE}
+        path={SPECIFIC_CHANNEL_VIEW_ROUTE(props.currentChannelId)}
         location={props.history.location}
         component={MessageListingContainer}
       />
@@ -31,5 +32,6 @@ ChannelView.displayName = 'ChannelView';
 
 ChannelView.propTypes = {
   channelName: PropTypes.string.isRequired,
+  currentChannelId: PropTypes.string.isRequired,
   ...withRouterPropTypes,
 };

@@ -5,10 +5,12 @@ import { ChannelView, IChannelViewDataProps } from '../components/ChannelView';
 
 const channelName = 'General';
 
-const mapStateToProps = (_state: IState, ownProps: RouteComponentProps<any>): IChannelViewDataProps => {
+const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): IChannelViewDataProps => {
+  const currentChannelId = state.channelListing.selectedChannel;
   return {
     ...ownProps,
     channelName,
+    currentChannelId,
   };
 };
 

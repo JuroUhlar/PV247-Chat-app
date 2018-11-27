@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { ChannelEditModalContainer } from '../containers/ChannelEditModalContainer';
 import { DropdownButton, Glyphicon, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CHANNEL_VIEW_ROUTE } from '../../shared/constants/routes';
+import { SPECIFIC_CHANNEL_VIEW_ROUTE } from '../../shared/constants/routes';
 
 interface IChannelBarItemProps {
   readonly channelName: string;
@@ -62,7 +62,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
 
   selectChannel = () => {
     this.props.onSelectChannel(this.props.channelId);
-  }
+  };
 
 
   deleteChannel = () => {
@@ -72,9 +72,13 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
 
   render(): JSX.Element {
     return (
-      <div className="channel-bar-item" >
+      <div className="channel-bar-item">
         <span className="glyphicon glyphicon-sort channel-bar-item_drag-icon visible-on-hover" title="Reordered channels" aria-hidden="true"/>
-        <Link to={CHANNEL_VIEW_ROUTE} className="channel-bar-item_channel-label" onClick={this.selectChannel}>
+        <Link
+          to={SPECIFIC_CHANNEL_VIEW_ROUTE(this.props.channelId)}
+          className="channel-bar-item_channel-label"
+          onClick={this.selectChannel}
+        >
           <span>
             {this.props.channelName}
           </span>

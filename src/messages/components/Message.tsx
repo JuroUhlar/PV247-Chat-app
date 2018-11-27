@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {Avatar} from '../../profile/components/Avatar';
-import {addLineBreaks} from '../../shared/utils/textUtils';
+import { Avatar } from '../../profile/components/Avatar';
+import { addLineBreaks } from '../../shared/utils/textUtils';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: (messageId: Uuid, userId: Uuid) => void;
   readonly onDislikeMessage: (messageId: Uuid, userId: Uuid) => void;
-  readonly onDeleteMessage: (messageId: Uuid) => void;
+  readonly onDeleteMessage: (currentChannelId: Uuid, messageId: Uuid) => void;
 }
 
 export interface IMessageDataProps {
@@ -16,6 +16,7 @@ export interface IMessageDataProps {
   readonly avatarUrl?: string;
   readonly messageId: Uuid;
   readonly authorId: Uuid;
+  readonly currentChannelId: Uuid;
   readonly currentUserId: Uuid;
 }
 
@@ -30,29 +31,30 @@ export class Message extends React.PureComponent<MessageProps> {
     messageLikesCount: PropTypes.number.isRequired,
     messageId: PropTypes.string.isRequired,
     currentUserId: PropTypes.string.isRequired,
+    currentChannelId: PropTypes.string.isRequired,
 
     onLikeMessage: PropTypes.func.isRequired,
     onDislikeMessage: PropTypes.func.isRequired,
   };
 
   _onLike = () => {
-    const {currentUserId, messageId} = this.props;
+    const { currentUserId, messageId } = this.props;
     this.props.onLikeMessage(messageId, currentUserId);
   };
 
   _onDislike = () => {
-    const {currentUserId, messageId, onDislikeMessage} = this.props;
+    const { currentUserId, messageId, onDislikeMessage } = this.props;
     onDislikeMessage(messageId, currentUserId);
   };
 
   _onDelete = () => {
-    const {messageId, authorId, currentUserId, onDeleteMessage} = this.props;
+    const { messageId, authorId, currentUserId, onDeleteMessage, currentChannelId } = this.props;
     if (authorId === currentUserId) {
-      onDeleteMessage(messageId);
+      onDeleteMessage(currentChannelId, messageId);
     }
   };
 
-  _createMarkup = (text: string) => ({__html: addLineBreaks(text)});
+  _createMarkup = (text: string) => ({ __html: addLineBreaks(text) });
 
   render(): JSX.Element {
     const {
@@ -86,7 +88,7 @@ export class Message extends React.PureComponent<MessageProps> {
                   className="small-icon glyphicon glyphicon-thumbs-down"
                   onClick={this._onDislike}
                 />
-                <div className="small-icon" style={{fontWeight: 'bold'}}>
+                <div className="small-icon" style={{ fontWeight: 'bold' }}>
                   {messageLikesCount}
                 </div>
               </div>

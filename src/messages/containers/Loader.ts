@@ -6,13 +6,13 @@ import { IState } from '../../shared/models/IState';
 import { fetchMessages } from '../ActionCreators/requests/fetchMessages';
 
 const mapStateToProps = (state: IState): ILoaderDataProps => ({
-  isFetching: state.appInfo.isLoading,
+  isLoading: state.appInfo.isLoading,
   currentChannelId: state.channelListing.selectedChannel,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): ILoaderCallbackProps => {
   return ({
-    fetchMessages: (currentChannelId: Uuid) => fetchMessages(dispatch, currentChannelId),
+    getMessages: (currentChannelId: Uuid) => fetchMessages(dispatch, currentChannelId),
   });
 };
 

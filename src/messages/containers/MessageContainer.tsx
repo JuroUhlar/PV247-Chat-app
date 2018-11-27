@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { IMessageCallbackProps, IMessageDataProps, Message } from '../components/Message';
 import { dislikeMessage, likeMessage } from '../ActionCreators/messageActionCreators';
 import { IState } from '../../shared/models/IState';
-import { offTopicChannelId } from '../../channels/utils/getInitialChannels';
 import { deleteMessageRequest } from '../ActionCreators/requests/deleteMessage';
 
 interface IMessageContainerDataProps {
@@ -12,6 +11,7 @@ interface IMessageContainerDataProps {
 
 const mapStateToProps = (state: IState, { messageId }: IMessageContainerDataProps): IMessageDataProps => {
   const currentUserId = state.usersInfo.currentUserId;
+  const currentChannelId = state.channelListing.selectedChannel;
   const message = state.messageListing.messages.get(messageId);
   const messagePos = message.authorId === currentUserId
     ? 'message-pane-pos-right'
@@ -33,15 +33,15 @@ const mapStateToProps = (state: IState, { messageId }: IMessageContainerDataProp
     messageId,
     authorId: messageAuthorId,
     currentUserId,
+    currentChannelId,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMessageCallbackProps => {
-  const currentChannelId = offTopicChannelId;
   return {
     onLikeMessage: (messageId: Uuid, userId: Uuid) => dispatch(likeMessage(messageId, userId)),
     onDislikeMessage: (messageId: Uuid, userId: Uuid) => dispatch(dislikeMessage(messageId, userId)),
-    onDeleteMessage: (messageId: Uuid) => deleteMessageRequest(dispatch, currentChannelId, messageId),
+    onDeleteMessage: (currentChannelId: Uuid, messageId: Uuid) => deleteMessageRequest(dispatch, currentChannelId, messageId),
   };
 };
 

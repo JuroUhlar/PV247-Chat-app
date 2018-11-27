@@ -3,12 +3,12 @@ import * as PropTypes from 'prop-types';
 import { ChannelViewContainer } from '../../channels/containers/ChannelViewContainer';
 
 export interface ILoaderDataProps {
-  isFetching: boolean;
+  isLoading: boolean;
   currentChannelId: Uuid;
 }
 
 export interface  ILoaderCallbackProps {
-  fetchMessages: (currentChannelId: Uuid) => Promise<Action>;
+  getMessages: (currentChannelId: Uuid) => Promise<Action>;
 }
 
 type LoaderProps = ILoaderDataProps & ILoaderCallbackProps;
@@ -16,10 +16,10 @@ type LoaderProps = ILoaderDataProps & ILoaderCallbackProps;
 export class Loader extends React.PureComponent<LoaderProps> {
   static displayName = 'Loader';
   static propTypes = {
-    isFetching: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     currentChannelId: PropTypes.string.isRequired,
 
-    fetchMessages: PropTypes.func.isRequired,
+    getMessages: PropTypes.func.isRequired,
   };
 
   constructor(props: LoaderProps) {
@@ -27,11 +27,11 @@ export class Loader extends React.PureComponent<LoaderProps> {
   }
 
   componentDidMount() {
-    this.props.fetchMessages(this.props.currentChannelId);
+    this.props.getMessages(this.props.currentChannelId);
   }
 
   render() {
-    return this.props.isFetching ?
+    return this.props.isLoading ?
       <div>I am fetching dude. Leave me alone..</div> : <ChannelViewContainer/>;
   }
 }

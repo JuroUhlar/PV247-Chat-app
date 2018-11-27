@@ -1,8 +1,9 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import * as Immutable from 'immutable';
 import { ChannelBarItem } from './ChannelBarItem';
 import { ChannelEditModalContainer } from '../containers/ChannelEditModalContainer';
 import { IChannel } from '../models/Channel';
-import * as Immutable from 'immutable';
 
 
 export interface IChannelListingDataProps {
@@ -23,7 +24,15 @@ interface IChannelListingStateProps {
 }
 
 export class ChannelListing extends React.PureComponent<ChannelListingProps, IChannelListingStateProps> {
+  static displayName = 'ChannelListing';
+  static propTypes = {
+    channels: PropTypes.object,
 
+    onAddChannel: PropTypes.func.isRequired,
+    onDeleteChannel: PropTypes.func.isRequired,
+    onRenameChannel: PropTypes.func.isRequired,
+    onSelectChannel: PropTypes.func.isRequired,
+  };
 
   constructor(props: any) {
     super(props);
@@ -50,7 +59,6 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
     }));
     console.log(id);
   }
-
 
   render(): JSX.Element {
     return (
