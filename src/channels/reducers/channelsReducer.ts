@@ -5,7 +5,7 @@ import {getInitialChannels} from '../utils/getInitialChannels';
 
 const initialState = getInitialChannels();
 
-export const channelsReducer = (prevState: Immutable.List<IChannel> = initialState, action: Action): Immutable.List<IChannel> => {
+export const channelsReducer = (prevState: Immutable.Map<Uuid, IChannel> = initialState, action: Action): Immutable.Map<Uuid, IChannel> => {
   switch (action.type) {
     case CHANNEL_CREATE: {
       const { id, name } = action.payload;
@@ -15,25 +15,22 @@ export const channelsReducer = (prevState: Immutable.List<IChannel> = initialSta
         users : Immutable.List([])
       });
 
-      return prevState.push(newChannel);
+      return prevState.set(newChannel.id, newChannel);
     }
 
     case CHANNEL_RENAME: {
       const { id, name } = action.payload;
-      const index = prevState.findIndex((channel: IChannel) => channel.id === id);
-      const oldChannel = prevState.get(index);
+      // const oldChannel = prevState.get(id);
       const newChannel = new Channel({
-        id: oldChannel.id,
+        id,
         name
       });
 
-      return prevState.set(index, newChannel);
+      return prevState.set(id, newChannel);
     }
 
     case CHANNEL_DELETE: {
-      const { id } = action.payload;
-      const index = prevState.findIndex((channel: IChannel) => channel.id === id);
-      return prevState.remove(index);
+      return prevState.delete(action.payload.id);
     }
 
     default:
