@@ -18,7 +18,6 @@ export interface IChannelListingCallbackProps {
 
 type ChannelListingProps = IChannelListingDataProps & IChannelListingCallbackProps;
 
-
 interface IChannelListingStateProps {
   readonly showChannelModal: boolean;
 }

@@ -1,7 +1,7 @@
 import { IState } from '../../shared/models/IState';
 import { Dispatch } from 'redux';
 import { createChannel, deleteChannel, renameChannel } from '../channelActionCreators';
-import { IChannel } from '../models/IChannel';
+// import { IChannel } from '../models/IChannel';
 import { connect } from 'react-redux';
 import {
   IChannelListingCallbackProps,
@@ -11,7 +11,7 @@ import {
 
 const mapStateToProps = (state: IState): IChannelListingDataProps => {
   return {
-    channels: state.channels.map((i: IChannel) => i).toList(),
+    channels: state.channelListing.channels.toList(),
   };
 };
 

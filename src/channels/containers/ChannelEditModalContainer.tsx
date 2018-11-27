@@ -1,7 +1,6 @@
 import { IState } from '../../shared/models/IState';
 import { Dispatch } from 'redux';
 import { createChannel, renameChannel } from '../channelActionCreators';
-import { IChannel } from '../models/IChannel';
 import { connect } from 'react-redux';
 import {
   IChannelEditModalDispatchProps,
@@ -17,7 +16,8 @@ interface IChannelEditModalOwnProps {
 
 const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IChannelEditModalStateProps => {
   return {
-    channel: state.channels.find((channel: IChannel) => channel.id === ownProps.channelId),
+    channel: state.channelListing.channels.get(ownProps.channelId),
+    // channel: state.channels.channels.find((channel: IChannel) => channel.id === ownProps.channelId),
   };
 };
 

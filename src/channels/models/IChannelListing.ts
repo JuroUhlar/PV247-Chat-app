@@ -4,5 +4,6 @@ import { IChannel } from './IChannel';
 export interface IChannelListing {
   readonly channels: Immutable.Map<Uuid, IChannel>;
   readonly channelIds: Immutable.OrderedSet<Uuid>;
+  readonly selectedChannel: Uuid;
 }
 
