@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNEL_RENAME } from '../shared/constants/actionTypes';
+import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNEL_RENAME, CHANNEL_SELECT } from '../shared/constants/actionTypes';
 
 export const createChannel = (name: string): Action => ({
   type: CHANNEL_CREATE,
@@ -19,6 +19,13 @@ export const renameChannel = (id: Uuid, name: string): Action => ({
 
 export const deleteChannel = (id: Uuid): Action => ({
   type: CHANNEL_DELETE,
+  payload: {
+    id
+  }
+});
+
+export const selectChannel = (id: Uuid): Action => ({
+  type: CHANNEL_SELECT,
   payload: {
     id
   }
