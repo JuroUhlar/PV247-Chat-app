@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
 import * as uuid from 'uuid';
-import { failToFetchMessages, requestMessages, succeedToFetchMessages } from '../../messageActionCreators';
+import { failToFetchMessages, requestMessages, succeedToFetchMessages } from '../messageActionCreators';
 import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 

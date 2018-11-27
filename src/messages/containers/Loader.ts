@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ILoaderCallbackProps, ILoaderDataProps, Loader } from '../components/Loader';
 import { IState } from '../../shared/models/IState';
-import { fetchMessages } from '../ActionCreators/internal/fetchMessages';
+import { fetchMessages } from '../ActionCreators/requests/fetchMessages';
 import { offTopicChannelId } from '../../channels/utils/getInitialChannels';
 
 const mapStateToProps = (state: IState): ILoaderDataProps => ({

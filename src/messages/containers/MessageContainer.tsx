@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {IMessageCallbackProps, IMessageDataProps, Message} from '../components/Message';
-import {deleteMessage, dislikeMessage, likeMessage} from '../messageActionCreators';
+import {deleteMessage, dislikeMessage, likeMessage} from '../ActionCreators/messageActionCreators';
 import {IState} from '../../shared/models/IState';
 
 interface IMessageContainerDataProps {

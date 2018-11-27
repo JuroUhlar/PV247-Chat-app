@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {IRichTextEditorCallbackProps, IRichTextEditorDataProps, RichTextEditor} from '../components/RichTextEditor';
 import {Dispatch} from 'redux';
-import {createMessage} from '../messageActionCreators';
+import {createMessage} from '../ActionCreators/messageActionCreators';
 import {IState} from '../../shared/models/IState';
 
 const mapStateToProps = (state: IState): IRichTextEditorDataProps => {
