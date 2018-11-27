@@ -76,7 +76,8 @@ export interface IMessageServerModel {
     popularity: {
       likes: [];
       dislikes: [];
-    }
+    },
+    authorId: Uuid;
   };
 }
 
@@ -91,7 +92,8 @@ const messageServerModelRecordData = {
     popularity: {
       likes: [],
       dislikes: [],
-    }
+    },
+    authorId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   },
 };
 
@@ -106,6 +108,7 @@ export class MessageServerModel extends Record(messageServerModelRecordData) imp
     popularity: {
       likes: [];
       dislikes: [];
-    }
+    },
+    authorId: Uuid;
   };
 }
