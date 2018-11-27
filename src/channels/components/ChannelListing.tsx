@@ -5,27 +5,25 @@ import { IChannel } from '../models/IChannel';
 import * as Immutable from 'immutable';
 
 
-export interface IChannelListingStateProps {
+export interface IChannelListingDataProps {
   readonly channels: Immutable.List<IChannel>;
 }
 
-export interface IChannelListingDispatchProps {
+export interface IChannelListingCallbackProps {
   readonly onAddChannel: (name: string) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
   readonly onRenameChannel: (id: Uuid, newName: string) => void;
-}
-
-export interface IChannelListingOwnProps {
   readonly onClick: (name: string) => void;
 }
 
-interface IChannelListingState {
+type ChannelListingProps = IChannelListingDataProps & IChannelListingCallbackProps;
+
+
+interface IChannelListingStateProps {
   readonly showChannelModal: boolean;
 }
 
-export class ChannelListing extends React.PureComponent<IChannelListingOwnProps &
-  IChannelListingStateProps &
-  IChannelListingDispatchProps, IChannelListingState> {
+export class ChannelListing extends React.PureComponent<ChannelListingProps, IChannelListingStateProps> {
 
 
   constructor(props: any) {
