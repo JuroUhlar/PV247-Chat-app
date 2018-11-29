@@ -19,10 +19,11 @@ export const channelsReducer = (prevState: Immutable.Map<Uuid, IChannel> = initi
     }
 
     case CHANNEL_UPDATE: {
-      const { id, name } = action.payload;
+      const { id, name, users } = action.payload;
       const newChannel = new Channel({
         id,
-        name
+        name,
+        users
       });
 
       return prevState.set(id, newChannel);

@@ -8,6 +8,7 @@ import {
   IChannelListingDataProps,
   ChannelListing
 } from '../components/ChannelListing';
+import { IChannel } from '../models/Channel';
 
 const mapStateToProps = (state: IState): IChannelListingDataProps => {
   return {
@@ -23,7 +24,7 @@ const mapDispatchToProps = (dispatch: Dispatch /*,ownProps: IChannelListingConta
   return {
     onAddChannel: (name: string) => dispatch(createChannel(name)),
     onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id)),
-    onUpdateChannel: (id: Uuid, newName: string) => dispatch(updateChannel(id, newName)),
+    onUpdateChannel: (channel: IChannel) => dispatch(updateChannel(channel)),
     onSelectChannel: (id: Uuid) => dispatch(selectChannel(id)),
   };
 };

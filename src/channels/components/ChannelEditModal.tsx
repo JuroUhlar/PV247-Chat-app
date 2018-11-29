@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { IChannel } from '../models/Channel';
+import { IChannel, Channel } from '../models/Channel';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import * as Immutable from 'immutable';
 
 
 export interface IChannelEditModalStateProps {
@@ -9,7 +10,7 @@ export interface IChannelEditModalStateProps {
 
 export interface IChannelEditModalDispatchProps {
   readonly onAddChannel: (name: string) => void;
-  readonly onUpdateChannel: (id: Uuid, newName: string) => void;
+  readonly onUpdateChannel: (channel: IChannel) => void;
 }
 
 export interface IChannelEditModalOwnProps {
@@ -47,7 +48,12 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
   }
 
   updateChannel = () => {
-    this.props.onUpdateChannel(this.props.channel.id, this.state.nameValue);
+    const newChannel = new Channel({
+      id: this.props.channel.id,
+      name: this.state.nameValue,
+      users: Immutable.List([])
+    });
+    this.props.onUpdateChannel(newChannel);
     this.resetForm();
     this.props.onClose();
   }

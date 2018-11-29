@@ -13,7 +13,7 @@ export interface IChannelListingDataProps {
 export interface IChannelListingCallbackProps {
   readonly onAddChannel: (name: string) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
-  readonly onUpdateChannel: (id: Uuid, newName: string) => void;
+  readonly onUpdateChannel: (channel: IChannel) => void;
   readonly onSelectChannel: (id: Uuid) => void;
 }
 
