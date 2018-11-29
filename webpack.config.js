@@ -9,7 +9,8 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -84,5 +85,6 @@ module.exports = {
     contentBase: path.resolve(__dirname, './build'),
     port: 3000,
     open: true,
+    historyApiFallback: true,
   }
 };
