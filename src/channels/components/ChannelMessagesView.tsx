@@ -12,7 +12,7 @@ export interface IChannelViewDataProps extends RouteComponentProps {
   readonly currentChannelId: Uuid;
 }
 
-export const ChannelView: React.SFC<IChannelViewDataProps> = (props: IChannelViewDataProps) => (
+export const ChannelMessagesView: React.SFC<IChannelViewDataProps> = (props: IChannelViewDataProps) => (
   <span>
     <div className="top-bar-cont">
       <h1>{props.channelName}</h1>
@@ -28,9 +28,9 @@ export const ChannelView: React.SFC<IChannelViewDataProps> = (props: IChannelVie
   </span>
 );
 
-ChannelView.displayName = 'ChannelView';
+ChannelMessagesView.displayName = 'ChannelMessagesView';
 
-ChannelView.propTypes = {
+ChannelMessagesView.propTypes = {
   channelName: PropTypes.string.isRequired,
   currentChannelId: PropTypes.string.isRequired,
   ...withRouterPropTypes,
