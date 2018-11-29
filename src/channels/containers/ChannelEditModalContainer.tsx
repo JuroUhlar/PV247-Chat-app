@@ -1,6 +1,6 @@
 import { IState } from '../../shared/models/IState';
 import { Dispatch } from 'redux';
-import { createChannel, renameChannel } from '../channelActionCreators';
+import { createChannel, updateChannel } from '../channelActionCreators';
 import { connect } from 'react-redux';
 import {
   IChannelEditModalDispatchProps,
@@ -24,7 +24,7 @@ const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IC
 const mapDispatchToProps = (dispatch: Dispatch): IChannelEditModalDispatchProps => {
   return {
     onAddChannel: (name: string) => dispatch(createChannel(name)),
-    onRenameChannel: (id: Uuid, newName: string) => dispatch(renameChannel(id, newName))
+    onUpdateChannel: (id: Uuid, newName: string) => dispatch(updateChannel(id, newName))
   };
 };
 

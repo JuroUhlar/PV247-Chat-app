@@ -1,6 +1,6 @@
 import * as Immutable from 'immutable';
 import { IChannel, Channel } from '../models/Channel';
-import { CHANNEL_CREATE, CHANNEL_RENAME, CHANNEL_DELETE } from '../../shared/constants/actionTypes';
+import { CHANNEL_CREATE, CHANNEL_UPDATE, CHANNEL_DELETE } from '../../shared/constants/actionTypes';
 import { getInitialChannels } from '../utils/getInitialChannels';
 
 const initialState = getInitialChannels();
@@ -18,7 +18,7 @@ export const channelsReducer = (prevState: Immutable.Map<Uuid, IChannel> = initi
       return prevState.set(newChannel.id, newChannel);
     }
 
-    case CHANNEL_RENAME: {
+    case CHANNEL_UPDATE: {
       const { id, name } = action.payload;
       const newChannel = new Channel({
         id,

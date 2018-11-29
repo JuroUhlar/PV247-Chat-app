@@ -13,7 +13,7 @@ export interface IChannelListingDataProps {
 export interface IChannelListingCallbackProps {
   readonly onAddChannel: (name: string) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
-  readonly onRenameChannel: (id: Uuid, newName: string) => void;
+  readonly onUpdateChannel: (id: Uuid, newName: string) => void;
   readonly onSelectChannel: (id: Uuid) => void;
 }
 
@@ -30,7 +30,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
 
     onAddChannel: PropTypes.func.isRequired,
     onDeleteChannel: PropTypes.func.isRequired,
-    onRenameChannel: PropTypes.func.isRequired,
+    onUpdateChannel: PropTypes.func.isRequired,
     onSelectChannel: PropTypes.func.isRequired,
   };
 
@@ -52,13 +52,6 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
       showChannelModal: true,
     }));
   };
-
-  handleRename(id: Uuid) {
-    this.setState(() => ({
-      showChannelModal: true,
-    }));
-    console.log(id);
-  }
 
   render(): JSX.Element {
     return (

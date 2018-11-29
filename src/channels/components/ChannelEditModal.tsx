@@ -9,7 +9,7 @@ export interface IChannelEditModalStateProps {
 
 export interface IChannelEditModalDispatchProps {
   readonly onAddChannel: (name: string) => void;
-  readonly onRenameChannel: (id: Uuid, newName: string) => void;
+  readonly onUpdateChannel: (id: Uuid, newName: string) => void;
 }
 
 export interface IChannelEditModalOwnProps {
@@ -47,7 +47,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
   }
 
   updateChannel = () => {
-    this.props.onRenameChannel(this.props.channel.id, this.state.nameValue);
+    this.props.onUpdateChannel(this.props.channel.id, this.state.nameValue);
     this.resetForm();
     this.props.onClose();
   }

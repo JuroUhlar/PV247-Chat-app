@@ -55,7 +55,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
     }));
   };
 
-  handleRename = () => {
+  handleUpdate = () => {
     this.openModal();
     this.closeDropdown();
   };
@@ -93,7 +93,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
           pullRight
           id="dropdown-no-caret"
         >
-          <MenuItem onClick={this.handleRename}>Rename</MenuItem>
+          <MenuItem onClick={this.handleUpdate}>Edit</MenuItem>
           <MenuItem onClick={this.closeDropdown}>Invite users</MenuItem>
           <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
         </DropdownButton>
