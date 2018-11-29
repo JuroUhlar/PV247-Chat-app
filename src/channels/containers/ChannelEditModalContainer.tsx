@@ -24,7 +24,7 @@ const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IC
 
 const mapDispatchToProps = (dispatch: Dispatch): IChannelEditModalDispatchProps => {
   return {
-    onAddChannel: (name: string) => dispatch(createChannel(name)),
+    onAddChannel: (channel: IChannel) => dispatch(createChannel(channel)),
     onUpdateChannel: (channel: IChannel) => dispatch(updateChannel(channel))
   };
 };

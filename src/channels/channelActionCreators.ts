@@ -2,11 +2,12 @@ import * as uuid from 'uuid';
 import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNEL_UPDATE, CHANNEL_SELECT } from '../shared/constants/actionTypes';
 import { IChannel } from './models/Channel';
 
-export const createChannel = (name: string): Action => ({
+export const createChannel = (channel: IChannel): Action => ({
   type: CHANNEL_CREATE,
   payload: {
-    name,
     id: uuid(),
+    name: channel.name,
+    users: channel.users,
   }
 });
 

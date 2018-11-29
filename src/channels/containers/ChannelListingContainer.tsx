@@ -22,7 +22,7 @@ const mapStateToProps = (state: IState): IChannelListingDataProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch /*,ownProps: IChannelListingContainerOwnProps*/): IChannelListingCallbackProps => {
   return {
-    onAddChannel: (name: string) => dispatch(createChannel(name)),
+    onAddChannel: (channel: IChannel) => dispatch(createChannel(channel)),
     onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id)),
     onUpdateChannel: (channel: IChannel) => dispatch(updateChannel(channel)),
     onSelectChannel: (id: Uuid) => dispatch(selectChannel(id)),
