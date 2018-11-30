@@ -5,7 +5,7 @@ import { createMessage, failToPostMessage, succeedToPostMessage } from '../messa
 import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { janeBearer } from '../../../profile/utils/usersUtils';
-import { IUpdateMessageDependencies } from '../createMessageFactory';
+import { ICreateMessageDependencies } from '../createMessageFactory';
 import { IMessageData, Message } from '../../models/Message';
 import { convertViewToServerMessageModel } from '../../utils/convertMessageModels';
 
@@ -34,7 +34,7 @@ interface IPostMessageFactoryDependencies {
   idGenerator: () => string;
 }
 
-const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) => (data: IUpdateMessageDependencies) =>
+const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) => (data: ICreateMessageDependencies) =>
   (dispatch: Dispatch): Promise<Action> => {
     const clientId = dispatch(dependencies.postBegin(data)).payload.id;
     const body = new Message({ ...data, id: clientId });

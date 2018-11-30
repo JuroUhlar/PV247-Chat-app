@@ -1,13 +1,13 @@
 import { MESSAGE_CREATE } from '../../shared/constants/actionTypes';
 
-export interface IUpdateMessageDependencies {
+export interface ICreateMessageDependencies {
   text: string;
   authorId: Uuid;
   channelId: Uuid;
 }
 
-export const createMessageFactory = (idGenerator: () => Uuid): ((dependencies: IUpdateMessageDependencies) => Action) =>
-  (dependencies: IUpdateMessageDependencies): Action => ({
+export const createMessageFactory = (idGenerator: () => Uuid): ((dependencies: ICreateMessageDependencies) => Action) =>
+  (dependencies: ICreateMessageDependencies): Action => ({
     type: MESSAGE_CREATE,
     payload: {
       id: idGenerator(),
