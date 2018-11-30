@@ -27,8 +27,21 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
   }
 
   componentDidMount() {
-    this.props.getMessages(this.props.currentChannelId);
+    this._handleLoadMessages();
   }
+
+  componentDidUpdate(prevProps: MessageListingWrapperProps) {
+    const { currentChannelId } = this.props;
+
+    if (prevProps.currentChannelId !== currentChannelId) {
+      this._handleLoadMessages();
+    }
+  }
+
+  _handleLoadMessages = () => {
+    const { currentChannelId, getMessages } = this.props;
+    getMessages(currentChannelId);
+  };
 
   render() {
     return this.props.isLoading ?
