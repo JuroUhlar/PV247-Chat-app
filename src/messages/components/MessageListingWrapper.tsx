@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { ChannelMessagesViewContainer } from '../../channels/containers/ChannelMessagesViewContainer';
+import { MessageListingContainer } from '../containers/MessageListingContainer';
 
 export interface IMessageListingWrapperDataProps {
   isLoading: boolean;
   currentChannelId: Uuid;
 }
 
-export interface  IMessageListingWrapperCallbackProps {
+export interface IMessageListingWrapperCallbackProps {
   getMessages: (currentChannelId: Uuid) => Promise<Action>;
 }
 
@@ -32,6 +32,6 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
 
   render() {
     return this.props.isLoading ?
-      <div>I am fetching dude. Leave me alone..</div> : <ChannelMessagesViewContainer/>;
+      <div>I am fetching dude. Leave me alone..</div> : <MessageListingContainer/>;
   }
 }
