@@ -2,20 +2,19 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { Avatar } from '../../profile/components/Avatar';
 import { addLineBreaks } from '../../shared/utils/textUtils';
+import { IMessage } from '../models/Message';
+import { IMessageUpdateData } from '../ActionCreators/requests/updateMessage';
 
 export interface IMessageCallbackProps {
-  readonly onLikeMessage: (messageId: Uuid, userId: Uuid) => void;
-  readonly onDislikeMessage: (messageId: Uuid, userId: Uuid) => void;
+  readonly onLikeMessage: (updateData: IMessageUpdateData) => Promise<Action>;
+  readonly onDislikeMessage: (updateData: IMessageUpdateData) => Promise<Action>;
   readonly onDeleteMessage: (currentChannelId: Uuid, messageId: Uuid) => void;
 }
 
 export interface IMessageDataProps {
-  readonly text: string;
   readonly messagePos: string;
-  readonly messageLikesCount: number;
-  readonly avatarUrl?: string;
-  readonly messageId: Uuid;
-  readonly authorId: Uuid;
+  readonly avatarUrl: string;
+  readonly message: IMessage;
   readonly currentChannelId: Uuid;
   readonly currentUserId: Uuid;
 }
@@ -25,11 +24,9 @@ type MessageProps = IMessageCallbackProps & IMessageDataProps;
 export class Message extends React.PureComponent<MessageProps> {
   static displayName = 'Message';
   static propTypes = {
-    text: PropTypes.string.isRequired,
+    message: PropTypes.object.isRequired,
     messagePos: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string,
-    messageLikesCount: PropTypes.number.isRequired,
-    messageId: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
     currentUserId: PropTypes.string.isRequired,
     currentChannelId: PropTypes.string.isRequired,
 
@@ -37,33 +34,36 @@ export class Message extends React.PureComponent<MessageProps> {
     onDislikeMessage: PropTypes.func.isRequired,
   };
 
+  _handleIndicatePreference = (indicatePreference: (updateData: IMessageUpdateData) => Promise<Action>) => {
+    const { message, currentUserId, currentChannelId } = this.props;
+    indicatePreference({
+      message,
+      userId: currentUserId,
+      channelId: currentChannelId
+    });
+  };
+
   _onLike = () => {
-    const { currentUserId, messageId } = this.props;
-    this.props.onLikeMessage(messageId, currentUserId);
+    this._handleIndicatePreference(this.props.onLikeMessage);
   };
 
   _onDislike = () => {
-    const { currentUserId, messageId, onDislikeMessage } = this.props;
-    onDislikeMessage(messageId, currentUserId);
+    this._handleIndicatePreference(this.props.onDislikeMessage);
   };
 
   _onDelete = () => {
-    const { messageId, authorId, currentUserId, onDeleteMessage, currentChannelId } = this.props;
-    if (authorId === currentUserId) {
-      onDeleteMessage(currentChannelId, messageId);
+    const { message, currentUserId, onDeleteMessage, currentChannelId } = this.props;
+    if (message.authorId === currentUserId) {
+      onDeleteMessage(currentChannelId, message.id);
     }
   };
 
   _createMarkup = (text: string) => ({ __html: addLineBreaks(text) });
 
   render(): JSX.Element {
-    const {
-      text,
-      messagePos,
-      avatarUrl,
-      messageLikesCount,
-    } = this.props;
-
+    const { message, messagePos, avatarUrl } = this.props;
+    const { likes, dislikes } = message.popularity;
+    const messageLikesCount = likes.size - dislikes.size;
 
     return (
       <div className={messagePos}>
@@ -95,7 +95,7 @@ export class Message extends React.PureComponent<MessageProps> {
             </div>
             <div
               className="text-container message-pane-block"
-              dangerouslySetInnerHTML={this._createMarkup(text)}/>
+              dangerouslySetInnerHTML={this._createMarkup(message.text)}/>
           </div>
         </div>
       </div>

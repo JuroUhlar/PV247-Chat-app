@@ -9,17 +9,52 @@ import {
   MESSAGES_FETCH__REQUEST,
   MESSAGES_FETCH__SUCCESS,
   MESSAGES_POST__FAILURE,
-  MESSAGES_POST__SUCCESS,
+  MESSAGES_POST__SUCCESS, MESSAGES_UPDATE__FAILURE, MESSAGES_UPDATE__SUCCESS,
 } from '../../shared/constants/actionTypes';
 import { createMessageFactory } from './createMessageFactory';
 
-export const createMessage = createMessageFactory(uuid);
+export const requestMessages = (): Action => ({
+  type: MESSAGES_FETCH__REQUEST,
+  payload: {},
+});
+
+export const succeedToFetchMessages = (json: object): Action => ({
+  type: MESSAGES_FETCH__SUCCESS,
+  payload: { messages: json },
+});
+
+export const failToFetchMessages = (id: string, error: Error): Action => ({
+  type: MESSAGES_FETCH__FAILURE,
+  payload: { id, errorMessage: error.message || 'Messages were not fetched' },
+});
 
 export const deleteMessage = (messageId: Uuid): Action => ({
   type: MESSAGE_DELETE,
   payload: {
     messageId,
   }
+});
+
+export const succeedToDeleteMessage = (json: object): Action => ({
+  type: MESSAGES_DELETE__SUCCESS,
+  payload: { messages: json },
+});
+
+export const failToDeleteMessage = (id: string, error: Error): Action => ({
+  type: MESSAGES_DELETE__FAILURE,
+  payload: { id, errorMessage: error.message || 'Message was not deleted' },
+});
+
+export const createMessage = createMessageFactory(uuid);
+
+export const succeedToPostMessage = (json: object): Action => ({
+  type: MESSAGES_POST__SUCCESS,
+  payload: { message: json },
+});
+
+export const failToPostMessage = (id: string, error: Error): Action => ({
+  type: MESSAGES_POST__FAILURE,
+  payload: { id, errorMessage: error.message || 'Message was not created' },
 });
 
 export const likeMessage = (messageId: Uuid, userId: Uuid): Action => ({
@@ -38,37 +73,12 @@ export const dislikeMessage = (messageId: Uuid, userId: Uuid): Action => ({
   }
 });
 
-export const requestMessages = (): Action => ({
-  type: MESSAGES_FETCH__REQUEST,
-  payload: {},
-});
-
-export const succeedToFetchMessages = (json: object): Action => ({
-  type: MESSAGES_FETCH__SUCCESS,
-  payload: { messages: json },
-});
-
-export const failToFetchMessages = (id: string, error: Error): Action => ({
-  type: MESSAGES_FETCH__FAILURE,
-  payload: { id, errorMessage: error.message || 'Messages were not fetched' },
-});
-
-export const succeedToDeleteMessage = (json: object): Action => ({
-  type: MESSAGES_DELETE__SUCCESS,
-  payload: { messages: json },
-});
-
-export const failToDeleteMessage = (id: string, error: Error): Action => ({
-  type: MESSAGES_DELETE__FAILURE,
-  payload: { id, errorMessage: error.message || 'Message was not deleted' },
-});
-
-export const succeedToPostMessage = (json: object): Action => ({
-  type: MESSAGES_POST__SUCCESS,
+export const succeedToUpdateMessage = (json: object): Action => ({
+  type: MESSAGES_UPDATE__SUCCESS,
   payload: { message: json },
 });
 
-export const failToPostMessage = (id: string, error: Error): Action => ({
-  type: MESSAGES_POST__FAILURE,
-  payload: { id, errorMessage: error.message || 'Message was not created' },
+export const failToUpdateMessage = (id: string, error: Error): Action => ({
+  type: MESSAGES_UPDATE__FAILURE,
+  payload: { id, errorMessage: error.message || 'Message was not updated' },
 });

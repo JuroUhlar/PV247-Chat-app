@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IMessageCallbackProps, IMessageDataProps, Message } from '../components/Message';
-import { dislikeMessage, likeMessage } from '../ActionCreators/messageActionCreators';
+import { dislikeMessageRequest, IMessageUpdateData, likeMessageRequest } from '../ActionCreators/requests/updateMessage';
 import { IState } from '../../shared/models/IState';
 import { deleteMessageRequest } from '../ActionCreators/requests/deleteMessage';
 
@@ -17,21 +17,13 @@ const mapStateToProps = (state: IState, { messageId }: IMessageContainerDataProp
     ? 'message-pane-pos-right'
     : 'message-pane-pos-left';
 
-  const text = message.text;
-
   const messageAuthorId = message.authorId;
   const messageAuthor = state.usersInfo.users.get(messageAuthorId);
 
-  const { likes, dislikes } = message.popularity;
-  const likesCount = likes.size - dislikes.size;
-
   return {
-    text,
+    message,
     messagePos,
-    messageLikesCount: likesCount,
     avatarUrl: messageAuthor.avatarPath,
-    messageId,
-    authorId: messageAuthorId,
     currentUserId,
     currentChannelId,
   };
@@ -39,8 +31,8 @@ const mapStateToProps = (state: IState, { messageId }: IMessageContainerDataProp
 
 const mapDispatchToProps = (dispatch: Dispatch): IMessageCallbackProps => {
   return {
-    onLikeMessage: (messageId: Uuid, userId: Uuid) => dispatch(likeMessage(messageId, userId)),
-    onDislikeMessage: (messageId: Uuid, userId: Uuid) => dispatch(dislikeMessage(messageId, userId)),
+    onLikeMessage: (updateData: IMessageUpdateData) => likeMessageRequest(updateData)(dispatch),
+    onDislikeMessage: (updateData: IMessageUpdateData) => dislikeMessageRequest(updateData)(dispatch),
     onDeleteMessage: (currentChannelId: Uuid, messageId: Uuid) => deleteMessageRequest(dispatch, currentChannelId, messageId),
   };
 };
