@@ -3,8 +3,8 @@ import * as memoizee from 'memoizee';
 import { IUser, User } from '../models/User';
 import { IUsersInfo } from '../models/IUsersInfo';
 
-const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
-const sallyId = '4a681417-dcfc-4951-b6b8-cb1db613f975';
+export const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
+export const sallyId = '4a681417-dcfc-4951-b6b8-cb1db613f975';
 export const janeId = 'd6378ee0-df4b-4c28-b57e-2c19b360261f';
 
 export const bearer1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYW5lQGdtYWlsLmNvbSIsImp0aSI6ImI3ZDYyYWE1LTA2NDktNDlmYi1hYjc3LWUyYjZiYzFiYmQ5ZiIsImlhdCI6MTU0MzUyODU0O';

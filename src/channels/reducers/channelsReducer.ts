@@ -8,11 +8,11 @@ const initialState = getInitialChannels();
 export const channelsReducer = (prevState: Immutable.Map<Uuid, IChannel> = initialState, action: Action): Immutable.Map<Uuid, IChannel> => {
   switch (action.type) {
     case CHANNEL_CREATE: {
-      const { id, name } = action.payload;
+      const { id, name, users } = action.payload;
       const newChannel = new Channel({
         id,
         name,
-        users: Immutable.List([])
+        users,
       });
 
       return prevState.set(newChannel.id, newChannel);

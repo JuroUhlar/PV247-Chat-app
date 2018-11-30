@@ -18,7 +18,7 @@ interface IChannelEditModalOwnProps {
 const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IChannelEditModalStateProps => {
   return {
     channel: state.channelListing.channels.get(ownProps.channelId),
-    // channel: state.channels.channels.find((channel: IChannel) => channel.id === ownProps.channelId),
+    users: state.usersInfo.users.toList(),
   };
 };
 
