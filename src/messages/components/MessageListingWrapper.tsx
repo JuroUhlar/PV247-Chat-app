@@ -2,18 +2,18 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChannelViewContainer } from '../../channels/containers/ChannelViewContainer';
 
-export interface ILoaderDataProps {
+export interface IMessageListingWrapperDataProps {
   isLoading: boolean;
   currentChannelId: Uuid;
 }
 
-export interface  ILoaderCallbackProps {
+export interface  IMessageListingWrapperCallbackProps {
   getMessages: (currentChannelId: Uuid) => Promise<Action>;
 }
 
-type LoaderProps = ILoaderDataProps & ILoaderCallbackProps;
+type MessageListingWrapperProps = IMessageListingWrapperDataProps & IMessageListingWrapperCallbackProps;
 
-export class Loader extends React.PureComponent<LoaderProps> {
+export class MessageListingWrapper extends React.PureComponent<MessageListingWrapperProps> {
   static displayName = 'Loader';
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
@@ -22,7 +22,7 @@ export class Loader extends React.PureComponent<LoaderProps> {
     getMessages: PropTypes.func.isRequired,
   };
 
-  constructor(props: LoaderProps) {
+  constructor(props: MessageListingWrapperProps) {
     super(props);
   }
 

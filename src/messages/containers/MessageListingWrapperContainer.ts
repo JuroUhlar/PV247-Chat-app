@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ILoaderCallbackProps, ILoaderDataProps, Loader } from '../components/Loader';
+import { IMessageListingWrapperCallbackProps, IMessageListingWrapperDataProps, MessageListingWrapper } from '../components/MessageListingWrapper';
 import { IState } from '../../shared/models/IState';
 import { fetchMessages } from '../ActionCreators/requests/fetchMessages';
 
-const mapStateToProps = (state: IState): ILoaderDataProps => ({
+const mapStateToProps = (state: IState): IMessageListingWrapperDataProps => ({
   isLoading: state.appInfo.isLoading,
   currentChannelId: state.channelListing.selectedChannel,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): ILoaderCallbackProps => {
+const mapDispatchToProps = (dispatch: Dispatch): IMessageListingWrapperCallbackProps => {
   return ({
     getMessages: (currentChannelId: Uuid) => fetchMessages(dispatch, currentChannelId),
   });
 };
 
-export const LoaderContainer: React.ComponentClass<ILoaderDataProps> = connect(
+export const MessageListingWrapperContainer: React.ComponentClass<IMessageListingWrapperDataProps> = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Loader);
+)(MessageListingWrapper);
