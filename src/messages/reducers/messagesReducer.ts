@@ -12,7 +12,8 @@ export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initi
     case MESSAGES_FETCH__SUCCESS: {
       const messages = action.payload.messages
         .map((value: IMessageServerModel) => [value.id, convertServerToViewMessageModel(value)]);
-      return prevState.merge(messages);
+
+      return Immutable.Map<Uuid, IMessage>(messages);
     }
 
     case MESSAGE_CREATE: {

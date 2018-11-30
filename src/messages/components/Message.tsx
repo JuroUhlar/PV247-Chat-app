@@ -81,16 +81,16 @@ export class Message extends React.PureComponent<MessageProps> {
                   onClick={this._onDelete}
                 />
                 <div
-                  className="small-icon glyphicon glyphicon-heart"
-                  onClick={this._onLike}
-                />
-                <div
                   className="small-icon glyphicon glyphicon-thumbs-down"
                   onClick={this._onDislike}
                 />
                 <div className="small-icon" style={{ fontWeight: 'bold' }}>
                   {messageLikesCount}
                 </div>
+                <div
+                  className="small-icon glyphicon glyphicon-thumbs-up"
+                  onClick={this._onLike}
+                />
               </div>
             </div>
             <div

@@ -14,4 +14,4 @@ const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): ICh
   };
 };
 
-export const ChannelViewContainer = withRouter(connect(mapStateToProps)(ChannelMessagesView));
+export const ChannelMessagesViewContainer = withRouter(connect(mapStateToProps)(ChannelMessagesView));

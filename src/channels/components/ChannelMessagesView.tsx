@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { MessageListingContainer } from '../../messages/containers/MessageListingContainer';
 import { RichTextEditorContainer } from '../../messages/containers/RichTextEditorContainer';
 import { Route, RouteComponentProps } from 'react-router';
 import { withRouterPropTypes } from '../../shared/utils/routerProps';
 import { SPECIFIC_CHANNEL_VIEW_ROUTE } from '../../shared/constants/routes';
+import { MessageListingWrapperContainer } from '../../messages/containers/MessageListingWrapperContainer';
 
 export interface IChannelViewDataProps extends RouteComponentProps {
   readonly channelName: string;
@@ -21,7 +21,7 @@ export const ChannelMessagesView: React.SFC<IChannelViewDataProps> = (props: ICh
       <Route
         path={SPECIFIC_CHANNEL_VIEW_ROUTE(props.currentChannelId)}
         location={props.history.location}
-        component={MessageListingContainer}
+        component={MessageListingWrapperContainer}
       />
     </div>
     <RichTextEditorContainer/>

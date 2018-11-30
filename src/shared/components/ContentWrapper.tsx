@@ -5,7 +5,7 @@ import { UserCardContainer } from '../../profile/containers/UserCardContainer';
 import { withRouterPropTypes } from '../utils/routerProps';
 import { ProfileView } from '../../profile/components/ProfileView';
 import { CHANNEL_VIEW_ROUTE, PROFILE_VIEW_ROUTE } from '../constants/routes';
-import { LoaderContainer } from '../../messages/containers/Loader';
+import { ChannelMessagesViewContainer } from '../../channels/containers/ChannelMessagesViewContainer';
 
 export interface IContentWrapperDataProps extends RouteComponentProps<any> {
 }
@@ -51,7 +51,7 @@ export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps
           <Route
             location={this.props.history.location}
             path={CHANNEL_VIEW_ROUTE}
-            component={LoaderContainer}
+            component={ChannelMessagesViewContainer}
           />
         </div>
       </div>
