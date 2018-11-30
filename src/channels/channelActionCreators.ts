@@ -1,22 +1,22 @@
 import * as uuid from 'uuid';
 import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNEL_UPDATE, CHANNEL_SELECT } from '../shared/constants/actionTypes';
-import { IChannel } from './models/Channel';
+import * as Immutable from 'immutable';
 
-export const createChannel = (channel: IChannel): Action => ({
+export const createChannel = (name: string, users: Immutable.List<Uuid>): Action => ({
   type: CHANNEL_CREATE,
   payload: {
     id: uuid(),
-    name: channel.name,
-    users: channel.users,
+    name,
+    users,
   }
 });
 
-export const updateChannel = (channel: IChannel): Action => ({
+export const updateChannel = (id: Uuid, name?: string, users?: Immutable.List<Uuid>): Action => ({
   type: CHANNEL_UPDATE,
   payload: {
-    id: channel.id,
-    name: channel.name,
-    users: channel.users,
+    id,
+    name,
+    users,
   }
 });
 

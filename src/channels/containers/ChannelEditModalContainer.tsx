@@ -2,12 +2,12 @@ import { IState } from '../../shared/models/IState';
 import { Dispatch } from 'redux';
 import { createChannel, updateChannel } from '../channelActionCreators';
 import { connect } from 'react-redux';
+import * as Immutable from 'immutable';
 import {
   IChannelEditModalDispatchProps,
   IChannelEditModalStateProps,
   ChannelEditModal
 } from '../components/ChannelEditModal';
-import { IChannel } from '../models/Channel';
 
 interface IChannelEditModalOwnProps {
   channelId: Uuid;
@@ -24,8 +24,8 @@ const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IC
 
 const mapDispatchToProps = (dispatch: Dispatch): IChannelEditModalDispatchProps => {
   return {
-    onAddChannel: (channel: IChannel) => dispatch(createChannel(channel)),
-    onUpdateChannel: (channel: IChannel) => dispatch(updateChannel(channel))
+    onAddChannel: (name: string, users: Immutable.List<Uuid>) => dispatch(createChannel(name, users)),
+    onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => dispatch(updateChannel(id, name, users))
   };
 };
 

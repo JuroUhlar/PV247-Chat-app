@@ -11,9 +11,9 @@ export interface IChannelListingDataProps {
 }
 
 export interface IChannelListingCallbackProps {
-  readonly onAddChannel: (channel: IChannel) => void;
+  readonly onAddChannel: (name: string, users: Immutable.List<Uuid>) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
-  readonly onUpdateChannel: (channel: IChannel) => void;
+  readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
   readonly onSelectChannel: (id: Uuid) => void;
 }
 

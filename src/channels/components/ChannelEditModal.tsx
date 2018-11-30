@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IChannel, Channel } from '../models/Channel';
+import { IChannel } from '../models/Channel';
 import { Modal, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import * as Immutable from 'immutable';
 
@@ -9,8 +9,8 @@ export interface IChannelEditModalStateProps {
 }
 
 export interface IChannelEditModalDispatchProps {
-  readonly onAddChannel: (channel: IChannel) => void;
-  readonly onUpdateChannel: (channel: IChannel) => void;
+  readonly onAddChannel: (name: string, users: Immutable.List<Uuid>) => void;
+  readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
 }
 
 export interface IChannelEditModalOwnProps {
@@ -48,23 +48,20 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
   }
 
   updateChannel = () => {
-    const newChannel = new Channel({
-      id: this.props.channel.id,
-      name: this.state.nameValue,
-      users: Immutable.List([])
-    });
-    this.props.onUpdateChannel(newChannel);
+    const id = this.props.channel.id;
+    const name = this.state.nameValue;
+    const users = Immutable.List([]);
+
+    this.props.onUpdateChannel(id, name, users);
     this.resetForm();
     this.props.onClose();
   }
 
   createChannel = () => {
-    const newChannel = new Channel({
-      id: '0',
-      name: this.state.nameValue,
-      users: Immutable.List([])
-    });
-    this.props.onAddChannel(newChannel);
+    const name = this.state.nameValue;
+    const users = Immutable.List([]);
+
+    this.props.onAddChannel(name, users);
     this.resetForm();
     this.props.onClose();
   };
