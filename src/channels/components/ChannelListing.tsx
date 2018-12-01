@@ -15,6 +15,7 @@ export interface IChannelListingCallbackProps {
   readonly onDeleteChannel: (id: Uuid) => void;
   readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
   readonly onSelectChannel: (id: Uuid) => void;
+  readonly getChannels: () => Promise<Action>;
 }
 
 type ChannelListingProps = IChannelListingDataProps & IChannelListingCallbackProps;

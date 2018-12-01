@@ -11,7 +11,7 @@ export const requestChannels = (): Action => ({
 
 export const succeedToFetchChannels = (json: object): Action => ({
   type: CHANNELS_FETCH__SUCCESS,
-  payload: { messages: json },
+  payload: { channels: json },
 });
 
 export const failToFetchChannels = (id: string, error: Error): Action => ({

@@ -41,4 +41,4 @@ const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =
       .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
   };
 
-export const fetchMessages = fetchChannelsFactory(fetchChannelsFactoryDependencies);
+export const fetchChannels = fetchChannelsFactory(fetchChannelsFactoryDependencies);
