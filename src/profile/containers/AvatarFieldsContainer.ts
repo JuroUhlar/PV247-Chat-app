@@ -3,7 +3,7 @@ import {IState} from '../../shared/models/IState';
 import {AvatarFields, IAvatarFieldsCallbackProps, IAvatarFieldsDataProps} from '../components/AvatarFields';
 import {getCurrentUser} from '../utils/usersUtils';
 import {Dispatch} from 'redux';
-import {changeAvatar} from '../usersActionCreators';
+import {changeAvatar} from '../actionCreators/usersActionCreators';
 
 const mapStateToProps = (state: IState): IAvatarFieldsDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);

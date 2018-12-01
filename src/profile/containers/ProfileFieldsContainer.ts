@@ -3,7 +3,7 @@ import {IState} from '../../shared/models/IState';
 import {IProfileFieldsCallbackProps, IProfileFieldsDataProps, ProfileFields} from '../components/ProfileFields';
 import {getCurrentUser} from '../utils/usersUtils';
 import {Dispatch} from 'redux';
-import {saveChangesToUsername} from '../usersActionCreators';
+import {saveChangesToUsername} from '../actionCreators/usersActionCreators';
 
 const mapStateToProps = (state: IState): IProfileFieldsDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);

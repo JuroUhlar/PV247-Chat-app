@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {IAppCallbackProps, IAppDataProps, App} from '../components/App';
 import {IState} from '../models/IState';
-import {logIn} from '../../profile/usersActionCreators';
+import {logIn} from '../../profile/actionCreators/usersActionCreators';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): IAppDataProps => ({

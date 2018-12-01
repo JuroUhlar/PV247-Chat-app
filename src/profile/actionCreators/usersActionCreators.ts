@@ -1,4 +1,4 @@
-import {USER_LOG_IN, USER_LOG_OUT, USER_CHANGE_USERNAME, USER_CHANGE_AVATAR} from '../shared/constants/actionTypes';
+import {USER_LOG_IN, USER_LOG_OUT, USER_CHANGE_USERNAME, USER_CHANGE_AVATAR} from '../../shared/constants/actionTypes';
 
 export const logIn = (userId: Uuid): Action => ({
   type: USER_LOG_IN,
