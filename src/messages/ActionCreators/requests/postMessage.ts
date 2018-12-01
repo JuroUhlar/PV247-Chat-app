@@ -13,7 +13,7 @@ const postMessageFactoryDependencies = {
   postBegin: createMessage,
   success: succeedToPostMessage,
   error: failToPostMessage,
-  post: (body: Partial<IMessageData>) => fetch(`${SERVER_ROUTE}${CHANNELS_ROUTE}${body.channelId}/${MESSAGES_ROUTE}`, {
+  post: (body: Partial<IMessageData>, channelId: Uuid) => fetch(`${SERVER_ROUTE}${CHANNELS_ROUTE}${channelId}/${MESSAGES_ROUTE}`, {
     method: 'POST',
     body: JSON.stringify(convertViewToServerMessageModel(body)),
     headers: {
@@ -30,7 +30,7 @@ interface IPostMessageFactoryDependencies {
   postBegin: (body: Partial<IMessageData>) => Action;
   success: (json: object) => Action;
   error: (id: string, error: Error) => Action;
-  post: (body: Partial<IMessageData>) => Promise<Response>;
+  post: (body: Partial<IMessageData>, channelId: Uuid) => Promise<Response>;
   idGenerator: () => string;
 }
 
@@ -39,7 +39,7 @@ const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) => (d
     const clientId = dispatch(dependencies.postBegin(data)).payload.id;
     const body = new Message({ ...data, id: clientId });
 
-    return dependencies.post(body)
+    return dependencies.post(body, data.channelId)
       .then(response => response.json())
       .then(message => dispatch(dependencies.success(message)))
       .catch((error: Error) => dispatch(dependencies.error(clientId, error)));

@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 import { ContentBlock, Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { offTopicChannelId } from '../../channels/utils/getInitialChannels';
 
 export interface IRichTextEditorCallbackProps {
   readonly onSendText: (text: string, authorId: Uuid, channelId: Uuid) => void;
@@ -11,6 +10,7 @@ export interface IRichTextEditorCallbackProps {
 
 export interface IRichTextEditorDataProps {
   readonly currentUserId: Uuid;
+  readonly currentChannelId: Uuid;
 }
 
 type RichTextEditorProps = IRichTextEditorCallbackProps & IRichTextEditorDataProps;
@@ -23,6 +23,7 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
   static displayName = 'RichTextEditor';
   static propTypes = {
     currentUserId: PropTypes.string.isRequired,
+    currentChannelId: PropTypes.string.isRequired,
 
     onSendText: PropTypes.func.isRequired,
   };
@@ -43,8 +44,9 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
     });
     const text = texts.reduce((result: string, txt: string) => result.concat(txt));
     const authorId = this.props.currentUserId;
+    const { currentChannelId } = this.props;
     if (text) {
-      this.props.onSendText(text, authorId, offTopicChannelId);
+      this.props.onSendText(text, authorId, currentChannelId);
       this.setState(() => ({ editorState: EditorState.createEmpty() }));
     }
   };
