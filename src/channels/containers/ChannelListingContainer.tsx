@@ -1,6 +1,6 @@
 import { IState } from '../../shared/models/IState';
 import { Dispatch } from 'redux';
-import { createChannel, deleteChannel, updateChannel, selectChannel } from '../channelActionCreators';
+import { createChannel, deleteChannel, updateChannel, selectChannel } from '../ActionCreators/channelActionCreators';
 import * as Immutable from 'immutable';
 import { connect } from 'react-redux';
 import {
