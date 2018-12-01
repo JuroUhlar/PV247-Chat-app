@@ -6,6 +6,7 @@ import { ContentWrapper, IContentWrapperDataProps } from '../../shared/component
 const mapStateToProps = (_state: IState, ownProps: RouteComponentProps<any>): IContentWrapperDataProps => {
   return {
     ...ownProps,
+    isLoadingChannels: _state.appInfo.isLoadingChannels
   };
 };
 

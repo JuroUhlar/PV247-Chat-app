@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
-import { ChannelListingContainer } from '../../channels/containers/ChannelListingContainer';
+import { ChannelListingWrapperContainer } from '../../channels/containers/ChannelListingWrapperContainer';
 import { UserCardContainer } from '../../profile/containers/UserCardContainer';
 import { withRouterPropTypes } from '../utils/routerProps';
 import { ProfileView } from '../../profile/components/ProfileView';
@@ -8,6 +8,7 @@ import { CHANNEL_VIEW_ROUTE, PROFILE_VIEW_ROUTE } from '../constants/routes';
 import { ChannelMessagesViewContainer } from '../../channels/containers/ChannelMessagesViewContainer';
 
 export interface IContentWrapperDataProps extends RouteComponentProps<any> {
+  isLoadingChannels: boolean;
 }
 
 export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps> {
@@ -39,7 +40,7 @@ export class ContentWrapper extends React.PureComponent<IContentWrapperDataProps
       <div className="content-wrapper full-height">
         <div className="sidebar-container">
           <UserCardContainer/>
-          <ChannelListingContainer/>
+          <ChannelListingWrapperContainer/>
         </div>
         <div className="content-container">
           <Route
