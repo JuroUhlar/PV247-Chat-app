@@ -7,8 +7,8 @@ export const harryId = '9bf3232e-01a6-4370-9110-c57bc5233190';
 export const sallyId = '4a681417-dcfc-4951-b6b8-cb1db613f975';
 export const janeId = 'd6378ee0-df4b-4c28-b57e-2c19b360261f';
 
-export const bearer1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYW5lQGdtYWlsLmNvbSIsImp0aSI6ImUyZWNiNTUzLTcyMjAtNGUwMi05ZmU2LTI4NTdlNDFhNDE2MiIsImlhdCI6MTU0MzYxNTYx';
-export const bearer2 = 'NCwibmJmIjoxNTQzNjE1NjE0LCJleHAiOjE1NDM3MDIwMTQsImlzcyI6IlBWMjQ3IEFQSSIsImF1ZCI6IlBWMjQ3IFN0dWRlbnRzIn0.vcbKKjsGVxr2XaRvCN0nksav2wARDgHoEaGKyJgD3TQ';
+export const bearer1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYW5lQGdtYWlsLmNvbSIsImp0aSI6ImYwZGM5ZjI4LTNlOGMtNDQyOS05N2E3LTY2OGVkYjRiYWYyZSIsImlhdCI6MTU0MzcwND';
+export const bearer2 = 'E2MiwibmJmIjoxNTQzNzA0MTYyLCJleHAiOjE1NDM3OTA1NjIsImlzcyI6IlBWMjQ3IEFQSSIsImF1ZCI6IlBWMjQ3IFN0dWRlbnRzIn0.dJxeNXZOFA4-VSpRqvFdcnwvhjB-ZBg-xleStHtf6zg';
 export const janeBearer = bearer1 + bearer2;
 
 

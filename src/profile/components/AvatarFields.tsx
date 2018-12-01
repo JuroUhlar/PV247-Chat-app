@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {isInsertEmpty} from '../../shared/utils/textUtils';
+import { isInsertEmpty } from '../../shared/utils/textUtils';
+import { IUser } from '../models/User';
 
 export interface IAvatarFieldsDataProps {
-  readonly avatarPath?: string;
-  readonly userId: string;
+  readonly user: IUser;
 }
 
 export interface IAvatarFieldsCallbackProps {
-  readonly onSave: (userId: Uuid, path: string) => void;
+  readonly onSave: (user: IUser, path: string) => void;
 }
 
 type AvatarFieldsProps = IAvatarFieldsDataProps & IAvatarFieldsCallbackProps;
@@ -22,31 +22,32 @@ export class AvatarFields extends React.PureComponent<AvatarFieldsProps, IAvatar
 
   static propTypes = {
     avatarPath: PropTypes.string,
-    userId: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
 
     onSave: PropTypes.func.isRequired,
   };
 
   constructor(props: AvatarFieldsProps) {
     super(props);
-    this.state = {avatarPath: props.avatarPath};
+    this.state = { avatarPath: props.user.avatarPath };
   }
 
   _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const avatarPath = event.currentTarget.value;
-    this.setState(() => ({avatarPath}));
+    this.setState(() => ({ avatarPath }));
   };
 
   _handleSave = () => {
     const path = this.state.avatarPath;
+    const { user, onSave } = this.props;
 
     if (path) {
-      this.props.onSave(this.props.userId, path);
+      onSave(user, path);
     }
   };
 
   render() {
-    const {avatarPath} = this.state;
+    const { avatarPath } = this.state;
 
     return (
       <form className="account-details user-profile-block">

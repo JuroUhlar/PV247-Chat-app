@@ -1,15 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import {isInsertEmpty} from '../../shared/utils/textUtils';
+import { isInsertEmpty } from '../../shared/utils/textUtils';
+import { IUser } from '../models/User';
 
 export interface IProfileFieldsDataProps {
-  readonly email: string;
-  readonly username: string;
-  readonly userId: string;
+  readonly user: IUser;
 }
 
 export interface IProfileFieldsCallbackProps {
-  readonly onSave: (id: Uuid, name: string) => void;
+  readonly onSave: (user: IUser, newUsername: string) => void;
 }
 
 type ProfileFieldsProps = IProfileFieldsDataProps & IProfileFieldsCallbackProps;
@@ -22,35 +21,34 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
   static displayName = 'ProfileFields';
 
   static propTypes = {
-    email: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
 
     onSave: PropTypes.func.isRequired,
   };
 
   constructor(props: ProfileFieldsProps) {
     super(props);
-    this.state = {username: props.username};
+    this.state = { username: props.user.name };
   }
 
   _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const username = event.currentTarget.value;
-    this.setState(() => ({username}));
+    this.setState(() => ({ username }));
   };
 
   _handleSave = () => {
-    this.props.onSave(this.props.userId, this.state.username);
+    const { user, onSave } = this.props;
+    onSave(user, this.state.username);
   };
 
   _handleCancel = () => {
-    const username = this.props.username;
-    this.setState(() => ({username}));
+    const username = this.props.user.name;
+    this.setState(() => ({ username }));
   };
 
   render() {
-    const {username} = this.state;
-
+    const { username } = this.state;
+    const { email } = this.props.user;
     return (
       <form className="account-details user-profile-block">
         <div className="form-group">
@@ -62,7 +60,7 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
             id="profileView-inputEmail"
             name="profileView-inputEmail"
             type="text"
-            defaultValue={this.props.email}
+            defaultValue={email}
             disabled
             className="form-control"
           />
