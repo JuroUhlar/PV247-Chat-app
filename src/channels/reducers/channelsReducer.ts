@@ -1,6 +1,7 @@
 import * as Immutable from 'immutable';
 import { IChannel, Channel, IChannelServerModel } from '../models/Channel';
-import { CHANNEL_CREATE, CHANNEL_UPDATE, CHANNEL_DELETE, CHANNELS_FETCH__SUCCESS } from '../../shared/constants/actionTypes';
+import { CHANNEL_CREATE, CHANNEL_UPDATE, CHANNEL_DELETE,
+         CHANNELS_FETCH__SUCCESS, CHANNELS_POST__SUCCESS} from '../../shared/constants/actionTypes';
 import { getInitialChannels } from '../utils/getInitialChannels';
 import { convertServerToViewChannelModel } from '../utils/convertChannelModels';
 
@@ -23,6 +24,19 @@ export const channelsReducer = (prevState: Immutable.Map<Uuid, IChannel> = initi
         users,
       });
       return prevState.set(newChannel.id, newChannel);
+    }
+
+    case CHANNELS_POST__SUCCESS: {
+      const oldId = action.payload.channel.customData.clientId;
+      const newChannelServer: IChannelServerModel = action.payload.channel;
+      const newChannelView = convertServerToViewChannelModel(newChannelServer);
+
+      return prevState
+        .mapEntries<string, IChannel>((entry: [string, IChannel]) =>
+          (entry[0] === oldId)
+            ? [ newChannelView.id, newChannelView ]
+            : entry)
+        .toMap();
     }
 
     case CHANNEL_UPDATE: {

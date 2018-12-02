@@ -44,6 +44,7 @@ export interface IChannelServerModel {
   readonly customData: {
     users: [];
     orderIndex: number;
+    clientId: Uuid;
   };
 }
 
@@ -53,6 +54,7 @@ const channelServerModelRecordData = {
   customData: {
     users: [],
     orderIndex: 0,
+    clientId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
   },
 };
 
@@ -62,5 +64,6 @@ export class ChannelServerModel extends Record(channelServerModelRecordData) imp
   readonly customData: {
     users: [],
     orderIndex: number,
+    clientId: Uuid,
   };
 }

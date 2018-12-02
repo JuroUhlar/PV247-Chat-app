@@ -11,13 +11,13 @@ export const convertServerToViewChannelModel = (serverModel: IChannelServerModel
   }));
 };
 
-export const convertViewToServerChannelModel = (clientModel: IChannel): IChannelServerModel => {
+export const convertViewToServerChannelModel = (clientModel: Partial<IChannel>): IChannelServerModel => {
   const { id, name, users } = clientModel;
   return (new ChannelServerModel({
-    id,
     name,
     customData: {
-      users: users.toArray()
+      users: users ? users.toArray() : [],
+      clientId: id,
     }
   }));
 };
