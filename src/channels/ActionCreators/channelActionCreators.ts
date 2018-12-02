@@ -3,10 +3,10 @@ import {
   CHANNEL_DELETE, CHANNEL_UPDATE, CHANNEL_SELECT,
   CHANNELS_FETCH__REQUEST, CHANNELS_FETCH__SUCCESS, CHANNELS_FETCH__FAILURE,
   CHANNELS_POST__SUCCESS, CHANNELS_POST__FAILURE,
-  CHANNELS_DELETE__SUCCESS, CHANNELS_DELETE__FAILURE
+  CHANNELS_DELETE__SUCCESS, CHANNELS_DELETE__FAILURE, CHANNELS_UPDATE__SUCCESS, CHANNELS_UPDATE__FAILURE
 } from '../../shared/constants/actionTypes';
-import * as Immutable from 'immutable';
 import { createChannelFactory } from './createChannelFactory';
+import * as Immutable from 'immutable';
 
 // Fetching channels
 
@@ -58,8 +58,7 @@ export const failToDeleteChannel = (id: string, error: Error): Action => ({
   payload: { id, errorMessage: error.message || 'Channel was not deleted' },
 });
 
-// Other
-
+// Updating a channel
 
 export const updateChannel = (id: Uuid, name?: string, users?: Immutable.List<Uuid>): Action => ({
   type: CHANNEL_UPDATE,
@@ -69,6 +68,19 @@ export const updateChannel = (id: Uuid, name?: string, users?: Immutable.List<Uu
     users,
   }
 });
+
+export const succeedToUpdateChannel = (json: object): Action => ({
+  type: CHANNELS_UPDATE__SUCCESS,
+  payload: { channel: json },
+});
+
+export const failToUpdateChannel = (id: string, error: Error): Action => ({
+  type: CHANNELS_UPDATE__FAILURE,
+  payload: { id, errorMessage: error.message || 'Channel was not updated' },
+});
+
+
+// Other
 
 export const selectChannel = (id: Uuid): Action => ({
   type: CHANNEL_SELECT,
