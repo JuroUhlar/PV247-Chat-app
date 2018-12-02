@@ -1,17 +1,17 @@
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {IAppCallbackProps, IAppDataProps, App} from '../components/App';
-import {IState} from '../models/IState';
-import {logIn} from '../../profile/actionCreators/usersActionCreators';
-import { RouteComponentProps, withRouter } from 'react-router';
+import {
+  App,
+  IAppDataProps
+} from '../components/App';
+import { IState } from '../models/IState';
+import {
+  RouteComponentProps,
+  withRouter
+} from 'react-router';
 
 const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): IAppDataProps => ({
-  isLogged: !!state.usersInfo.currentUserId,
   ...ownProps,
+  isLoggedIn: !!state.usersInfo.currentUserId,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): IAppCallbackProps => ({
-  onLogin: (name: string) => dispatch(logIn(name)),
-});
-
-export const AppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export const AppContainer = withRouter(connect(mapStateToProps)(App));

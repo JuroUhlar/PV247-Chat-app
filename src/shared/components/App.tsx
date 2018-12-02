@@ -1,56 +1,59 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { LoginPage } from './LoginPage';
+import {
+  Route,
+  RouteComponentProps,
+} from 'react-router-dom';
 import { ContentWrapperContainer } from '../../channels/containers/ContentWrapperContainer';
-import { Route, RouteComponentProps } from 'react-router';
-import { CONTENT_VIEW_ROUTE, LOGIN_ROUTE } from '../constants/routes';
+import {
+  CHANNEL_VIEW_ROUTE,
+  LOGIN_ROUTE
+} from '../constants/routes';
 import { withRouterPropTypes } from '../utils/routerProps';
-
-export interface IAppCallbackProps {
-  readonly onLogin: (name: string) => void;
-}
+import { LoginPageContainer } from '../containers/LoginPageContainer';
+import { PrivateRoute } from './PrivateRoute';
 
 export interface IAppDataProps extends RouteComponentProps {
-  readonly isLogged: boolean;
+  isLoggedIn: boolean;
 }
 
-export type AppProps = IAppCallbackProps & IAppDataProps;
+export type AppProps = IAppDataProps;
 
 export class App extends React.PureComponent<AppProps> {
   static displayName = 'App';
 
   static propTypes = {
     ...withRouterPropTypes,
-    onLogin: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
   };
 
   constructor(props: any) {
     super(props);
   }
 
-  _onLoginClick = () => {
-    this.props.onLogin('');
-  };
+  componentDidUpdate (prevProps: IAppDataProps) {
+    const { isLoggedIn, history } = this.props;
+    if (!prevProps.isLoggedIn && isLoggedIn) {
+      history.push(CHANNEL_VIEW_ROUTE);
+    }
+  }
 
   render(): JSX.Element {
-    // const { isLogged } = this.props;
+    const { history, isLoggedIn } = this.props;
     return (
       <div className="full-height">
-        {/*{isLogged ?*/}
-        <Route
-          path={CONTENT_VIEW_ROUTE}
-          location={this.props.history.location}
+        <PrivateRoute
+          path={CHANNEL_VIEW_ROUTE}
+          location={history.location}
           component={ContentWrapperContainer}
+          isAuthenticated={isLoggedIn}
         />
-        {/*:*/}
         <Route
           exact
-          location={this.props.history.location}
+          location={history.location}
           path={LOGIN_ROUTE}
-          component={LoginPage}
-          onLogInClick={this._onLoginClick}
+          component={LoginPageContainer}
         />
-        {/*}*/}
       </div>
     );
   }
