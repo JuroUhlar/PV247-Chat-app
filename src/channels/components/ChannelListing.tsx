@@ -4,6 +4,7 @@ import * as Immutable from 'immutable';
 import { ChannelBarItem } from './ChannelBarItem';
 import { ChannelEditModalContainer } from '../containers/ChannelEditModalContainer';
 import { IChannel } from '../models/Channel';
+import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
 
 
 export interface IChannelListingDataProps {
@@ -11,7 +12,7 @@ export interface IChannelListingDataProps {
 }
 
 export interface IChannelListingCallbackProps {
-  readonly onAddChannel: (name: string, users: Immutable.List<Uuid>) => void;
+  readonly onAddChannel: (dependencies: ICreateChannelDependencies) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
   readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
   readonly onSelectChannel: (id: Uuid) => void;

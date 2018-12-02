@@ -4,6 +4,7 @@ import { Modal, Button, FormGroup, ControlLabel, FormControl, Table } from 'reac
 import * as Immutable from 'immutable';
 import { IUser } from '../../profile/models/User';
 import { List } from 'immutable';
+import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
 
 
 export interface IChannelEditModalStateProps {
@@ -12,7 +13,7 @@ export interface IChannelEditModalStateProps {
 }
 
 export interface IChannelEditModalDispatchProps {
-  readonly onAddChannel: (name: string, users: Immutable.List<Uuid>) => void;
+  readonly onAddChannel: (dependencies: ICreateChannelDependencies) => void;
   readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
 }
 
@@ -80,10 +81,12 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
   }
 
   createChannel = () => {
-    const name = this.state.nameValue;
-    const users = this.state.membersIds;
+    const dependencies: ICreateChannelDependencies = {
+      name: this.state.nameValue,
+      users: this.state.membersIds
+    };
 
-    this.props.onAddChannel(name, users);
+    this.props.onAddChannel(dependencies);
     this.resetForm();
     this.props.onClose();
   };

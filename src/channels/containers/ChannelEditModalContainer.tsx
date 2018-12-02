@@ -8,6 +8,7 @@ import {
   IChannelEditModalStateProps,
   ChannelEditModal
 } from '../components/ChannelEditModal';
+import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
 
 interface IChannelEditModalOwnProps {
   channelId: Uuid;
@@ -24,7 +25,7 @@ const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IC
 
 const mapDispatchToProps = (dispatch: Dispatch): IChannelEditModalDispatchProps => {
   return {
-    onAddChannel: (name: string, users: Immutable.List<Uuid>) => dispatch(createChannel(name, users)),
+    onAddChannel: (dependencies: ICreateChannelDependencies) => dispatch(createChannel(dependencies)),
     onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => dispatch(updateChannel(id, name, users))
   };
 };

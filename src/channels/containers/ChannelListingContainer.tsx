@@ -9,6 +9,7 @@ import {
   IChannelListingDataProps,
   ChannelListing
 } from '../components/ChannelListing';
+import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
 
 const mapStateToProps = (state: IState): IChannelListingDataProps => {
   return {
@@ -22,7 +23,7 @@ const mapStateToProps = (state: IState): IChannelListingDataProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch /*,ownProps: IChannelListingContainerOwnProps*/): IChannelListingCallbackProps => {
   return {
-    onAddChannel: (name: string, users: Immutable.List<Uuid>) => dispatch(createChannel(name, users)),
+    onAddChannel: (dependencies: ICreateChannelDependencies) => dispatch(createChannel(dependencies)),
     onDeleteChannel: (id: Uuid) => dispatch(deleteChannel(id)),
     onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => dispatch(updateChannel(id, name, users)),
     onSelectChannel: (id: Uuid) => dispatch(selectChannel(id)),
