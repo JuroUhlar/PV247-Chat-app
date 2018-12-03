@@ -1,37 +1,19 @@
 import {
+  UNAUTHENTICATE__SUCCESS,
+  USER_CHANGE_AVATAR,
+  USER_CHANGE_USERNAME,
   USER_FETCH__FAILURE,
   USER_FETCH__REQUEST,
   USER_FETCH__SUCCESS,
-  USER_CHANGE_AVATAR,
-  USER_CHANGE_USERNAME,
-  USER_LOG_IN,
-  USER_LOG_OUT,
   USER_UPDATE__FAILURE,
   USER_UPDATE__SUCCESS,
   USERS_ALL_FETCH__FAILURE,
-  USERS_ALL_FETCH__SUCCESS,
   USERS_ALL_FETCH__REQUEST,
-  USER_LOG_IN__SUCCESS,
-  USER_LOG_IN__FAILURE,
+  USERS_ALL_FETCH__SUCCESS,
 } from '../../shared/constants/actionTypes';
 
-export const logIn = (userId: Uuid): Action => ({
-  type: USER_LOG_IN,
-  payload: { userId },
-});
-
-export const succeedToLogIn = (json: object): Action => ({
-  type: USER_LOG_IN__SUCCESS,
-  payload: { user: json },
-});
-
-export const failToLogIn = (id: string, error: Error): Action => ({
-  type: USER_LOG_IN__FAILURE,
-  payload: { id, errorMessage: error.message || 'Failed to log in' },
-});
-
 export const logOut = (userId: Uuid): Action => ({
-  type: USER_LOG_OUT,
+  type: UNAUTHENTICATE__SUCCESS,
   payload: { userId },
 });
 

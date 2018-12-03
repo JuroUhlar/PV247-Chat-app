@@ -5,7 +5,6 @@ import {
   USERS_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
 import {
   IUser,
   IUserData
@@ -43,7 +42,7 @@ const updateUserFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response))

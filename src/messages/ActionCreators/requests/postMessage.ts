@@ -1,12 +1,22 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
 import * as uuid from 'uuid';
-import { createMessage, failToPostMessage, succeedToPostMessage } from '../messageActionCreators';
-import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
+import {
+  createMessage,
+  failToPostMessage,
+  succeedToPostMessage
+} from '../messageActionCreators';
+import {
+  CHANNELS_ROUTE,
+  MESSAGES_ROUTE,
+  SERVER_ROUTE
+} from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
 import { ICreateMessageDependencies } from '../createMessageFactory';
-import { IMessageData, Message } from '../../models/Message';
+import {
+  IMessageData,
+  Message
+} from '../../models/Message';
 import { convertViewToServerMessageModel } from '../../utils/convertMessageModels';
 
 const postMessageFactoryDependencies = {
@@ -19,7 +29,7 @@ const postMessageFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response)),

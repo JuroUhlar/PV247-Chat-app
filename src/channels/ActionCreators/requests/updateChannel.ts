@@ -1,9 +1,15 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
-import { updateChannel, succeedToUpdateChannel, failToUpdateChannel } from '../channelActionCreators';
-import { CHANNELS_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
+import {
+  failToUpdateChannel,
+  succeedToUpdateChannel,
+  updateChannel
+} from '../channelActionCreators';
+import {
+  CHANNELS_ROUTE,
+  SERVER_ROUTE
+} from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
 import { IChannelData } from '../../models/Channel';
 import { convertViewToServerChannelModel } from '../../utils/convertChannelModels';
 import * as Immutable from 'immutable';
@@ -26,7 +32,7 @@ const updateChannelFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response)),

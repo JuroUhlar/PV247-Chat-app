@@ -11,7 +11,6 @@ import {
   USERS_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
 import { convertServerToViewUserModel } from '../../utils/convertUserModels';
 
 const fetchUserFactoryDependencies = {
@@ -22,7 +21,7 @@ const fetchUserFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response)),

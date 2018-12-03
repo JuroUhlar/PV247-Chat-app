@@ -1,9 +1,16 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
-import { deleteMessage, failToDeleteMessage, succeedToDeleteMessage } from '../messageActionCreators';
-import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
+import {
+  deleteMessage,
+  failToDeleteMessage,
+  succeedToDeleteMessage
+} from '../messageActionCreators';
+import {
+  CHANNELS_ROUTE,
+  MESSAGES_ROUTE,
+  SERVER_ROUTE
+} from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
 
 const deleteMessageFactoryDependencies = {
   deleteBegin: deleteMessage,
@@ -13,7 +20,7 @@ const deleteMessageFactoryDependencies = {
     method: 'DELETE',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response)),

@@ -1,12 +1,26 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
-import { dislikeMessage, failToUpdateMessage, likeMessage, succeedToUpdateMessage } from '../messageActionCreators';
-import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
+import {
+  dislikeMessage,
+  failToUpdateMessage,
+  likeMessage,
+  succeedToUpdateMessage
+} from '../messageActionCreators';
+import {
+  CHANNELS_ROUTE,
+  MESSAGES_ROUTE,
+  SERVER_ROUTE
+} from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
-import { IMessage, IMessageData } from '../../models/Message';
+import {
+  IMessage,
+  IMessageData
+} from '../../models/Message';
 import { convertViewToServerMessageModel } from '../../utils/convertMessageModels';
-import { dislikePopularity, likePopularity } from '../../utils/updateMessagePopularity';
+import {
+  dislikePopularity,
+  likePopularity
+} from '../../utils/updateMessagePopularity';
 
 interface ISpecificPreferenceDeps {
   updateBegin: (messageId: Uuid, userId: Uuid) => Action;
@@ -36,7 +50,7 @@ const updateMessageFactoryDependencies = (specificPreferenceDeps: ISpecificPrefe
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response))

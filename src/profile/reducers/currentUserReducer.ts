@@ -1,17 +1,19 @@
 import {
-  USER_LOG_IN__SUCCESS,
-  USER_LOG_OUT
+  AUTHENTICATE__SUCCESS,
+  AUTHENTICATION__FAILURE,
+  UNAUTHENTICATE__SUCCESS,
 } from '../../shared/constants/actionTypes';
 
 const initialState = null;
 
 export const currentUserReducer = (prevState: Uuid | null = initialState, action: Action): Uuid | null => {
   switch (action.type) {
-    case USER_LOG_IN__SUCCESS: {
-      return action.payload.user.id;
+    case AUTHENTICATE__SUCCESS: {
+      return action.payload.id;
     }
 
-    case USER_LOG_OUT: {
+    case AUTHENTICATION__FAILURE:
+    case UNAUTHENTICATE__SUCCESS: {
       return null;
     }
 

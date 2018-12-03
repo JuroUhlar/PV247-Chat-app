@@ -1,10 +1,17 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
 import * as uuid from 'uuid';
-import { failToFetchMessages, requestMessages, succeedToFetchMessages } from '../messageActionCreators';
-import { CHANNELS_ROUTE, MESSAGES_ROUTE, SERVER_ROUTE } from '../../../shared/constants/routes';
+import {
+  failToFetchMessages,
+  requestMessages,
+  succeedToFetchMessages
+} from '../messageActionCreators';
+import {
+  CHANNELS_ROUTE,
+  MESSAGES_ROUTE,
+  SERVER_ROUTE
+} from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { janeBearer } from '../../../profile/utils/usersUtils';
 
 const fetchMessagesFactoryDependencies = {
   fetchBegin: requestMessages,
@@ -14,7 +21,7 @@ const fetchMessagesFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + janeBearer,
+      authorization: 'Bearer ' + localStorage.getItem('user'),
     },
   })
     .then(response => checkStatus(response)),

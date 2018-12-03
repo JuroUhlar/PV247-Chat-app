@@ -8,10 +8,10 @@ import {
   RouteComponentProps,
   withRouter
 } from 'react-router';
-import { logInUser } from '../../profile/actionCreators/requests/logInUser';
+import { auth } from '../actionCreators/requests/authenticateRequest';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: RouteComponentProps<any>): ILoginPageProps => ({
-  onLogInClick: (email: string) => logInUser(email)(dispatch),
+  onLogInClick: (email: string) => auth(email)(dispatch),
   ...ownProps,
 });
 

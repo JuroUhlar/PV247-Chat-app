@@ -7,6 +7,7 @@ import {
 import { ContentWrapperContainer } from '../../channels/containers/ContentWrapperContainer';
 import {
   CHANNEL_VIEW_ROUTE,
+  CONTENT_VIEW_ROUTE,
   LOGIN_ROUTE
 } from '../constants/routes';
 import { withRouterPropTypes } from '../utils/routerProps';
@@ -31,7 +32,7 @@ export class App extends React.PureComponent<AppProps> {
     super(props);
   }
 
-  componentDidUpdate (prevProps: IAppDataProps) {
+  componentDidUpdate(prevProps: IAppDataProps) {
     const { isLoggedIn, history } = this.props;
     if (!prevProps.isLoggedIn && isLoggedIn) {
       history.push(CHANNEL_VIEW_ROUTE);
@@ -43,7 +44,7 @@ export class App extends React.PureComponent<AppProps> {
     return (
       <div className="full-height">
         <PrivateRoute
-          path={CHANNEL_VIEW_ROUTE}
+          path={CONTENT_VIEW_ROUTE}
           location={history.location}
           component={ContentWrapperContainer}
           isAuthenticated={isLoggedIn}
