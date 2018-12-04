@@ -17,6 +17,7 @@ import {
   IUser,
   IUserServerModel
 } from '../../models/User';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 const fetchAllUsersFactoryDependencies = {
   fetchBegin: requestAllUsers,
@@ -26,7 +27,7 @@ const fetchAllUsersFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

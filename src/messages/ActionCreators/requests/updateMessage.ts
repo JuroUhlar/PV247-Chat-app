@@ -21,6 +21,7 @@ import {
   dislikePopularity,
   likePopularity
 } from '../../utils/updateMessagePopularity';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 interface ISpecificPreferenceDeps {
   updateBegin: (messageId: Uuid, userId: Uuid) => Action;
@@ -50,7 +51,7 @@ const updateMessageFactoryDependencies = (specificPreferenceDeps: ISpecificPrefe
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response))

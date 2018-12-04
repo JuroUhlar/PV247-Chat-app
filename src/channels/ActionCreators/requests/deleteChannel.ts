@@ -10,6 +10,7 @@ import {
   SERVER_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 interface IDeleteChannelFactoryDependencies {
   deleteBegin: (id: Uuid) => Action;
@@ -26,7 +27,7 @@ const deleteMessageFactoryDependencies = {
     method: 'DELETE',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

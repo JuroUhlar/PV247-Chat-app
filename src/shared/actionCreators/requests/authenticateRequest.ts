@@ -13,6 +13,7 @@ import {
   succeedToCreateBearer
 } from '../actionCreators';
 import { IUserServerModel } from '../../../profile/models/User';
+import { getBearer } from '../../utils/getBearer';
 
 const createBearerFactoryDependencies = {
   postBegin: requestBearer,
@@ -31,7 +32,7 @@ const createBearerFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

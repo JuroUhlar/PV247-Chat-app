@@ -16,6 +16,7 @@ import {
   saveChangesToUsername,
   succeedToUpdateUser
 } from '../usersActionCreators';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 interface IUpdateUserFactoryDependencies {
   success: (json: object) => Action;
@@ -42,7 +43,7 @@ const updateUserFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response))

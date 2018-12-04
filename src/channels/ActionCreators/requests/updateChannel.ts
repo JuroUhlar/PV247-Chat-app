@@ -13,6 +13,7 @@ import { checkStatus } from '../../../shared/utils/checkStatus';
 import { IChannelData } from '../../models/Channel';
 import { convertViewToServerChannelModel } from '../../utils/convertChannelModels';
 import * as Immutable from 'immutable';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 
 interface IUpdateChannelFactoryDependencies {
@@ -32,7 +33,7 @@ const updateChannelFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

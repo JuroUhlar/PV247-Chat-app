@@ -12,6 +12,7 @@ import {
   SERVER_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 const fetchChannelsFactoryDependencies = {
   fetchBegin: requestChannels,
@@ -21,7 +22,7 @@ const fetchChannelsFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

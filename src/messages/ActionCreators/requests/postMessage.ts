@@ -18,6 +18,7 @@ import {
   Message
 } from '../../models/Message';
 import { convertViewToServerMessageModel } from '../../utils/convertMessageModels';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 const postMessageFactoryDependencies = {
   postBegin: createMessage,
@@ -29,7 +30,7 @@ const postMessageFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

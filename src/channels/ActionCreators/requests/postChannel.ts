@@ -17,6 +17,7 @@ import {
   IChannelData
 } from '../../models/Channel';
 import { convertViewToServerChannelModel } from '../../utils/convertChannelModels';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 interface IPostChannelFactoryDependencies {
   postBegin: (body: Partial<IChannelData>) => Action;
@@ -36,7 +37,7 @@ const postChannelFactoryDependencies = {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),

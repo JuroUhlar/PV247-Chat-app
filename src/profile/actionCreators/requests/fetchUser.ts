@@ -12,6 +12,7 @@ import {
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { convertServerToViewUserModel } from '../../utils/convertUserModels';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 const fetchUserFactoryDependencies = {
   fetchBegin: requestUser,
@@ -21,7 +22,7 @@ const fetchUserFactoryDependencies = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      authorization: 'Bearer ' + localStorage.getItem('user'),
+      authorization: getBearer(),
     },
   })
     .then(response => checkStatus(response)),
