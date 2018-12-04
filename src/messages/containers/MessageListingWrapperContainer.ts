@@ -6,7 +6,7 @@ import { IState } from '../../shared/models/IState';
 import { fetchMessages } from '../ActionCreators/requests/fetchMessages';
 
 const mapStateToProps = (state: IState): IMessageListingWrapperDataProps => ({
-  isLoading: state.appInfo.isLoading,
+  isLoading: state.appInfo.isLoadingMessages,
   currentChannelId: state.channelListing.selectedChannel,
 });
 

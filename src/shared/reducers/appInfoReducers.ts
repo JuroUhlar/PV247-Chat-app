@@ -4,7 +4,7 @@ import { isLoadingChannelsReducer } from './isLoadingChannelsReducer';
 import { isLoadingUsersReducer } from '../../profile/reducers/isLoadingUsersReducer';
 
 export const appInfoReducers = combineReducers({
-  isLoading: isLoadingReducer,
+  isLoadingMessages: isLoadingReducer,
   isLoadingChannels: isLoadingChannelsReducer,
   isLoadingUsers: isLoadingUsersReducer,
 });

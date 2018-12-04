@@ -1,5 +1,5 @@
 export interface IAppInfo {
-  readonly isLoading: boolean;
+  readonly isLoadingMessages: boolean;
   readonly isLoadingChannels: boolean;
   readonly isLoadingUsers: boolean;
 }
