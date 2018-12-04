@@ -1,13 +1,24 @@
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import {
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom';
 import { IState } from '../../shared/models/IState';
-import { ContentWrapper, IContentWrapperDataProps } from '../../shared/components/ContentWrapper';
+import {
+  ContentWrapper,
+  IContentWrapperCallbackProps,
+  IContentWrapperDataProps
+} from '../../shared/components/ContentWrapper';
+import { Dispatch } from 'redux';
+import { fetchAllUsers } from '../../profile/actionCreators/requests/fetchAllUsers';
 
-const mapStateToProps = (_state: IState, ownProps: RouteComponentProps<any>): IContentWrapperDataProps => {
-  return {
-    ...ownProps,
-    isLoadingChannels: _state.appInfo.isLoadingChannels
-  };
-};
+const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): IContentWrapperDataProps => ({
+  ...ownProps,
+  isLoadingUsers: state.appInfo.isLoadingUsers,
+});
 
-export const ContentWrapperContainer = withRouter(connect(mapStateToProps)(ContentWrapper));
+const mapDispatchToProps = (dispatch: Dispatch): IContentWrapperCallbackProps => ({
+  loadAllUsers: () => fetchAllUsers(dispatch),
+});
+
+export const ContentWrapperContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ContentWrapper));

@@ -59,7 +59,7 @@ export const requestAllUsers = (): Action => ({
 
 export const succeedToFetchAllUsers = (json: object): Action => ({
   type: USERS_ALL_FETCH__SUCCESS,
-  payload: { messages: json },
+  payload: { users: json },
 });
 
 export const failToFetchAllUsers = (id: string, error: Error): Action => ({
