@@ -1,5 +1,7 @@
 # PV247-Chat-app
 
+Heya :) if you'd like to use our app, you have to log in as either jane@gmail.com, harry@gmail.com or sally@gmail.com for now. 
+
 https://is.muni.cz/auth/el/1433/podzim2018/PV247/um/ProjectAssignment.pdf
 
 https://pv247messaging.azurewebsites.net/help/index.html
