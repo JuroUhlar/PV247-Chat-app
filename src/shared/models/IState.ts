@@ -4,8 +4,8 @@ import { IAppInfo } from './IAppInfo';
 import { IChannelListing } from '../../channels/models/IChannelListing';
 
 export interface IState {
-  channelListing: IChannelListing;
-  messageListing: IMessageListing;
-  usersInfo: IUsersInfo;
-  appInfo: IAppInfo;
+  readonly channelListing: IChannelListing;
+  readonly messageListing: IMessageListing;
+  readonly usersInfo: IUsersInfo;
+  readonly appInfo: IAppInfo;
 }

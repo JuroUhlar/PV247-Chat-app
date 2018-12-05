@@ -17,10 +17,10 @@ import { getBearer } from '../../../shared/utils/getBearer';
 
 
 interface IUpdateChannelFactoryDependencies {
-  updateBegin: (id: Uuid, name: string, users: Immutable.List<Uuid>) => Action;
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  update: (body: Partial<IChannelData>) => Promise<Response>;
+  readonly updateBegin: (id: Uuid, name: string, users: Immutable.List<Uuid>) => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly update: (body: Partial<IChannelData>) => Promise<Response>;
 }
 
 const updateChannelFactoryDependencies = {

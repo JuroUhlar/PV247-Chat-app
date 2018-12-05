@@ -19,17 +19,17 @@ import {
 import { getBearer } from '../../../shared/utils/getBearer';
 
 interface IUpdateUserFactoryDependencies {
-  success: (json: object) => Action;
-  error: (id: Uuid, error: Error) => Action;
-  update: (body: Partial<IUserData>) => Promise<Response>;
-  updateAvatarPathBegin: (id: Uuid, path: string) => Action;
-  updateUsernameBegin: (id: Uuid, name: string) => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: Uuid, error: Error) => Action;
+  readonly update: (body: Partial<IUserData>) => Promise<Response>;
+  readonly updateAvatarPathBegin: (id: Uuid, path: string) => Action;
+  readonly updateUsernameBegin: (id: Uuid, name: string) => Action;
 }
 
 export interface IUserUpdateData {
-  user: IUser;
-  updatedUsername?: string;
-  updatedAvatarPath?: string;
+  readonly user: IUser;
+  readonly updatedUsername?: string;
+  readonly updatedAvatarPath?: string;
 }
 
 const updateUserFactoryDependencies = {

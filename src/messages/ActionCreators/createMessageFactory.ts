@@ -1,9 +1,9 @@
 import { MESSAGE_CREATE } from '../../shared/constants/actionTypes';
 
 export interface ICreateMessageDependencies {
-  text: string;
-  authorId: Uuid;
-  channelId: Uuid;
+  readonly text: string;
+  readonly authorId: Uuid;
+  readonly channelId: Uuid;
 }
 
 export const createMessageFactory = (idGenerator: () => Uuid): ((dependencies: ICreateMessageDependencies) => Action) =>

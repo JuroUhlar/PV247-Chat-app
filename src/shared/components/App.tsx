@@ -15,7 +15,7 @@ import { LoginPageContainer } from '../containers/LoginPageContainer';
 import { PrivateRoute } from './PrivateRoute';
 
 export interface IAppDataProps extends RouteComponentProps {
-  isLoggedIn: boolean;
+  readonly isLoggedIn: boolean;
 }
 
 export type AppProps = IAppDataProps;

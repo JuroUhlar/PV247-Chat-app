@@ -20,11 +20,11 @@ import { convertViewToServerChannelModel } from '../../utils/convertChannelModel
 import { getBearer } from '../../../shared/utils/getBearer';
 
 interface IPostChannelFactoryDependencies {
-  postBegin: (body: Partial<IChannelData>) => Action;
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  post: (body: Partial<IChannelData>) => Promise<Response>;
-  idGenerator: () => string;
+  readonly postBegin: (body: Partial<IChannelData>) => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly post: (body: Partial<IChannelData>) => Promise<Response>;
+  readonly idGenerator: () => string;
 }
 
 const postChannelFactoryDependencies = {

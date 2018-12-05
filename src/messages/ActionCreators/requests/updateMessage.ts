@@ -24,20 +24,20 @@ import {
 import { getBearer } from '../../../shared/utils/getBearer';
 
 interface ISpecificPreferenceDeps {
-  updateBegin: (messageId: Uuid, userId: Uuid) => Action;
-  updatePopularity: (message: IMessage, userId: Uuid) => IMessage;
+  readonly updateBegin: (messageId: Uuid, userId: Uuid) => Action;
+  readonly updatePopularity: (message: IMessage, userId: Uuid) => IMessage;
 }
 
 interface IUpdateMessageFactoryDependencies extends ISpecificPreferenceDeps {
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  update: (body: Partial<IMessageData>, channelId: Uuid) => Promise<Response>;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly update: (body: Partial<IMessageData>, channelId: Uuid) => Promise<Response>;
 }
 
 export interface IMessageUpdateData {
-  message: IMessage;
-  userId: Uuid;
-  channelId: Uuid;
+  readonly message: IMessage;
+  readonly userId: Uuid;
+  readonly channelId: Uuid;
 }
 
 const updateMessageFactoryDependencies = (specificPreferenceDeps: ISpecificPreferenceDeps) => ({

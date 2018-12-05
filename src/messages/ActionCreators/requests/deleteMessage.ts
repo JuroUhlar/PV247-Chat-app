@@ -28,10 +28,10 @@ const deleteMessageFactoryDependencies = {
 };
 
 interface IDeleteMessageFactoryDependencies {
-  deleteBegin: (id: Uuid) => Action;
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  delete: (channelId: Uuid, messageId: Uuid) => Promise<Response>;
+  readonly deleteBegin: (id: Uuid) => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly delete: (channelId: Uuid, messageId: Uuid) => Promise<Response>;
 }
 
 const deleteMessageFactory = (dependencies: IDeleteMessageFactoryDependencies) =>

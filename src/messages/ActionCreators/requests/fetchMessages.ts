@@ -30,11 +30,11 @@ const fetchMessagesFactoryDependencies = {
 };
 
 interface IFetchMessagesFactoryDependencies {
-  fetchBegin: () => Action;
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  fetch: (channelId: Uuid) => Promise<Response>;
-  idGenerator: () => string;
+  readonly fetchBegin: () => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly fetch: (channelId: Uuid) => Promise<Response>;
+  readonly idGenerator: () => string;
 }
 
 const fetchMessagesFactory = (dependencies: IFetchMessagesFactoryDependencies) =>

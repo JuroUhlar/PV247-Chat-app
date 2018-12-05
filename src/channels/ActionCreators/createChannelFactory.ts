@@ -2,8 +2,8 @@ import { CHANNEL_CREATE } from '../../shared/constants/actionTypes';
 import * as Immutable from 'immutable';
 
 export interface ICreateChannelDependencies {
-  name: string;
-  users: Immutable.List<Uuid>;
+  readonly name: string;
+  readonly users: Immutable.List<Uuid>;
 }
 
 export const createChannelFactory = (idGenerator: () => Uuid): ((dependencies: ICreateChannelDependencies) => Action) =>

@@ -8,10 +8,10 @@ import * as H from 'history';
 import { LOGIN_ROUTE } from '../constants/routes';
 
 interface IPrivateRouteProps {
-  component: any;
-  isAuthenticated: boolean;
-  path: string;
-  location: H.Location<H.LocationState>;
+  readonly component: any;
+  readonly isAuthenticated: boolean;
+  readonly path: string;
+  readonly location: H.Location<H.LocationState>;
 }
 
 export const PrivateRoute: React.SFC<IPrivateRouteProps> = (props: IPrivateRouteProps) => {

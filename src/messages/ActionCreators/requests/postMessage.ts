@@ -38,11 +38,11 @@ const postMessageFactoryDependencies = {
 };
 
 interface IPostMessageFactoryDependencies {
-  postBegin: (body: Partial<IMessageData>) => Action;
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  post: (body: Partial<IMessageData>, channelId: Uuid) => Promise<Response>;
-  idGenerator: () => string;
+  readonly postBegin: (body: Partial<IMessageData>) => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly post: (body: Partial<IMessageData>, channelId: Uuid) => Promise<Response>;
+  readonly idGenerator: () => string;
 }
 
 const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) => (data: ICreateMessageDependencies) =>

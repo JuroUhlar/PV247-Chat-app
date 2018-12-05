@@ -3,12 +3,12 @@ import * as PropTypes from 'prop-types';
 import { MessageListingContainer } from '../containers/MessageListingContainer';
 
 export interface IMessageListingWrapperDataProps {
-  isLoading: boolean;
-  currentChannelId: Uuid;
+  readonly isLoading: boolean;
+  readonly currentChannelId: Uuid;
 }
 
 export interface IMessageListingWrapperCallbackProps {
-  getMessages: (currentChannelId: Uuid) => Promise<Action>;
+  readonly getMessages: (currentChannelId: Uuid) => Promise<Action>;
 }
 
 type MessageListingWrapperProps = IMessageListingWrapperDataProps & IMessageListingWrapperCallbackProps;

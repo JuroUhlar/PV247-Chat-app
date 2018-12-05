@@ -3,11 +3,11 @@ import * as PropTypes from 'prop-types';
 import { ChannelListingContainer } from '../containers/ChannelListingContainer';
 
 export interface IChannelListingWrapperDataProps {
-  isLoading: boolean;
+  readonly isLoading: boolean;
 }
 
 export interface IChannelListingWrapperCallbackProps {
-  getChannels: () => Promise<Action>;
+  readonly getChannels: () => Promise<Action>;
 }
 
 type ChannelListingWrapperProps = IChannelListingWrapperDataProps & IChannelListingWrapperCallbackProps;

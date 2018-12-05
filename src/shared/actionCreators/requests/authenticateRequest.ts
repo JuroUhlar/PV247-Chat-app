@@ -40,12 +40,12 @@ const createBearerFactoryDependencies = {
 };
 
 interface ICreateBearerFactoryDependencies {
-  postBegin: () => Action;
-  success: (json: object, userId: Uuid) => Action;
-  error: (id: string, error: Error) => Action;
-  fetchLogin: (email: string) => Promise<Response>;
-  idGenerator: () => string;
-  fetchUser: (email: string) => Promise<Response>;
+  readonly postBegin: () => Action;
+  readonly success: (json: object, userId: Uuid) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly fetchLogin: (email: string) => Promise<Response>;
+  readonly idGenerator: () => string;
+  readonly fetchUser: (email: string) => Promise<Response>;
 }
 
 const createBearerFactory = (dependencies: ICreateBearerFactoryDependencies) => (email: string) =>

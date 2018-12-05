@@ -12,9 +12,9 @@ import { ICreateChannelDependencies } from '../ActionCreators/createChannelFacto
 import { updateChannelRequest } from '../ActionCreators/requests/updateChannel';
 
 interface IChannelEditModalOwnProps {
-  channelId: Uuid;
-  show: boolean;
-  onClose: () => void;
+  readonly channelId: Uuid;
+  readonly show: boolean;
+  readonly onClose: () => void;
 }
 
 const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IChannelEditModalStateProps => {

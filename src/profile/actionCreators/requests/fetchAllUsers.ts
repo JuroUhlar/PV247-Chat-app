@@ -35,11 +35,11 @@ const fetchAllUsersFactoryDependencies = {
 };
 
 interface IFetchAllUsersFactoryDependencies {
-  fetchBegin: () => Action;
-  success: (json: object) => Action;
-  error: (id: string, error: Error) => Action;
-  fetch: () => Promise<Response>;
-  idGenerator: () => string;
+  readonly fetchBegin: () => Action;
+  readonly success: (json: object) => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly fetch: () => Promise<Response>;
+  readonly idGenerator: () => string;
 }
 
 const fetchAllUsersFactory = (dependencies: IFetchAllUsersFactoryDependencies) =>

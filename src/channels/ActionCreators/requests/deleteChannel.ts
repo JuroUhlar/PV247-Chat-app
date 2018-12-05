@@ -13,10 +13,10 @@ import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
 
 interface IDeleteChannelFactoryDependencies {
-  deleteBegin: (id: Uuid) => Action;
-  success: () => Action;
-  error: (id: string, error: Error) => Action;
-  delete: (channelId: Uuid) => Promise<Response>;
+  readonly deleteBegin: (id: Uuid) => Action;
+  readonly success: () => Action;
+  readonly error: (id: string, error: Error) => Action;
+  readonly delete: (channelId: Uuid) => Promise<Response>;
 }
 
 const deleteMessageFactoryDependencies = {
