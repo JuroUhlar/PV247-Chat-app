@@ -1,5 +1,11 @@
 import * as Immutable from 'immutable';
-import { IMessage, IMessageServerModel, Message, MessagePopularity, MessageServerModel } from '../models/Message';
+import {
+  IMessage,
+  IMessageServerModel,
+  Message,
+  MessageServerModel
+} from '../models/Message';
+import { MessagePopularity } from '../models/MessagePopularity';
 
 export const convertServerToViewMessageModel = (serverModel: IMessageServerModel): IMessage => {
   const { value, createdAt, id, customData: { authorId, popularity: { likes, dislikes } } } = serverModel;
