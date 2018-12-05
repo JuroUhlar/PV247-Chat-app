@@ -4,16 +4,16 @@ import { MESSAGE_CREATE, MESSAGE_DELETE, MESSAGE_DISLIKE, MESSAGE_LIKE, MESSAGES
 import { messageReducer } from './messageReducer';
 import { convertServerToViewMessageModel } from '../utils/convertMessageModels';
 
-const initialState = Immutable.Map<Uuid, IMessage>();
+const initialState = Immutable.OrderedMap<Uuid, IMessage>();
 
-export const messagesReducer = (prevState: Immutable.Map<Uuid, IMessage> = initialState, action: Action):
-  Immutable.Map<Uuid, IMessage> => {
+export const messagesReducer = (prevState: Immutable.OrderedMap<Uuid, IMessage> = initialState, action: Action):
+  Immutable.OrderedMap<Uuid, IMessage> => {
   switch (action.type) {
     case MESSAGES_FETCH__SUCCESS: {
       const messages = action.payload.messages
         .map((value: IMessageServerModel) => [value.id, convertServerToViewMessageModel(value)]);
 
-      return Immutable.Map<Uuid, IMessage>(messages);
+      return Immutable.OrderedMap<Uuid, IMessage>(messages);
     }
 
     case MESSAGE_CREATE: {

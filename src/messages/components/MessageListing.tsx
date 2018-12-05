@@ -5,7 +5,7 @@ import { MessageContainer } from '../containers/MessageContainer';
 import { IMessage } from '../models/Message';
 
 export interface IMessageListingDataProps {
-  readonly messages: Immutable.Map<Uuid, IMessage>;
+  readonly messages: Immutable.OrderedMap<Uuid, IMessage>;
 }
 
 export const MessageListing: React.SFC<IMessageListingDataProps> = ({ messages }) => {
