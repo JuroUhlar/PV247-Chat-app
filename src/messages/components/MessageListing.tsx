@@ -1,18 +1,19 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as Immutable from 'immutable';
-import {MessageContainer} from '../containers/MessageContainer';
+import { MessageContainer } from '../containers/MessageContainer';
+import { IMessage } from '../models/Message';
 
 export interface IMessageListingDataProps {
-  readonly messageIds: Immutable.Set<Uuid>;
+  readonly messages: Immutable.Map<Uuid, IMessage>;
 }
 
-export const MessageListing: React.SFC<IMessageListingDataProps> = ({messageIds}) => {
+export const MessageListing: React.SFC<IMessageListingDataProps> = ({ messages }) => {
   this._prepareMessages = () => {
-    return (messageIds && messageIds.map((id: Uuid) => {
+    return (messages && messages.map((message: IMessage, key: Uuid) => {
         return (
-          <li key={id}>
-            <MessageContainer messageId={id}/>
+          <li key={key}>
+            <MessageContainer message={message}/>
           </li>
         );
       })
@@ -29,5 +30,5 @@ export const MessageListing: React.SFC<IMessageListingDataProps> = ({messageIds}
 
 MessageListing.displayName = 'MessageListing';
 MessageListing.propTypes = {
-  messageIds: PropTypes.object,
+  messages: PropTypes.object,
 };

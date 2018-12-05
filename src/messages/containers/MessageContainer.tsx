@@ -4,15 +4,15 @@ import { IMessageCallbackProps, IMessageDataProps, Message } from '../components
 import { dislikeMessageRequest, IMessageUpdateData, likeMessageRequest } from '../ActionCreators/requests/updateMessage';
 import { IState } from '../../shared/models/IState';
 import { deleteMessageRequest } from '../ActionCreators/requests/deleteMessage';
+import { IMessage } from '../models/Message';
 
 interface IMessageContainerDataProps {
-  readonly messageId: Uuid;
+  readonly message: IMessage;
 }
 
-const mapStateToProps = (state: IState, { messageId }: IMessageContainerDataProps): IMessageDataProps => {
+const mapStateToProps = (state: IState, { message }: IMessageContainerDataProps): IMessageDataProps => {
   const currentUserId = state.usersInfo.currentUserId;
   const currentChannelId = state.channelListing.selectedChannel;
-  const message = state.messageListing.messages.get(messageId);
   const messagePos = message.authorId === currentUserId
     ? 'message-pane-pos-right'
     : 'message-pane-pos-left';
