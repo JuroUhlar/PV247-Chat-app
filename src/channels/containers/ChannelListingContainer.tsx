@@ -14,7 +14,8 @@ import { ICreateChannelDependencies } from '../ActionCreators/createChannelFacto
 
 const mapStateToProps = (state: IState): IChannelListingDataProps => {
   return {
-    channels: state.channelListing.channels.toList(),
+    channels: state.channelListing.channels,
+    channelIds: state.channelListing.channelIds
   };
 };
 

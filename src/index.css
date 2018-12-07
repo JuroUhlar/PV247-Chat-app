@@ -138,6 +138,10 @@ body, html, .full-height {
   padding: 0px;
 }
 
+.channels-ordered-list {
+  height: 100%;
+}
+
 /* User card */
 
 .user-card {
