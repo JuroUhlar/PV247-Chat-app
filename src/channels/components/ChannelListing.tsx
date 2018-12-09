@@ -58,7 +58,23 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
   };
 
   onDragEnd = (result: DropResult) => {
-    console.log(result);
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    }
+
+    const newChannelIds: Uuid[] = this.props.channelIds.toArray();
+    newChannelIds.splice(source.index, 1); // Remove the moved channel ID from array
+    newChannelIds.splice(destination.index, 0, draggableId); // Add the moved ID to the destination index
+
+    const newOrder = Immutable.OrderedSet<Uuid>(newChannelIds);
+    console.log(this.props.channelIds);
+    console.log(newOrder);
   };
 
   render(): JSX.Element {
@@ -75,7 +91,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
           <Droppable droppableId={'Channel-listing-droppable'}>
             {(provided: DroppableProvided) => (
               <ol className="channels-ordered-list" ref={provided.innerRef}>
-                {this.props.channelIds.map((channelId: Uuid) => {
+                {this.props.channelIds.toArray().map((channelId: Uuid, index: number) => {
                   const channel = this.props.channels.get(channelId);
                   return (
                     <li key={channel.id}>
@@ -83,6 +99,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
                         channelName={channel.name}
                         channelId={channel.id}
                         key={channel.id}
+                        channelIndex={index}
                         onSelectChannel={this.props.onSelectChannel}
                         onDeleteChannel={this.props.onDeleteChannel}
                       />
@@ -93,9 +110,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
               </ol>
             )}
           </Droppable>
-
         </DragDropContext>
-        {/* <ChannelEditModal show={this.state.showChannelModal} onClose={this.closeModal} onSave={this.props.onAddChannel} /> */}
         <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} />
       </div>
     );
