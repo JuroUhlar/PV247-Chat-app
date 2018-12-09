@@ -356,3 +356,36 @@ body, html, .full-height {
 .rdw-editor-toolbar {
   background-color: #b7cbe3;
 }
+
+.spinner {
+  position: absolute;
+  left: 60%;
+  top: 30%;
+  z-index: 1;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  transition: border-top 0.5s ease;
+  border-top: 16px solid #7B9EC9;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spinWithColor 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spinWithColor {
+    0% {
+        transform: rotate(0deg);
+        border-top: 16px solid #7B9EC9;
+    }
+    51% { border-top: 16px solid #a8dab5; }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spinWithColor {
+  0% {
+    transform: rotate(0deg);
+    border-top: 16px solid #7B9EC9;
+  }
+  51% { border-top: 16px solid #a8dab5; }
+  100% { transform: rotate(360deg); }
+}

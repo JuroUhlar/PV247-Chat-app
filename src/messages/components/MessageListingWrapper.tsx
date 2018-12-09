@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { MessageListingContainer } from '../containers/MessageListingContainer';
+import { Spinner } from '../../shared/components/Spinner';
 
 export interface IMessageListingWrapperDataProps {
   readonly isLoading: boolean;
@@ -45,6 +46,6 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
 
   render() {
     return this.props.isLoading ?
-      <div>I am fetching dude. Leave me alone..</div> : <MessageListingContainer/>;
+      <Spinner/> : <MessageListingContainer/>;
   }
 }
