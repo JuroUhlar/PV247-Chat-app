@@ -1,117 +1,41 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { RouteComponentProps } from 'react-router-dom';
+import {
+  Tab,
+  Tabs,
+} from 'react-bootstrap/lib';
 import { withRouterPropTypes } from '../utils/routerProps';
+import { LoginTab } from './LoginTab';
+import { SignUpTab } from './SignUpTab';
 
 export interface ILoginPageProps extends RouteComponentProps {
   readonly onLogInClick: (email: string) => void;
   readonly onSignUpClick: (email: string, username: string) => void;
 }
 
-interface ILoginPageState {
-  readonly email: string;
-  readonly username: string;
-  readonly isSignUpToggled: boolean;
-}
+export const LoginPage: React.SFC<ILoginPageProps> = (props: ILoginPageProps) => (
+  <div className="login-form">
+    <h2 className="text-center">Junda app</h2>
+    <Tabs
+      defaultActiveKey="LogInTab"
+      id="login-or-signup-user-forms"
+      animation={false}
+    >
+      <Tab eventKey="LogInTab" title="Log In">
+        <LoginTab onLogInClick={props.onLogInClick}/>
+      </Tab>
+      <Tab eventKey="SignUpTab" title="Sign Up">
+        <SignUpTab onSignUpClick={props.onSignUpClick}/>
+      </Tab>
+    </Tabs>
+  </div>
+);
 
-export class LoginPage extends React.PureComponent<ILoginPageProps, ILoginPageState> {
-  static displayName = 'LoginPage';
-  static propTypes = {
-    ...withRouterPropTypes,
+LoginPage.displayName = 'LoginPage';
+LoginPage.propTypes = {
+  ...withRouterPropTypes,
 
-    onLogInClick: PropTypes.func.isRequired,
-    onSignUpClick: PropTypes.func.isRequired,
-  };
-
-  constructor(props: ILoginPageProps) {
-    super(props);
-    this.state = {
-      email: '',
-      username: '',
-      isSignUpToggled: false,
-    };
-  }
-
-  _handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const email = event.currentTarget.value;
-    this.setState(() => ({ email }));
-  };
-
-  _handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const username = event.currentTarget.value;
-    this.setState(() => ({ username }));
-  };
-
-  _handleLogIn = (): void => {
-    const { onLogInClick } = this.props;
-    onLogInClick(this.state.email);
-  };
-
-  _handleToggle = (event: React.FormEvent): void => {
-    event.preventDefault();
-    const { isSignUpToggled } = this.state;
-    this.setState(() => ({ isSignUpToggled: !isSignUpToggled }));
-  };
-
-  _handleSignUp = (event: React.FormEvent): void => {
-    event.preventDefault();
-    const { username, email } = this.state;
-    this.props.onSignUpClick(email, username);
-  };
-
-  render(): JSX.Element {
-    const { isSignUpToggled, email } = this.state;
-    return (
-      <div className="login-form">
-        <form>
-          <h2 className="text-center">PV247 Chat</h2>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Email"
-              onChange={this._handleEmailChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              disabled={!isSignUpToggled}
-              type="Username"
-              className="form-control"
-              placeholder="Username"
-              onChange={this._handleUsernameChange}
-            />
-          </div>
-          <div className="form-group">
-            <div className="row">
-              <div className="col-sm-6">
-                <button
-                  type="button"
-                  className="btn btn-primary btn-block"
-                  disabled={!email}
-                  onClick={this._handleLogIn}
-                >Log in
-                </button>
-              </div>
-              <div className="col-sm-6">
-                {isSignUpToggled ?
-                  <button
-                    onClick={this._handleSignUp}
-                    className="btn btn-secondary btn-block"
-                  > Sign Me Up!
-                  </button>
-                  :
-                  <button
-                    onClick={this._handleToggle}
-                    className="btn btn-secondary btn-block"
-                  > Sign Up?
-                  </button>}
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
-
+  onLogInClick: PropTypes.func.isRequired,
+  onSignUpClick: PropTypes.func.isRequired,
+};
