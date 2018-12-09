@@ -5,6 +5,7 @@ import { withRouterPropTypes } from '../utils/routerProps';
 
 export interface ILoginPageProps extends RouteComponentProps {
   readonly onLogInClick: (email: string) => void;
+  readonly onSignUpClick: (email: string, username: string) => void;
 }
 
 interface ILoginPageState {
@@ -19,6 +20,7 @@ export class LoginPage extends React.PureComponent<ILoginPageProps, ILoginPageSt
     ...withRouterPropTypes,
 
     onLogInClick: PropTypes.func.isRequired,
+    onSignUpClick: PropTypes.func.isRequired,
   };
 
   constructor(props: ILoginPageProps) {
@@ -51,9 +53,10 @@ export class LoginPage extends React.PureComponent<ILoginPageProps, ILoginPageSt
     this.setState(() => ({ isSignUpToggled: !isSignUpToggled }));
   };
 
-  _handleSignUp = (): void => {
+  _handleSignUp = (event: React.FormEvent): void => {
+    event.preventDefault();
     const { username, email } = this.state;
-    console.log(username, email);
+    this.props.onSignUpClick(email, username);
   };
 
   render(): JSX.Element {
