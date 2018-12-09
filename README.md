@@ -1,6 +1,7 @@
 # PV247-Chat-app
 
-Heya :) if you'd like to use our app, you have to log in as either jane@gmail.com, harry@gmail.com or sally@gmail.com for now. 
+Heya :) if you'd like to use our app as an existing user, you can use these emails: jane@gmail.com, harry@gmail.com, and sally@gmail.com amd click Log in.
+If you'd like to create your own profile, switch to the Sign Up tab and enter an email address along with your username and click Sign up.
 
 https://is.muni.cz/auth/el/1433/podzim2018/PV247/um/ProjectAssignment.pdf
 
