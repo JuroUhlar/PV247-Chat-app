@@ -78,7 +78,7 @@ export class UserCard extends React.PureComponent<UserCardProps> {
               <LinkContainer to={LOGIN_ROUTE}>
                 <MenuItem
                   key="userLogout"
-                  // onClick={this._handleLogout}
+                  onClick={this._handleLogout}
                 >Log Out
                 </MenuItem>
               </LinkContainer>

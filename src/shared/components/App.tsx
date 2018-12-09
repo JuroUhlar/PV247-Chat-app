@@ -35,7 +35,6 @@ export class App extends React.PureComponent<AppProps> {
   componentDidUpdate(prevProps: IAppDataProps) {
     const { isLoggedIn, history } = this.props;
     if (!prevProps.isLoggedIn && isLoggedIn) {
-      console.log('ia ma logged');
       history.push(CHANNEL_VIEW_ROUTE);
     }
   }

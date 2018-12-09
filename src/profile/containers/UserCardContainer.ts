@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {IState} from '../../shared/models/IState';
 import {IUserCardCallbackProps, IUserCardDataProps, UserCard} from '../components/UserCard';
 import {getCurrentUser} from '../utils/usersUtils';
-import {logOut} from '../actionCreators/usersActionCreators';
+import { unauthenticate } from '../actionCreators/unauthenticate';
 
 const mapStateToProps = (state: IState): IUserCardDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);
@@ -16,7 +16,7 @@ const mapStateToProps = (state: IState): IUserCardDataProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): IUserCardCallbackProps => {
   return {
-    onLogout: (userId: Uuid) => dispatch(logOut(userId)),
+    onLogout: (userId: Uuid) => dispatch(unauthenticate(userId)),
   };
 };
 
