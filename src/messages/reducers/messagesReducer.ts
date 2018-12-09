@@ -11,6 +11,7 @@ export const messagesReducer = (prevState: Immutable.OrderedMap<Uuid, IMessage> 
   switch (action.type) {
     case MESSAGES_FETCH__SUCCESS: {
       const messages = action.payload.messages
+        .reverse()
         .map((value: IMessageServerModel) => [value.id, convertServerToViewMessageModel(value)]);
 
       return Immutable.OrderedMap<Uuid, IMessage>(messages);
