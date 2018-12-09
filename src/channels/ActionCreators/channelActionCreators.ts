@@ -3,7 +3,8 @@ import {
   CHANNEL_DELETE, CHANNEL_UPDATE, CHANNEL_SELECT,
   CHANNELS_FETCH__REQUEST, CHANNELS_FETCH__SUCCESS, CHANNELS_FETCH__FAILURE,
   CHANNELS_POST__SUCCESS, CHANNELS_POST__FAILURE,
-  CHANNELS_DELETE__SUCCESS, CHANNELS_DELETE__FAILURE, CHANNELS_UPDATE__SUCCESS, CHANNELS_UPDATE__FAILURE
+  CHANNELS_DELETE__SUCCESS, CHANNELS_DELETE__FAILURE, CHANNELS_UPDATE__SUCCESS, CHANNELS_UPDATE__FAILURE,
+  CHANNELS_REORDER
 } from '../../shared/constants/actionTypes';
 import { createChannelFactory } from './createChannelFactory';
 import * as Immutable from 'immutable';
@@ -86,5 +87,12 @@ export const selectChannel = (id: Uuid): Action => ({
   type: CHANNEL_SELECT,
   payload: {
     id
+  }
+});
+
+export const reorderChannels = (channelIds: Immutable.OrderedSet<Uuid>): Action => ({
+  type: CHANNELS_REORDER,
+  payload: {
+    channelIds
   }
 });

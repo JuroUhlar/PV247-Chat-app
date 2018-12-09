@@ -18,6 +18,7 @@ export interface IChannelListingCallbackProps {
   readonly onDeleteChannel: (id: Uuid) => void;
   readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
   readonly onSelectChannel: (id: Uuid) => void;
+  readonly onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => void;
   readonly getChannels: () => Promise<Action>;
 }
 
@@ -71,10 +72,8 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
     const newChannelIds: Uuid[] = this.props.channelIds.toArray();
     newChannelIds.splice(source.index, 1); // Remove the moved channel ID from array
     newChannelIds.splice(destination.index, 0, draggableId); // Add the moved ID to the destination index
-
-    const newOrder = Immutable.OrderedSet<Uuid>(newChannelIds);
-    console.log(this.props.channelIds);
-    console.log(newOrder);
+    const newOrderedSet = Immutable.OrderedSet<Uuid>(newChannelIds);
+    this.props.onReorderChannels(newOrderedSet);
   };
 
   render(): JSX.Element {

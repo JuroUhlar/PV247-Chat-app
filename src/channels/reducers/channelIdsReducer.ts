@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable';
-import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNELS_FETCH__SUCCESS, CHANNELS_POST__SUCCESS } from '../../shared/constants/actionTypes';
+import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNELS_FETCH__SUCCESS, CHANNELS_POST__SUCCESS, CHANNELS_REORDER } from '../../shared/constants/actionTypes';
 import { getInitialChannels } from '../utils/getInitialChannels';
 import { IChannelServerModel } from '../models/Channel';
 
@@ -35,6 +35,10 @@ export const channelIdsReducer = (prevState: Immutable.OrderedSet<Uuid> = initia
 
     case CHANNEL_DELETE: {
       return prevState.delete(action.payload.id);
+    }
+
+    case CHANNELS_REORDER: {
+      return action.payload.channelIds;
     }
 
     default:
