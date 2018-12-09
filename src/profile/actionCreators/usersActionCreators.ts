@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import {
   UNAUTHENTICATE__SUCCESS,
   USER_CHANGE_AVATAR,
@@ -5,12 +6,15 @@ import {
   USER_FETCH__FAILURE,
   USER_FETCH__REQUEST,
   USER_FETCH__SUCCESS,
+  USER_POST__FAILURE,
+  USER_POST__SUCCESS,
   USER_UPDATE__FAILURE,
   USER_UPDATE__SUCCESS,
   USERS_ALL_FETCH__FAILURE,
   USERS_ALL_FETCH__REQUEST,
   USERS_ALL_FETCH__SUCCESS,
 } from '../../shared/constants/actionTypes';
+import { createUserFactory } from './createUserFactory';
 
 export const logOut = (userId: Uuid): Action => ({
   type: UNAUTHENTICATE__SUCCESS,
@@ -49,6 +53,18 @@ export const succeedToFetchUser = (json: object): Action => ({
 
 export const failToFetchUser = (id: string, error: Error): Action => ({
   type: USER_FETCH__FAILURE,
+  payload: { id, errorMessage: error.message || 'User was not fetched' },
+});
+
+export const createUser = createUserFactory(uuid);
+
+export const succeedToPostUser = (json: object): Action => ({
+  type: USER_POST__SUCCESS,
+  payload: { user: json },
+});
+
+export const failToPostUser = (id: string, error: Error): Action => ({
+  type: USER_POST__FAILURE,
   payload: { id, errorMessage: error.message || 'User was not fetched' },
 });
 
