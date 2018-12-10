@@ -29,8 +29,6 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
   static displayName = 'ChannelListing';
   static propTypes = {
     channels: PropTypes.object,
-
-    onAddChannel: PropTypes.func.isRequired,
     onDeleteChannel: PropTypes.func.isRequired,
     onSelectChannel: PropTypes.func.isRequired,
   };
@@ -40,6 +38,15 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
     this.state = {
       showChannelModal: false,
     };
+  }
+
+  // When adding or removing channels, update channel order metadata on server
+  componentWillReceiveProps(nextProps: ChannelListingProps) {
+    if (this.props.channelIds.count() === nextProps.channelIds.count()) {
+      return;
+    }
+    console.log(nextProps);
+    this.props.onReorderChannels(nextProps.channelIds);
   }
 
   closeModal = () => {
