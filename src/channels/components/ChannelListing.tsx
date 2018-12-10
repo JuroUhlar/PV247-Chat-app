@@ -16,7 +16,6 @@ export interface IChannelListingCallbackProps {
   readonly onDeleteChannel: (id: Uuid) => void;
   readonly onSelectChannel: (id: Uuid) => void;
   readonly onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => void;
-
 }
 
 type ChannelListingProps = IChannelListingDataProps & IChannelListingCallbackProps;
@@ -41,6 +40,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
   }
 
   // When adding or removing channels, update channel order metadata on server
+  // Not sure if this is elegant or shitty code.
   componentWillReceiveProps(nextProps: ChannelListingProps) {
     if (this.props.channelIds.count() === nextProps.channelIds.count()) {
       return;
