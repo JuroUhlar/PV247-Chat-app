@@ -14,5 +14,6 @@ export const SERVER_ROUTE = 'https://pv247messaging.azurewebsites.net/api/v2/';
 export const BEARER_ROUTE = `${SERVER_ROUTE}auth/`;
 export const CHANNELS_ROUTE = `app/${appId}/channel/`;
 export const MESSAGES_ROUTE = 'message/';
+export const APP_ROUTE = `app/${appId}/`;
 export const USERS_ROUTE = `${appId}/user/`;
 

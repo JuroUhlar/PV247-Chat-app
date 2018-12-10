@@ -4,7 +4,6 @@ import * as Immutable from 'immutable';
 import { ChannelBarItem } from './ChannelBarItem';
 import { ChannelEditModalContainer } from '../containers/ChannelEditModalContainer';
 import { IChannel } from '../models/Channel';
-import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
 import { DragDropContext, DropResult, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 
 
@@ -14,12 +13,10 @@ export interface IChannelListingDataProps {
 }
 
 export interface IChannelListingCallbackProps {
-  readonly onAddChannel: (dependencies: ICreateChannelDependencies) => void;
   readonly onDeleteChannel: (id: Uuid) => void;
-  readonly onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => void;
   readonly onSelectChannel: (id: Uuid) => void;
   readonly onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => void;
-  readonly getChannels: () => Promise<Action>;
+
 }
 
 type ChannelListingProps = IChannelListingDataProps & IChannelListingCallbackProps;
@@ -35,7 +32,6 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
 
     onAddChannel: PropTypes.func.isRequired,
     onDeleteChannel: PropTypes.func.isRequired,
-    onUpdateChannel: PropTypes.func.isRequired,
     onSelectChannel: PropTypes.func.isRequired,
   };
 

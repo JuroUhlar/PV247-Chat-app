@@ -22,7 +22,9 @@ export class LoginTab extends React.PureComponent<ILoginTabProps, ILoginTabState
   constructor(props: ILoginTabProps) {
     super(props);
     this.state = {
-      email: '',
+      // email: '',
+      // Default value for faster debugging, remove before commiting
+      email: 'jane@gmail.com',
     };
   }
 
@@ -45,6 +47,8 @@ export class LoginTab extends React.PureComponent<ILoginTabProps, ILoginTabState
             type="email"
             className="form-control"
             placeholder="Email"
+            // Default value for faster debugging, remove before commiting
+            defaultValue="jane@gmail.com"
             onChange={this._handleEmailChange}
           />
         </div>

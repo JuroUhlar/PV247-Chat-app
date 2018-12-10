@@ -1,7 +1,7 @@
 import { IState } from '../../shared/models/IState';
 import { Dispatch } from 'redux';
-import { createChannel, updateChannel, selectChannel, reorderChannels } from '../ActionCreators/channelActionCreators';
-import { fetchChannels } from '../ActionCreators/requests/fetchChannels';
+import { selectChannel } from '../ActionCreators/channelActionCreators';
+import { reorderChannelsRequest } from '../ActionCreators/requests/putChannelOrder';
 import { deleteChannelRequest } from '../ActionCreators/requests/deleteChannel';
 import * as Immutable from 'immutable';
 import { connect } from 'react-redux';
@@ -10,7 +10,6 @@ import {
   IChannelListingDataProps,
   ChannelListing
 } from '../components/ChannelListing';
-import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
 
 const mapStateToProps = (state: IState): IChannelListingDataProps => {
   return {
@@ -19,18 +18,11 @@ const mapStateToProps = (state: IState): IChannelListingDataProps => {
   };
 };
 
-// interface IChannelListingContainerOwnProps {
-//   readonly onClick: (name: string) => void;
-// }
-
 const mapDispatchToProps = (dispatch: Dispatch /*,ownProps: IChannelListingContainerOwnProps*/): IChannelListingCallbackProps => {
   return {
-    onAddChannel: (dependencies: ICreateChannelDependencies) => dispatch(createChannel(dependencies)),
     onDeleteChannel: (id: Uuid) => deleteChannelRequest(dispatch, id),
-    onUpdateChannel: (id: Uuid, name?: string, users?: Immutable.List<Uuid>) => dispatch(updateChannel(id, name, users)),
     onSelectChannel: (id: Uuid) => dispatch(selectChannel(id)),
-    onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => dispatch(reorderChannels(newChannelIds)),
-    getChannels: () => fetchChannels(dispatch),
+    onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => reorderChannelsRequest(dispatch, newChannelIds),
   };
 };
 

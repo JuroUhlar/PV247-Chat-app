@@ -107,7 +107,6 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
               id="dropdown-no-caret"
             >
               <MenuItem onClick={this.handleUpdate}>Edit</MenuItem>
-              <MenuItem onClick={this.closeDropdown}>Invite users</MenuItem>
               <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
             </DropdownButton>
             <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} channelId={this.props.channelId} />

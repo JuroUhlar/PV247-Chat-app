@@ -33,7 +33,7 @@ const deleteMessageFactoryDependencies = {
     .then(response => checkStatus(response)),
 };
 
-const deleteMessageFactory = (dependencies: IDeleteChannelFactoryDependencies) =>
+const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =>
   (dispatch: Dispatch, channelId: Uuid): Promise<Action> => {
     dispatch(dependencies.deleteBegin(channelId));
     return dependencies.delete(channelId)
@@ -41,4 +41,4 @@ const deleteMessageFactory = (dependencies: IDeleteChannelFactoryDependencies) =
       .catch((error: Error) => dispatch(dependencies.error(channelId, error)));
   };
 
-export const deleteChannelRequest = deleteMessageFactory(deleteMessageFactoryDependencies);
+export const deleteChannelRequest = deleteChannelFactory(deleteMessageFactoryDependencies);

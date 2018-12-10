@@ -4,7 +4,7 @@ import {
   CHANNELS_FETCH__REQUEST, CHANNELS_FETCH__SUCCESS, CHANNELS_FETCH__FAILURE,
   CHANNELS_POST__SUCCESS, CHANNELS_POST__FAILURE,
   CHANNELS_DELETE__SUCCESS, CHANNELS_DELETE__FAILURE, CHANNELS_UPDATE__SUCCESS, CHANNELS_UPDATE__FAILURE,
-  CHANNELS_REORDER
+  CHANNELS_REORDER, CHANNELS_REORDER__SUCCESS, CHANNELS_REORDER__FAILURE
 } from '../../shared/constants/actionTypes';
 import { createChannelFactory } from './createChannelFactory';
 import * as Immutable from 'immutable';
@@ -80,6 +80,28 @@ export const failToUpdateChannel = (id: string, error: Error): Action => ({
   payload: { id, errorMessage: error.message || 'Channel was not updated' },
 });
 
+// Reordering channels
+
+export const reorderChannels = (channelIds: Immutable.OrderedSet<Uuid>): Action => ({
+  type: CHANNELS_REORDER,
+  payload: {
+    channelIds
+  }
+});
+
+export const succeedToReorderChannels = (json: object): Action => ({
+  type: CHANNELS_REORDER__SUCCESS,
+  payload: {
+    appData: json
+  },
+});
+
+export const failToReorderChannels = ( error: Error): Action => ({
+  type: CHANNELS_REORDER__FAILURE,
+  payload: { errorMessage: error.message || 'Channels were not reordered.' },
+});
+
+
 
 // Other
 
@@ -90,9 +112,3 @@ export const selectChannel = (id: Uuid): Action => ({
   }
 });
 
-export const reorderChannels = (channelIds: Immutable.OrderedSet<Uuid>): Action => ({
-  type: CHANNELS_REORDER,
-  payload: {
-    channelIds
-  }
-});
