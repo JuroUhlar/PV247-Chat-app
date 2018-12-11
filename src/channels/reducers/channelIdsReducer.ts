@@ -1,5 +1,8 @@
 import * as Immutable from 'immutable';
-import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNELS_FETCH__SUCCESS, CHANNELS_POST__SUCCESS, CHANNELS_REORDER } from '../../shared/constants/actionTypes';
+import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNELS_POST__SUCCESS, CHANNELS_REORDER,
+    CHANNELS_FETCH__SUCCESS,
+   CHANNELS_ORDER_FETCH__SUCCESS
+  } from '../../shared/constants/actionTypes';
 import { getInitialChannels } from '../utils/getInitialChannels';
 import { IChannelServerModel } from '../models/Channel';
 
@@ -17,6 +20,12 @@ export const channelIdsReducer = (prevState: Immutable.OrderedSet<Uuid> = initia
         .reverse();
 
       return Immutable.OrderedSet<Uuid>(channelIdsInCorrectOrder);
+    }
+
+    case CHANNELS_ORDER_FETCH__SUCCESS: {
+      const receivedChannelIds: Uuid[] = action.payload.channelIds;
+      const filteredChannelIds = receivedChannelIds.filter(id => prevState.contains(id));
+      return Immutable.OrderedSet<Uuid>(filteredChannelIds);
     }
 
     case CHANNELS_POST__SUCCESS: {

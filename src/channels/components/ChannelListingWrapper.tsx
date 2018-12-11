@@ -31,8 +31,9 @@ export class ChannelListingWrapper extends React.PureComponent<ChannelListingWra
 
   _handleLoadChannels = () => {
     const { getChannels, getChannelOrder } = this.props;
-    getChannels();
-    getChannelOrder();
+    getChannels().then(
+      () => getChannelOrder()
+    );
   };
 
   render() {
