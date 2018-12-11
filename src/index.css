@@ -237,10 +237,13 @@ body, html, .full-height {
 }
 
 .message-list {
-  list-style-type:none;
   display: flex;
   flex-flow: column wrap;
   height: 100%;
+}
+
+.message-list .none-list {
+  list-style-type:none;
 }
 
 .message-pane {
