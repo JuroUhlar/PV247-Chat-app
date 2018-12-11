@@ -21,7 +21,7 @@ export const MessageListing: React.SFC<IMessageListingDataProps> = ({ messages }
   };
 
   return (
-    <ol className="message-list">
+    <ol className="none-list">
       {this._prepareMessages()}
     </ol>
   );

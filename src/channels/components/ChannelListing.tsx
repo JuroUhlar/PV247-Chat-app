@@ -81,7 +81,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
 
   render(): JSX.Element {
     return (
-      <div className="channel-listing">
+      <>
         <div className="channel-taskbar">
           <span className="channel-taskbar_title">Channels</span>
           <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel" onClick={this.openModal}
@@ -114,7 +114,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
           </Droppable>
         </DragDropContext>
         <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} />
-      </div>
+      </>
     );
   }
 }

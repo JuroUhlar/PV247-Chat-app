@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { ChannelListingContainer } from '../containers/ChannelListingContainer';
+import { Spinner } from '../../shared/components/Spinner';
 
 export interface IChannelListingWrapperDataProps {
   readonly isLoading: boolean;
@@ -35,7 +36,10 @@ export class ChannelListingWrapper extends React.PureComponent<ChannelListingWra
   };
 
   render() {
-    return this.props.isLoading ?
-      <div>"I am fetching, girl. Go away..."</div> : <ChannelListingContainer/>;
+    return (
+      <div className="channel-listing">
+        {this.props.isLoading ? <Spinner/> : <ChannelListingContainer/>}
+      </div>
+    );
   }
 }

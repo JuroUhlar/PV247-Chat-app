@@ -13,6 +13,7 @@ import {
 } from '../constants/routes';
 import { ChannelMessagesViewContainer } from '../../channels/containers/ChannelMessagesViewContainer';
 import * as PropTypes from 'prop-types';
+import { Spinner } from './Spinner';
 
 export interface IContentWrapperDataProps extends RouteComponentProps<any> {
   readonly isLoadingUsers: boolean;
@@ -58,7 +59,9 @@ export class ContentWrapper extends React.PureComponent<ContentWrapperProps> {
     return (
       <div className="content-wrapper full-height">
         <div className="sidebar-container">
-          {isLoadingUsers ? 'I am loaaaaaading' : <UserCardContainer/>}
+          <div className="user-card">
+            {isLoadingUsers ? <Spinner/> : <UserCardContainer/>}
+          </div>
           <ChannelListingWrapperContainer/>
         </div>
         <div className="content-container">
