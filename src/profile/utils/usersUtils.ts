@@ -13,3 +13,9 @@ const getCurrentUser = (state: IUsersInfo) => {
 };
 const memoizedGetCurrentUser = memoizee(getCurrentUser);
 export { memoizedGetCurrentUser as getCurrentUser };
+
+const getUser = (state: IUsersInfo, userId: Uuid) => {
+  return state.users.get(userId);
+};
+const memoizedGetUser = memoizee(getUser);
+export { memoizedGetUser as getUser };

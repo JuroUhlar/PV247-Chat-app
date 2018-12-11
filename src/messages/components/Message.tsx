@@ -9,6 +9,7 @@ import {
   convertFromRaw,
   EditorState,
 } from 'draft-js';
+import { IUser } from '../../profile/models/User';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: (updateData: IMessageUpdateData) => Promise<Action>;
@@ -18,7 +19,7 @@ export interface IMessageCallbackProps {
 
 export interface IMessageDataProps {
   readonly messagePos: string;
-  readonly avatarUrl: string;
+  readonly messageAuthor: IUser;
   readonly message: IMessage;
   readonly currentChannelId: Uuid;
   readonly currentUserId: Uuid;
@@ -31,7 +32,7 @@ export class Message extends React.PureComponent<MessageProps> {
   static propTypes = {
     message: PropTypes.object.isRequired,
     messagePos: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
+    messageAuthor: PropTypes.object.isRequired,
     currentUserId: PropTypes.string.isRequired,
     currentChannelId: PropTypes.string.isRequired,
 
@@ -74,7 +75,7 @@ export class Message extends React.PureComponent<MessageProps> {
   };
 
   render(): JSX.Element {
-    const { message, messagePos, avatarUrl } = this.props;
+    const { message, messagePos, messageAuthor } = this.props;
     const { likes, dislikes } = message.popularity;
     const messageLikesCount = likes.size - dislikes.size;
 
@@ -82,13 +83,16 @@ export class Message extends React.PureComponent<MessageProps> {
       <div className={messagePos}>
         <div className="message-pane">
           <Avatar
-            avatarPath={avatarUrl}
+            avatarPath={messageAuthor.avatarPath}
             avatarPos="avatar-side"
             avatarSize="mini-avatar"
           />
           <div className="message-side">
-            <div className="top-message-bar-cont">
-              <div className="top-message-bar">
+            <div className="top-message-bar">
+              <div className="--content-left">
+                {messageAuthor.name}
+              </div>
+              <div className="--content-right">
                 <div
                   className="small-icon glyphicon glyphicon-trash"
                   onClick={this._onDelete}

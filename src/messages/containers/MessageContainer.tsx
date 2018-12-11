@@ -1,10 +1,19 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { IMessageCallbackProps, IMessageDataProps, Message } from '../components/Message';
-import { dislikeMessageRequest, IMessageUpdateData, likeMessageRequest } from '../ActionCreators/requests/updateMessage';
+import {
+  IMessageCallbackProps,
+  IMessageDataProps,
+  Message
+} from '../components/Message';
+import {
+  dislikeMessageRequest,
+  IMessageUpdateData,
+  likeMessageRequest
+} from '../ActionCreators/requests/updateMessage';
 import { IState } from '../../shared/models/IState';
 import { deleteMessageRequest } from '../ActionCreators/requests/deleteMessage';
 import { IMessage } from '../models/Message';
+import { getUser } from '../../profile/utils/usersUtils';
 
 interface IMessageContainerDataProps {
   readonly message: IMessage;
@@ -17,13 +26,12 @@ const mapStateToProps = (state: IState, { message }: IMessageContainerDataProps)
     ? 'message-pane-pos-right'
     : 'message-pane-pos-left';
 
-  const messageAuthorId = message.authorId;
-  const messageAuthor = state.usersInfo.users.get(messageAuthorId);
+  const messageAuthor = getUser(state.usersInfo, message.authorId);
 
   return {
     message,
     messagePos,
-    avatarUrl: messageAuthor.avatarPath,
+    messageAuthor,
     currentUserId,
     currentChannelId,
   };

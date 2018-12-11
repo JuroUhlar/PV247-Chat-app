@@ -268,15 +268,22 @@ body, html, .full-height {
   background-color: #b7cbe3;
 }
 
-.message-pane .top-message-bar-cont {
+.message-pane .top-message-bar {
   position: relative;
   width: 100%;
 }
 
-.message-pane .top-message-bar{
+.top-message-bar .--content-right{
   float: right;
   padding-right: 1px;
   padding-top: 5px;
+}
+
+.top-message-bar .--content-left{
+  float: left;
+  padding-right: 1px;
+  padding-top: 5px;
+  font-size: 12px;
 }
 
 .message-pane .small-icon {
