@@ -13,14 +13,7 @@ import { checkStatus } from '../../../shared/utils/checkStatus';
 
 import { getBearer } from '../../../shared/utils/getBearer';
 import * as Immutable from 'immutable';
-
-interface AppData {
-  readonly customData: AppCustomData;
-}
-
-type AppCustomData = {
-  readonly channelsOrder: Uuid[];
-};
+import { AppData } from '../../models/AppData';
 
 interface IPutAppFactoryDependencies {
   readonly updateBegin: (body: Immutable.OrderedSet<Uuid>) => Action;

@@ -8,6 +8,7 @@ export interface IChannelListingWrapperDataProps {
 
 export interface IChannelListingWrapperCallbackProps {
   readonly getChannels: () => Promise<Action>;
+  readonly getChannelOrder: () => Promise<Action>;
 }
 
 type ChannelListingWrapperProps = IChannelListingWrapperDataProps & IChannelListingWrapperCallbackProps;
@@ -28,8 +29,9 @@ export class ChannelListingWrapper extends React.PureComponent<ChannelListingWra
   }
 
   _handleLoadChannels = () => {
-    const { getChannels } = this.props;
+    const { getChannels, getChannelOrder } = this.props;
     getChannels();
+    getChannelOrder();
   };
 
   render() {

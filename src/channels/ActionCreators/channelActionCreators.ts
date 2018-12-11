@@ -4,10 +4,11 @@ import {
   CHANNELS_FETCH__REQUEST, CHANNELS_FETCH__SUCCESS, CHANNELS_FETCH__FAILURE,
   CHANNELS_POST__SUCCESS, CHANNELS_POST__FAILURE,
   CHANNELS_DELETE__SUCCESS, CHANNELS_DELETE__FAILURE, CHANNELS_UPDATE__SUCCESS, CHANNELS_UPDATE__FAILURE,
-  CHANNELS_REORDER, CHANNELS_REORDER__SUCCESS, CHANNELS_REORDER__FAILURE
+  CHANNELS_REORDER, CHANNELS_REORDER__SUCCESS, CHANNELS_REORDER__FAILURE, CHANNELS_ORDER_FETCH__REQUEST, CHANNELS_ORDER_FETCH__SUCCESS, CHANNELS_ORDER_FETCH__FAILURE
 } from '../../shared/constants/actionTypes';
 import { createChannelFactory } from './createChannelFactory';
 import * as Immutable from 'immutable';
+import { AppData } from '../models/AppData';
 
 // Fetching channels
 
@@ -96,12 +97,27 @@ export const succeedToReorderChannels = (json: object): Action => ({
   },
 });
 
-export const failToReorderChannels = ( error: Error): Action => ({
+export const failToReorderChannels = (error: Error): Action => ({
   type: CHANNELS_REORDER__FAILURE,
   payload: { errorMessage: error.message || 'Channels were not reordered.' },
 });
 
+// Getting channel order
 
+export const requestChannelOrder = (): Action => ({
+  type: CHANNELS_ORDER_FETCH__REQUEST,
+  payload: {},
+});
+
+export const succeedToFetchChannelOrder = (appData: AppData): Action => ({
+  type: CHANNELS_ORDER_FETCH__SUCCESS,
+  payload: { channelIds: appData.customData.channelsOrder },
+});
+
+export const failToFetchChannelOrder = (error: Error): Action => ({
+  type: CHANNELS_ORDER_FETCH__FAILURE,
+  payload: { errorMessage: error.message || 'Channels order was not fetched' },
+});
 
 // Other
 
