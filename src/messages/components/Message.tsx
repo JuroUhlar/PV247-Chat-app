@@ -1,9 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { Editor } from 'react-draft-wysiwyg';
 import { Avatar } from '../../profile/components/Avatar';
-import { addLineBreaks } from '../../shared/utils/textUtils';
 import { IMessage } from '../models/Message';
 import { IMessageUpdateData } from '../ActionCreators/requests/updateMessage';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {
+  convertFromRaw,
+  EditorState,
+} from 'draft-js';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: (updateData: IMessageUpdateData) => Promise<Action>;
@@ -58,7 +63,15 @@ export class Message extends React.PureComponent<MessageProps> {
     }
   };
 
-  _createMarkup = (text: string) => ({ __html: addLineBreaks(text) });
+  _messageContent = (): EditorState => {
+    const { text } = this.props.message;
+    if (text) {
+      const contentState = convertFromRaw(text);
+      const editorState = EditorState.createWithContent(contentState);
+      return editorState;
+    }
+    return EditorState.createEmpty();
+  };
 
   render(): JSX.Element {
     const { message, messagePos, avatarUrl } = this.props;
@@ -93,9 +106,13 @@ export class Message extends React.PureComponent<MessageProps> {
                 />
               </div>
             </div>
-            <div
-              className="text-container message-pane-block"
-              dangerouslySetInnerHTML={this._createMarkup(message.text)}/>
+            <div className="text-container message-pane-block"/>
+            <Editor
+              editorState={this._messageContent()}
+              toolbarClassName="RTE-without-toolbar"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+            />
           </div>
         </div>
       </div>

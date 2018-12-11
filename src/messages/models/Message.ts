@@ -3,13 +3,14 @@ import {
   IMessagePopularity,
   MessagePopularity
 } from './MessagePopularity';
+import { RawDraftContentState } from 'draft-js';
 
 export interface IMessageData {
   readonly id: Uuid;
   readonly timestamp: Date | null;
   readonly authorId: Uuid;
   readonly channelId: Uuid;
-  readonly text: string;
+  readonly text: RawDraftContentState | null;
   readonly popularity: IMessagePopularity;
 }
 
@@ -18,7 +19,7 @@ export interface IMessage extends IMessageData, IRecordFunctions<IMessageData, I
 
 export const messageRecordData: IMessageData = {
   id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-  text: '',
+  text: null,
   timestamp: null,
   authorId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   channelId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -30,7 +31,7 @@ export class Message extends Record(messageRecordData) implements IMessage {
   readonly timestamp: Date | null;
   readonly authorId: Uuid;
   readonly channelId: Uuid;
-  readonly text: string;
+  readonly text: RawDraftContentState | null;
   readonly popularity: IMessagePopularity;
 
   toObject(): IMessageData {

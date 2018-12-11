@@ -16,7 +16,7 @@ export const convertServerToViewMessageModel = (serverModel: IMessageServerModel
   });
   return (new Message({
     id,
-    text: value,
+    text: JSON.parse(value),
     timestamp,
     authorId,
     channelId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -27,7 +27,7 @@ export const convertServerToViewMessageModel = (serverModel: IMessageServerModel
 export const convertViewToServerMessageModel = (clientModel: Partial<IMessage>): IMessageServerModel => {
   const { text, popularity, id, authorId } = clientModel;
   return (new MessageServerModel({
-    value: text,
+    value: JSON.stringify(text),
     customData: {
       popularity,
       authorId,

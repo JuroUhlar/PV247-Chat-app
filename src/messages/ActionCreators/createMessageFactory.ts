@@ -1,7 +1,8 @@
 import { MESSAGE_CREATE } from '../../shared/constants/actionTypes';
+import { RawDraftContentState } from 'draft-js';
 
 export interface ICreateMessageDependencies {
-  readonly text: string;
+  readonly text: RawDraftContentState;
   readonly authorId: Uuid;
   readonly channelId: Uuid;
 }

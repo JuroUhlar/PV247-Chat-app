@@ -1,11 +1,15 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { EditorState } from 'draft-js';
-import { ContentBlock, Editor } from 'react-draft-wysiwyg';
+import {
+  convertToRaw,
+  EditorState,
+} from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { ICreateMessageDependencies } from '../ActionCreators/createMessageFactory';
 
 export interface IRichTextEditorCallbackProps {
-  readonly onSendText: (text: string, authorId: Uuid, channelId: Uuid) => void;
+  readonly onSendMessage: (data: ICreateMessageDependencies) => void;
 }
 
 export interface IRichTextEditorDataProps {
@@ -25,7 +29,7 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
     currentUserId: PropTypes.string.isRequired,
     currentChannelId: PropTypes.string.isRequired,
 
-    onSendText: PropTypes.func.isRequired,
+    onSendMessage: PropTypes.func.isRequired,
   };
 
   constructor(props: RichTextEditorProps) {
@@ -38,15 +42,16 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
 
   _handleSendText = () => {
     const contentState = this.state.editorState.getCurrentContent();
-    const blockMap = contentState.getBlockMap();
-    const texts = blockMap.map((block: ContentBlock) => {
-      return block.getText();
-    });
-    const text = texts.reduce((result: string, txt: string) => result.concat(txt));
+    const rawContent = convertToRaw(contentState);
+    const hasText = !!rawContent.blocks[0].text;
     const authorId = this.props.currentUserId;
     const { currentChannelId } = this.props;
-    if (text) {
-      this.props.onSendText(text, authorId, currentChannelId);
+    if (hasText) {
+      this.props.onSendMessage({
+        text: rawContent,
+        authorId,
+        channelId: currentChannelId
+      });
       this.setState(() => ({ editorState: EditorState.createEmpty() }));
     }
   };
