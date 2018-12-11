@@ -45,7 +45,12 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
   };
 
   render() {
-    return this.props.isLoading ?
-      <Spinner/> : <MessageListingContainer/>;
+    const { isLoading } = this.props;
+    return (
+      <div className="message-list">
+        {isLoading ?
+          <Spinner/> : <MessageListingContainer/>}
+      </div>
+    );
   }
 }
