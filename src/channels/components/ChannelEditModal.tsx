@@ -56,54 +56,54 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
     }
   }
 
-  handleNameChange = (event: any) => {
+  _handleNameChange = (event: any) => {
     const newName = event.target.value;
     this.setState(() => ({
       nameValue: newName
     }));
   }
 
-  handleUserChange = (id: Uuid) => {
-    const newMembersIds = toggleChannelMember(id, this.state.membersIds);
+  _handleUserChange = (id: Uuid) => {
+    const newMembersIds = _toggleChannelMember(id, this.state.membersIds);
     this.setState(() => ({
       membersIds: newMembersIds
     }));
   }
 
-  private handleKeyPress = (event: React.KeyboardEvent<FormControl>) => {
+  _handleKeyPress = (event: React.KeyboardEvent<FormControl>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       if (this.props.channel) {
-        this.updateChannel();
+        this._updateChannel();
       }
       else {
-        this.createChannel();
+        this._createChannel();
       }
     }
   }
 
-  updateChannel = () => {
+  _updateChannel = () => {
     const id = this.props.channel.id;
     const name = this.state.nameValue;
     const users = this.state.membersIds;
 
     this.props.onUpdateChannel(id, name, users);
-    this.resetForm();
+    this._resetForm();
     this.props.onClose();
   }
 
-  createChannel = () => {
+  _createChannel = () => {
     const dependencies: ICreateChannelDependencies = {
       name: this.state.nameValue,
       users: this.state.membersIds
     };
 
     this.props.onAddChannel(dependencies);
-    this.resetForm();
+    this._resetForm();
     this.props.onClose();
   };
 
-  resetForm = () => {
+  _resetForm = () => {
     this.setState(() => ({
       nameValue: '',
       membersIds: Immutable.List([]),
@@ -124,9 +124,9 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
                 type="text"
                 value={this.state.nameValue}
                 placeholder="Enter channel name"
-                onChange={this.handleNameChange}
+                onChange={this._handleNameChange}
                 autoFocus
-                onKeyPress={this.handleKeyPress}
+                onKeyPress={this._handleKeyPress}
               />
               <FormControl.Feedback />
             </FormGroup>
@@ -141,7 +141,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
                       <td>
                         <input type="checkbox"
                           checked={this.state.membersIds.contains(user.id)}
-                          onChange={() => this.handleUserChange(user.id)}
+                          onChange={() => this._handleUserChange(user.id)}
                         />
                       </td>
                     </tr>
@@ -153,15 +153,15 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
         </Modal.Body>
         <Modal.Footer>
           {this.props.channel ?
-            <Button onClick={this.updateChannel}>Update channel</Button> :
-            <Button onClick={this.createChannel}>Create channel</Button>}
+            <Button onClick={this._updateChannel}>Update channel</Button> :
+            <Button onClick={this._createChannel}>Create channel</Button>}
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-function toggleChannelMember(id: Uuid, memberIds: Immutable.List<Uuid>): Immutable.List<Uuid> {
+function _toggleChannelMember(id: Uuid, memberIds: Immutable.List<Uuid>): Immutable.List<Uuid> {
   if (memberIds.contains(id)) {
     const index = memberIds.findIndex((userId: Uuid) => userId === id);
     return memberIds.remove(index);

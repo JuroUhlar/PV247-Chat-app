@@ -6,7 +6,6 @@ import { ChannelEditModalContainer } from '../containers/ChannelEditModalContain
 import { IChannel } from '../models/Channel';
 import { DragDropContext, DropResult, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 
-
 export interface IChannelListingDataProps {
   readonly channels: Immutable.Map<Uuid, IChannel>;
   readonly channelIds: Immutable.OrderedSet<Uuid>;
@@ -45,23 +44,22 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
     if (this.props.channelIds.count() === oldProps.channelIds.count()) {
       return;
     }
-    console.log(this.props);
     setTimeout(() => this.props.onReorderChannels(this.props.channelIds), 1000);
   }
 
-  closeModal = () => {
+  _closeModal = () => {
     this.setState(() => ({
       showChannelModal: false,
     }));
   };
 
-  openModal = () => {
+  _openModal = () => {
     this.setState(() => ({
       showChannelModal: true,
     }));
   };
 
-  onDragEnd = (result: DropResult) => {
+  _onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -84,11 +82,11 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
       <>
         <div className="channel-taskbar">
           <span className="channel-taskbar_title">Channels</span>
-          <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel" onClick={this.openModal}
+          <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel" onClick={this._openModal}
             aria-hidden="true" />
         </div>
         <DragDropContext
-          onDragEnd={this.onDragEnd}
+          onDragEnd={this._onDragEnd}
         >
           <Droppable droppableId={'Channel-listing-droppable'}>
             {(provided: DroppableProvided) => (
@@ -113,7 +111,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
             )}
           </Droppable>
         </DragDropContext>
-        <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} />
+        <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this._closeModal} />
       </>
     );
   }
