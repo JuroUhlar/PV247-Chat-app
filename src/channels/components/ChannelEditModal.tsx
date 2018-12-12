@@ -51,7 +51,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
       // const allUserIds = Immutable.List(props.users.toArray().map((user => user.id)));
       this.setState(() => ({
         // membersIds: allUserIds
-         membersIds: Immutable.List([])
+        membersIds: Immutable.List([])
       }));
     }
   }
@@ -68,6 +68,18 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
     this.setState(() => ({
       membersIds: newMembersIds
     }));
+  }
+
+  private handleKeyPress = (event: React.KeyboardEvent<FormControl>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      if (this.props.channel) {
+        this.updateChannel();
+      }
+      else {
+        this.createChannel();
+      }
+    }
   }
 
   updateChannel = () => {
@@ -114,17 +126,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
                 placeholder="Enter channel name"
                 onChange={this.handleNameChange}
                 autoFocus
-                onKeyPress={event => {
-                  if (event.key === 'Enter') {
-                    event.preventDefault();
-                    if (this.props.channel) {
-                      this.updateChannel();
-                    } else {
-                      this.createChannel();
-                    }
-                  }
-                }
-                }
+                onKeyPress={this.handleKeyPress}
               />
               <FormControl.Feedback />
             </FormGroup>
