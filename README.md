@@ -9,6 +9,8 @@ https://pv247messaging.azurewebsites.net/help/index.html
 
 ## Feature set
 
+Bold === To be done
+
 Channel management
 
 * Create new
@@ -44,10 +46,10 @@ Profile management
 ## Other requirements
 
 * Keep your project‘s structure similar to the reference implementation
-* **Write tests for
-  * Reducers
-  * Thunk actions
-  * Utility functions**
+* **Write tests for**
+  * **Reducers**
+  * **Thunk actions**
+  * **Utility functions**
 * Write code based on SOLID, YAGNI, DRY, KISS principles
 * Follow best practices (these can usually be found in the documentation of respective packages)
 * Provide your users with indication on asynchronous operation progress
