@@ -14,7 +14,11 @@ interface IChannelBarItemProps {
   readonly onSelectChannel: (id: Uuid) => void;
 }
 
-export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, any> {
+interface IChannelBarItemState {
+  showChannelModal: boolean;
+}
+
+export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, IChannelBarItemState> {
   static displayName = 'ChannelBarItem';
 
   static propTypes = {
