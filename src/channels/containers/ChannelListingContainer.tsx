@@ -20,7 +20,7 @@ const mapStateToProps = (state: IState): IChannelListingDataProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch /*,ownProps: IChannelListingContainerOwnProps*/): IChannelListingCallbackProps => {
   return {
-    onDeleteChannel: (id: Uuid) => deleteChannelRequest(dispatch, id),
+    onDeleteChannel: (id: Uuid) => dispatch(deleteChannelRequest(id)),
     onSelectChannel: (id: Uuid) => dispatch(selectChannel(id)),
     onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => reorderChannelsRequest(dispatch, newChannelIds),
   };

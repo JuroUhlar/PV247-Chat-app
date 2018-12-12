@@ -3,7 +3,8 @@ import * as fetch from 'isomorphic-fetch';
 import {
   deleteChannel,
   failToDeleteChannel,
-  succeedToDeleteChannel
+  succeedToDeleteChannel,
+  selectChannel
 } from '../channelActionCreators';
 import {
   CHANNELS_ROUTE,
@@ -11,6 +12,7 @@ import {
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { IState } from '../../../shared/models/IState';
 
 interface IDeleteChannelFactoryDependencies {
   readonly deleteBegin: (id: Uuid) => Action;
@@ -34,11 +36,19 @@ const deleteMessageFactoryDependencies = {
 };
 
 const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =>
-  (dispatch: Dispatch, channelId: Uuid): Promise<Action> => {
-    dispatch(dependencies.deleteBegin(channelId));
-    return dependencies.delete(channelId)
-      .then(() => dispatch(dependencies.success()))
-      .catch((error: Error) => dispatch(dependencies.error(channelId, error)));
-  };
+  (channelId: Uuid): any =>
+    async (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
+      // If deleting currently selected channel, select another one first
+      const currentState = getState();
+      if (currentState.channelListing.selectedChannel === channelId) {
+        const newSelectedChannelId = currentState.channelListing.channelIds.remove(channelId).first();
+        await dispatch(selectChannel(newSelectedChannelId));
+      }
+
+      dispatch(dependencies.deleteBegin(channelId));
+      return dependencies.delete(channelId)
+        .then(() => dispatch(dependencies.success()))
+        .catch((error: Error) => dispatch(dependencies.error(channelId, error)));
+    };
 
 export const deleteChannelRequest = deleteChannelFactory(deleteMessageFactoryDependencies);
