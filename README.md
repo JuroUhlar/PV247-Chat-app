@@ -9,6 +9,8 @@ https://pv247messaging.azurewebsites.net/help/index.html
 
 ## Feature set
 
+Bold === To be done
+
 Channel management
 
 * Create new
@@ -17,13 +19,13 @@ Channel management
 * Invite user(s)
 * Ordering
 
-Attachments / images
+**Attachments / images**
 
 * Options:
-* Inline in rich text
-* Attach to message
-* Attach to channel
-* Images should have preview thumbnails
+  * **Inline in rich text**
+  * **Attach to message**
+  * Attach to channel
+* **Images should have preview thumbnails**
 
 Messaging in channels
 
@@ -33,24 +35,24 @@ Messaging in channels
 * Message up/down voting
 * Rich text editing experience
 * Font size, font color, triple emphasis, links, …
-* Annotate existing user
+* **Annotate existing user**
 
 Profile management
 
-* Upload avatar
+* **Upload avatar**
 * Change displayed name
 * Use email strictly for sign in and invitations
 
 ## Other requirements
 
 * Keep your project‘s structure similar to the reference implementation
-* Write tests for
-  * Reducers
-  * Thunk actions
-  * Utility functions
+* **Write tests for**
+  * **Reducers**
+  * **Thunk actions**
+  * **Utility functions**
 * Write code based on SOLID, YAGNI, DRY, KISS principles
 * Follow best practices (these can usually be found in the documentation of respective packages)
 * Provide your users with indication on asynchronous operation progress
   * a loading spinner of some sort
-* Try to find a way to deliver new messages to your users even when they do not interact with your application
-* You are provided with REST API, so new messages are delivered from the server only on your application‘s explicit request (→ no WebSocket involved) → messaging is not expected to be instant
+* **Try to find a way to deliver new messages to your users even when they do not interact with your application**
+  * You are provided with REST API, so new messages are delivered from the server only on your application‘s explicit request (→ no WebSocket involved) → messaging is not expected to be instant
