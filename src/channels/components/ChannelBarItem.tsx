@@ -28,48 +28,32 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
   constructor(props: any) {
     super(props);
     this.state = {
-      anchorEl: null,
       showChannelModal: false,
     };
   }
 
-  openDropdown = (event: any) => {
-    const anchorElement: HTMLElement = event.currentTarget;
-    this.setState(() => {
-      return { anchorEl: anchorElement };
-    });
-  };
-
-  closeDropdown = () => {
-    this.setState(() => {
-      return { anchorEl: null };
-    });
-  };
-
-  closeModal = () => {
+  _closeModal = () => {
     this.setState(() => ({
       showChannelModal: false,
     }));
   };
 
-  openModal = () => {
+  _openModal = () => {
     this.setState(() => ({
       showChannelModal: true,
     }));
   };
 
-  handleUpdate = () => {
-    this.openModal();
-    this.closeDropdown();
+  _handleUpdate = () => {
+    this._openModal();
   };
 
-  selectChannel = () => {
+  _selectChannel = () => {
     this.props.onSelectChannel(this.props.channelId);
   };
 
 
-  deleteChannel = () => {
-    this.closeDropdown();
+  _deleteChannel = () => {
     this.props.onDeleteChannel(this.props.channelId);
   };
 
@@ -90,7 +74,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
             <Link
               to={SPECIFIC_CHANNEL_VIEW_ROUTE(this.props.channelId)}
               className="channel-bar-item_channel-label"
-              onClick={this.selectChannel}
+              onClick={this._selectChannel}
             >
               <span>
                 {this.props.channelName}
@@ -106,10 +90,10 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, an
               pullRight
               id="dropdown-no-caret"
             >
-              <MenuItem onClick={this.handleUpdate}>Edit</MenuItem>
-              <MenuItem onClick={this.deleteChannel}>Delete</MenuItem>
+              <MenuItem onClick={this._handleUpdate}>Edit</MenuItem>
+              <MenuItem onClick={this._deleteChannel}>Delete</MenuItem>
             </DropdownButton>
-            <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this.closeModal} channelId={this.props.channelId} />
+            <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this._closeModal} channelId={this.props.channelId} />
           </div>
         )}
       </Draggable>
