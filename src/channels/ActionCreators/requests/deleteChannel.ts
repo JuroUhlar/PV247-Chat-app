@@ -8,11 +8,13 @@ import {
 } from '../channelActionCreators';
 import {
   CHANNELS_ROUTE,
-  SERVER_ROUTE
+  SERVER_ROUTE,
+  SPECIFIC_CHANNEL_VIEW_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
 import { IState } from '../../../shared/models/IState';
+import { history } from '../../../shared/components/AppWrapper';
 
 interface IDeleteChannelFactoryDependencies {
   readonly deleteBegin: (id: Uuid) => Action;
@@ -43,6 +45,7 @@ const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =
       if (currentState.channelListing.selectedChannel === channelId) {
         const newSelectedChannelId = currentState.channelListing.channelIds.remove(channelId).first();
         await dispatch(selectChannel(newSelectedChannelId));
+        history.push(SPECIFIC_CHANNEL_VIEW_ROUTE(newSelectedChannelId));
       }
 
       dispatch(dependencies.deleteBegin(channelId));
