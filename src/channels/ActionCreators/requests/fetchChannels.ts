@@ -46,7 +46,7 @@ const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =
     return dependencies.fetch()
       .then(response => response.json())
       .then((json) => {
-        fetchChannelOrder(dispatch);
+        dispatch(fetchChannelOrder);
         return dispatch(dependencies.success(json));
       })
       .catch((error: Error) => dispatch(dependencies.error(errorId, error)));

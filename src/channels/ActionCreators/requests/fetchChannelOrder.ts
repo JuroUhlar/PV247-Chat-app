@@ -35,7 +35,7 @@ const fetchChannelsFactoryDependencies = {
     .then(response => checkStatus(response)),
 };
 
-const fetchChannelOrderFactory = (dependencies: IFetchChannelOrderFactoryDependencies) =>
+const fetchChannelOrderFactory = (dependencies: IFetchChannelOrderFactoryDependencies): any =>
   (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
 
