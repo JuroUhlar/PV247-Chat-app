@@ -1,6 +1,6 @@
-import { MESSAGES_FETCH__FAILURE, MESSAGES_FETCH__REQUEST, MESSAGES_FETCH__SUCCESS } from '../constants/actionTypes';
+import { MESSAGES_FETCH__FAILURE, MESSAGES_FETCH__REQUEST, MESSAGES_FETCH__SUCCESS } from '../../shared/constants/actionTypes';
 
-export const isLoadingReducer = (prevState: boolean = false, action: Action): boolean => {
+export const isLoadingMessagesReducer = (prevState: boolean = false, action: Action): boolean => {
   switch (action.type) {
     case MESSAGES_FETCH__REQUEST: {
       return true;

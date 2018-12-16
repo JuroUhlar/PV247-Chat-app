@@ -1,4 +1,4 @@
-import { CHANNELS_FETCH__REQUEST, CHANNELS_ORDER_FETCH__REQUEST, CHANNELS_ORDER_FETCH__FAILURE, CHANNELS_ORDER_FETCH__SUCCESS } from '../constants/actionTypes';
+import { CHANNELS_FETCH__REQUEST, CHANNELS_ORDER_FETCH__REQUEST, CHANNELS_ORDER_FETCH__FAILURE, CHANNELS_ORDER_FETCH__SUCCESS } from '../../shared/constants/actionTypes';
 
 export const isLoadingChannelsReducer = (prevState: boolean = false, action: Action): boolean => {
   switch (action.type) {

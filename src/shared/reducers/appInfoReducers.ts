@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import { isLoadingReducer } from './isLoadingReducer';
-import { isLoadingChannelsReducer } from './isLoadingChannelsReducer';
+import { isLoadingMessagesReducer } from '../../messages/reducers/isLoadingMessagesReducer';
+import { isLoadingChannelsReducer } from '../../channels/reducers/isLoadingChannelsReducer';
 import { isLoadingUsersReducer } from '../../profile/reducers/isLoadingUsersReducer';
 
 export const appInfoReducers = combineReducers({
-  isLoadingMessages: isLoadingReducer,
+  isLoadingMessages: isLoadingMessagesReducer,
   isLoadingChannels: isLoadingChannelsReducer,
   isLoadingUsers: isLoadingUsersReducer,
 });

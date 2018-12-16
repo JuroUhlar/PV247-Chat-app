@@ -105,6 +105,7 @@ export class Message extends React.PureComponent<MessageProps> {
             </div>
             <div className="text-container message-pane-block"/>
             <Editor
+              readonly
               editorState={this._messageContent()}
               toolbarClassName="RTE-without-toolbar"
               wrapperClassName="wrapperClassName"
