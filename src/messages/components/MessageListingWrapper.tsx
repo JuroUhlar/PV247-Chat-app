@@ -9,7 +9,7 @@ export interface IMessageListingWrapperDataProps {
 }
 
 export interface IMessageListingWrapperCallbackProps {
-  readonly getMessages: (currentChannelId: Uuid) => Promise<Action>;
+  readonly getMessages: () => Promise<Action>;
 }
 
 type MessageListingWrapperProps = IMessageListingWrapperDataProps & IMessageListingWrapperCallbackProps;
@@ -39,10 +39,7 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
     }
   }
 
-  _handleLoadMessages = () => {
-    const { currentChannelId, getMessages } = this.props;
-    getMessages(currentChannelId);
-  };
+  _handleLoadMessages = () => this.props.getMessages();
 
   render() {
     const { isLoading } = this.props;

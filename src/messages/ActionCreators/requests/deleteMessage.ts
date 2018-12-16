@@ -12,6 +12,7 @@ import {
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { IState } from '../../../shared/models/IState';
 
 const deleteMessageFactoryDependencies = {
   deleteBegin: deleteMessage,
@@ -35,10 +36,11 @@ interface IDeleteMessageFactoryDependencies {
 }
 
 const deleteMessageFactory = (dependencies: IDeleteMessageFactoryDependencies) =>
-  (dispatch: Dispatch, channelId: Uuid, messageId: Uuid): Promise<Action> => {
+  (messageId: Uuid): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     dispatch(dependencies.deleteBegin(messageId));
+    const currentChannelId = getState().channelListing.selectedChannel;
 
-    return dependencies.delete(channelId, messageId)
+    return dependencies.delete(currentChannelId, messageId)
       .then(response => response.json())
       .then(message => dispatch(dependencies.success(message)))
       .catch((error: Error) => dispatch(dependencies.error(messageId, error)));

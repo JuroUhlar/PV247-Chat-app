@@ -13,6 +13,7 @@ import {
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { IState } from '../../../shared/models/IState';
 
 const fetchMessagesFactoryDependencies = {
   fetchBegin: requestMessages,
@@ -38,11 +39,12 @@ interface IFetchMessagesFactoryDependencies {
 }
 
 const fetchMessagesFactory = (dependencies: IFetchMessagesFactoryDependencies) =>
-  (dispatch: Dispatch, channelId: Uuid): Promise<Action> => {
+  (): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
+    const currentChannelId = getState().channelListing.selectedChannel;
 
-    return dependencies.fetch(channelId)
+    return dependencies.fetch(currentChannelId)
       .then(response => response.json())
       .then(messages => dispatch(dependencies.success(messages)))
       .catch((error: Error) => dispatch(dependencies.error(errorId, error)));

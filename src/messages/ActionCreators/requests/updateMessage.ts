@@ -22,6 +22,7 @@ import {
   likePopularity
 } from '../../utils/updateMessagePopularity';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { IState } from '../../../shared/models/IState';
 
 interface ISpecificPreferenceDeps {
   readonly updateBegin: (messageId: Uuid, userId: Uuid) => Action;
@@ -32,12 +33,6 @@ interface IUpdateMessageFactoryDependencies extends ISpecificPreferenceDeps {
   readonly success: (json: object) => Action;
   readonly error: (id: string, error: Error) => Action;
   readonly update: (body: Partial<IMessageData>, channelId: Uuid) => Promise<Response>;
-}
-
-export interface IMessageUpdateData {
-  readonly message: IMessage;
-  readonly userId: Uuid;
-  readonly channelId: Uuid;
 }
 
 const updateMessageFactoryDependencies = (specificPreferenceDeps: ISpecificPreferenceDeps) => ({
@@ -66,13 +61,14 @@ const dislikeDependencies = updateMessageFactoryDependencies({
   updatePopularity: dislikePopularity,
 });
 
-const updateMessageFactory = (dependencies: IUpdateMessageFactoryDependencies) => (data: IMessageUpdateData) =>
-  (dispatch: Dispatch): Promise<Action> => {
-    const { message, userId, channelId } = data;
+const updateMessageFactory = (dependencies: IUpdateMessageFactoryDependencies) =>
+  (message: IMessage): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
+    const userId = getState().usersInfo.currentUserId;
+    const currentChannelId = getState().channelListing.selectedChannel;
     dispatch(dependencies.updateBegin(message.id, userId));
     const updatedMessage = dependencies.updatePopularity(message, userId);
 
-    return dependencies.update(updatedMessage, channelId)
+    return dependencies.update(updatedMessage, currentChannelId)
       .then(response => response.json())
       .then(msg => dispatch(dependencies.success(msg)))
       .catch((error: Error) => dispatch(dependencies.error(updatedMessage.id, error)));

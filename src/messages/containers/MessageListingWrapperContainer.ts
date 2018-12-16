@@ -12,7 +12,7 @@ const mapStateToProps = (state: IState): IMessageListingWrapperDataProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IMessageListingWrapperCallbackProps => {
   return ({
-    getMessages: (currentChannelId: Uuid) => fetchMessages(dispatch, currentChannelId),
+    getMessages: () => dispatch(fetchMessages()),
   });
 };
 

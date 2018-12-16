@@ -3,7 +3,6 @@ import * as PropTypes from 'prop-types';
 import { Editor } from 'react-draft-wysiwyg';
 import { Avatar } from '../../profile/components/Avatar';
 import { IMessage } from '../models/Message';
-import { IMessageUpdateData } from '../ActionCreators/requests/updateMessage';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {
   convertFromRaw,
@@ -12,16 +11,15 @@ import {
 import { IUser } from '../../profile/models/User';
 
 export interface IMessageCallbackProps {
-  readonly onLikeMessage: (updateData: IMessageUpdateData) => Promise<Action>;
-  readonly onDislikeMessage: (updateData: IMessageUpdateData) => Promise<Action>;
-  readonly onDeleteMessage: (currentChannelId: Uuid, messageId: Uuid) => void;
+  readonly onLikeMessage: (message: IMessage) => Promise<Action>;
+  readonly onDislikeMessage: (message: IMessage) => Promise<Action>;
+  readonly onDeleteMessage: (messageId: Uuid) => void;
 }
 
 export interface IMessageDataProps {
   readonly messagePos: string;
   readonly messageAuthor: IUser;
   readonly message: IMessage;
-  readonly currentChannelId: Uuid;
   readonly currentUserId: Uuid;
 }
 
@@ -34,19 +32,14 @@ export class Message extends React.PureComponent<MessageProps> {
     messagePos: PropTypes.string.isRequired,
     messageAuthor: PropTypes.object.isRequired,
     currentUserId: PropTypes.string.isRequired,
-    currentChannelId: PropTypes.string.isRequired,
 
     onLikeMessage: PropTypes.func.isRequired,
     onDislikeMessage: PropTypes.func.isRequired,
   };
 
-  _handleIndicatePreference = (indicatePreference: (updateData: IMessageUpdateData) => Promise<Action>) => {
-    const { message, currentUserId, currentChannelId } = this.props;
-    indicatePreference({
-      message,
-      userId: currentUserId,
-      channelId: currentChannelId
-    });
+  _handleIndicatePreference = (indicatePreference: (message: IMessage) => Promise<Action>) => {
+    const { message } = this.props;
+    return indicatePreference(message);
   };
 
   _onLike = () => {
@@ -58,9 +51,9 @@ export class Message extends React.PureComponent<MessageProps> {
   };
 
   _onDelete = () => {
-    const { message, currentUserId, onDeleteMessage, currentChannelId } = this.props;
+    const { message, currentUserId, onDeleteMessage } = this.props;
     if (message.authorId === currentUserId) {
-      onDeleteMessage(currentChannelId, message.id);
+      onDeleteMessage(message.id);
     }
   };
 

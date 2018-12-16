@@ -12,13 +12,14 @@ import {
   SERVER_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import { ICreateMessageDependencies } from '../createMessageFactory';
 import {
   IMessageData,
   Message
 } from '../../models/Message';
 import { convertViewToServerMessageModel } from '../../utils/convertMessageModels';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { IState } from '../../../shared/models/IState';
+import { RawDraftContentState } from 'draft-js';
 
 const postMessageFactoryDependencies = {
   postBegin: createMessage,
@@ -45,12 +46,17 @@ interface IPostMessageFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) => (data: ICreateMessageDependencies) =>
-  (dispatch: Dispatch): Promise<Action> => {
-    const clientId = dispatch(dependencies.postBegin(data)).payload.id;
-    const body = new Message({ ...data, id: clientId });
+const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) =>
+  (text: RawDraftContentState): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
+    const messageData = {
+      authorId: getState().usersInfo.currentUserId,
+      text,
+      channelId: getState().channelListing.selectedChannel,
+    };
+    const clientId = dispatch(dependencies.postBegin(messageData)).payload.id;
+    const body = new Message({ ...messageData, id: clientId });
 
-    return dependencies.post(body, data.channelId)
+    return dependencies.post(body, messageData.channelId)
       .then(response => response.json())
       .then(message => dispatch(dependencies.success(message)))
       .catch((error: Error) => dispatch(dependencies.error(clientId, error)));

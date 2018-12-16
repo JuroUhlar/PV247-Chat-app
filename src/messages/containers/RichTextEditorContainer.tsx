@@ -2,24 +2,13 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import {
   IRichTextEditorCallbackProps,
-  IRichTextEditorDataProps,
   RichTextEditor
 } from '../components/RichTextEditor';
-import { IState } from '../../shared/models/IState';
 import { postMessageRequest } from '../ActionCreators/requests/postMessage';
-import { ICreateMessageDependencies } from '../ActionCreators/createMessageFactory';
-
-const mapStateToProps = (state: IState): IRichTextEditorDataProps => {
-  const { currentUserId } = state.usersInfo;
-  const { selectedChannel } = state.channelListing;
-  return {
-    currentUserId,
-    currentChannelId: selectedChannel,
-  };
-};
+import { RawDraftContentState } from 'draft-js';
 
 const mapDispatchToProps = (dispatch: Dispatch): IRichTextEditorCallbackProps => ({
-  onSendMessage: (data: ICreateMessageDependencies) => postMessageRequest(data)(dispatch),
+  onSendMessage: (text: RawDraftContentState) => dispatch(postMessageRequest(text)),
 });
 
-export const RichTextEditorContainer = connect(mapStateToProps, mapDispatchToProps)(RichTextEditor);
+export const RichTextEditorContainer = connect(null, mapDispatchToProps)(RichTextEditor);

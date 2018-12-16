@@ -7,7 +7,6 @@ import {
 } from '../components/Message';
 import {
   dislikeMessageRequest,
-  IMessageUpdateData,
   likeMessageRequest
 } from '../ActionCreators/requests/updateMessage';
 import { IState } from '../../shared/models/IState';
@@ -21,7 +20,6 @@ interface IMessageContainerDataProps {
 
 const mapStateToProps = (state: IState, { message }: IMessageContainerDataProps): IMessageDataProps => {
   const currentUserId = state.usersInfo.currentUserId;
-  const currentChannelId = state.channelListing.selectedChannel;
   const messagePos = message.authorId === currentUserId
     ? 'message-pane-pos-right'
     : 'message-pane-pos-left';
@@ -33,15 +31,14 @@ const mapStateToProps = (state: IState, { message }: IMessageContainerDataProps)
     messagePos,
     messageAuthor,
     currentUserId,
-    currentChannelId,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IMessageCallbackProps => {
   return {
-    onLikeMessage: (updateData: IMessageUpdateData) => likeMessageRequest(updateData)(dispatch),
-    onDislikeMessage: (updateData: IMessageUpdateData) => dislikeMessageRequest(updateData)(dispatch),
-    onDeleteMessage: (currentChannelId: Uuid, messageId: Uuid) => deleteMessageRequest(dispatch, currentChannelId, messageId),
+    onLikeMessage: (message: IMessage) => dispatch(likeMessageRequest(message)),
+    onDislikeMessage: (message: IMessage) => dispatch(dislikeMessageRequest(message)),
+    onDeleteMessage: (messageId: Uuid) => dispatch(deleteMessageRequest(messageId)),
   };
 };
 
