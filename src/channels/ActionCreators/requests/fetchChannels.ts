@@ -13,6 +13,7 @@ import {
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { fetchChannelOrder } from './fetchChannelOrder';
 
 const fetchChannelsFactoryDependencies = {
   fetchBegin: requestChannels,
@@ -45,7 +46,8 @@ const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =
     return dependencies.fetch()
       .then(response => response.json())
       .then(messages => dispatch(dependencies.success(messages)))
-      .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
+      .catch((error: Error) => dispatch(dependencies.error(errorId, error)))
+      .then(() => fetchChannelOrder(dispatch));
   };
 
 export const fetchChannels = fetchChannelsFactory(fetchChannelsFactoryDependencies);
