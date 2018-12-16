@@ -3,9 +3,6 @@ import {
   UNAUTHENTICATE__SUCCESS,
   USER_CHANGE_AVATAR,
   USER_CHANGE_USERNAME,
-  USER_FETCH__FAILURE,
-  USER_FETCH__REQUEST,
-  USER_FETCH__SUCCESS,
   USER_POST__FAILURE,
   USER_POST__SUCCESS,
   USER_UPDATE__FAILURE,
@@ -39,21 +36,6 @@ export const succeedToUpdateUser = (json: object): Action => ({
 export const failToUpdateUser = (id: string, error: Error): Action => ({
   type: USER_UPDATE__FAILURE,
   payload: { id, errorMessage: error.message || 'User was not updated' },
-});
-
-export const requestUser = (): Action => ({
-  type: USER_FETCH__REQUEST,
-  payload: {},
-});
-
-export const succeedToFetchUser = (json: object): Action => ({
-  type: USER_FETCH__SUCCESS,
-  payload: { user: json },
-});
-
-export const failToFetchUser = (id: string, error: Error): Action => ({
-  type: USER_FETCH__FAILURE,
-  payload: { id, errorMessage: error.message || 'User was not fetched' },
 });
 
 export const createUser = createUserFactory(uuid);

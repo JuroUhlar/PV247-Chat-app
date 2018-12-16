@@ -8,7 +8,7 @@ import {
   RouteComponentProps,
   withRouter
 } from 'react-router';
-import { auth } from '../actionCreators/requests/authenticateRequest';
+import { auth } from '../../profile/actionCreators/requests/authenticateRequest';
 import { signUpRequests } from '../../profile/actionCreators/requests/signUpRequests';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: RouteComponentProps<any>): ILoginPageProps => ({

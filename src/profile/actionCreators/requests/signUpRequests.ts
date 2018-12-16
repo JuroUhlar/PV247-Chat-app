@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { auth } from '../../../shared/actionCreators/requests/authenticateRequest';
+import { auth } from './authenticateRequest';
 import { ICreateUserDependencies } from '../createUserFactory';
 import { postUserRequest } from './postUser';
 

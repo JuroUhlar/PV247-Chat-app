@@ -5,15 +5,15 @@ import {
   BEARER_ROUTE,
   SERVER_ROUTE,
   USERS_ROUTE
-} from '../../constants/routes';
-import { checkStatus } from '../../utils/checkStatus';
+} from '../../../shared/constants/routes';
+import { checkStatus } from '../../../shared/utils/checkStatus';
 import {
   failToCreateBearer,
   requestBearer,
   succeedToCreateBearer
-} from '../actionCreators';
-import { IUserServerModel } from '../../../profile/models/User';
-import { getBearer } from '../../utils/getBearer';
+} from './authActionCreators';
+import { IUserServerModel } from '../../models/User';
+import { getBearer } from '../../../shared/utils/getBearer';
 
 const createBearerFactoryDependencies = {
   postBegin: requestBearer,

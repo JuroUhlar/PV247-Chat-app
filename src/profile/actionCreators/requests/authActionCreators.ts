@@ -2,7 +2,7 @@ import {
   AUTHENTICATE__SUCCESS,
   AUTHENTICATION__FAILURE,
   AUTHENTICATION__REQUEST
-} from '../constants/actionTypes';
+} from '../../../shared/constants/actionTypes';
 
 export const requestBearer = (): Action => ({
   type: AUTHENTICATION__REQUEST,
