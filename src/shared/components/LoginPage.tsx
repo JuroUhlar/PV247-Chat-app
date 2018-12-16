@@ -16,7 +16,7 @@ export interface ILoginPageProps extends RouteComponentProps {
 
 export const LoginPage: React.SFC<ILoginPageProps> = (props: ILoginPageProps) => (
   <div className="login-form">
-    <h2 className="text-center">Junda app</h2>
+    <h2 className="text-center">Linju chat app</h2>
     <Tabs
       defaultActiveKey="LogInTab"
       id="login-or-signup-user-forms"

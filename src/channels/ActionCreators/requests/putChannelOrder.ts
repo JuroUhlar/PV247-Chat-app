@@ -22,24 +22,25 @@ interface IPutAppFactoryDependencies {
   readonly update: (body: Immutable.OrderedSet<Uuid>) => Promise<Response>;
 }
 
+export const updateOrderFetch = (channelIds: Immutable.OrderedSet<Uuid>) => fetch(`${SERVER_ROUTE}${APP_ROUTE}`, {
+  method: 'PUT',
+  body: JSON.stringify({
+    customData: {
+      channelsOrder: channelIds.toArray()
+    }
+  }),
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    accept: 'application/json',
+    authorization: getBearer(),
+  },
+}).then(response => checkStatus(response));
+
 const putAppFactoryDependencies = {
   updateBegin: reorderChannels,
   success: succeedToReorderChannels,
   error: failToReorderChannels,
-  update: (channelIds: Immutable.OrderedSet<Uuid>) => fetch(`${SERVER_ROUTE}${APP_ROUTE}`, {
-    method: 'PUT',
-    body: JSON.stringify({
-      customData: {
-        channelsOrder: channelIds.toArray()
-      }
-    }),
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      accept: 'application/json',
-      authorization: getBearer(),
-    },
-  })
-    .then(response => checkStatus(response)),
+  update: updateOrderFetch,
 };
 
 const putAppFactory = (dependencies: IPutAppFactoryDependencies) =>

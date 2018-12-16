@@ -4,8 +4,12 @@ import * as uuid from 'uuid';
 import {
   createChannel,
   failToPostChannel,
-  succeedToPostChannel
+  succeedToPostChannel,
+  reorderChannels,
+  succeedToReorderChannels,
+  failToReorderChannels
 } from '../channelActionCreators';
+
 import {
   CHANNELS_ROUTE,
   SERVER_ROUTE
@@ -18,6 +22,10 @@ import {
 } from '../../models/Channel';
 import { convertViewToServerChannelModel } from '../../utils/convertChannelModels';
 import { getBearer } from '../../../shared/utils/getBearer';
+import * as Immutable from 'immutable';
+import { updateOrderFetch } from './putChannelOrder';
+import { IState } from '../../../shared/models/IState';
+import { AppData } from '../../models/AppData';
 
 interface IPostChannelFactoryDependencies {
   readonly postBegin: (body: Partial<IChannelData>) => Action;
@@ -25,6 +33,11 @@ interface IPostChannelFactoryDependencies {
   readonly error: (id: string, error: Error) => Action;
   readonly post: (body: Partial<IChannelData>) => Promise<Response>;
   readonly idGenerator: () => string;
+  // Channel ordering
+  readonly updateOrderBegin: (body: Immutable.OrderedSet<Uuid>) => Action;
+  readonly updateOrderSuccess: (json: object) => Action;
+  readonly updateOrderError: (error: Error) => Action;
+  readonly updateOrder: (body: Immutable.OrderedSet<Uuid>) => Promise<Response>;
 }
 
 const postChannelFactoryDependencies = {
@@ -42,16 +55,31 @@ const postChannelFactoryDependencies = {
   })
     .then(response => checkStatus(response)),
   idGenerator: uuid,
+  // Channel ordering
+  updateOrderBegin: reorderChannels,
+  updateOrderSuccess: succeedToReorderChannels,
+  updateOrderError: failToReorderChannels,
+  updateOrder: updateOrderFetch
 };
 
 const postChannelFactory = (dependencies: IPostChannelFactoryDependencies) => (data: ICreateChannelDependencies): any =>
-  (dispatch: Dispatch): Promise<Action> => {
+  (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     const clientId = dispatch(dependencies.postBegin(data)).payload.id;
     const body = new Channel({ ...data, id: clientId });
 
     return dependencies.post(body)
       .then(response => response.json())
-      .then(message => dispatch(dependencies.success(message)))
+      .then((json) => {
+        const newChannelIds = getState().channelListing.channelIds.remove(clientId).add(json.id);
+
+        dispatch(dependencies.success(json));
+        dispatch(dependencies.updateOrderBegin(newChannelIds));
+
+        return dependencies.updateOrder(newChannelIds)
+          .then(response => response.json())
+          .then((appData: AppData) => dispatch(dependencies.updateOrderSuccess(appData)))
+          .catch((error: Error) => dispatch(dependencies.updateOrderError(error)));
+      })
       .catch((error: Error) => dispatch(dependencies.error(clientId, error)));
   };
 
