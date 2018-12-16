@@ -8,7 +8,6 @@ import {
 import { getCurrentUser } from '../utils/usersUtils';
 import { Dispatch } from 'redux';
 import { updateUserRequest } from '../actionCreators/requests/updateUser';
-import { IUser } from '../models/User';
 
 const mapStateToProps = (state: IState): IAvatarFieldsDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);
@@ -19,7 +18,7 @@ const mapStateToProps = (state: IState): IAvatarFieldsDataProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IAvatarFieldsCallbackProps => ({
-  onSave: (user: IUser, updatedAvatarPath: string) => updateUserRequest({ user, updatedAvatarPath })(dispatch),
+  onSave: (updatedAvatarPath: string) => dispatch(updateUserRequest({ updatedAvatarPath })),
 });
 
 export const AvatarFieldsContainer = connect(mapStateToProps, mapDispatchToProps)(AvatarFields);

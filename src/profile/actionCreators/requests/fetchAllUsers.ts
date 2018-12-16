@@ -43,7 +43,7 @@ interface IFetchAllUsersFactoryDependencies {
 }
 
 const fetchAllUsersFactory = (dependencies: IFetchAllUsersFactoryDependencies) =>
-  (dispatch: Dispatch): Promise<Action> => {
+  (): any => (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
     let clientUsers = Immutable.Map<Uuid, IUser>();

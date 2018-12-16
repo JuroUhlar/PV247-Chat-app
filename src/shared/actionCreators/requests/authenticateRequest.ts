@@ -48,8 +48,8 @@ interface ICreateBearerFactoryDependencies {
   readonly fetchUser: (email: string) => Promise<Response>;
 }
 
-const createBearerFactory = (dependencies: ICreateBearerFactoryDependencies) => (email: string) =>
-  (dispatch: Dispatch): Promise<Action> => {
+const createBearerFactory = (dependencies: ICreateBearerFactoryDependencies) =>
+  (email: string): any => (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.postBegin());
     const errorId = dependencies.idGenerator();
 

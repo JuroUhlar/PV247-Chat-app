@@ -5,10 +5,7 @@ import {
   USERS_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
-import {
-  IUser,
-  IUserData
-} from '../../models/User';
+import { IUserData } from '../../models/User';
 import { convertViewToServerUserModel } from '../../utils/convertUserModels';
 import {
   changeAvatar,
@@ -17,6 +14,8 @@ import {
   succeedToUpdateUser
 } from '../usersActionCreators';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { getCurrentUser } from '../../utils/usersUtils';
+import { IState } from '../../../shared/models/IState';
 
 interface IUpdateUserFactoryDependencies {
   readonly success: (json: object) => Action;
@@ -27,7 +26,6 @@ interface IUpdateUserFactoryDependencies {
 }
 
 export interface IUserUpdateData {
-  readonly user: IUser;
   readonly updatedUsername?: string;
   readonly updatedAvatarPath?: string;
 }
@@ -49,23 +47,24 @@ const updateUserFactoryDependencies = {
     .then(response => checkStatus(response))
 };
 
-const updateUserFactory = (dependencies: IUpdateUserFactoryDependencies) => (data: IUserUpdateData) =>
-  (dispatch: Dispatch): Promise<Action> => {
-    const { user, updatedAvatarPath, updatedUsername } = data;
-    let updatedUser = user;
+const updateUserFactory = (dependencies: IUpdateUserFactoryDependencies) =>
+  (data: IUserUpdateData): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
+    const { updatedAvatarPath, updatedUsername } = data;
+    const currentUser = getCurrentUser(getState().usersInfo);
+    let updatedUser = currentUser;
     if (updatedUsername) {
-      dispatch(dependencies.updateUsernameBegin(user.id, updatedUsername));
+      dispatch(dependencies.updateUsernameBegin(currentUser.id, updatedUsername));
       updatedUser = updatedUser.with({ name: updatedUsername });
     }
     if (updatedAvatarPath) {
-      dispatch(dependencies.updateAvatarPathBegin(user.id, updatedAvatarPath));
+      dispatch(dependencies.updateAvatarPathBegin(currentUser.id, updatedAvatarPath));
       updatedUser = updatedUser.with({ avatarPath: updatedAvatarPath });
     }
 
     return dependencies.update(updatedUser)
       .then(response => response.json())
       .then(usr => dispatch(dependencies.success(usr)))
-      .catch((error: Error) => dispatch(dependencies.error(user.id, error)));
+      .catch((error: Error) => dispatch(dependencies.error(currentUser.id, error)));
   };
 
 export const updateUserRequest = updateUserFactory(updateUserFactoryDependencies);

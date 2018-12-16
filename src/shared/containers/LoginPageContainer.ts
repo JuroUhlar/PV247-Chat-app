@@ -12,9 +12,9 @@ import { auth } from '../actionCreators/requests/authenticateRequest';
 import { signUpRequests } from '../../profile/actionCreators/requests/signUpRequests';
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: RouteComponentProps<any>): ILoginPageProps => ({
-  onLogInClick: (email: string) => auth(email)(dispatch),
+  onLogInClick: (email: string) => dispatch(auth(email)),
   ...ownProps,
-  onSignUpClick: (email: string, username: string) => signUpRequests({ email, username })(dispatch),
+  onSignUpClick: (email: string, username: string) => dispatch(signUpRequests({ email, username })),
 });
 
 export const LoginPageContainer = withRouter(connect(null, mapDispatchToProps)(LoginPage));

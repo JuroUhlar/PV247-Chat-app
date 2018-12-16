@@ -13,8 +13,8 @@ interface ISignUpFactoryDependencies {
   readonly authenticate: (email: string) => (dispatch: Dispatch) => Promise<Action>;
 }
 
-const signUp = (dependencies: ISignUpFactoryDependencies) => (data: ICreateUserDependencies) =>
-  async (dispatch: Dispatch): Promise<void> => {
+const signUp = (dependencies: ISignUpFactoryDependencies) =>
+  (data: ICreateUserDependencies): any => async (dispatch: Dispatch): Promise<void> => {
     const { email } = data;
 
     await dependencies.postUser(data)(dispatch);

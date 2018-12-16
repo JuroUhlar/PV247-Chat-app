@@ -8,7 +8,6 @@ import {
 import { getCurrentUser } from '../utils/usersUtils';
 import { Dispatch } from 'redux';
 import { updateUserRequest } from '../actionCreators/requests/updateUser';
-import { IUser } from '../models/User';
 
 const mapStateToProps = (state: IState): IProfileFieldsDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);
@@ -19,7 +18,7 @@ const mapStateToProps = (state: IState): IProfileFieldsDataProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IProfileFieldsCallbackProps => ({
-  onSave: (user: IUser, updatedUsername: string) => updateUserRequest({ user, updatedUsername })(dispatch),
+  onSave: (updatedUsername: string) => dispatch(updateUserRequest({ updatedUsername })),
 });
 
 export const ProfileFieldsContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileFields);

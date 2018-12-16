@@ -37,8 +37,8 @@ interface IFetchUserFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const fetchUserFactory = (dependencies: IFetchUserFactoryDependencies) => (email: string) =>
-  (dispatch: Dispatch): Promise<Action> => {
+const fetchUserFactory = (dependencies: IFetchUserFactoryDependencies) =>
+  (email: string): any => (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
 

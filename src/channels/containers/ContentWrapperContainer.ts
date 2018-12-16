@@ -18,7 +18,7 @@ const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): ICo
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): IContentWrapperCallbackProps => ({
-  loadAllUsers: () => fetchAllUsers(dispatch),
+  loadAllUsers: () => dispatch(fetchAllUsers()),
 });
 
 export const ContentWrapperContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ContentWrapper));

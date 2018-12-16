@@ -44,8 +44,8 @@ interface IPostUserFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const postUserFactory = (dependencies: IPostUserFactoryDependencies) => (data: ICreateUserDependencies) =>
-  (dispatch: Dispatch): Promise<Action> => {
+const postUserFactory = (dependencies: IPostUserFactoryDependencies) =>
+  (data: ICreateUserDependencies) => (dispatch: Dispatch): Promise<Action> => {
     const { username, email } = data;
     const userId = dispatch(dependencies.postBegin(data)).payload.id;
     const body = new User({ email, name: username, id: userId });

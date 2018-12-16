@@ -8,7 +8,7 @@ export interface IAvatarFieldsDataProps {
 }
 
 export interface IAvatarFieldsCallbackProps {
-  readonly onSave: (user: IUser, path: string) => void;
+  readonly onSave: (path: string) => void;
 }
 
 type AvatarFieldsProps = IAvatarFieldsDataProps & IAvatarFieldsCallbackProps;
@@ -39,10 +39,8 @@ export class AvatarFields extends React.PureComponent<AvatarFieldsProps, IAvatar
 
   _handleSave = () => {
     const path = this.state.avatarPath;
-    const { user, onSave } = this.props;
-
     if (path) {
-      onSave(user, path);
+      this.props.onSave(path);
     }
   };
 

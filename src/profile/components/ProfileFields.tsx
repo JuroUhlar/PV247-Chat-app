@@ -8,7 +8,7 @@ export interface IProfileFieldsDataProps {
 }
 
 export interface IProfileFieldsCallbackProps {
-  readonly onSave: (user: IUser, newUsername: string) => void;
+  readonly onSave: (newUsername: string) => void;
 }
 
 type ProfileFieldsProps = IProfileFieldsDataProps & IProfileFieldsCallbackProps;
@@ -37,8 +37,7 @@ export class ProfileFields extends React.PureComponent<ProfileFieldsProps, IProf
   };
 
   _handleSave = () => {
-    const { user, onSave } = this.props;
-    onSave(user, this.state.username);
+    this.props.onSave(this.state.username);
   };
 
   _handleCancel = () => {
