@@ -52,11 +52,11 @@ const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =
 
       dispatch(dependencies.deleteBegin(channelId));
       return dependencies.delete(channelId)
-        .then(() => dispatch(dependencies.success()))
-        .catch((error: Error) => dispatch(dependencies.error(channelId, error)))
-        // Update channel order
-        // Not sure if chaining requests like this is the best way to do it
-        .then(() => dispatch(reorderChannelsRequest(channelsLeftIds)));
+        .then(() => {
+          dispatch(reorderChannelsRequest(channelsLeftIds));
+          return dispatch(dependencies.success());
+        })
+        .catch((error: Error) => dispatch(dependencies.error(channelId, error)));
     };
 
 export const deleteChannelRequest = deleteChannelFactory(deleteMessageFactoryDependencies);

@@ -45,9 +45,11 @@ const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =
 
     return dependencies.fetch()
       .then(response => response.json())
-      .then(json => dispatch(dependencies.success(json)))
-      .catch((error: Error) => dispatch(dependencies.error(errorId, error)))
-      .then((): Promise<Action> => fetchChannelOrder(dispatch));
+      .then((json) => {
+        fetchChannelOrder(dispatch);
+        return dispatch(dependencies.success(json));
+      })
+      .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
   };
 
 export const fetchChannels = fetchChannelsFactory(fetchChannelsFactoryDependencies);
