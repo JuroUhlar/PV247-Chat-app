@@ -43,7 +43,8 @@ const putAppFactoryDependencies = {
 };
 
 const putAppFactory = (dependencies: IPutAppFactoryDependencies) =>
-  (dispatch: Dispatch, channelIds: Immutable.OrderedSet<Uuid>): Promise<Action> => {
+ (channelIds: Immutable.OrderedSet<Uuid>): any =>
+  (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.updateBegin(channelIds));
 
     return dependencies.update(channelIds)

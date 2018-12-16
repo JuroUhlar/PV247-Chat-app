@@ -10,7 +10,7 @@ const mapStateToProps = (state: IState): IChannelListingWrapperDataProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): IChannelListingWrapperCallbackProps => {
   return ({
-    getChannels: () => fetchChannels(dispatch),
+    getChannels: () => dispatch(fetchChannels()),
   });
 };
 

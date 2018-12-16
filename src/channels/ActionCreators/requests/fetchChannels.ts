@@ -39,7 +39,7 @@ interface IFetchChannelsFactoryDependencies {
 }
 
 const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =>
-  (dispatch: Dispatch): Promise<Action> => {
+  (): any => (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
 
@@ -47,7 +47,7 @@ const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =
       .then(response => response.json())
       .then(messages => dispatch(dependencies.success(messages)))
       .catch((error: Error) => dispatch(dependencies.error(errorId, error)))
-      .then(() => fetchChannelOrder(dispatch));
+      .then((): Promise<Action> => fetchChannelOrder(dispatch));
   };
 
 export const fetchChannels = fetchChannelsFactory(fetchChannelsFactoryDependencies);

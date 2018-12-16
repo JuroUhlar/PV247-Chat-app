@@ -44,7 +44,7 @@ const postChannelFactoryDependencies = {
   idGenerator: uuid,
 };
 
-const postChannelFactory = (dependencies: IPostChannelFactoryDependencies) => (data: ICreateChannelDependencies) =>
+const postChannelFactory = (dependencies: IPostChannelFactoryDependencies) => (data: ICreateChannelDependencies): any =>
   (dispatch: Dispatch): Promise<Action> => {
     const clientId = dispatch(dependencies.postBegin(data)).payload.id;
     const body = new Channel({ ...data, id: clientId });

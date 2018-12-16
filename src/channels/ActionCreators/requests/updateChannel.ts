@@ -39,15 +39,16 @@ const updateChannelFactoryDependencies = {
     .then(response => checkStatus(response)),
 };
 
-const updateChannelFactory = (dependencies: IUpdateChannelFactoryDependencies) => (id: Uuid, name: string, users: Immutable.List<Uuid>) =>
-  (dispatch: Dispatch): Promise<Action> => {
-    dispatch(dependencies.updateBegin(id, name, users));
-    const data = { id, name, users };
+const updateChannelFactory = (dependencies: IUpdateChannelFactoryDependencies) =>
+  (id: Uuid, name: string, users: Immutable.List<Uuid>): any =>
+    (dispatch: Dispatch): Promise<Action> => {
+      dispatch(dependencies.updateBegin(id, name, users));
+      const data = { id, name, users };
 
-    return dependencies.update(data)
-      .then(response => response.json())
-      .then(channel => dispatch(dependencies.success(channel)))
-      .catch((error: Error) => dispatch(dependencies.error(id, error)));
-  };
+      return dependencies.update(data)
+        .then(response => response.json())
+        .then(channel => dispatch(dependencies.success(channel)))
+        .catch((error: Error) => dispatch(dependencies.error(id, error)));
+    };
 
 export const updateChannelRequest = updateChannelFactory(updateChannelFactoryDependencies);

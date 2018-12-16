@@ -26,8 +26,8 @@ const mapStateToProps = (state: IState, ownProps: IChannelEditModalOwnProps): IC
 
 const mapDispatchToProps = (dispatch: Dispatch): IChannelEditModalDispatchProps => {
   return {
-    onAddChannel: (dependencies: ICreateChannelDependencies) => postChannelRequest(dependencies)(dispatch),
-    onUpdateChannel: (id: Uuid, name: string, users: Immutable.List<Uuid>) => updateChannelRequest(id, name, users)(dispatch)
+    onAddChannel: (dependencies: ICreateChannelDependencies) => dispatch(postChannelRequest(dependencies)),
+    onUpdateChannel: (id: Uuid, name: string, users: Immutable.List<Uuid>) => dispatch(updateChannelRequest(id, name, users))
   };
 };
 

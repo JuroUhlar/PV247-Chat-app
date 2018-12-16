@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch: Dispatch /*,ownProps: IChannelListingConta
   return {
     onDeleteChannel: (id: Uuid) => dispatch(deleteChannelRequest(id)),
     onSelectChannel: (id: Uuid) => dispatch(selectChannel(id)),
-    onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => reorderChannelsRequest(dispatch, newChannelIds),
+    onReorderChannels: (newChannelIds: Immutable.OrderedSet<Uuid>) => dispatch(reorderChannelsRequest(newChannelIds)),
   };
 };
 
