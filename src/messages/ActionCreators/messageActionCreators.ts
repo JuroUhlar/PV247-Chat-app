@@ -5,16 +5,24 @@ import {
   MESSAGE_LIKE,
   MESSAGES_DELETE__FAILURE,
   MESSAGES_DELETE__SUCCESS,
+  MESSAGES_FAKE_RECEIVE__REQUEST,
   MESSAGES_FETCH__FAILURE,
   MESSAGES_FETCH__REQUEST,
   MESSAGES_FETCH__SUCCESS,
   MESSAGES_POST__FAILURE,
-  MESSAGES_POST__SUCCESS, MESSAGES_UPDATE__FAILURE, MESSAGES_UPDATE__SUCCESS,
+  MESSAGES_POST__SUCCESS,
+  MESSAGES_UPDATE__FAILURE,
+  MESSAGES_UPDATE__SUCCESS,
 } from '../../shared/constants/actionTypes';
 import { createMessageFactory } from './createMessageFactory';
 
 export const requestMessages = (): Action => ({
   type: MESSAGES_FETCH__REQUEST,
+  payload: {},
+});
+
+export const fakeReceiveMessages = (): Action => ({
+  type: MESSAGES_FAKE_RECEIVE__REQUEST,
   payload: {},
 });
 

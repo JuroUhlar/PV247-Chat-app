@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { MessageListingContainer } from '../containers/MessageListingContainer';
 import { Spinner } from '../../shared/components/Spinner';
+import Timer = NodeJS.Timer;
 
 export interface IMessageListingWrapperDataProps {
   readonly isLoading: boolean;
@@ -10,6 +11,7 @@ export interface IMessageListingWrapperDataProps {
 
 export interface IMessageListingWrapperCallbackProps {
   readonly getMessages: () => Promise<Action>;
+  readonly fakeReceiveMessages: () => Promise<Action>;
 }
 
 type MessageListingWrapperProps = IMessageListingWrapperDataProps & IMessageListingWrapperCallbackProps;
@@ -21,7 +23,9 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
     currentChannelId: PropTypes.string.isRequired,
 
     getMessages: PropTypes.func.isRequired,
+    fakeReceiveMessages: PropTypes.func.isRequired,
   };
+  _pendingTimeout: Timer;
 
   constructor(props: MessageListingWrapperProps) {
     super(props);
@@ -29,6 +33,7 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
 
   componentDidMount() {
     this._handleLoadMessages();
+    this._handleReceiveMessage();
   }
 
   componentDidUpdate(prevProps: MessageListingWrapperProps) {
@@ -39,7 +44,15 @@ export class MessageListingWrapper extends React.PureComponent<MessageListingWra
     }
   }
 
+  componentWillUnmount() {
+    clearTimeout(this._pendingTimeout);
+  }
+
   _handleLoadMessages = () => this.props.getMessages();
+
+  _handleReceiveMessage = () => {
+    this._pendingTimeout = setInterval(() => this.props.fakeReceiveMessages(), 2500);
+  };
 
   render() {
     const { isLoading } = this.props;

@@ -3,6 +3,7 @@ import * as fetch from 'isomorphic-fetch';
 import * as uuid from 'uuid';
 import {
   failToFetchMessages,
+  fakeReceiveMessages,
   requestMessages,
   succeedToFetchMessages
 } from '../messageActionCreators';
@@ -15,8 +16,8 @@ import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
 import { IState } from '../../../shared/models/IState';
 
-const fetchMessagesFactoryDependencies = {
-  fetchBegin: requestMessages,
+const fetchMessagesFactoryDependencies = (fake: boolean) => ({
+  fetchBegin: fake ? fakeReceiveMessages : requestMessages,
   success: succeedToFetchMessages,
   error: failToFetchMessages,
   fetch: (channelId: Uuid) => fetch(`${SERVER_ROUTE}${CHANNELS_ROUTE}${channelId}/${MESSAGES_ROUTE}`, {
@@ -28,7 +29,7 @@ const fetchMessagesFactoryDependencies = {
   })
     .then(response => checkStatus(response)),
   idGenerator: uuid,
-};
+});
 
 interface IFetchMessagesFactoryDependencies {
   readonly fetchBegin: () => Action;
@@ -50,4 +51,4 @@ const fetchMessagesFactory = (dependencies: IFetchMessagesFactoryDependencies) =
       .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
   };
 
-export const fetchMessages = fetchMessagesFactory(fetchMessagesFactoryDependencies);
+export const fetchMessages = (fake: boolean = false): any => fetchMessagesFactory(fetchMessagesFactoryDependencies(fake))();
