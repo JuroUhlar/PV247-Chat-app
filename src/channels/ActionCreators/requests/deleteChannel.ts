@@ -15,6 +15,7 @@ import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
 import { IState } from '../../../shared/models/IState';
 import { history } from '../../../shared/components/AppWrapper';
+import { reorderChannelsRequest } from './putChannelOrder';
 
 interface IDeleteChannelFactoryDependencies {
   readonly deleteBegin: (id: Uuid) => Action;
@@ -42,8 +43,9 @@ const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =
     async (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
       // If deleting currently selected channel, select another one first
       const currentState = getState();
+      const channelsLeftIds = currentState.channelListing.channelIds.remove(channelId);
       if (currentState.channelListing.selectedChannel === channelId) {
-        const newSelectedChannelId = currentState.channelListing.channelIds.remove(channelId).first();
+        const newSelectedChannelId = channelsLeftIds.first();
         await dispatch(selectChannel(newSelectedChannelId));
         history.push(SPECIFIC_CHANNEL_VIEW_ROUTE(newSelectedChannelId));
       }
@@ -51,7 +53,10 @@ const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =
       dispatch(dependencies.deleteBegin(channelId));
       return dependencies.delete(channelId)
         .then(() => dispatch(dependencies.success()))
-        .catch((error: Error) => dispatch(dependencies.error(channelId, error)));
+        .catch((error: Error) => dispatch(dependencies.error(channelId, error)))
+        // Update channel order
+        // Not sure if chaining requests like this is the best way to do it
+        .then(() => dispatch(reorderChannelsRequest(channelsLeftIds)));
     };
 
 export const deleteChannelRequest = deleteChannelFactory(deleteMessageFactoryDependencies);

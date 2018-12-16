@@ -41,7 +41,7 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
   // When adding or removing channels, update channel order metadata on server
   // Not sure if this is elegant or shitty code.
   componentDidUpdate(oldProps: ChannelListingProps) {
-    if (this.props.channelIds.count() === oldProps.channelIds.count()) {
+    if (this.props.channelIds.count() <= oldProps.channelIds.count()) {
       return;
     }
     setTimeout(() => this.props.onReorderChannels(this.props.channelIds), 1000);
