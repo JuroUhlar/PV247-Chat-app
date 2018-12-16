@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { IChannel } from '../models/Channel';
-import { Modal, Button, FormGroup, ControlLabel, FormControl, Table } from 'react-bootstrap';
+import {
+  Button,
+  ControlLabel,
+  FormControl,
+  FormGroup,
+  Modal,
+  Table,
+} from 'react-bootstrap';
 import * as Immutable from 'immutable';
 import { IUser } from '../../profile/models/User';
 import { List } from 'immutable';
@@ -40,19 +47,21 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
   }
 
   componentWillReceiveProps(props: IChannelEditModalOwnProps & IChannelEditModalStateProps & IChannelEditModalDispatchProps) {
-    if (props.channel) {
-      // When editing existing channel
-      this.setState(() => ({
-        nameValue: props.channel.name,
-        membersIds: props.channel.users,
-      }));
-    } else {
-      // When creating new channel
-      // const allUserIds = Immutable.List(props.users.toArray().map((user => user.id)));
-      this.setState(() => ({
-        // membersIds: allUserIds
-        membersIds: Immutable.List([])
-      }));
+    if (this.props.channel !== props.channel) {
+      if (props.channel) {
+        // When editing existing channel
+        this.setState(() => ({
+          nameValue: props.channel.name,
+          membersIds: props.channel.users,
+        }));
+      } else {
+        // When creating new channel
+        // const allUserIds = Immutable.List(props.users.toArray().map((user => user.id)));
+        this.setState(() => ({
+          // membersIds: allUserIds
+          membersIds: Immutable.List([])
+        }));
+      }
     }
   }
 
@@ -61,14 +70,14 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
     this.setState(() => ({
       nameValue: newName
     }));
-  }
+  };
 
   _handleUserChange = (id: Uuid) => {
     const newMembersIds = _toggleChannelMember(id, this.state.membersIds);
     this.setState(() => ({
       membersIds: newMembersIds
     }));
-  }
+  };
 
   _handleKeyPress = (event: React.KeyboardEvent<FormControl>) => {
     if (event.key === 'Enter') {
@@ -80,7 +89,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
         this._createChannel();
       }
     }
-  }
+  };
 
   _updateChannel = () => {
     const id = this.props.channel.id;
@@ -90,7 +99,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
     this.props.onUpdateChannel(id, name, users);
     this._resetForm();
     this.props.onClose();
-  }
+  };
 
   _createChannel = () => {
     const dependencies: ICreateChannelDependencies = {
@@ -108,7 +117,7 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
       nameValue: '',
       membersIds: Immutable.List([]),
     }));
-  }
+  };
 
   render(): JSX.Element {
     return (
