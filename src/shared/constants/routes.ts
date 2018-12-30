@@ -16,4 +16,5 @@ export const CHANNELS_ROUTE = `app/${appId}/channel/`;
 export const MESSAGES_ROUTE = 'message/';
 export const APP_ROUTE = `app/${appId}/`;
 export const USERS_ROUTE = `${appId}/user/`;
-
+export const FILE_ROUTE = 'file/';
+export const DOWNLOAD_LINK_ROUTE = '/download-link/';
