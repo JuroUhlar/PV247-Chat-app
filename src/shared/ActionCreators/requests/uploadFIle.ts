@@ -5,8 +5,8 @@ import {
   succeedToUploadFIle,
   failToUploadFile,
   requestFileDonwloadLink,
-  succeedToFetchDownloadLink,
-  failToFetchDownloadLink
+  failToFetchDownloadLink,
+  succeedToFetchDownloadLink
 } from '../fileActionCreators';
 import {
   FILE_ROUTE,
@@ -15,30 +15,34 @@ import {
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
+import { DownloadLinkResponse } from '../../models/DownloadLinkResponse';
+import { FilesUploadResponse } from '../../models/FilesUploadResponse';
+import { updateUserAvatarUrl } from '../../../profile/actionCreators/requests/updateUser';
 
 interface IUploadFileFactoryDependencies {
   readonly postBegin: () => Action;
   readonly success: (json: object) => Action;
   readonly error: (error: Error) => Action;
   readonly post: (body: FormData) => Promise<Response>;
-  // Get Download link
+  // Getting Download link
   readonly getLinkBegin: (id: Uuid) => Action;
-  readonly getLinkSuccess: (json: object) => Action;
+  readonly getLinkSuccess: (link: string) => Action;
   readonly getLinkError: (error: Error) => Action;
   readonly getLink: (id: Uuid) => Promise<Response>;
 }
 
 const uploadFileFactoryDependencies: IUploadFileFactoryDependencies = {
+  // Uploading file
   postBegin: uploadFile,
   success: succeedToUploadFIle,
   error: failToUploadFile,
-  post: (body: FormData) => fetch(`${SERVER_ROUTE}${FILE_ROUTE}`, {
+  post: (data: FormData) => fetch(`${SERVER_ROUTE}${FILE_ROUTE}`, {
     method: 'POST',
-    body,
     headers: {
-      accept: 'application/json',
+      accept: 'text/plain',
       authorization: getBearer(),
     },
+    body: data,
   })
     .then(response => checkStatus(response)),
   // Getting download link
@@ -55,13 +59,16 @@ const uploadFileFactoryDependencies: IUploadFileFactoryDependencies = {
     .then(response => checkStatus(response)),
 };
 
+const uploadUserAvatarFactoryDependencies = {...uploadFileFactoryDependencies, getLinkSuccess: updateUserAvatarUrl};
+
+
 const uploadFileFactory = (dependencies: IUploadFileFactoryDependencies) => (data: FormData): any =>
   (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.postBegin());
 
     return dependencies.post(data)
       .then(response => response.json())
-      .then((json) => {
+      .then((json: FilesUploadResponse) => {
         const fileId = json[0].id;
 
         dispatch(dependencies.success(json));
@@ -69,10 +76,13 @@ const uploadFileFactory = (dependencies: IUploadFileFactoryDependencies) => (dat
 
         return dependencies.getLink(fileId)
           .then(response => response.json())
-          .then((object: Object) => dispatch(dependencies.getLinkSuccess(object)))
+          .then((object: DownloadLinkResponse) => dispatch(dependencies.getLinkSuccess(object.fileUri)))
           .catch((error: Error) => dispatch(dependencies.getLinkError(error)));
       })
       .catch((error: Error) => dispatch(dependencies.error(error)));
   };
 
 export const uploadFileRequest = uploadFileFactory(uploadFileFactoryDependencies);
+export const uploadUserAvatarRequest = uploadFileFactory(uploadUserAvatarFactoryDependencies);
+
+

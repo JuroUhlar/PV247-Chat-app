@@ -68,3 +68,5 @@ const updateUserFactory = (dependencies: IUpdateUserFactoryDependencies) =>
   };
 
 export const updateUserRequest = updateUserFactory(updateUserFactoryDependencies);
+
+export const updateUserAvatarUrl = (url: string) => updateUserRequest({ updatedAvatarPath: url });

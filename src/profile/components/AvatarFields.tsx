@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { isInsertEmpty } from '../../shared/utils/textUtils';
+// import { isInsertEmpty } from '../../shared/utils/textUtils';
 import { IUser } from '../models/User';
 
 export interface IAvatarFieldsDataProps {
@@ -8,62 +8,66 @@ export interface IAvatarFieldsDataProps {
 }
 
 export interface IAvatarFieldsCallbackProps {
-  readonly onSave: (path: string) => void;
+  readonly onUploadFile: (data: FormData) => void;
 }
 
 type AvatarFieldsProps = IAvatarFieldsDataProps & IAvatarFieldsCallbackProps;
 
 interface IAvatarFieldsState {
-  readonly avatarPath?: string;
+  readonly avatarFile: File | null;
 }
 
-export class AvatarFields extends React.PureComponent<AvatarFieldsProps, IAvatarFieldsState> {
+export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFieldsState> {
   static displayName = 'AvatarFields';
 
   static propTypes = {
-    avatarPath: PropTypes.string,
     user: PropTypes.object.isRequired,
-
-    onSave: PropTypes.func.isRequired,
+    onUplaodFile: PropTypes.func.isRequired,
   };
+
+  fileInput: React.RefObject<HTMLInputElement>;
 
   constructor(props: AvatarFieldsProps) {
     super(props);
-    this.state = { avatarPath: props.user.avatarPath };
+    this.state = { avatarFile: null };
+    this.fileInput = React.createRef<HTMLInputElement>();
   }
 
   _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const avatarPath = event.currentTarget.value;
-    this.setState(() => ({ avatarPath }));
+    if (event.target.files) {
+      const avatarFile = event.target.files.length > 0 ? event.target.files[0] : null;
+      console.log(avatarFile);
+      this.setState(() => ({ avatarFile }));
+    }
   };
 
-  _handleSave = () => {
-    const path = this.state.avatarPath;
-    if (path) {
-      this.props.onSave(path);
+  _handleUplaod = () => {
+    if (this.fileInput.current) {
+      const file = this.fileInput.current.files![0];
+      const data = new FormData();
+      data.append('Files', file);
+      this.props.onUploadFile(data);
     }
   };
 
   render() {
-    const { avatarPath } = this.state;
-
     return (
       <form className="account-details user-profile-block">
         <div className="form-group">
           <input
+            ref={this.fileInput}
             onChange={this._handleChange}
-            value={avatarPath}
-            name="profileView-avatarPath"
-            id="profileView-avatarPath"
-            type="text"
+            name="profileView-file"
+            id="profileView-file"
+            type="file"
             className="form-control"
           />
         </div>
         <button
-          disabled={isInsertEmpty(avatarPath)}
+          disabled={this.state.avatarFile === null}
           className="btn btn-primary btn-block"
           type="button"
-          onClick={this._handleSave}
+          onClick={this._handleUplaod}
         > Submit
         </button>
       </form>

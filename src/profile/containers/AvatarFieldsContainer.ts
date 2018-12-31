@@ -7,7 +7,7 @@ import {
 } from '../components/AvatarFields';
 import { getCurrentUser } from '../utils/usersUtils';
 import { Dispatch } from 'redux';
-import { updateUserRequest } from '../actionCreators/requests/updateUser';
+import { uploadUserAvatarRequest } from '../../shared/ActionCreators/requests/uploadFIle';
 
 const mapStateToProps = (state: IState): IAvatarFieldsDataProps => {
   const currentUser = getCurrentUser(state.usersInfo);
@@ -18,7 +18,7 @@ const mapStateToProps = (state: IState): IAvatarFieldsDataProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IAvatarFieldsCallbackProps => ({
-  onSave: (updatedAvatarPath: string) => dispatch(updateUserRequest({ updatedAvatarPath })),
+  onUploadFile: (data: FormData) => dispatch(uploadUserAvatarRequest(data)),
 });
 
 export const AvatarFieldsContainer = connect(mapStateToProps, mapDispatchToProps)(AvatarFields);

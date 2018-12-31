@@ -30,9 +30,9 @@ export const requestFileDonwloadLink = (fileId: Uuid): Action => ({
   payload: { fileId },
 });
 
-export const succeedToFetchDownloadLink = (json: object): Action => ({
+export const succeedToFetchDownloadLink = (link: string): Action => ({
   type: FILE_DOWNLOAD_LINK_FETCH__SUCCESS,
-  payload: { fileMetadata: json },
+  payload: { link },
 });
 
 export const failToFetchDownloadLink = (error: Error): Action => ({
