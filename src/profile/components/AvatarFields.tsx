@@ -25,12 +25,9 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
     onUplaodFile: PropTypes.func.isRequired,
   };
 
-  fileInput: React.RefObject<HTMLInputElement>;
-
   constructor(props: AvatarFieldsProps) {
     super(props);
     this.state = { avatarFile: null };
-    this.fileInput = React.createRef<HTMLInputElement>();
   }
 
   _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,10 +39,9 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
   };
 
   _handleUplaod = () => {
-    if (this.fileInput.current) {
-      const file = this.fileInput.current.files![0];
+    if (this.state.avatarFile) {
       const data = new FormData();
-      data.append('Files', file);
+      data.append('Files', this.state.avatarFile);
       this.props.onUploadFile(data);
     }
   };
@@ -55,7 +51,6 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
       <form className="account-details user-profile-block">
         <div className="form-group">
           <input
-            ref={this.fileInput}
             onChange={this._handleChange}
             name="profileView-file"
             id="profileView-file"
