@@ -29,7 +29,7 @@ export const ProfileAvatarSettings: React.SFC<ProfileAvatarSettingsProps> = ({
       placement="bottom"
       overlay={PopoverComponent({
         id: 'avatar-path-input',
-        title: 'Insert your avatar',
+        title: 'Insert your avatar URL',
         children: <AvatarFieldsContainer/>
       })}
     >

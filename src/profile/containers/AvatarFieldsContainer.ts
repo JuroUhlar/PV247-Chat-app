@@ -14,6 +14,7 @@ const mapStateToProps = (state: IState): IAvatarFieldsDataProps => {
 
   return {
     user: currentUser,
+    isUploadingFile: state.appInfo.isUploadingFile,
   };
 };
 

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { IUser } from '../models/User';
+import { Spinner } from '../../shared/components/Spinner';
 
 export interface IAvatarFieldsDataProps {
   readonly user: IUser;
+  readonly isUploadingFile: boolean;
 }
 
 export interface IAvatarFieldsCallbackProps {
@@ -59,6 +61,7 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
             name="profileView-file"
             id="profileView-file"
             type="file"
+            accept="image/*"
             className="form-control"
           />
         </div>
@@ -68,8 +71,9 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
           className="btn btn-primary btn-block"
           type="button"
           onClick={this._handleUplaod}
-        > Submit
+          > Submit
         </button>
+        {this.props.isUploadingFile ? <Spinner/> : null}
       </form>
     );
   }
