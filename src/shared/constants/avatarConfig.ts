@@ -1,1 +1,1 @@
-export const defaultAvatarPath = 'http://modernurbandesigners.com/Lists/Staff/Attachments/9/female-avatar-square.jpg';
+export const defaultAvatarPath = 'https://cdn.pressly.com/clients/Pressly/static/default-user-avatar.png';
