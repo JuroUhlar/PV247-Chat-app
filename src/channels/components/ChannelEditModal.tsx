@@ -47,22 +47,23 @@ export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnPr
   }
 
   componentWillReceiveProps(props: IChannelEditModalOwnProps & IChannelEditModalStateProps & IChannelEditModalDispatchProps) {
-    if (this.props.channel !== props.channel) {
-      if (props.channel) {
-        // When editing existing channel
-        this.setState(() => ({
-          nameValue: props.channel.name,
-          membersIds: props.channel.users,
-        }));
-      } else {
-        // When creating new channel
-        // const allUserIds = Immutable.List(props.users.toArray().map((user => user.id)));
-        this.setState(() => ({
-          // membersIds: allUserIds
-          membersIds: Immutable.List([])
-        }));
-      }
+    console.log(props);
+    if (props.channel) {
+      // When editing existing channel
+      this.setState(() => ({
+        nameValue: props.channel.name,
+        membersIds: props.channel.users,
+      }));
+
+    } else {
+      // When creating new channel
+      // const allUserIds = Immutable.List(props.users.toArray().map((user => user.id)));
+      this.setState(() => ({
+        // membersIds: allUserIds
+        membersIds: Immutable.List([])
+      }));
     }
+
   }
 
   _handleNameChange = (event: any) => {
