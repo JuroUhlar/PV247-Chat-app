@@ -97,7 +97,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, IC
               <MenuItem onClick={this._handleUpdate}>Edit</MenuItem>
               <MenuItem onClick={this._deleteChannel}>Delete</MenuItem>
             </DropdownButton>
-            <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this._closeModal} channelId={this.props.channelId} />
+            {this.state.showChannelModal ? <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this._closeModal} channelId={this.props.channelId} /> : null}
           </div>
         )}
       </Draggable>

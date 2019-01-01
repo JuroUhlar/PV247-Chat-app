@@ -31,39 +31,27 @@ export interface IChannelEditModalOwnProps {
   readonly channel?: IChannel;
 }
 
+export type ChannelEditModalProps = IChannelEditModalOwnProps & IChannelEditModalStateProps & IChannelEditModalDispatchProps;
+
 interface IChannelEditState {
   readonly nameValue: string;
   readonly membersIds: Immutable.List<Uuid>;
 }
 
-export class ChannelEditModal extends React.PureComponent<IChannelEditModalOwnProps & IChannelEditModalStateProps & IChannelEditModalDispatchProps, IChannelEditState> {
-  constructor(props: any) {
+export class ChannelEditModal extends React.PureComponent<ChannelEditModalProps, IChannelEditState> {
+  constructor(props: ChannelEditModalProps) {
     super(props);
-    const membersIds: Immutable.List<Uuid> = Immutable.List([]);
-    this.state = {
-      nameValue: '',
-      membersIds
-    };
-  }
-
-  componentWillReceiveProps(props: IChannelEditModalOwnProps & IChannelEditModalStateProps & IChannelEditModalDispatchProps) {
-    console.log(props);
-    if (props.channel) {
-      // When editing existing channel
-      this.setState(() => ({
+    if (props.channel != null) {
+      this.state = {
         nameValue: props.channel.name,
         membersIds: props.channel.users,
-      }));
-
+      };
     } else {
-      // When creating new channel
-      // const allUserIds = Immutable.List(props.users.toArray().map((user => user.id)));
-      this.setState(() => ({
-        // membersIds: allUserIds
-        membersIds: Immutable.List([])
-      }));
+      this.state = {
+        nameValue: '',
+        membersIds: Immutable.List([]),
+      };
     }
-
   }
 
   _handleNameChange = (event: any) => {
