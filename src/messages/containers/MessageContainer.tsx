@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {
+  IAnnotatedUser,
   IMessageCallbackProps,
   IMessageDataProps,
   Message
@@ -20,6 +21,16 @@ interface IMessageContainerDataProps {
 
 const mapStateToProps = (state: IState, { message }: IMessageContainerDataProps): IMessageDataProps => {
   const currentUserId = state.usersInfo.currentUserId;
+  const annotatedUsers = message.annotatedUsers
+    .map((userId: Uuid): IAnnotatedUser => {
+      const user = getUser(state.usersInfo, userId);
+      return {
+        id: userId,
+        name: user.name,
+        avatarPath: user.avatarPath,
+      };
+    })
+    .toList();
   const messagePos = message.authorId === currentUserId
     ? 'message-pane-pos-right'
     : 'message-pane-pos-left';
@@ -31,6 +42,7 @@ const mapStateToProps = (state: IState, { message }: IMessageContainerDataProps)
     messagePos,
     messageAuthor,
     currentUserId,
+    annotatedUsers,
   };
 };
 

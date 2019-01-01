@@ -1,4 +1,4 @@
-import { Record } from 'immutable';
+import { Record, Set } from 'immutable';
 import {
   IMessagePopularity,
   MessagePopularity
@@ -12,6 +12,7 @@ export interface IMessageData {
   readonly channelId: Uuid;
   readonly text: RawDraftContentState | null;
   readonly popularity: IMessagePopularity;
+  readonly annotatedUsers: Set<Uuid>;
 }
 
 export interface IMessage extends IMessageData, IRecordFunctions<IMessageData, IMessage> {
@@ -24,6 +25,7 @@ export const messageRecordData: IMessageData = {
   authorId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   channelId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
   popularity: new MessagePopularity(),
+  annotatedUsers: Set<Uuid>(),
 };
 
 export class Message extends Record(messageRecordData) implements IMessage {
@@ -33,6 +35,7 @@ export class Message extends Record(messageRecordData) implements IMessage {
   readonly channelId: Uuid;
   readonly text: RawDraftContentState | null;
   readonly popularity: IMessagePopularity;
+  readonly annotatedUsers: Set<Uuid>;
 
   toObject(): IMessageData {
     return super.toObject() as IMessageData;
@@ -52,6 +55,7 @@ export interface IMessagePostServerModelData {
     },
     authorId: Uuid;
     clientId: Uuid;
+    annotatedUsers?: [];
   };
 }
 
@@ -77,7 +81,8 @@ const messageServerModelRecordData = {
     },
     authorId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
     clientId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-  },
+    annotatedUsers: [],
+},
 };
 
 export class MessageServerModel extends Record(messageServerModelRecordData) implements IMessageServerModel {
@@ -94,5 +99,6 @@ export class MessageServerModel extends Record(messageServerModelRecordData) imp
     },
     authorId: Uuid;
     clientId: Uuid;
+    annotatedUsers?: [];
   };
 }

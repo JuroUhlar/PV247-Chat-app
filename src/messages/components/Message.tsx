@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import * as Immutable from 'immutable';
 import { Editor } from 'react-draft-wysiwyg';
 import { Avatar } from '../../profile/components/Avatar';
 import { IMessage } from '../models/Message';
@@ -9,6 +10,7 @@ import {
   EditorState,
 } from 'draft-js';
 import { IUser } from '../../profile/models/User';
+import { AnnotatedUserPane } from './AnnotatedUserPane';
 
 export interface IMessageCallbackProps {
   readonly onLikeMessage: (message: IMessage) => Promise<Action>;
@@ -16,11 +18,18 @@ export interface IMessageCallbackProps {
   readonly onDeleteMessage: (messageId: Uuid) => void;
 }
 
+export interface IAnnotatedUser {
+  readonly name: string;
+  readonly avatarPath: string;
+  readonly id: Uuid;
+}
+
 export interface IMessageDataProps {
   readonly messagePos: string;
   readonly messageAuthor: IUser;
   readonly message: IMessage;
   readonly currentUserId: Uuid;
+  readonly annotatedUsers: Immutable.List<IAnnotatedUser>;
 }
 
 type MessageProps = IMessageCallbackProps & IMessageDataProps;
@@ -32,6 +41,7 @@ export class Message extends React.PureComponent<MessageProps> {
     messagePos: PropTypes.string.isRequired,
     messageAuthor: PropTypes.object.isRequired,
     currentUserId: PropTypes.string.isRequired,
+    annotatedUsers: PropTypes.object.isRequired,
 
     onLikeMessage: PropTypes.func.isRequired,
     onDislikeMessage: PropTypes.func.isRequired,
@@ -68,7 +78,7 @@ export class Message extends React.PureComponent<MessageProps> {
   };
 
   render(): JSX.Element {
-    const { message, messagePos, messageAuthor } = this.props;
+    const { message, messagePos, messageAuthor, annotatedUsers } = this.props;
     const { likes, dislikes } = message.popularity;
     const messageLikesCount = likes.size - dislikes.size;
 
@@ -111,6 +121,7 @@ export class Message extends React.PureComponent<MessageProps> {
               wrapperClassName="wrapperClassName"
               editorClassName="editorClassName"
             />
+            <AnnotatedUserPane annotatedUsers={annotatedUsers}/>
           </div>
         </div>
       </div>

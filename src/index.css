@@ -187,6 +187,17 @@ body, html, .full-height {
   cursor: pointer;
 }
 
+.annotated-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid lightsteelblue;
+  vertical-align: middle;
+  margin-right: 5px;
+  float: left;
+  cursor: pointer;
+}
+
 .user-profile {
   display: flex;
   flex-flow: row wrap;
@@ -410,4 +421,21 @@ body, html, .full-height {
 
 .RTE-without-toolbar {
   display: none !important;
+}
+
+.annotated-user {
+  color: #00778b;
+  margin-top: 5px;
+}
+
+.annotated-user:hover {
+  color: #003842;
+  text-decoration: underline;
+}
+
+.annotated-user--pane {
+  list-style-type: none;
+  padding: 0px;
+  border-top: solid 1px #00778b;
+
 }
