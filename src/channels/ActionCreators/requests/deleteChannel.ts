@@ -16,12 +16,15 @@ import { getBearer } from '../../../shared/utils/getBearer';
 import { IState } from '../../../shared/models/IState';
 import { history } from '../../../shared/components/AppWrapper';
 import { reorderChannelsRequest } from './putChannelOrder';
+import { OrderedSet } from 'immutable';
 
 interface IDeleteChannelFactoryDependencies {
   readonly deleteBegin: (id: Uuid) => Action;
   readonly success: () => Action;
   readonly error: (id: string, error: Error) => Action;
   readonly delete: (channelId: Uuid) => Promise<Response>;
+  readonly updateChannelOrder: (channelIds: OrderedSet<Uuid>) => any;
+  readonly selectChannel: (id: string) => Action;
 }
 
 const deleteMessageFactoryDependencies = {
@@ -36,6 +39,8 @@ const deleteMessageFactoryDependencies = {
     },
   })
     .then(response => checkStatus(response)),
+  updateChannelOrder: reorderChannelsRequest,
+  selectChannel
 };
 
 const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =>
@@ -46,14 +51,14 @@ const deleteChannelFactory = (dependencies: IDeleteChannelFactoryDependencies) =
       const channelsLeftIds = currentState.channelListing.channelIds.remove(channelId);
       if (currentState.channelListing.selectedChannel === channelId) {
         const newSelectedChannelId = channelsLeftIds.first();
-        await dispatch(selectChannel(newSelectedChannelId));
+        await dispatch(dependencies.selectChannel(newSelectedChannelId));
         history.push(SPECIFIC_CHANNEL_VIEW_ROUTE(newSelectedChannelId));
       }
 
       dispatch(dependencies.deleteBegin(channelId));
       return dependencies.delete(channelId)
         .then(() => {
-          dispatch(reorderChannelsRequest(channelsLeftIds));
+          dispatch(dependencies.updateChannelOrder(channelsLeftIds));
           return dispatch(dependencies.success());
         })
         .catch((error: Error) => dispatch(dependencies.error(channelId, error)));
