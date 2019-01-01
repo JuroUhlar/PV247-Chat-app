@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-// import { isInsertEmpty } from '../../shared/utils/textUtils';
 import { IUser } from '../models/User';
 
 export interface IAvatarFieldsDataProps {
@@ -15,6 +14,7 @@ type AvatarFieldsProps = IAvatarFieldsDataProps & IAvatarFieldsCallbackProps;
 
 interface IAvatarFieldsState {
   readonly avatarFile: File | null;
+  readonly temporaryFileURL: string;
 }
 
 export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFieldsState> {
@@ -22,19 +22,23 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
 
   static propTypes = {
     user: PropTypes.object.isRequired,
-    onUplaodFile: PropTypes.func.isRequired,
+    onUploadFile: PropTypes.func.isRequired,
   };
 
   constructor(props: AvatarFieldsProps) {
     super(props);
-    this.state = { avatarFile: null };
+    this.state = {
+      avatarFile: null,
+      temporaryFileURL: '',
+     };
   }
 
   _handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const avatarFile = event.target.files.length > 0 ? event.target.files[0] : null;
-      console.log(avatarFile);
-      this.setState(() => ({ avatarFile }));
+      URL.revokeObjectURL(this.state.temporaryFileURL);
+      const temporaryFileURL = avatarFile ? URL.createObjectURL(avatarFile) : '';
+      this.setState(() => ({ avatarFile, temporaryFileURL }));
     }
   };
 
@@ -58,6 +62,7 @@ export class AvatarFields extends React.Component<AvatarFieldsProps, IAvatarFiel
             className="form-control"
           />
         </div>
+        {this.state.avatarFile ? <img src={this.state.temporaryFileURL} width="100" className="mini-avatar"/> : null}
         <button
           disabled={this.state.avatarFile === null}
           className="btn btn-primary btn-block"
