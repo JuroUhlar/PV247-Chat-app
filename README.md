@@ -39,7 +39,7 @@ Messaging in channels
 
 Profile management
 
-* **Upload avatar**
+* Upload avatar
 * Change displayed name
 * Use email strictly for sign in and invitations
 
@@ -54,5 +54,5 @@ Profile management
 * Follow best practices (these can usually be found in the documentation of respective packages)
 * Provide your users with indication on asynchronous operation progress
   * a loading spinner of some sort
-* **Try to find a way to deliver new messages to your users even when they do not interact with your application**
+* Try to find a way to deliver new messages to your users even when they do not interact with your application
   * You are provided with REST API, so new messages are delivered from the server only on your application‘s explicit request (→ no WebSocket involved) → messaging is not expected to be instant
