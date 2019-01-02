@@ -19,7 +19,7 @@ const createBearerFactoryDependencies = {
   postBegin: requestBearer,
   success: succeedToCreateBearer,
   error: failToCreateBearer,
-  fetchLogin: (email: string) => fetch(BEARER_ROUTE, {
+  postLogin: (email: string) => fetch(BEARER_ROUTE, {
     method: 'POST',
     body: JSON.stringify({ email }),
     headers: {
@@ -43,7 +43,7 @@ interface ICreateBearerFactoryDependencies {
   readonly postBegin: () => Action;
   readonly success: (json: object, userId: Uuid) => Action;
   readonly error: (id: string, error: Error) => Action;
-  readonly fetchLogin: (email: string) => Promise<Response>;
+  readonly postLogin: (email: string) => Promise<Response>;
   readonly idGenerator: () => string;
   readonly fetchUser: (email: string) => Promise<Response>;
 }
@@ -53,7 +53,7 @@ const createBearerFactory = (dependencies: ICreateBearerFactoryDependencies) =>
     dispatch(dependencies.postBegin());
     const errorId = dependencies.idGenerator();
 
-    return dependencies.fetchLogin(email)
+    return dependencies.postLogin(email)
       .then(response => response.json())
       .then(object => {
         localStorage.setItem('user', object.token);
