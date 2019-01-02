@@ -194,7 +194,6 @@ body, html, .full-height {
   border: 1px solid lightsteelblue;
   vertical-align: middle;
   margin-right: 5px;
-  float: left;
   cursor: pointer;
 }
 
@@ -423,9 +422,10 @@ body, html, .full-height {
   display: none !important;
 }
 
-.annotated-user {
+.annotated-user .image-container {
   color: #00778b;
   margin-top: 5px;
+  display: inline;
 }
 
 .annotated-user:hover {
@@ -437,5 +437,4 @@ body, html, .full-height {
   list-style-type: none;
   padding: 0px;
   border-top: solid 1px #00778b;
-
 }

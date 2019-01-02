@@ -13,7 +13,7 @@ export const Avatar: React.SFC<AvatarProps> = ({
   avatarSize,
   avatarPos,
 }) => (
-  <div className={avatarPos}>
+  <div className={'image-container ' + (avatarPos ? avatarPos : '')}>
     <img
       className={avatarSize}
       src={avatarPath || defaultAvatarPath}

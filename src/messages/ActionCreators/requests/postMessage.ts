@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
+import * as Immutable from 'immutable';
 import * as uuid from 'uuid';
 import {
   createMessage,
@@ -47,8 +48,9 @@ interface IPostMessageFactoryDependencies {
 }
 
 const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) =>
-  (text: RawDraftContentState): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
+  (text: RawDraftContentState, annotatedUsers?: Immutable.Set<Uuid>): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     const messageData = {
+      annotatedUsers,
       authorId: getState().usersInfo.currentUserId,
       text,
       channelId: getState().channelListing.selectedChannel,

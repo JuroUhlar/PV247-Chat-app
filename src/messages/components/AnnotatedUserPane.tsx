@@ -4,11 +4,11 @@ import * as PropTypes from 'prop-types';
 import { IAnnotatedUser } from './Message';
 import { Avatar } from '../../profile/components/Avatar';
 
-interface IAnnotatedUserPane {
-  annotatedUsers: Immutable.List<IAnnotatedUser>;
+interface IAnnotatedUserPaneProps {
+  readonly annotatedUsers: Immutable.List<IAnnotatedUser>;
 }
 
-export const AnnotatedUserPane: React.SFC<IAnnotatedUserPane> = ({ annotatedUsers }) => (
+export const AnnotatedUserPane: React.SFC<IAnnotatedUserPaneProps> = ({ annotatedUsers }) => (
   !annotatedUsers.isEmpty() ? (
     <ul className="annotated-user--pane">
       {annotatedUsers.map((user: IAnnotatedUser) => (
