@@ -53,6 +53,9 @@ const fetchAllUsersFactory = (dependencies: IFetchAllUsersFactoryDependencies) =
       .then(json => {
         const users = Array.from(json);
         users.forEach((user: IUserServerModel) => {
+          if (!user.email) {
+            return;
+          }
           const clientUser = convertServerToViewUserModel(user);
           clientUsers = clientUsers.set(clientUser.id, clientUser);
         });
