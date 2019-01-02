@@ -438,3 +438,7 @@ body, html, .full-height {
   padding: 0px;
   border-top: solid 1px #00778b;
 }
+
+.rdw-option-wrapper:hover {
+  background-color: #e6f3ed;
+}

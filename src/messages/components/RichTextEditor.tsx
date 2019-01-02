@@ -11,7 +11,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { AnnotateUserOptionContainer } from '../containers/AnnotateUserOptionContainer';
 
 export interface IRichTextEditorCallbackProps {
-  readonly onSendMessage: (text: RawDraftContentState, annotatedUsers?: Immutable.Set<Uuid>) => void;
+  readonly onSendMessage: (text: RawDraftContentState, annotatedUserIds?: Immutable.Set<Uuid>) => void;
 }
 
 export interface IRichTextEditorDataProps {
@@ -21,7 +21,7 @@ type RichTextEditorProps = IRichTextEditorCallbackProps & IRichTextEditorDataPro
 
 interface IRichTextEditorStateProps {
   readonly editorState: EditorState;
-  readonly annotatedUsers: Immutable.Set<Uuid>;
+  readonly annotatedUserIds: Immutable.Set<Uuid>;
 }
 
 export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRichTextEditorStateProps> {
@@ -34,15 +34,15 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
     super(props);
     this.state = {
       editorState: EditorState.createEmpty(),
-      annotatedUsers: Immutable.Set<Uuid>(),
+      annotatedUserIds: Immutable.Set<Uuid>(),
     };
   }
 
   _onEditorStateChange = (editorState: EditorState) => (this.setState(() => ({ editorState })));
 
 
-  _handleAnnotateUsers = (users: Immutable.Set<Uuid>) => {
-    this.setState(() => ({ annotatedUsers: users }));
+  _handleAnnotationChange = (userIds: Immutable.Set<Uuid>) => {
+    this.setState(() => ({ annotatedUserIds: userIds }));
   };
 
   _handleSendText = () => {
@@ -50,16 +50,16 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
     const rawContent = convertToRaw(contentState);
     const hasText = !!rawContent.blocks[0].text;
     if (hasText) {
-      this.props.onSendMessage(rawContent, this.state.annotatedUsers);
+      this.props.onSendMessage(rawContent, this.state.annotatedUserIds);
       this.setState(() => ({
         editorState: EditorState.createEmpty(),
-        annotatedUsers: Immutable.Set<Uuid>(),
+        annotatedUserIds: Immutable.Set<Uuid>(),
       }));
     }
   };
 
   render() {
-    const { editorState } = this.state;
+    const { editorState, annotatedUserIds } = this.state;
     return (
       <div className="writing-view-cont">
         <Editor
@@ -68,7 +68,12 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
           wrapperClassName="wrapperClassName"
           editorClassName="editorClassName"
           onEditorStateChange={this._onEditorStateChange}
-          toolbarCustomButtons={[<AnnotateUserOptionContainer onAnnotate={this._handleAnnotateUsers} key="annotateUsers"/>]}
+          toolbarCustomButtons={[
+            <AnnotateUserOptionContainer
+              onAnnotationChange={this._handleAnnotationChange}
+              annotatedUserIds={annotatedUserIds}
+              key="annotateUsers"
+            />]}
         />
         <div
           className="send-btn-holder"

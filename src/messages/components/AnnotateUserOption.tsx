@@ -11,46 +11,55 @@ import { Avatar } from '../../profile/components/Avatar';
 
 export interface IAnnotateUserOptionProps {
   readonly users: Immutable.List<IUser>;
-  readonly onAnnotate: (users: Immutable.Set<Uuid>) => void;
+  readonly onAnnotationChange: (users: Immutable.Set<Uuid>) => void;
+  readonly annotatedUserIds: Immutable.Set<Uuid>;
 }
 
 export interface IAnnotateUserOptionStateProps {
   readonly isOpen: boolean;
-  readonly annotatedUsers: Immutable.Set<Uuid>;
+  readonly annotatedUserIds: Immutable.Set<Uuid>;
 }
 
 export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionProps, IAnnotateUserOptionStateProps> {
   static displayName = 'AnnotateUserOption';
   static propTypes = {
     users: PropTypes.object.isRequired,
+    annotatedUserIds: PropTypes.object.isRequired,
 
-    onAnnotate: PropTypes.func.isRequired,
+    onAnnotationChange: PropTypes.func.isRequired,
   };
 
   constructor(props: IAnnotateUserOptionProps) {
     super(props);
     this.state = {
       isOpen: false,
-      annotatedUsers: Immutable.Set<Uuid>(),
+      annotatedUserIds: props.annotatedUserIds,
     };
   }
 
-  _toggleAnnotated(id: Uuid, userIds: Immutable.Set<Uuid>): Immutable.Set<Uuid> {
-    if (userIds.contains(id)) {
-      return userIds.remove(id);
+  componentWillReceiveProps(nextProps: IAnnotateUserOptionProps) {
+    const { annotatedUserIds } = nextProps;
+    if (!annotatedUserIds.equals(this.state.annotatedUserIds)) {
+      this.setState(() => ({ annotatedUserIds }));
     }
-    return userIds.add(id);
   }
 
-  _handleUserCheck = (id: Uuid) => () => {
-    const newUserIds = this._toggleAnnotated(id, this.state.annotatedUsers);
-    this.setState(() => ({
-      annotatedUsers: newUserIds
-    }));
+  _toggleAnnotated(id: Uuid): Immutable.Set<Uuid> {
+    const { annotatedUserIds } = this.state;
+    if (annotatedUserIds.contains(id)) {
+      return annotatedUserIds.remove(id);
+    }
+    return annotatedUserIds.add(id);
+  }
+
+  _handleUserTick = (id: Uuid) => () => {
+    const newUserIds = this._toggleAnnotated(id);
+    this.setState(() => ({ annotatedUserIds: newUserIds }));
   };
 
   _handleAnnotate = () => {
-    this.props.onAnnotate(this.state.annotatedUsers);
+    const { onAnnotationChange } = this.props;
+    onAnnotationChange(this.state.annotatedUserIds);
     this._closeModal();
   };
 
@@ -62,14 +71,16 @@ export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionP
     this.setState(() => ({ isOpen: true }));
   };
 
-  _isChecked = (userId: Uuid) => (this.state.annotatedUsers.contains(userId));
+  _isChecked = (userId: Uuid) => (
+    this.state.annotatedUserIds.contains(userId)
+  );
 
   render() {
     return (
       <div>
-        <Button onClick={this._openModal}>
+        <div className="rdw-option-wrapper" onClick={this._openModal}>
           @
-        </Button>
+        </div>
         <Modal
           onHide={this._closeModal}
           show={this.state.isOpen}
@@ -84,7 +95,7 @@ export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionP
               return (
                 <Checkbox
                   key={user.id}
-                  onChange={this._handleUserCheck(user.id)}
+                  onChange={this._handleUserTick(user.id)}
                   checked={this._isChecked(user.id)}
                 >
                   <div className="annotated-user">
