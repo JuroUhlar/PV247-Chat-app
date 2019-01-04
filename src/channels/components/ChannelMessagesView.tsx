@@ -14,12 +14,14 @@ import { Spinner } from '../../shared/components/Spinner';
 export interface IChannelViewDataProps extends RouteComponentProps {
   readonly channelName: string;
   readonly currentChannelId: Uuid;
+  readonly areUsersLoaded: boolean;
 }
 
 export class ChannelMessagesView extends React.PureComponent<IChannelViewDataProps> {
   static displayName = 'ChannelMessagesView';
   static propTypes = {
     channelName: PropTypes.string.isRequired,
+    areUsersLoaded: PropTypes.bool.isRequired,
     currentChannelId: PropTypes.string.isRequired,
     ...withRouterPropTypes,
   };
@@ -35,14 +37,14 @@ export class ChannelMessagesView extends React.PureComponent<IChannelViewDataPro
   }
 
   render() {
-    const { channelName, currentChannelId, history } = this.props;
+    const { channelName, currentChannelId, areUsersLoaded, history } = this.props;
     return (
       <span>
     <div className="top-bar-cont">
       <h1>{channelName}</h1>
     </div>
     <div className="channel-view-cont">
-      {currentChannelId ?
+      {currentChannelId && areUsersLoaded ?
         <Route
           path={SPECIFIC_CHANNEL_VIEW_ROUTE(currentChannelId)}
           location={history.location}

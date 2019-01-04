@@ -11,6 +11,7 @@ const mapStateToProps = (state: IState, ownProps: RouteComponentProps<any>): ICh
     ...ownProps,
     currentChannelId,
     channelName: currentChannel.name,
+    areUsersLoaded: !state.usersInfo.users.isEmpty(),
   };
 };
 
