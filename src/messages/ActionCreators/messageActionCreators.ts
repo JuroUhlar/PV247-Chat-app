@@ -53,7 +53,7 @@ export const failToDeleteMessage = (id: string, error: Error): Action => ({
   payload: { id, errorMessage: error.message || 'Message was not deleted' },
 });
 
-export const createMessage = createMessageFactory(uuid);
+export const createMessage = createMessageFactory(uuid, Date.now);
 
 export const succeedToPostMessage = (json: object): Action => ({
   type: MESSAGES_POST__SUCCESS,

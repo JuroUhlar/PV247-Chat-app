@@ -14,18 +14,13 @@ export const createdAt = '2019-01-02T19:22:25Z';
 export const bobId = 'fea7b47c-0a43-45ce-97a3-bda43ce7a1bc';
 
 export const likedByBobPopularity = new MessagePopularity({
-  likes: Immutable.Set<Uuid>([authorId, bobId]),
+  likes: Immutable.Set<Uuid>([bobId]),
   dislikes: Immutable.Set<Uuid>(),
 });
 
 export const dislikedByBobPopularity = new MessagePopularity({
-  likes: Immutable.Set<Uuid>([authorId]),
+  likes: Immutable.Set<Uuid>([]),
   dislikes: Immutable.Set<Uuid>([bobId]),
-});
-
-export const neutralByBobPopularity = new MessagePopularity({
-  likes: Immutable.Set<Uuid>([authorId]),
-  dislikes: Immutable.Set<Uuid>(),
 });
 
 export const popularMessage = (popularity: IMessagePopularity) => new Message({

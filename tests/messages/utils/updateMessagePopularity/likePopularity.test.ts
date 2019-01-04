@@ -2,16 +2,16 @@ import {
   bobId,
   dislikedByBobPopularity,
   likedByBobPopularity,
-  neutralByBobPopularity,
   popularMessage
 } from '../../../helpers/messages';
 import { likePopularity } from '../../../../src/messages/utils/updateMessagePopularity';
+import { MessagePopularity } from '../../../../src/messages/models/MessagePopularity';
 
 describe('Correctly changes the popularity of a message if liked', () => {
   const testCases = [
     {
       caseName: 'likes a message if the user has not shown their preference',
-      messageToBeLiked: popularMessage(neutralByBobPopularity),
+      messageToBeLiked: popularMessage(new MessagePopularity()),
       expectedMessage: popularMessage(likedByBobPopularity),
     },
     {

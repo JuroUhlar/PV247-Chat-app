@@ -8,9 +8,9 @@ import {
   authorId,
   createdAt,
   messageId,
-  neutralByBobPopularity,
   text
 } from '../../../helpers/messages';
+import { MessagePopularity } from '../../../../src/messages/models/MessagePopularity';
 
 describe('Correctly converts from the client to the server model', () => {
   it('returns the clientModel when a serverModel is received', () => {
@@ -19,7 +19,7 @@ describe('Correctly converts from the client to the server model', () => {
       timestamp: Date.parse(createdAt),
       id: messageId,
       text: JSON.parse(text),
-        popularity: neutralByBobPopularity,
+        popularity: new MessagePopularity(),
       annotatedUsers,
     });
 
@@ -27,7 +27,7 @@ describe('Correctly converts from the client to the server model', () => {
       value: text,
       customData: {
         clientId: messageId,
-        popularity: neutralByBobPopularity,
+        popularity: new MessagePopularity(),
         authorId,
         annotatedUsers,
       }

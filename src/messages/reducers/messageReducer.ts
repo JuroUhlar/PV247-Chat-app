@@ -25,11 +25,11 @@ export const messageReducer = (prevState: IMessage = new Message(), action: Acti
     }
 
     case MESSAGE_CREATE: {
-      const { id, authorId, text, channelId } = action.payload;
+      const { id, authorId, text, channelId, timeStamp } = action.payload;
       const newMessage = new Message({
-        messageId: id,
+        id,
         text,
-        timeStamp: Date.now(),
+        timeStamp,
         authorId,
         channelId,
         popularity: new MessagePopularity(),

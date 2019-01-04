@@ -33,7 +33,7 @@ export const messagesReducer = (prevState: Immutable.OrderedMap<Uuid, IMessage> 
           (entry[0] === oldId)
             ? [ updatedMessage.id, updatedMessage ]
             : entry)
-        .toMap();
+        .toOrderedMap();
     }
 
     case MESSAGE_DELETE: {

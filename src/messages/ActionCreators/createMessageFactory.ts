@@ -7,7 +7,7 @@ export interface ICreateMessageDependencies {
   readonly channelId: Uuid;
 }
 
-export const createMessageFactory = (idGenerator: () => Uuid): ((dependencies: ICreateMessageDependencies) => Action) =>
+export const createMessageFactory = (idGenerator: () => Uuid, timestampGenerator: () => number): ((dependencies: ICreateMessageDependencies) => Action) =>
   (dependencies: ICreateMessageDependencies): Action => ({
     type: MESSAGE_CREATE,
     payload: {
@@ -15,5 +15,6 @@ export const createMessageFactory = (idGenerator: () => Uuid): ((dependencies: I
       text: dependencies.text,
       channelId: dependencies.channelId,
       authorId: dependencies.authorId,
+      timeStamp: timestampGenerator(),
     },
   });
