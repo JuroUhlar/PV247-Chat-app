@@ -1,8 +1,7 @@
 import * as Immutable from 'immutable';
 import {
   IUser,
-  User,
-  UserServerModel
+  User
 } from '../../../src/profile/models/User';
 import {
   firstUserAvatarPath,

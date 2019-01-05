@@ -42,7 +42,7 @@ interface IFetchAllUsersFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const fetchAllUsersFactory = (dependencies: IFetchAllUsersFactoryDependencies) =>
+export const fetchAllUsersFactory = (dependencies: IFetchAllUsersFactoryDependencies) =>
   (): any => (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
