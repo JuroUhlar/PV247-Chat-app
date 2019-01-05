@@ -338,12 +338,12 @@ body, html, .full-height {
 }
 
 .channel-view-cont {
-  height: 65%;
+  height: 60%;
   overflow-y: scroll;
   background-color: white;
 }
 .writing-view-cont {
-  height: 25%;
+  height: 29%;
   background-color: white;
 }
 
@@ -439,12 +439,29 @@ body, html, .full-height {
   border-top: solid 1px #00778b;
 }
 
-.rdw-image-modal, .rdw-emoji-modal, .rdw-embedded-modal, .rdw-link-modal, .rdw-colorpicker-modal {
+.rdw-image-modal,
+.rdw-emoji-modal,
+.rdw-embedded-modal,
+.rdw-link-modal,
+.rdw-colorpicker-modal {
   right: 97%;
   left: unset;
   top: unset;
 }
 
+.rdw-link-modal-input,
+.rdw-embedded-modal-link-input,
+.rdw-embedded-modal-size-input,
+.rdw-image-modal-size-input,
+.rdw-image-modal-url-input,
+.rdw-dropdown-optionwrapper {
+  border: solid 1px #91a2b7;
+}
+
 .rdw-option-wrapper:hover {
   background-color: #e6f3ed;
+}
+
+.rdw-dropdown-optionwrapper {
+  max-height: 400%;
 }
