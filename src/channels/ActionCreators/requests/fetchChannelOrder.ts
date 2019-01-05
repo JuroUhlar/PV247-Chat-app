@@ -5,10 +5,12 @@ import {
   requestChannelOrder,
   succeedToFetchChannelOrder
 } from '../channelActionCreators';
+import { history } from '../../../shared/components/AppWrapper';
 
 import {
   SERVER_ROUTE,
-  APP_ROUTE
+  APP_ROUTE,
+  SPECIFIC_CHANNEL_VIEW_ROUTE
 } from '../../../shared/constants/routes';
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
@@ -41,7 +43,10 @@ const fetchChannelOrderFactory = (dependencies: IFetchChannelOrderFactoryDepende
 
     return dependencies.fetch()
       .then(response => response.json())
-      .then((appData: AppData) => dispatch(dependencies.success(appData)))
+      .then((appData: AppData) => {
+        history.push(SPECIFIC_CHANNEL_VIEW_ROUTE(appData.customData.channelsOrder[0]));
+        return dispatch(dependencies.success(appData));
+      })
       .catch((error: Error) => dispatch(dependencies.error(error)));
   };
 

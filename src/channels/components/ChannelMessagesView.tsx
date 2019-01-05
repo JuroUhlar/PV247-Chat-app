@@ -26,16 +26,6 @@ export class ChannelMessagesView extends React.PureComponent<IChannelViewDataPro
     ...withRouterPropTypes,
   };
 
-  // TODO: change to componentWillReceive props with an appropriate condition after currentChannelId will be filled in from the server
-  componentDidMount() {
-    const { history } = this.props;
-    const nextCurrentChannelId = this.props.currentChannelId;
-
-    if (nextCurrentChannelId !== null) {
-      history.push(SPECIFIC_CHANNEL_VIEW_ROUTE(nextCurrentChannelId));
-    }
-  }
-
   render() {
     const { channelName, currentChannelId, areUsersLoaded, history } = this.props;
     return (
