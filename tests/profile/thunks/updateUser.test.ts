@@ -29,10 +29,10 @@ describe('Correctly resolves updateUser: ', () => {
   const updateFail = () => Promise.resolve({ json: (): Promise<Error> => Promise.reject(new Error('User could not be updated')) });
   let fakeDispatch: jest.Mock<Dispatch>;
   const fakeAction = (payload: string): Action => ({ type: 'UNKNOWN', payload });
-  const fakeReceived = () => fakeAction('SUCCESS');
-  const fakeFailed = () => fakeAction('ERROR');
-  const fakeUpdateAvatar = () => fakeAction('UPDATE_AVATAR');
-  const fakeUpdateUsername = () => fakeAction('UPDATE_USERNAME');
+  const fakeReceived = () => fakeAction('success');
+  const fakeFailed = () => fakeAction('error');
+  const fakeUpdateAvatar = () => fakeAction('update_avatar');
+  const fakeUpdateUsername = () => fakeAction('update_avatar');
   const getState = (): any => {
     return {
       usersInfo: {

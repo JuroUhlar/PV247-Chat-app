@@ -38,9 +38,9 @@ describe('Correctly resolves fetchUsers: ', () => {
   const fetchFail = () => Promise.resolve({ json: (): Promise<Error> => Promise.reject(new Error('Users could not be fetched')) });
   let fakeDispatch: jest.Mock<Dispatch>;
   const fakeAction = (payload: string): Action => ({ type: 'UNKNOWN', payload });
-  const fakeRequest = () => fakeAction('USERS_REQUEST');
-  const fakeReceived = () => fakeAction('USERS_SUCCESS');
-  const fakeFailed = () => fakeAction('ERROR');
+  const fakeRequest = () => fakeAction('request');
+  const fakeReceived = () => fakeAction('success');
+  const fakeFailed = () => fakeAction('error');
   const fakeIdGenerator = () => '98dbde18-639e-49a6-8e51-603ceb2ae92d';
   const testCases = [
     { name: ' succeeding', fetch: fetchSuccess },
