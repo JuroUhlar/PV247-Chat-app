@@ -21,10 +21,10 @@ describe('Correctly resolves postUser: ', () => {
   const postFailImmediately = () => Promise.reject(new Error('User could not be posted'));
   const postFail = () => Promise.resolve({ json: (): Promise<Error> => Promise.reject(new Error('User could not be posted')) });
   let fakeDispatch: jest.Mock<Dispatch>;
-  const fakeAction = (payload: string): Action => ({ type: 'unknown', payload });
-  const fakeReceived = () => fakeAction('success');
-  const fakeFailed = () => fakeAction('error');
-  const fakeAddUser = () => fakeAction('add');
+  const fakeAction = (payload: string): Action => ({ type: 'UNKNOWN', payload });
+  const fakeReceived = () => fakeAction('SUCCESS');
+  const fakeFailed = () => fakeAction('ERROR');
+  const fakeAddUser = () => fakeAction('ADD');
   const fakeIdGenerator = () => firstUserId;
   const postUser = (post: () => Promise<any>) => postUserFactory({
     success: fakeReceived,
