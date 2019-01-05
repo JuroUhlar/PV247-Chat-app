@@ -1,4 +1,4 @@
-import { createMessageFactory } from '../../../src/messages/ActionCreators/createMessageFactory';
+import { createMessageFactory } from '../../../src/messages/actionCreators/createMessageFactory';
 import {
   annotatedUsers,
   authorId,
@@ -18,7 +18,7 @@ import {
   dislikeMessage,
   likeMessage,
   succeedToPostMessage
-} from '../../../src/messages/ActionCreators/messageActionCreators';
+} from '../../../src/messages/actionCreators/messageActionCreators';
 import { MessagePopularity } from '../../../src/messages/models/MessagePopularity';
 
 describe('messageReducer works correctly with single messages', () => {

@@ -15,13 +15,13 @@ import {
   text
 } from '../../helpers/messages';
 import { MessagePopularity } from '../../../src/messages/models/MessagePopularity';
-import { createMessageFactory } from '../../../src/messages/ActionCreators/createMessageFactory';
+import { createMessageFactory } from '../../../src/messages/actionCreators/createMessageFactory';
 import {
   deleteMessage,
   likeMessage,
   succeedToFetchMessages,
   succeedToPostMessage
-} from '../../../src/messages/ActionCreators/messageActionCreators';
+} from '../../../src/messages/actionCreators/messageActionCreators';
 import { Uuid } from '../../helpers/types';
 
 describe('messagesReducer works correctly with messages', () => {

@@ -9,9 +9,9 @@ import {
 import {
   dislikeMessageRequest,
   likeMessageRequest
-} from '../ActionCreators/requests/updateMessage';
+} from '../actionCreators/requests/updateMessage';
 import { IState } from '../../shared/models/IState';
-import { deleteMessageRequest } from '../ActionCreators/requests/deleteMessage';
+import { deleteMessageRequest } from '../actionCreators/requests/deleteMessage';
 import { IMessage } from '../models/Message';
 import { getUser } from '../../profile/utils/usersUtils';
 

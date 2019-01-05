@@ -7,7 +7,7 @@ import {
   MessageListingWrapper,
 } from '../components/MessageListingWrapper';
 import { IState } from '../../shared/models/IState';
-import { fetchMessages } from '../ActionCreators/requests/fetchMessages';
+import { fetchMessages } from '../actionCreators/requests/fetchMessages';
 
 const mapStateToProps = (state: IState): IMessageListingWrapperDataProps => ({
   isLoading: state.appInfo.isLoadingMessages,

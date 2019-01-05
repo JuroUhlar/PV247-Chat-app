@@ -8,7 +8,7 @@ import { messagePopularityReducer } from '../../../src/messages/reducers/message
 import {
   dislikeMessage,
   likeMessage
-} from '../../../src/messages/ActionCreators/messageActionCreators';
+} from '../../../src/messages/actionCreators/messageActionCreators';
 
 describe('messagePopularityReducer likes and dislikes messages correctly', () => {
   const likeAction = likeMessage(messageId, bobId);
