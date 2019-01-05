@@ -1,13 +1,12 @@
 import * as Immutable from 'immutable';
-import { CHANNEL_CREATE, CHANNEL_DELETE, CHANNELS_POST__SUCCESS, CHANNELS_REORDER,
-    CHANNELS_FETCH__SUCCESS,
-   CHANNELS_ORDER_FETCH__SUCCESS
-  } from '../../shared/constants/actionTypes';
-import { getInitialChannels } from '../utils/getInitialChannels';
+import {
+  CHANNEL_CREATE, CHANNEL_DELETE, CHANNELS_POST__SUCCESS, CHANNELS_REORDER,
+  CHANNELS_FETCH__SUCCESS,
+  CHANNELS_ORDER_FETCH__SUCCESS
+} from '../../shared/constants/actionTypes';
 import { IChannelServerModel } from '../models/Channel';
 
-
-const initialState = getInitialChannels().keySeq().toOrderedSet();
+const initialState: Immutable.OrderedSet<Uuid> = Immutable.OrderedSet([]);
 
 export const channelIdsReducer = (prevState: Immutable.OrderedSet<Uuid> = initialState, action: Action):
   Immutable.OrderedSet<Uuid> => {
@@ -34,7 +33,7 @@ export const channelIdsReducer = (prevState: Immutable.OrderedSet<Uuid> = initia
       const serverId = channel.id;
 
       return prevState
-        .map((id: Uuid) => (id === oldId) ?  serverId : id)
+        .map((id: Uuid) => (id === oldId) ? serverId : id)
         .toOrderedSet();
     }
 

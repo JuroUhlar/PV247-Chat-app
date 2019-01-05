@@ -84,18 +84,22 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
               <ol className="channels-ordered-list" ref={provided.innerRef}>
                 {this.props.channelIds.toArray().map((channelId: Uuid, index: number) => {
                   const channel = this.props.channels.get(channelId);
-                  return (
-                    <li key={channel.id}>
-                      <ChannelBarItem
-                        channelName={channel.name}
-                        channelId={channel.id}
-                        key={channel.id}
-                        channelIndex={index}
-                        onSelectChannel={this.props.onSelectChannel}
-                        onDeleteChannel={this.props.onDeleteChannel}
-                      />
-                    </li>
-                  );
+                  if (channel) {
+                    return (
+                      <li key={channel.id}>
+                        <ChannelBarItem
+                          channelName={channel.name}
+                          channelId={channel.id}
+                          key={channel.id}
+                          channelIndex={index}
+                          onSelectChannel={this.props.onSelectChannel}
+                          onDeleteChannel={this.props.onDeleteChannel}
+                        />
+                      </li>
+                    );
+                   } else {
+                     return null;
+                   }
                 })}
                 {provided.placeholder}
               </ol>

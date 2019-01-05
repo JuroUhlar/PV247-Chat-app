@@ -2,11 +2,9 @@ import * as Immutable from 'immutable';
 import { IChannel, Channel, IChannelServerModel } from '../models/Channel';
 import { CHANNEL_CREATE, CHANNEL_UPDATE, CHANNEL_DELETE,
          CHANNELS_FETCH__SUCCESS, CHANNELS_POST__SUCCESS} from '../../shared/constants/actionTypes';
-import { getInitialChannels } from '../utils/getInitialChannels';
 import { convertServerToViewChannelModel } from '../utils/convertChannelModels';
 
-const initialState = getInitialChannels();
-// const initialState = Immutable.Map<Uuid, IChannel>();
+const initialState = Immutable.Map<Uuid, IChannel>([]);
 
 export const channelsReducer = (prevState: Immutable.Map<Uuid, IChannel> = initialState, action: Action): Immutable.Map<Uuid, IChannel> => {
   switch (action.type) {
