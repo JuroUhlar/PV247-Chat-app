@@ -1,13 +1,6 @@
 import * as Immutable from 'immutable';
 import { Record } from 'immutable';
 
-// export interface IChannel {
-//   readonly id: Uuid;
-//   name: string;
-//   // users: [Uuid];
-//   users: Immutable.List<Uuid>;
-// }
-
 export interface IChannelData {
   readonly id: Uuid;
   readonly name: string;
@@ -42,8 +35,7 @@ export interface IChannelServerModel {
   readonly id: Uuid;
   readonly name: string;
   readonly customData: {
-    users: [];
-    orderIndex: number;
+    users: Uuid[];
     clientId: Uuid;
   };
 }
@@ -62,8 +54,7 @@ export class ChannelServerModel extends Record(channelServerModelRecordData) imp
   readonly id: Uuid;
   readonly name: string;
   readonly customData: {
-    users: [],
-    orderIndex: number,
+    users: Uuid[],
     clientId: Uuid,
   };
 }

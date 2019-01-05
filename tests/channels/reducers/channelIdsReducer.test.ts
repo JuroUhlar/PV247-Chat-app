@@ -14,6 +14,7 @@ import {
 } from '../../helpers/channels';
 import * as Immutable from 'immutable';
 import { ICreateChannelDependencies, createChannelFactory } from '../../../src/channels/ActionCreators/createChannelFactory';
+import { Uuid } from '../../helpers/types';
 
 describe('channelIdsReducer correctly keeps track of all channels in the app', () => {
   it('loads up channels from server in reverse order', () => {

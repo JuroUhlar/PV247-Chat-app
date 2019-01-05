@@ -1,9 +1,11 @@
-import { Channel } from '../../src/channels/models/Channel';
+import { Channel, ChannelServerModel } from '../../src/channels/models/Channel';
 import { user1Id, user2Id } from './users';
 import * as Immutable from 'immutable';
+import { Uuid } from './types';
 
 
-export const channelUsers = Immutable.List([user1Id, user2Id]);
+export const channelUsersArray = [user1Id, user2Id];
+export const channelUsers = Immutable.List<Uuid>(channelUsersArray);
 
 export const channel1 = new Channel({
   name: 'General',
@@ -11,10 +13,28 @@ export const channel1 = new Channel({
   users: channelUsers
 });
 
+export const channel1server = new ChannelServerModel ({
+  name: channel1.name,
+  id: channel1.id,
+  customData: {
+    users: channel1.users.toArray(),
+    clientId: channel1.id
+  }
+});
+
 export const channel2 = new Channel({
   name: 'Random',
   id: 'b9b0e2b0-ed4c-4a3a-ac28-4e34cc2009a7',
   users: channelUsers
+});
+
+export const channel2server = new ChannelServerModel ({
+  name: channel2.name,
+  id: channel2.id,
+  customData: {
+    users: channel2.users.toArray(),
+    clientId: channel2.id
+  }
 });
 
 export const channel3 = new Channel({
