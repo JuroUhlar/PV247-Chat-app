@@ -48,8 +48,7 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
   _handleSendText = () => {
     const contentState = this.state.editorState.getCurrentContent();
     const rawContent = convertToRaw(contentState);
-    const relevantBlocks = rawContent.blocks[0];
-    const hasTextOrData = !!relevantBlocks.text || !!relevantBlocks.data;
+    const hasTextOrData = !!rawContent.blocks[0].text || !!rawContent.entityMap[0];
     if (hasTextOrData) {
       this.props.onSendMessage(rawContent, this.state.annotatedUserIds);
       this.setState(() => ({
