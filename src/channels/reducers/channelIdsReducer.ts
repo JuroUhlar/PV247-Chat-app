@@ -6,7 +6,7 @@ import {
 } from '../../shared/constants/actionTypes';
 import { IChannelServerModel } from '../models/Channel';
 
-const initialState: Immutable.OrderedSet<Uuid> = Immutable.OrderedSet([]);
+const initialState: Immutable.OrderedSet<Uuid> = Immutable.OrderedSet();
 
 export const channelIdsReducer = (prevState: Immutable.OrderedSet<Uuid> = initialState, action: Action):
   Immutable.OrderedSet<Uuid> => {

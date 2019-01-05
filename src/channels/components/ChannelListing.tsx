@@ -4,7 +4,12 @@ import * as Immutable from 'immutable';
 import { ChannelBarItem } from './ChannelBarItem';
 import { ChannelEditModalContainer } from '../containers/ChannelEditModalContainer';
 import { IChannel } from '../models/Channel';
-import { DragDropContext, DropResult, Droppable, DroppableProvided } from 'react-beautiful-dnd';
+import {
+  DragDropContext,
+  Droppable,
+  DroppableProvided,
+  DropResult
+} from 'react-beautiful-dnd';
 
 export interface IChannelListingDataProps {
   readonly channels: Immutable.Map<Uuid, IChannel>;
@@ -73,8 +78,10 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
       <>
         <div className="channel-taskbar">
           <span className="channel-taskbar_title">Channels</span>
-          <span className="glyphicon glyphicon-plus add-channel-icon" title="Add a channel" onClick={this._openModal}
-            aria-hidden="true" />
+          <span className="glyphicon glyphicon-plus add-channel-icon"
+                title="Add a channel"
+                onClick={this._openModal}
+                aria-hidden="true"/>
         </div>
         <DragDropContext
           onDragEnd={this._onDragEnd}
@@ -84,29 +91,24 @@ export class ChannelListing extends React.PureComponent<ChannelListingProps, ICh
               <ol className="channels-ordered-list" ref={provided.innerRef}>
                 {this.props.channelIds.toArray().map((channelId: Uuid, index: number) => {
                   const channel = this.props.channels.get(channelId);
-                  if (channel) {
-                    return (
-                      <li key={channel.id}>
-                        <ChannelBarItem
-                          channelName={channel.name}
-                          channelId={channel.id}
-                          key={channel.id}
-                          channelIndex={index}
-                          onSelectChannel={this.props.onSelectChannel}
-                          onDeleteChannel={this.props.onDeleteChannel}
-                        />
-                      </li>
-                    );
-                   } else {
-                     return null;
-                   }
+                  return channel ? (
+                    <li key={channel.id}>
+                      <ChannelBarItem
+                        channelName={channel.name}
+                        channelId={channel.id}
+                        key={channel.id}
+                        channelIndex={index}
+                        onSelectChannel={this.props.onSelectChannel}
+                        onDeleteChannel={this.props.onDeleteChannel}
+                      />
+                    </li>) : null;
                 })}
                 {provided.placeholder}
               </ol>
             )}
           </Droppable>
         </DragDropContext>
-        <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this._closeModal} />
+        <ChannelEditModalContainer show={this.state.showChannelModal} onClose={this._closeModal}/>
       </>
     );
   }
