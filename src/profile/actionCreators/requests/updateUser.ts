@@ -47,7 +47,7 @@ const updateUserFactoryDependencies = {
     .then(response => checkStatus(response))
 };
 
-const updateUserFactory = (dependencies: IUpdateUserFactoryDependencies) =>
+export const updateUserFactory = (dependencies: IUpdateUserFactoryDependencies) =>
   (data: IUserUpdateData): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     const { updatedAvatarPath, updatedUsername } = data;
     const currentUser = getCurrentUser(getState().usersInfo);
