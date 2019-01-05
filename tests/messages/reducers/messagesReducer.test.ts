@@ -104,7 +104,7 @@ describe('messagesReducer works correctly with messages', () => {
     });
     const successAction = succeedToFetchMessages(serverMessages);
 
-    const tested = messagesReducer(initialState, successAction);
+    const tested = messagesReducer(undefined, successAction);
 
     expect(tested).toEqual(expectedState);
   });

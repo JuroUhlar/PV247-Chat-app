@@ -3,6 +3,7 @@ import { IUser } from '../models/User';
 import {
   USER_CHANGE_AVATAR,
   USER_CHANGE_USERNAME,
+  USER_CREATE,
   USERS_ALL_FETCH__SUCCESS
 } from '../../shared/constants/actionTypes';
 import { userReducer } from './userReducer';
@@ -15,6 +16,11 @@ export const usersReducer = (prevState: Immutable.Map<Uuid, IUser> = initialStat
     case USERS_ALL_FETCH__SUCCESS: {
       const users = action.payload.users;
       return users;
+    }
+
+    case USER_CREATE: {
+      const newUser = userReducer(undefined, action);
+      return prevState.set(action.payload.id, newUser);
     }
 
     case USER_CHANGE_AVATAR:

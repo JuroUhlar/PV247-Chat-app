@@ -15,3 +15,8 @@ export const user2 = new User({
   name: 'user2',
   avatarPath: 'www.path2.com',
 });
+
+export const firstUserId = user1Id;
+export const firstUserEmail = 'firstUser@email.com';
+export const firstUserName = 'firstUserName';
+export const firstUserAvatarPath = 'www.firstPath.com';
