@@ -33,7 +33,7 @@ export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionP
     super(props);
     this.state = {
       isOpen: false,
-      annotatedUserIds: props.annotatedUserIds,
+      annotatedUserIds: Immutable.Set<Uuid>(),
     };
   }
 
@@ -54,7 +54,9 @@ export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionP
 
   _handleUserTick = (id: Uuid) => () => {
     const newUserIds = this._toggleAnnotated(id);
-    this.setState(() => ({ annotatedUserIds: newUserIds }));
+    // This component receives empty props.annotatedUserIds every fake message request for some reason.
+    // Therefore this function is called and not just set.state
+    this.props.onAnnotationChange(newUserIds);
   };
 
   _handleAnnotate = () => {
@@ -111,23 +113,12 @@ export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionP
           </Modal.Body>
 
           <Modal.Footer className="form-group">
-            <div className="form-group">
-              <div className="row">
-                <div className="col-sm-6">
                   <Button
-                    className="btn-block"
-                    onClick={this._closeModal}
-                  >Close</Button>
-                </div>
-                <div className="col-sm-6">
-                  <Button
+                    block
                     className="btn-block"
                     bsStyle="primary"
                     onClick={this._handleAnnotate}
                   >Annotate selected users</Button>
-                </div>
-              </div>
-            </div>
           </Modal.Footer>
         </Modal>
       </div>
