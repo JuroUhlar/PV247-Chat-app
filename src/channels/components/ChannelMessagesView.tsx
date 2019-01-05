@@ -12,17 +12,17 @@ import { MessageListingWrapperContainer } from '../../messages/containers/Messag
 import { Spinner } from '../../shared/components/Spinner';
 
 export interface IChannelViewDataProps extends RouteComponentProps {
-  readonly channelName: string;
-  readonly currentChannelId: Uuid;
+  readonly channelName: string | null;
+  readonly currentChannelId: Uuid | null;
   readonly areUsersLoaded: boolean;
 }
 
 export class ChannelMessagesView extends React.PureComponent<IChannelViewDataProps> {
   static displayName = 'ChannelMessagesView';
   static propTypes = {
-    channelName: PropTypes.string.isRequired,
+    channelName: PropTypes.string,
     areUsersLoaded: PropTypes.bool.isRequired,
-    currentChannelId: PropTypes.string.isRequired,
+    currentChannelId: PropTypes.string,
     ...withRouterPropTypes,
   };
 
@@ -31,7 +31,7 @@ export class ChannelMessagesView extends React.PureComponent<IChannelViewDataPro
     return (
       <span>
     <div className="top-bar-cont">
-      <h1>{channelName}</h1>
+      <h1>{channelName ? channelName : null}</h1>
     </div>
     <div className="channel-view-cont">
       {currentChannelId && areUsersLoaded ?

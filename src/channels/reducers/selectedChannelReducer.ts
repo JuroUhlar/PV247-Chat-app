@@ -1,8 +1,8 @@
 import { CHANNEL_SELECT, CHANNELS_ORDER_FETCH__SUCCESS } from '../../shared/constants/actionTypes';
 
-const initialState = 'no channel selected';
+const initialState = null;
 
-export const selectedChannelReducer = (prevState: Uuid = initialState, action: Action): Uuid => {
+export const selectedChannelReducer = (prevState: Uuid | null = initialState, action: Action): Uuid | null => {
   switch (action.type) {
     case CHANNEL_SELECT: {
       const { id } = action.payload;
