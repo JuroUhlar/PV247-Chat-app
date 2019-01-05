@@ -12,6 +12,7 @@ import * as Immutable from 'immutable';
 import { IUser } from '../../profile/models/User';
 import { List } from 'immutable';
 import { ICreateChannelDependencies } from '../ActionCreators/createChannelFactory';
+import { toggleChannelMember } from '../utils/channelUtils';
 
 
 export interface IChannelEditModalStateProps {
@@ -62,7 +63,7 @@ export class ChannelEditModal extends React.PureComponent<ChannelEditModalProps,
   };
 
   _handleUserChange = (id: Uuid) => {
-    const newMembersIds = _toggleChannelMember(id, this.state.membersIds);
+    const newMembersIds = toggleChannelMember(id, this.state.membersIds);
     this.setState(() => ({
       membersIds: newMembersIds
     }));
@@ -159,10 +160,4 @@ export class ChannelEditModal extends React.PureComponent<ChannelEditModalProps,
   }
 }
 
-function _toggleChannelMember(id: Uuid, memberIds: Immutable.List<Uuid>): Immutable.List<Uuid> {
-  if (memberIds.contains(id)) {
-    const index = memberIds.findIndex((userId: Uuid) => userId === id);
-    return memberIds.remove(index);
-  }
-  return memberIds.push(id);
-}
+
