@@ -38,7 +38,7 @@ interface IFetchChannelsFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =>
+export const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =>
   (): any => (dispatch: Dispatch): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
