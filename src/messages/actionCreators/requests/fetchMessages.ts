@@ -39,7 +39,7 @@ interface IFetchMessagesFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const fetchMessagesFactory = (dependencies: IFetchMessagesFactoryDependencies) =>
+export const fetchMessagesFactory = (dependencies: IFetchMessagesFactoryDependencies) =>
   (): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     dispatch(dependencies.fetchBegin());
     const errorId = dependencies.idGenerator();
