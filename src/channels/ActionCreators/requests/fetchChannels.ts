@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
 import * as uuid from 'uuid';
 import {
@@ -14,6 +13,8 @@ import {
 import { checkStatus } from '../../../shared/utils/checkStatus';
 import { getBearer } from '../../../shared/utils/getBearer';
 import { fetchChannelOrder } from './fetchChannelOrder';
+import { fetchChannelsFactory } from '../fetchChannelsFactory';
+
 
 const fetchChannelsFactoryDependencies = {
   fetchBegin: requestChannels,
@@ -31,7 +32,7 @@ const fetchChannelsFactoryDependencies = {
   getChannelOrder: fetchChannelOrder
 };
 
-interface IFetchChannelsFactoryDependencies {
+export interface IFetchChannelsFactoryDependencies {
   readonly fetchBegin: () => Action;
   readonly success: (json: object) => Action;
   readonly error: (id: string, error: Error) => Action;
@@ -39,19 +40,5 @@ interface IFetchChannelsFactoryDependencies {
   readonly idGenerator: () => string;
   readonly getChannelOrder: any;
 }
-
-export const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =>
-  (): any => (dispatch: Dispatch): Promise<Action> => {
-    dispatch(dependencies.fetchBegin());
-    const errorId = dependencies.idGenerator();
-
-    return dependencies.fetch()
-      .then(response => response.json())
-      .then((json) => {
-        dispatch(dependencies.getChannelOrder);
-        return dispatch(dependencies.success(json));
-      })
-      .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
-  };
 
 export const fetchChannels = fetchChannelsFactory(fetchChannelsFactoryDependencies);

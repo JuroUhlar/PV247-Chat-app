@@ -21,6 +21,7 @@ interface IFetchChannelOrderFactoryDependencies {
   readonly success: (json: object) => Action;
   readonly error: (error: Error) => Action;
   readonly fetch: () => Promise<Response>;
+  readonly updateHistoryFunction: (url: string) => any;
 }
 
 const fetchChannelsFactoryDependencies = {
@@ -35,6 +36,7 @@ const fetchChannelsFactoryDependencies = {
     },
   })
     .then(response => checkStatus(response)),
+  updateHistoryFunction: (url: string) => history.push(url)
 };
 
 const fetchChannelOrderFactory = (dependencies: IFetchChannelOrderFactoryDependencies): any =>
@@ -44,7 +46,7 @@ const fetchChannelOrderFactory = (dependencies: IFetchChannelOrderFactoryDepende
     return dependencies.fetch()
       .then(response => response.json())
       .then((appData: AppData) => {
-        history.push(SPECIFIC_CHANNEL_VIEW_ROUTE(appData.customData.channelsOrder[0]));
+        dependencies.updateHistoryFunction(SPECIFIC_CHANNEL_VIEW_ROUTE(appData.customData.channelsOrder[0]));
         return dispatch(dependencies.success(appData));
       })
       .catch((error: Error) => dispatch(dependencies.error(error)));

@@ -3,7 +3,7 @@ import {
   IChannelServerModel, ChannelServerModel,
 } from '../../../src/channels/models/Channel';
 import { Action } from '../../helpers/types';
-import { fetchChannelsFactory } from '../../../src/channels/actionCreators/requests/fetchChannels';
+import { fetchChannelsFactory } from '../../../src/channels/actionCreators/fetchChannelsFactory';
 import {
   channel1server,
   channel2server
@@ -24,11 +24,6 @@ describe('Correctly resolves fetchChannels: ', () => {
   const fakeGetChannelOrder = () => fakeAction('CHANNEL_ORDER_REQUEST');
   const fakeFailed = () => fakeAction('ERROR');
   const fakeIdGenerator = () => '0dafe799-7d05-42d2-a641-cef1ff07daa7';
-  const testCases = [
-    { name: ' succeeding', fetch: fetchSuccess },
-    { name: ' immediately failing', fetch: fetchFailImmediately },
-    { name: ' failing', fetch: fetchFail },
-  ];
   const fetchChannels = (fetch: () => Promise<any>) => fetchChannelsFactory({
     fetchBegin: fakeRequest,
     fetch,
@@ -43,22 +38,27 @@ describe('Correctly resolves fetchChannels: ', () => {
     done();
   });
 
+  const testCases = [
+    { name: ' succeeding', fetch: fetchSuccess },
+    { name: ' immediately failing', fetch: fetchFailImmediately },
+    { name: ' failing', fetch: fetchFail },
+  ];
+
   testCases.forEach((testCase) => {
     it('dispatches requestChannels with' + testCase.name + ' fetch', () => {
       fetchChannels(testCase.fetch)()(fakeDispatch);
       const actual = fakeDispatch.mock.calls[0];
-
       expect(actual[0]).toEqual(fakeRequest());
     });
   });
 
-  it('dispatches channelsRecieved', () => {
+  it('dispatches getChannelOrder on success', () => {
     return fetchChannels(fetchSuccess)()(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
-        expect(actual[0]).toEqual(fakeReceived());
-        expect(fakeDispatch.mock.calls.length).toBe(2);
+        expect(actual[0]).toEqual(fakeGetChannelOrder);
+        expect(fakeDispatch.mock.calls.length).toBe(3);
       });
   });
 
