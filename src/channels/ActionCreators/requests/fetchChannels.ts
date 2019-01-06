@@ -28,6 +28,7 @@ const fetchChannelsFactoryDependencies = {
   })
     .then(response => checkStatus(response)),
   idGenerator: uuid,
+  getChannelOrder: fetchChannelOrder
 };
 
 interface IFetchChannelsFactoryDependencies {
@@ -36,6 +37,7 @@ interface IFetchChannelsFactoryDependencies {
   readonly error: (id: string, error: Error) => Action;
   readonly fetch: () => Promise<Response>;
   readonly idGenerator: () => string;
+  readonly getChannelOrder: any;
 }
 
 export const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependencies) =>
@@ -46,7 +48,7 @@ export const fetchChannelsFactory = (dependencies: IFetchChannelsFactoryDependen
     return dependencies.fetch()
       .then(response => response.json())
       .then((json) => {
-        dispatch(fetchChannelOrder);
+        dispatch(dependencies.getChannelOrder);
         return dispatch(dependencies.success(json));
       })
       .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
