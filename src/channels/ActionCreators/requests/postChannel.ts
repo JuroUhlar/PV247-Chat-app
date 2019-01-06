@@ -62,7 +62,7 @@ const postChannelFactoryDependencies = {
   updateOrder: updateOrderFetch
 };
 
-const postChannelFactory = (dependencies: IPostChannelFactoryDependencies) => (data: ICreateChannelDependencies): any =>
+export const postChannelFactory = (dependencies: IPostChannelFactoryDependencies) => (data: ICreateChannelDependencies): any =>
   (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     const clientId = dispatch(dependencies.postBegin(data)).payload.id;
     const body = new Channel({ ...data, id: clientId });
