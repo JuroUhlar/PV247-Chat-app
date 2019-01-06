@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {
   Button,
-  Form
+  Form,
+  FormControl
 } from 'react-bootstrap';
 
 export interface ILoginTabProps {
@@ -28,7 +29,7 @@ export class LoginTab extends React.PureComponent<ILoginTabProps, ILoginTabState
     };
   }
 
-  _handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  _handleEmailChange = (event: any) => {
     const email = event.currentTarget.value;
     this.setState(() => ({ email }));
   };
@@ -38,18 +39,27 @@ export class LoginTab extends React.PureComponent<ILoginTabProps, ILoginTabState
     onLogInClick(this.state.email);
   };
 
+  _handleKeyPress = (event: React.KeyboardEvent<Button>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this._handleLogIn();
+    }
+  };
+
   render(): JSX.Element {
     const { email } = this.state;
     return (
       <Form>
         <div className="form-group">
-          <input
+          <FormControl
             type="email"
             className="form-control"
             placeholder="Email"
+            autoFocus
             // Default value for faster debugging, remove before commiting
             defaultValue="jane@gmail.com"
             onChange={this._handleEmailChange}
+            onKeyPress={this._handleKeyPress}
           />
         </div>
         <Button
