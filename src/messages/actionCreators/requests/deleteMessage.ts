@@ -35,7 +35,7 @@ interface IDeleteMessageFactoryDependencies {
   readonly delete: (channelId: Uuid, messageId: Uuid) => Promise<Response>;
 }
 
-const deleteMessageFactory = (dependencies: IDeleteMessageFactoryDependencies) =>
+export const deleteMessageFactory = (dependencies: IDeleteMessageFactoryDependencies) =>
   (messageId: Uuid): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     dispatch(dependencies.deleteBegin(messageId));
     const currentChannelId = getState().channelListing.selectedChannel;

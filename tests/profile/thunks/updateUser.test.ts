@@ -16,6 +16,7 @@ import {
 } from '../../helpers/users';
 import { Dispatch } from 'redux';
 import { updateUserFactory } from '../../../src/profile/actionCreators/requests/updateUser';
+import { IState } from '../../../src/shared/models/IState';
 
 describe('Correctly resolves updateUser: ', () => {
   const user = new User({
@@ -33,13 +34,13 @@ describe('Correctly resolves updateUser: ', () => {
   const fakeFailed = () => fakeAction('error');
   const fakeUpdateAvatar = () => fakeAction('update_avatar');
   const fakeUpdateUsername = () => fakeAction('update_avatar');
-  const getState = (): any => {
+  const fakeGetState = (): IState => {
     return {
       usersInfo: {
         currentUserId: firstUserId,
         users: Immutable.Map<Uuid, IUser>({ [firstUserId]: user })
       }
-    };
+    } as IState;
   };
   const updateUser = (update: () => Promise<any>) => updateUserFactory({
     success: fakeReceived,
@@ -65,7 +66,7 @@ describe('Correctly resolves updateUser: ', () => {
   testCases.forEach(testCase => {
 
     it(`dispatches update avatarPath and username with ${testCase.name} update`, () => {
-      updateUser(testCase.update)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState);
+      updateUser(testCase.update)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, fakeGetState);
       const actual = fakeDispatch.mock.calls;
 
       expect(actual[0][0]).toEqual(fakeUpdateUsername());
@@ -74,7 +75,7 @@ describe('Correctly resolves updateUser: ', () => {
   });
 
   it('dispatches usersReceived', () =>
-    updateUser(updateSuccess)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
+    updateUser(updateSuccess)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, fakeGetState)
       .then(() => {
         const actual = fakeDispatch.mock.calls[2];
 
@@ -84,7 +85,7 @@ describe('Correctly resolves updateUser: ', () => {
   );
 
   it('fails with error immediately', () =>
-    updateUser(updateFailImmediately)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
+    updateUser(updateFailImmediately)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, fakeGetState)
       .then(() => {
         const actual = fakeDispatch.mock.calls[2];
 
@@ -94,7 +95,7 @@ describe('Correctly resolves updateUser: ', () => {
   );
 
   it('fails with error', () =>
-    updateUser(updateFail)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
+    updateUser(updateFail)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, fakeGetState)
       .then(() => {
         const actual = fakeDispatch.mock.calls[2];
 

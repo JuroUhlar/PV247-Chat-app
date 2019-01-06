@@ -79,7 +79,7 @@ export class AnnotateUserOption extends React.PureComponent<IAnnotateUserOptionP
 
   render() {
     return (
-      <div>
+      <div className="custom-rte-option">
         <div className="rdw-option-wrapper" onClick={this._openModal}>
           @
         </div>

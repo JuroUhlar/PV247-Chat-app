@@ -466,3 +466,9 @@ body, html, .full-height {
 .rdw-dropdown-optionwrapper {
   max-height: 400%;
 }
+
+.custom-rte-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
