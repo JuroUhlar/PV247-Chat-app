@@ -61,7 +61,7 @@ const dislikeDependencies = updateMessageFactoryDependencies({
   updatePopularity: dislikePopularity,
 });
 
-const updateMessageFactory = (dependencies: IUpdateMessageFactoryDependencies) =>
+export const updateMessageFactory = (dependencies: IUpdateMessageFactoryDependencies) =>
   (message: IMessage): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     const userId = getState().usersInfo.currentUserId;
     const currentChannelId = getState().channelListing.selectedChannel;
