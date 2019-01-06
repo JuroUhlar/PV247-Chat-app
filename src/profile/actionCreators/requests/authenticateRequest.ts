@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import * as fetch from 'isomorphic-fetch';
 import * as uuid from 'uuid';
 import {
@@ -12,7 +11,7 @@ import {
   requestBearer,
   succeedToCreateBearer
 } from './authActionCreators';
-import { IUserServerModel } from '../../models/User';
+import { createBearerFactory } from '../createBearerFactory';
 import { getBearer } from '../../../shared/utils/getBearer';
 
 const createBearerFactoryDependencies = {
@@ -39,32 +38,4 @@ const createBearerFactoryDependencies = {
   idGenerator: uuid,
 };
 
-interface ICreateBearerFactoryDependencies {
-  readonly postBegin: () => Action;
-  readonly success: (json: object, userId: Uuid) => Action;
-  readonly error: (id: string, error: Error) => Action;
-  readonly postLogin: (email: string) => Promise<Response>;
-  readonly idGenerator: () => string;
-  readonly fetchUser: (email: string) => Promise<Response>;
-}
-
-const createBearerFactory = (dependencies: ICreateBearerFactoryDependencies) =>
-  (email: string): any => (dispatch: Dispatch): Promise<Action> => {
-    dispatch(dependencies.postBegin());
-    const errorId = dependencies.idGenerator();
-
-    return dependencies.postLogin(email)
-      .then(response => response.json())
-      .then(object => {
-        localStorage.setItem('user', object.token);
-
-        return dependencies.fetchUser(email)
-          .then(response => response.json())
-          .then((user: IUserServerModel) =>
-            dispatch(dependencies.success(object, user.customData.id)))
-          .catch((error: Error) => dispatch(dependencies.error(errorId + 'user', error)));
-      })
-      .catch((error: Error) => dispatch(dependencies.error(errorId, error)));
-  };
-
-export const auth = createBearerFactory(createBearerFactoryDependencies);
+export const auth = createBearerFactory(localStorage)(createBearerFactoryDependencies);

@@ -18,7 +18,7 @@ describe('Correctly resolves fetchUsers: ', () => {
     new UserServerModel({
       email: firstUserEmail,
       customData: {
-        firstUserId,
+        id: firstUserId,
         avatarPath: firstUserAvatarPath,
         name: firstUserName,
       }
@@ -26,7 +26,7 @@ describe('Correctly resolves fetchUsers: ', () => {
     new UserServerModel({
       email: firstUserEmail,
       customData: {
-        secondUserId,
+        id: secondUserId,
         avatarPath: firstUserAvatarPath,
         name: firstUserName,
       }
