@@ -78,7 +78,6 @@ describe('Correctly resolves authenticateUser: ', () => {
   });
 
   fetchCases.forEach(fetchCase => {
-
     loginCases.forEach(loginCase => {
       it(`dispatches requestBearer with ${fetchCase.name} and ${loginCase.name}`, () => {
         authenticateUser(fetchCase.fetch, loginCase.login)(firstUserEmail)(fakeDispatch);
@@ -91,8 +90,8 @@ describe('Correctly resolves authenticateUser: ', () => {
     });
   });
 
-  it('dispatches succeedToCreateBearer', () => {
-    return authenticateUser(loginSuccess, fetchSuccess)(firstUserEmail)(fakeDispatch)
+  it('dispatches succeedToCreateBearer', () =>
+    authenticateUser(loginSuccess, fetchSuccess)(firstUserEmail)(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
@@ -100,34 +99,11 @@ describe('Correctly resolves authenticateUser: ', () => {
         console.log(fakeDispatch.mock.calls);
         expect(actual[0]).toEqual(fakeReceived());
         expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
-
-  it('fails with error immediately because of user login', () => {
-    return authenticateUser(loginFailImmediately, fetchSuccess)(firstUserEmail)(fakeDispatch)
-      .then(() => {
-        const actual = fakeDispatch.mock.calls[1];
-
-        console.log(actual);
-        console.log(fakeDispatch.mock.calls);
-        expect(actual[0]).toEqual(fakeFailed());
-        expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
-
-  it('fails with error because of user login', () => authenticateUser(loginFail, fetchSuccess)(firstUserEmail)(fakeDispatch)
-    .then(() => {
-      const actual = fakeDispatch.mock.calls[1];
-
-      console.log(actual);
-      console.log(fakeDispatch.mock.calls);
-      expect(actual[0]).toEqual(fakeFailed());
-      expect(fakeDispatch.mock.calls.length).toBe(2);
-    })
+      })
   );
 
-  it('fails with error immediately because of user fetch', () => {
-    return authenticateUser(loginSuccess, fetchFailImmediately)(firstUserEmail)(fakeDispatch)
+  it('fails with error immediately because of user login', () =>
+    authenticateUser(loginFailImmediately, fetchSuccess)(firstUserEmail)(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
@@ -135,18 +111,42 @@ describe('Correctly resolves authenticateUser: ', () => {
         console.log(fakeDispatch.mock.calls);
         expect(actual[0]).toEqual(fakeFailed());
         expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
+      })
+  );
+
+  it('fails with error because of user login', () =>
+    authenticateUser(loginFail, fetchSuccess)(firstUserEmail)(fakeDispatch)
+      .then(() => {
+        const actual = fakeDispatch.mock.calls[1];
+
+        console.log(actual);
+        console.log(fakeDispatch.mock.calls);
+        expect(actual[0]).toEqual(fakeFailed());
+        expect(fakeDispatch.mock.calls.length).toBe(2);
+      })
+  );
+
+  it('fails with error immediately because of user fetch', () =>
+    authenticateUser(loginSuccess, fetchFailImmediately)(firstUserEmail)(fakeDispatch)
+      .then(() => {
+        const actual = fakeDispatch.mock.calls[1];
+
+        console.log(actual);
+        console.log(fakeDispatch.mock.calls);
+        expect(actual[0]).toEqual(fakeFailed());
+        expect(fakeDispatch.mock.calls.length).toBe(2);
+      })
+  );
 
   it('fails with error because of user fetch', () =>
     authenticateUser(loginSuccess, fetchFail)(firstUserEmail)(fakeDispatch)
-    .then(() => {
-      const actual = fakeDispatch.mock.calls[1];
+      .then(() => {
+        const actual = fakeDispatch.mock.calls[1];
 
-      console.log(actual);
-      console.log(fakeDispatch.mock.calls);
-      expect(actual[0]).toEqual(fakeFailed());
-      expect(fakeDispatch.mock.calls.length).toBe(2);
-    })
+        console.log(actual);
+        console.log(fakeDispatch.mock.calls);
+        expect(actual[0]).toEqual(fakeFailed());
+        expect(fakeDispatch.mock.calls.length).toBe(2);
+      })
   );
 });

@@ -61,7 +61,7 @@ describe('Correctly resolves fetchUsers: ', () => {
   });
 
   testCases.forEach((testCase) => {
-    it('dispatches requestUsers with' + testCase.name + ' fetch', () => {
+    it(`dispatches requestUsers with ${testCase.name} fetch`, () => {
       fetchUsers(testCase.fetch)()(fakeDispatch);
       const actual = fakeDispatch.mock.calls[0];
 
@@ -69,25 +69,25 @@ describe('Correctly resolves fetchUsers: ', () => {
     });
   });
 
-  it('dispatches usersReceived', () => {
-    return fetchUsers(fetchSuccess)()(fakeDispatch)
+  it('dispatches usersReceived', () =>
+    fetchUsers(fetchSuccess)()(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
         expect(actual[0]).toEqual(fakeReceived());
         expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
+      })
+  );
 
-  it('fails with error immediately', () => {
-    return fetchUsers(fetchFailImmediately)()(fakeDispatch)
+  it('fails with error immediately', () =>
+    fetchUsers(fetchFailImmediately)()(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
         expect(actual[0]).toEqual(fakeFailed());
         expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
+      })
+  );
 
   it('fails with error', () => fetchUsers(fetchFail)()(fakeDispatch)
     .then(() => {

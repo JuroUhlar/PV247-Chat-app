@@ -12,7 +12,7 @@ import { Dispatch } from 'redux';
 import { postUserFactory } from '../../../src/profile/actionCreators/requests/postUser';
 
 describe('Correctly resolves postUser: ', () => {
-  const user = new User ({
+  const user = new User({
     id: firstUserId,
     email: firstUserEmail,
     name: firstUserName,
@@ -45,41 +45,41 @@ describe('Correctly resolves postUser: ', () => {
   });
 
   testCases.forEach(testCase => {
-
-    it('dispatches createUser with' + testCase.name + ' post', () => {
-      postUser(testCase.post)({ username: firstUserName, email: firstUserEmail})(fakeDispatch);
+    it(`dispatches createUser with ${testCase.name} post`, () => {
+      postUser(testCase.post)({ username: firstUserName, email: firstUserEmail })(fakeDispatch);
       const actual = fakeDispatch.mock.calls[0];
 
       expect(actual[0]).toEqual(fakeAddUser());
     });
   });
 
-  it('dispatches usersReceived', () => {
-    return postUser(postSuccess)({ username: firstUserName, email: firstUserEmail})(fakeDispatch)
+  it('dispatches usersReceived', () =>
+    postUser(postSuccess)({ username: firstUserName, email: firstUserEmail })(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
         expect(actual[0]).toEqual(fakeReceived());
         expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
+      })
+  );
 
-  it('fails with error immediately', () => {
-    return postUser(postFailImmediately)({ username: firstUserName, email: firstUserEmail})(fakeDispatch)
+  it('fails with error immediately', () =>
+    postUser(postFailImmediately)({ username: firstUserName, email: firstUserEmail })(fakeDispatch)
       .then(() => {
         const actual = fakeDispatch.mock.calls[1];
 
         expect(actual[0]).toEqual(fakeFailed());
         expect(fakeDispatch.mock.calls.length).toBe(2);
-      });
-  });
+      })
+  );
 
-  it('fails with error', () => postUser(postFail)({ username: firstUserName, email: firstUserEmail})(fakeDispatch)
-    .then(() => {
-      const actual = fakeDispatch.mock.calls[1];
+  it('fails with error', () =>
+    postUser(postFail)({ username: firstUserName, email: firstUserEmail })(fakeDispatch)
+      .then(() => {
+        const actual = fakeDispatch.mock.calls[1];
 
-      expect(actual[0]).toEqual(fakeFailed());
-      expect(fakeDispatch.mock.calls.length).toBe(2);
-    })
+        expect(actual[0]).toEqual(fakeFailed());
+        expect(fakeDispatch.mock.calls.length).toBe(2);
+      })
   );
 });

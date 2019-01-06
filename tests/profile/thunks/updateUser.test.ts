@@ -64,7 +64,7 @@ describe('Correctly resolves updateUser: ', () => {
 
   testCases.forEach(testCase => {
 
-    it('dispatches update avatarPath and username with' + testCase.name + ' update', () => {
+    it(`dispatches update avatarPath and username with ${testCase.name} update`, () => {
       updateUser(testCase.update)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState);
       const actual = fakeDispatch.mock.calls;
 
@@ -73,35 +73,35 @@ describe('Correctly resolves updateUser: ', () => {
     });
   });
 
-  it('dispatches usersReceived', () => {
-    return updateUser(updateSuccess)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
+  it('dispatches usersReceived', () =>
+    updateUser(updateSuccess)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
       .then(() => {
         const actual = fakeDispatch.mock.calls[2];
 
         expect(actual[0]).toEqual(fakeReceived());
         expect(fakeDispatch.mock.calls.length).toBe(3);
-      });
-  });
+      })
+  );
 
-  it('fails with error immediately', () => {
-    return updateUser(updateFailImmediately)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
+  it('fails with error immediately', () =>
+    updateUser(updateFailImmediately)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
       .then(() => {
         const actual = fakeDispatch.mock.calls[2];
 
         expect(actual[0]).toEqual(fakeFailed());
         expect(fakeDispatch.mock.calls.length).toBe(3);
-      });
-  });
+      })
+  );
 
   it('fails with error', () =>
     updateUser(updateFail)({ updatedUsername: updatedName, updatedAvatarPath: updatedPath })(fakeDispatch, getState)
-    .then(() => {
-      const actual = fakeDispatch.mock.calls[2];
+      .then(() => {
+        const actual = fakeDispatch.mock.calls[2];
 
-      console.log(actual);
-      console.log(fakeDispatch.mock.calls);
-      expect(actual[0]).toEqual(fakeFailed());
-      expect(fakeDispatch.mock.calls.length).toBe(3);
-    })
+        console.log(actual);
+        console.log(fakeDispatch.mock.calls);
+        expect(actual[0]).toEqual(fakeFailed());
+        expect(fakeDispatch.mock.calls.length).toBe(3);
+      })
   );
 });
