@@ -64,6 +64,15 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
       <div className="writing-view-cont">
         <Editor
           editorState={editorState}
+          toolbar={{
+            options: ['inline', 'blockType', 'fontSize', 'list', 'colorPicker', 'link', 'emoji', 'image'],
+            inline: {
+              options: ['bold', 'italic', 'underline', 'strikethrough'],
+            },
+            list: {
+              options: ['unordered', 'ordered'],
+            }
+          }}
           toolbarClassName="toolbarClassName"
           wrapperClassName="wrapperClassName"
           editorClassName="editorClassName"

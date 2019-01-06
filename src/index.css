@@ -88,7 +88,6 @@
 }
 
 .channel-taskbar .add-channel-icon {
-  /* border: 1px solid black; */
   border-radius: 4px;
   padding: 0px 10px;
   margin: 10px;
@@ -116,12 +115,8 @@ body, html, .full-height {
 .content-wrapper {
   display: flex;
   flex-direction: row;
-  /* border: 1px solid lightsteelblue; */
 }
 
-.sidebar-container, .content-container {
-  /* border: 1px solid lightsteelblue; */
-}
 
 .sidebar-container {
   width: 250px;
@@ -132,7 +127,6 @@ body, html, .full-height {
 
 .content-container {
   flex: 1;
-  /* background-color: #e6f3ed; */
 }
 
 .channel-listing {
@@ -337,7 +331,6 @@ body, html, .full-height {
 
 .top-bar-cont {
   height: 8%;
-  /* border-bottom: 1px solid lightsteelblue; */
 }
 
 .top-bar-cont h1 {
