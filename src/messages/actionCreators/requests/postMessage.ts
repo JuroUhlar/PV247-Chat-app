@@ -47,7 +47,7 @@ interface IPostMessageFactoryDependencies {
   readonly idGenerator: () => string;
 }
 
-const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) =>
+export const postMessageFactory = (dependencies: IPostMessageFactoryDependencies) =>
   (text: RawDraftContentState, annotatedUsers?: Immutable.Set<Uuid>): any => (dispatch: Dispatch, getState: () => IState): Promise<Action> => {
     const messageData = {
       annotatedUsers,
