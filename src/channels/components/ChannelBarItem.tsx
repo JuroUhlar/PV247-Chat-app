@@ -93,6 +93,7 @@ export class ChannelBarItem extends React.PureComponent<IChannelBarItemProps, IC
               noCaret
               pullRight
               id="dropdown-no-caret"
+              className="channel-bar-item_open-options-icon"
             >
               <MenuItem onClick={this._handleUpdate}>Edit</MenuItem>
               <MenuItem onClick={this._deleteChannel}>Delete</MenuItem>
