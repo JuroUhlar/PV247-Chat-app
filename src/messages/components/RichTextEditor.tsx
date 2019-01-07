@@ -85,9 +85,9 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
               options: ['unordered', 'ordered'],
             }
           }}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
+          toolbarClassName="editor-toolbar"
+          wrapperClassName="editor-wrapper"
+          editorClassName="editor-input"
           onEditorStateChange={this._onEditorStateChange}
           toolbarCustomButtons={[
             <AnnotateUserOptionContainer
@@ -96,11 +96,13 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
               key="annotateUsers"
             />]}
         />
-        <div
-          className="send-btn-holder"
-          onClick={this._handleSendText}
-        >
-          <div className="inside glyphicon glyphicon-send"/>
+        <div className="send-btn-wrapper">
+          <div
+            className="send-btn-holder"
+            onClick={this._handleSendText}
+          >
+            <div className="inside glyphicon glyphicon-send" />
+          </div>
         </div>
       </div>);
   }

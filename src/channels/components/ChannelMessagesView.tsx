@@ -29,20 +29,20 @@ export class ChannelMessagesView extends React.PureComponent<IChannelViewDataPro
   render() {
     const { channelName, currentChannelId, areUsersLoaded, history } = this.props;
     return (
-      <span>
-    <div className="top-bar-cont">
-      <h1>{channelName ? channelName : null}</h1>
-    </div>
-    <div className="channel-view-cont">
-      {currentChannelId && areUsersLoaded ?
-        <Route
-          path={SPECIFIC_CHANNEL_VIEW_ROUTE(currentChannelId)}
-          location={history.location}
-          component={MessageListingWrapperContainer}
-        /> : <Spinner/>}
-    </div>
-    <RichTextEditorContainer/>
-  </span>
+      <span className="channel-view-flex-container">
+        <div className="top-bar-cont">
+          <h1>{channelName ? channelName : null}</h1>
+        </div>
+        <div className="channel-view-cont">
+          {currentChannelId && areUsersLoaded ?
+            <Route
+              path={SPECIFIC_CHANNEL_VIEW_ROUTE(currentChannelId)}
+              location={history.location}
+              component={MessageListingWrapperContainer}
+            /> : <Spinner />}
+        </div>
+        <RichTextEditorContainer />
+      </span>
     );
   }
 }

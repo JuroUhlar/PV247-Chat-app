@@ -300,6 +300,7 @@ body, html, .full-height {
 .message-pane .small-icon {
   float: left;
   height: 17px;
+  width: 14px;
   margin: 2px;
   padding-top: 1px;
   font-size: 13px;
@@ -310,7 +311,7 @@ body, html, .full-height {
   border-radius: 85%;
   background-color: #304936;
   color: lightgray;
-  width: 17px;
+  width: 14px;
 }
 
 .message-pane .text-container{
@@ -330,35 +331,48 @@ body, html, .full-height {
 }
 
 .top-bar-cont {
-  height: 8%;
+  height: 75px;
 }
 
 .top-bar-cont h1 {
   margin: 20px 20px;
 }
 
+.channel-view-flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%
+}
+
 .channel-view-cont {
-  height: 60%;
+  flex: 1;
   overflow-y: scroll;
   background-color: white;
 }
 .writing-view-cont {
-  height: 29%;
+  max-height: 400px;
   background-color: white;
+}
+
+.send-btn-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  align-content: flex-end;
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 .send-btn-holder {
   width: 30px;
   height: 30px;
   padding: 10px;
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
   color: darkblue;
   background-color: #b7cbe3;
   border-radius: 15px;
   cursor: pointer;
   z-index: 1;
+  float: right;
+  margin-bottom: 10px;
 }
 
 .send-btn-holder:hover{
@@ -372,7 +386,19 @@ body, html, .full-height {
 }
 
 .rdw-editor-toolbar {
-  background-color: #b7cbe3;
+  /* background-color: #b7cbe3; */
+}
+
+.editor-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.editor-input {
+  overflow: auto;
+  max-height: 150px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
 }
 
 .spinner {
