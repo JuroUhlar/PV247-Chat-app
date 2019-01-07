@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux';
-import {
-  IChannelServerModel, ChannelServerModel,
-} from '../../../src/channels/models/Channel';
+import { IChannelServerModel } from '../../../src/channels/models/Channel';
 import { Action } from '../../helpers/types';
 import { fetchChannelsFactory } from '../../../src/channels/actionCreators/fetchChannelsFactory';
 import {

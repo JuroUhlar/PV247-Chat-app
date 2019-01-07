@@ -23,7 +23,7 @@ interface IUpdateChannelFactoryDependencies {
   readonly update: (body: Partial<IChannelData>) => Promise<Response>;
 }
 
-const updateChannelFactoryDependencies = {
+export const updateChannelFactoryDependencies = {
   updateBegin: updateChannel,
   success: succeedToUpdateChannel,
   error: failToUpdateChannel,
@@ -39,7 +39,7 @@ const updateChannelFactoryDependencies = {
     .then(response => checkStatus(response)),
 };
 
-const updateChannelFactory = (dependencies: IUpdateChannelFactoryDependencies) =>
+export const updateChannelFactory = (dependencies: IUpdateChannelFactoryDependencies) =>
   (id: Uuid, name: string, users: Immutable.List<Uuid>): any =>
     (dispatch: Dispatch): Promise<Action> => {
       dispatch(dependencies.updateBegin(id, name, users));
