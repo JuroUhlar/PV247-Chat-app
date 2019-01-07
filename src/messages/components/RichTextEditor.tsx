@@ -9,6 +9,7 @@ import {
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { AnnotateUserOptionContainer } from '../containers/AnnotateUserOptionContainer';
+import * as Mousetrap from 'mousetrap';
 
 export interface IRichTextEditorCallbackProps {
   readonly onSendMessage: (text: RawDraftContentState, annotatedUserIds?: Immutable.Set<Uuid>) => void;
@@ -57,6 +58,17 @@ export class RichTextEditor extends React.PureComponent<RichTextEditorProps, IRi
       }));
     }
   };
+
+  componentDidMount() {
+    Mousetrap.bind(['ctrl+enter'], (e) => {
+      e.preventDefault();
+      this._handleSendText();
+    });
+    Mousetrap.prototype.stopCallback = () => false;
+  }
+  componentWillUnmount() {
+    Mousetrap.unbind(['ctrl+enter']);
+  }
 
   render() {
     const { editorState, annotatedUserIds } = this.state;

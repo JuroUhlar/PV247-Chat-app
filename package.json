@@ -9,10 +9,12 @@
     "test": "jest --config=jest.config.js --no-cache"
   },
   "dependencies": {
+    "@types/mousetrap": "^1.6.0",
     "bootstrap": "^3.3.7",
     "immutable": "^3.8.2",
     "isomorphic-fetch": "^2.2.1",
     "memoizee": "^0.4.14",
+    "mousetrap": "^1.6.2",
     "react": "^16.4.1",
     "react-beautiful-dnd": "^10.0.2",
     "react-bootstrap": "^0.32.4",
