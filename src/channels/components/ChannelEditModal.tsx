@@ -134,13 +134,19 @@ export class ChannelEditModal extends React.PureComponent<ChannelEditModalProps,
               <Table hover>
                 <tbody>
                   {this.props.users.map((user: IUser) => (
-                    <tr key={user.id}>
+                    <tr
+                      key={user.id}
+                      onClick={() => this._handleUserChange(user.id)}
+                      style={{
+                        cursor: 'pointer',
+                        backgroundColor: this.state.membersIds.contains(user.id) ? '#B7CBE3' : 'white'}}>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
                       <td>
                         <input type="checkbox"
                           checked={this.state.membersIds.contains(user.id)}
-                          onChange={() => this._handleUserChange(user.id)}
+                          readOnly
+                          // onChange={() => this._handleUserChange(user.id)}
                         />
                       </td>
                     </tr>
